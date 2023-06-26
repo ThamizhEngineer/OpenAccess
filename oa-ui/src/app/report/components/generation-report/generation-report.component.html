@@ -1,0 +1,108 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+          Generation Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='selAgreementMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input matInput placeholder="Year" [(ngModel)]="selAgreementYear">
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;"  [disabled]="disableEdc"   placeholder="EDC" [(ngModel)]='selOrgName'>
+                <mat-option *ngFor="let org of orgList" [value]="org.name">
+                  {{org.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-card-actions>				
+            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+            </mat-card-actions>
+  
+      </div>
+          <br/>
+          <br/>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+           <!-- <ngx-datatable-column name="EDC Name">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op1}}
+            </ng-template>
+           </ngx-datatable-column> -->
+  
+           <ngx-datatable-column name="Gen service no">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op2}}
+              </ng-template>
+           </ngx-datatable-column>
+
+           <ngx-datatable-column name="Gen Company Name">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op3}}
+            </ng-template>
+          </ngx-datatable-column>
+  
+           <!-- <ngx-datatable-column name="Month">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op4}}
+              </ng-template>
+           </ngx-datatable-column>
+  
+           <ngx-datatable-column name="Year">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op5}}
+              </ng-template>
+           </ngx-datatable-column> -->
+  
+           <ngx-datatable-column name="C1">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op6}}
+              </ng-template>
+           </ngx-datatable-column>
+  
+           <ngx-datatable-column name="C2">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op7}}
+              </ng-template>
+           </ngx-datatable-column>
+  
+           <ngx-datatable-column name="C3">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op8}}
+              </ng-template>
+           </ngx-datatable-column>
+                
+           <ngx-datatable-column name="C4">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op9}}
+              </ng-template>
+           </ngx-datatable-column>
+                
+           <ngx-datatable-column name="C5">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op10}}
+              </ng-template>
+           </ngx-datatable-column>
+  
+           <ngx-datatable-column name="NetGeneration">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op11}}
+            </ng-template>
+         </ngx-datatable-column>
+        </ngx-datatable>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

@@ -1,0 +1,87 @@
+export class EsIntent{
+    id?:string;
+    sellerCompanyServiceId?:string;
+    sellerCompanyServiceNumber?:string;
+    sellerCompanyId?:string;
+    sellerCompanyName?:string;
+    sellerCompanyCode?:string;
+    sellerEndOrgId?:string;
+    sellerEndOrgName?:string;
+    sellerEndOrgCode?:string;
+    agmtPeriodCode?:string;
+    fromDate?:string;
+    toDate?:string;
+    fromMonth?:string;
+    toMonth?:string;
+    fromYear?:string;
+    toYear?:string;   
+    isCaptive?:string;
+    statusCode?:string;
+    statusName?:string;
+    ewaId?:string;
+    ewaStatusCode?:string;
+    ewaStatusName?:string;
+    fuelTypeCode?:string;
+    fuelTypeName?:string;
+    flowTypeCode?:string;
+    flowTypeName?:string;
+    ipaaId?:string;
+    ipaaStatusCode?:string;
+    ipaaStatusName?:string;
+    nocGeneratorId?:string;
+    nocGeneratorStatusCode?:string;
+    nocGeneratorStatusName?:string;
+    proposedCapacity?:string;
+    ewaTotalApprovedCapacity?:string;
+    sldcAwaitedDt?:string;
+    sldcApprovalDt?:string;
+    sldcRejectedDt?:string;
+    sldcApproved?:string;
+    sldcRemarks?:string;
+
+
+    energySaleIntentLines?:Array<EsIntentLine>
+    constructor(){
+        this.flowTypeCode="THIRD-PARTY";
+    }
+}
+export class EsIntentLine{
+    id?:string;
+    energySaleIntentId?:string;
+    buyerCompanyServiceId?:string;
+    buyerCompanyServiceNumber?:string;
+    buyerCompanyId?:string;
+    buyerCompanyName?:string;
+    buyerCompanyCode?:string;
+    buyerEndOrgId?:string;
+    buyerEndOrgName?:string;
+    buyerEndOrgCode?:string;
+    statusCode?:string;
+    statusName?:string;
+    nocId?:string;
+    consentId?:string;
+    ewaId?:string;
+    oaAgmtId?:string;
+    nocStatusCode?:string;
+    nocStatusName?:string;
+    consentStatusCode?:string;
+    consentStatusName?:string;
+    oaAgmtStatusCode?:string;
+    oaAgmtStatusName?:string;  
+    epaStatusCode?:string;
+    epaStatusName?:string;
+    proposedQuantum?:string;
+    isCaptive?:string;
+    ewaLineApprovedCapacity?:string;
+}
+
+export class Edc{
+    id?:string;
+    number?:string;
+    orgId?:string;
+    orgCode?:string;
+    orgName?:string;
+    companyId?:string;
+    companyCode?:string;
+    companyName?:string;
+}

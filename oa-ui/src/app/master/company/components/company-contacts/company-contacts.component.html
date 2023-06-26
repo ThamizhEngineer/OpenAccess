@@ -1,0 +1,78 @@
+<mat-card-content>
+             <ngx-datatable
+				      class="material"
+              tabindex="index"
+				      [rows]="company.contacts"
+				      [columnMode]="'force'"
+				      [headerHeight]="50"
+				      [footerHeight]="0"
+				      [rowHeight]="'auto'">
+				      <ngx-datatable-column name="Purpose"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['purpose']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Name"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['name']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Designation"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['designation']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Landline"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['landline']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Mobile"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['mobile']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Email"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['email']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-raised-button mat-icon-button mat-button-sm  (click)="editContact(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                  <button mat-raised-button mat-icon-button mat-button-sm  (click)="deleteContact(row.$$index)"><mat-icon>delete</mat-icon></button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+				    </ngx-datatable>
+              <mat-card>
+                <mat-card-title><Strong>{{contactRowIndex>-1?'Update':'Add'}} Contact</Strong></mat-card-title>
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Purpose" name="contact.purpose" [(ngModel)]='contact.purpose' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Name" name="contact.name" [(ngModel)]='contact.name' >
+                    </mat-form-field> 
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Designation" name="contact.designation" [(ngModel)]='contact.designation' >
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Landline" name="contact.landline" [(ngModel)]='contact.landline' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Mobile" name="contact.mobile" [(ngModel)]='contact.mobile' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Email" name="contact.email" [(ngModel)]='contact.email' >
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button (click)="contactRowIndex>-1?updateContact():addContact()">{{contactRowIndex>-1?'Update':'Add'}}</button>
+                  <button mat-raised-button (click)="initContacts()">Reset</button>
+                </mat-card-actions>
+              </mat-card>
+          </mat-card-content>

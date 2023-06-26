@@ -1,0 +1,454 @@
+<mat-card class="mat-card-top">
+	<div mat-subheader>Project Value</div>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="Total Project Value" [(ngModel)]='cs.idTotalCost' [disabled]="stepDisable">
+		</mat-form-field>
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <input matInput placeholder="Currency" [matAutocomplete]="tdAutoCurrency1" [(ngModel)]='cs.idTotalCurrency' #modelDir="ngModel"
+        (ngModelChange)="this.currencyList = filterCurrencies(csLoan.currency)">
+      <mat-autocomplete #tdAutoCurrency1="matAutocomplete">
+        <mat-option *ngFor="let currency of currencyList" [value]="currency.name">
+          <span>{{ currency.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  <mat-form-field class=
+		<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="Exchange Rate" [(ngModel)]='cs.idTotalExchangeRate' [disabled]="stepDisable">
+		</mat-form-field>
+		<mat-form-field *ngIf="isWind== false" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="Proposed Debt Equity Ratio (ex 2:1)" [(ngModel)]='cs.idproposedDebtEquityRatio' [disabled]="stepDisable">
+		</mat-form-field>
+	</div><br/>
+	
+	<div mat-subheader>Loan Details</div>
+	<!-- <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end center"><button  mat-raised-button  color="primary" (click)="add()">Add Loan Detail</button><br/></div> -->
+	<!-- <ngx-datatable class="material" tabindex="index" [rows]="cs.csLoans" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Loan Origin">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          
+		  <mat-form-field *ngIf="row.editable;else loanOrigin" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="" [(ngModel)]='row.loanOrigin' [disabled]="stepDisable">
+		  </mat-form-field>
+		  <ng-template #loanOrigin>{{row.loanOrigin}}</ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Source">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <mat-form-field *ngIf="row.editable;else loansourceName" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="" [(ngModel)]='row.sourceName' [disabled]="stepDisable">
+		  </mat-form-field>
+		  <ng-template #loansourceName>{{row.sourceName}}</ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Loan Amount">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <mat-form-field *ngIf="row.editable;else loanAmount" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="" [(ngModel)]='row.loanAmount' [disabled]="stepDisable">
+		  </mat-form-field>
+		  <ng-template #loanAmount>{{row.loanAmount}}</ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Currency">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <mat-form-field *ngIf="row.editable;else loancurrency" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="" [(ngModel)]='row.currency' [disabled]="stepDisable">
+		  </mat-form-field>
+		  <ng-template #loancurrency>{{row.currency}}</ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+	  <ngx-datatable-column name="Exchange Rate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <mat-form-field *ngIf="row.editable;else loanexchangeRate" class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="" [(ngModel)]='row.exchangeRate' [disabled]="stepDisable">
+		  </mat-form-field>
+		  <ng-template #loanexchangeRate>{{row.exchangeRate}}</ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+	  <ngx-datatable-column name="Action">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button *ngIf="!row.editable;else loanAction" mat-button color="primary" (click)="row.editable = true">Edit</button>
+		  <ng-template #loanAction><button mat-button color="primary" (click)="row.editable = false">Update</button></ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable> -->
+
+    <mat-card-content>
+      <ngx-datatable class="material" tabindex="index" [rows]="cs.csLoans" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+        [rowHeight]="'auto'">
+        <ngx-datatable-column name="Loan Origin">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.loanOrigin}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Source">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.loanSourceName}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Loan Amount">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.loanAmount}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Actions">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="editLoan(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteLoan(row.$$index)"><mat-icon>delete</mat-icon></button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <mat-card *ngIf="cs.statusCode!='COMPLETED'">
+        <mat-card-title>{{loanRowIndex>-1?'Update':'Add'}} Loan</mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <!-- <mat-select style="width: 100%;" placeholder="Loan Origin" [(ngModel)]='idLoan.loanOrigin'>
+              <mat-option *ngFor="let loanOrigin of loanOrigins" [value]="loanOrigin.name">
+                {{ loanOrigin.name }}
+              </mat-option>
+            </mat-select> -->
+            <div class="ml-xs mr-xs" style="width: 100%;">                   
+                <label>Loan Orgin</label> <br/>
+                <mat-radio-group [(ngModel)]='csLoan.loanOrigin'  placeholder="Loan Orgin?">
+                  <mat-radio-button value="Domestic">Domestic</mat-radio-button>
+                  <mat-radio-button value="International">International</mat-radio-button>
+                 
+                </mat-radio-group>
+              </div>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Source Name" [(ngModel)]=' csLoan.loanSourceName'>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Source Address" [(ngModel)]=' csLoan.loanSourceAddress'>
+            </mat-form-field>
+        
+          </div>
+  
+          <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Loan Amount" [(ngModel)]=' csLoan.loanAmount'>
+                </mat-form-field>
+                <!-- <mat-select style="width: 100%;" placeholder="Currency" [(ngModel)]=' idLoan.currency'>
+                  <mat-option *ngFor="let currency of currencies" [value]="currency.name">
+                    {{ currency.name }}
+                  </mat-option>
+                </mat-select> -->
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Currency" [matAutocomplete]="tdAutoCurrency" [(ngModel)]='csLoan.loanCurrency' #modelDir="ngModel"
+                      (ngModelChange)="this.currencyList = filterCurrencies(csLoan.currency)">
+                    <mat-autocomplete #tdAutoCurrency="matAutocomplete">
+                      <mat-option *ngFor="let currency of currencyList" [value]="currency.name">
+                        <span>{{ currency.name}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Exchange Rate" [(ngModel)]=' csLoan.loanExchangeRate'>
+                </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="loanRowIndex>-1?updateLoan():addLoan()">{{loanRowIndex>-1?'Update':'Add'}}</button>
+          <button mat-raised-button (click)="initLoan()">Reset</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  
+	<br/>
+	
+	<!-- <div mat-subheader>Table A -Equity Share Capital with Voting rights</div>
+	<ngx-datatable class="material" [rows]="cs.idEquityShareVotingRights" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="ClassofEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.classOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="NoOfEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.noOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ValueofEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.valueOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="AmountofEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.amountOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="NoOfVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.noOfVotingRights}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="PercentageHoldingInEquityShareCapital">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+       <ngx-datatable-column name="PercentageHoldingInVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInVotingRights}}
+        </ng-template>
+      </ngx-datatable-column>
+       <ngx-datatable-column name="PercentageHoldingInEquityShareCapitalWithVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInVotingWithEquity}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+	<br/>
+	
+	<div mat-subheader>Table B -Break up of Capitive user holding in Equity Share Capital with Voting rights</div>
+	<ngx-datatable class="material" [rows]="cs.idCaptiveUserContributions" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="ClassofShareHolder">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.classOfShareHolder}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="NoOfEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.noOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ValueofEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.valueOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="AmountofEquityShares">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.amountOfEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="NoOfVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.noOfVotingRights}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="PercentageHoldingInEquityShareCapital">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInEquityShares}}
+        </ng-template>
+      </ngx-datatable-column>
+       <ngx-datatable-column name="PercentageHoldingInVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInVotingRights}}
+        </ng-template>
+      </ngx-datatable-column>
+       <ngx-datatable-column name="PercentageHoldingInEquityShareCapitalWithVotingRights">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.percentageHoldingInVotingWithEquity}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable> -->
+    <mat-card-title>
+      <Strong>Table A -Equity Share Capital with Voting rights as on 07-09-2017 </Strong>
+    </mat-card-title>
+    <mat-card-content>
+      <ngx-datatable class="material" [rows]="cs.csEquityShareVotingRights" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="'auto'">
+        <ngx-datatable-column name="ClassofEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.classOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="NoOfEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.noOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ValueofEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.valueOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="AmountofEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.amountOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="NoOfVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.noOfVotingRights}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="PercentageHoldingInEquityShareCapital">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+         <ngx-datatable-column name="PercentageHoldingInVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInVotingRights}}
+          </ng-template>
+        </ngx-datatable-column>
+         <ngx-datatable-column name="PercentageHoldingInEquityShareCapitalWithVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInVotingWithEquity}}
+          </ng-template>
+        </ngx-datatable-column>
+  
+  
+        <ngx-datatable-column name="Actions">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="editEquityShareVotingRights(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteEquityShareVotingRights(row.$$index)"><mat-icon>delete</mat-icon></button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+  
+      <mat-card *ngIf="cs.statusCode!='COMPLETED'">
+        <mat-card-title>
+          <Strong>{{EquityShareVotingRightsRowIndex>-1?'Update':'Add'}} EquityShareCapitalwithVotingRights</Strong>
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Class Of EquityShares" [(ngModel)]='equityShareVotingRights.classOfEquityShares'>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="No Of EquityShares" [(ngModel)]='equityShareVotingRights.noOfEquityShares'>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Value Of EquityShares" [(ngModel)]='equityShareVotingRights.valueOfEquityShares'>
+            </mat-form-field>
+  
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Amount Of EquityShares" [(ngModel)]='equityShareVotingRights.amountOfEquityShares'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+           
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="No Of VotingRights" [(ngModel)]='equityShareVotingRights.noOfVotingRights'>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInEquityShareCapital" [(ngModel)]='equityShareVotingRights.percentageHoldingInEquityShares'>
+            </mat-form-field>
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInVotingRights" [(ngModel)]='equityShareVotingRights.percentageHoldingInVotingRights'>
+            </mat-form-field>
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInEquityShareCapitalWithVotingRights" [(ngModel)]='equityShareVotingRights.percentageHoldingInVotingWithEquity'>
+            </mat-form-field>
+           </div>
+  
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="EquityShareVotingRightsRowIndex>-1?updateEquityShareVotingRights():addEquityShareVotingRights()">{{EquityShareVotingRightsRowIndex>-1?'Update':'Add'}}</button>
+          <button mat-raised-button (click)="initEquityShareVotingRights()">Reset</button>
+        </mat-card-actions>
+       </mat-card>
+    </mat-card-content>
+  
+    <mat-card-title>
+      <Strong>Table B -Break up of Capitive user holding in Equity Share Capital with Voting rights as on 07-09-2017</Strong>
+    </mat-card-title>
+    <mat-card-content>
+      <ngx-datatable class="material" [rows]="cs.csCaptiveUserContributions" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="'auto'">
+        <ngx-datatable-column name="ClassofShareHolder">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.classOfShareHolder}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="NoOfEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.noOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ValueofEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.valueOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="AmountofEquityShares">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.amountOfEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="NoOfVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.noOfVotingRights}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="PercentageHoldingInEquityShareCapital">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInEquityShares}}
+          </ng-template>
+        </ngx-datatable-column>
+         <ngx-datatable-column name="PercentageHoldingInVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInVotingRights}}
+          </ng-template>
+        </ngx-datatable-column>
+         <ngx-datatable-column name="PercentageHoldingInEquityShareCapitalWithVotingRights">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.percentageHoldingInVotingWithEquity}}
+          </ng-template>
+        </ngx-datatable-column>
+  
+  
+        <ngx-datatable-column name="Actions">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="editCaptiveUserCon(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+            <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteCaptiveUserCon(row.$$index)"><mat-icon>delete</mat-icon></button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+  
+    
+      <mat-card *ngIf="cs.statusCode!='COMPLETED'">
+        <mat-card-title>
+          <Strong>{{captiveUserConRowIndex>-1?'Update':'Add'}} Captive User & Others</Strong>
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Class Of ShareHolder" [(ngModel)]='captiveUserContribution.classOfShareHolder'>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="No Of EquityShares" [(ngModel)]='captiveUserContribution.noOfEquityShares'>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Value Of EquityShares" [(ngModel)]='captiveUserContribution.valueOfEquityShares'>
+            </mat-form-field>
+  
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Amount Of EquityShares" [(ngModel)]='captiveUserContribution.amountOfEquityShares'>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+           
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="No Of VotingRights" [(ngModel)]='captiveUserContribution.noOfVotingRights'>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInEquityShareCapital" [(ngModel)]='captiveUserContribution.percentageHoldingInEquityShares'>
+            </mat-form-field>
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInVotingRights" [(ngModel)]='captiveUserContribution.percentageHoldingInVotingRights'>
+            </mat-form-field>
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PercentageHoldingInEquityShareCapitalWithVotingRights" [(ngModel)]='captiveUserContribution.percentageHoldingInVotingWithEquity'>
+            </mat-form-field>
+           </div>
+  
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="captiveUserConRowIndex>-1?updateCaptiveUserCon():addCaptiveUserCon()">{{captiveUserConRowIndex>-1?'Update':'Add'}}</button>
+          <button mat-raised-button (click)="initCaptiveUserCon()">Reset</button>
+        </mat-card-actions>
+	<br/>
+</mat-card>
+<br/>

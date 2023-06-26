@@ -1,0 +1,252 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+
+            <mat-card-title><strong> View Energy Sale Intent -{{esIntent.flowTypeCode}}</strong></mat-card-title>
+            <mat-card-content>
+                <mat-card-title>{{this.commonUtils.getProp('seller')}} Company</mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                   <input matInput placeholder="EDC Name" [(ngModel)]='esIntent.sellerEndOrgName' (ngModelChange)="onEdcChange()" readonly>
+                  </mat-form-field>  -->
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='esIntent.sellerEndOrgId' [required]="isMandatory"
+                                (ngModelChange)="onEdcChange()">
+                                <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{ edc.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='esIntent.sellerCompanyServiceId'
+                                [required]="isMandatory" (ngModelChange)="onServiceChange()">
+                                <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+                                    {{ companyService.companyName }} - {{ companyService.number }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="esIntent.isCaptive">
+                                <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                                    {{iscaptives.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [(ngModel)]="esIntent.agmtPeriodCode">
+                                <mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+                                    {{code.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+               
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+
+                                <input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="esIntent.code" readonly>
+                                    
+                            </mat-form-field>
+                            <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="esIntent.code" required pattern="[0-9]+" #val_code="ngModel" name="dis_code">
+								<mat-hint>Must be numeric</mat-hint>
+								<mat-error *ngIf="val_code.invalid && (val_code.dirty || val_code.touched) && val_code.errors.required">ES Intent number is required.</mat-error>
+								<mat-error *ngIf="val_code.invalid && (val_code.dirty || val_code.touched) && val_code.errors.pattern">ES Intent number Must be number.</mat-error>
+							</mat-form-field> -->
+							
+				
+                        <month-picker class="ml-xs mr-xs" style="width: 100%;" [(config)]="mpFromConfig" [(model)]="mpFromModel" (mpOnModelChange)="this.mpOnFromModelChange($event)"></month-picker>
+                        <month-picker class="ml-xs mr-xs" style="width: 100%;" [(config)]="mpToConfig" [(model)]="mpToModel" (mpOnModelChange)="this.mpOnToModelChange($event)"></month-picker>
+
+                     
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+                    </div><br/>
+                    <div *ngIf="esIntent.flowTypeCode == 'THIRD-PARTY' || esIntent.flowTypeCode == 'WEG' " fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="In Principle Approval Application Status" [(ngModel)]="esIntent.ipaaStatusCode" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Noc Generator Status" [(ngModel)]="esIntent.nocGeneratorStatusCode" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                            <input matInput placeholder="EWA Status" [(ngModel)]='esIntent.ewaStatusCode' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA' && esIntent.flowTypeCode == 'THIRD-PARTY' ">
+                            <input matInput placeholder="Proposed Quantum(MW)" [(ngModel)]='esIntent.proposedCapacity'>
+                        </mat-form-field>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                    </div>
+                    <div *ngIf="esIntent.flowTypeCode == 'CAPTIVE'" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                            <input matInput placeholder="EWA Status" [(ngModel)]='esIntent.ewaStatusCode' readonly>
+                        </mat-form-field>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+                    </div>
+
+                </mat-card-content>
+
+
+                <mat-card *ngIf="esIntent.ewaStatusCode == 'COMPLETED' || esIntent.flowTypeCode=='CAPTIVE' || esIntent.flowTypeCode=='WEG'">
+                    <mat-card-content>
+                        <mat-card-title>Intented {{this.commonUtils.getProp('buyer')}} List</mat-card-title>
+
+                        <ngx-datatable class="material" tabindex="index" [rows]="esIntent.energySaleIntentLines" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="0" [rowHeight]="'auto'">
+
+
+                            <ngx-datatable-column name="Company Name">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.buyerCompanyName}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Service Number">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.buyerCompanyServiceNumber}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Quantum">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.proposedQuantum}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                      <!--      <ngx-datatable-column name="Shared Percentage">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.sharedPercentage}}
+                                </ng-template>
+                            </ngx-datatable-column> -->
+
+                            <div *ngIf="esIntent.flowTypeCode != 'WEG'">
+                            <ngx-datatable-column name="Noc Status" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{(row.nocStatusCode==null)?"Not Started":row.nocStatusCode}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            </div>
+                            <div *ngIf="esIntent.flowTypeCode != 'WEG'">
+                            <ngx-datatable-column name="Consent Status" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{(row.consentStatusCode==null)?"Not Started":row.consentStatusCode}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </div>
+                            <ngx-datatable-column name="OA Status" *ngIf="esIntent.flowTypeCode != 'WEG'">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{(row.oaAgmtStatusCode==null)?"Not Started":row.oaAgmtStatusCode}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Actions">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <button mat-raised-button mat-icon-button mat-button-sm (click)="editEsIntentLine(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                                    <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteEsIntentLine(row.$$index)"><mat-icon>delete</mat-icon></button>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+
+                        <mat-card-title>
+                            <Strong>{{esIntentLineRowIndex>-1?'Update':'Add'}} Intented {{this.commonUtils.getProp('buyers')}}</Strong>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='esIntentLine.buyerEndOrgId' [required]="isMandatory"
+                                        (ngModelChange)="onBuyerEdcChange()">
+                                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                            {{ edc.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='esIntentLine.buyerCompanyServiceId'
+                                        [required]="isMandatory" (ngModelChange)="onBuyerServiceChange()">
+                                        <mat-option *ngFor="let companyService of buyerCompanyServices" [value]="companyService.id">
+                                            {{ companyService.companyName }} - {{ companyService.number }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+
+                           <!--     <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="esIntentLine.isCaptive">
+                                        <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                                            {{iscaptives.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field> -->
+
+
+
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="esIntent.flowTypeCode != 'WEG'">
+                                
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                                    <input matInput placeholder="Noc Status" value=" {{(esIntentLine.nocStatusCode==null)?'Not Started':esIntentLine.nocStatusCode}}"
+                                        readonly>
+                                </mat-form-field>
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                                    <input matInput placeholder="Consent Status" value=" {{(esIntentLine.consentStatusCode==null)?'Not Started':esIntentLine.consentStatusCode}}"
+                                        readonly>
+
+                                </mat-form-field>
+                                <div class="ml-xs mr-xs" style="width: 100%;" ></div>
+
+
+
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" *ngIf="esIntent.flowTypeCode != 'WEG'" style="width: 100%;">
+                                    <input matInput placeholder="OA Agreement Status" value=" {{(esIntentLine.oaAgmtStatusCode==null)?'Not Started':esIntentLine.oaAgmtStatusCode}}"
+                                        readonly>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="Proposed Quantum(MW)" [(ngModel)]='esIntentLine.proposedQuantum'>
+                                </mat-form-field>
+
+                                <div class="ml-xs mr-xs" *ngIf="esIntent.flowTypeCode != 'WEG'" style="width: 100%;" ></div>
+                                <div class="ml-xs mr-xs" *ngIf="esIntent.flowTypeCode == 'WEG'" style="width: 100%;" ></div>
+                                <div class="ml-xs mr-xs" *ngIf="esIntent.flowTypeCode == 'WEG'" style="width: 100%;" ></div>
+                            </div>
+
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button (click)="esIntentLineRowIndex>-1?updateEsIntentLine():addEsIntentLine()">{{esIntentLineRowIndex>-1?'Update':'Add'}}</button>
+                            <button mat-raised-button (click)="initEsIntentLines()">Reset</button>
+                        </mat-card-actions>
+                       
+                    </mat-card-content>
+                    
+                </mat-card>
+                <hr>
+                <mat-card-actions *ngIf="esIntent.flowTypeCode != 'THIRD-PARTY'">
+                    <button mat-raised-button color="primary" *ngIf="this.accessUpdateFlag && esIntent.ewaStatusCode != 'COMPLETED'"  (click)="saveEsIntent('')" >Save</button>
+                    <button mat-raised-button color="primary" *ngIf="this.accessProcessFlag && esIntent.ewaStatusCode != 'COMPLETED'"  (click)="processEsIntent('')" >Process</button>
+                    <button mat-raised-button color="primary" *ngIf="this.accessProcessFlag && (esIntent.ewaStatusCode == 'COMPLETED' && esIntent.flowTypeCode=='CAPTIVE')"  (click)="createOaa('')" >Open Access Application</button>
+                    <!-- <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" addScreen!=true && esIntent.statusCode!='PROCESS'">Process</button> -->
+                    <button mat-raised-button class="primary" (click)="listEsIntent()">Back</button>
+                </mat-card-actions>
+                <mat-card-actions *ngIf="esIntent.flowTypeCode == 'THIRD-PARTY'">
+                    <button mat-raised-button color="primary" *ngIf="this.accessUpdateFlag"  (click)="saveEsIntent('')" >Save</button>
+                    <button mat-raised-button color="primary" *ngIf="this.accessProcessFlag"  (click)="processEsIntent('')" >Process</button>
+                    <button mat-raised-button color="primary" *ngIf="this.accessProcessFlag && esIntent.ewaStatusCode == 'COMPLETED'"  (click)="createOaa('')" >Open Access Application</button>
+                    <!-- <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" addScreen!=true && esIntent.statusCode!='PROCESS'">Process</button> -->
+                    <button mat-raised-button class="primary" (click)="listEsIntent()">Back</button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

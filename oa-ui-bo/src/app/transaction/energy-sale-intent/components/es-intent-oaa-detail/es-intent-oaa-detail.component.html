@@ -1,0 +1,327 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Open Access Application</mat-card-title>
+
+	<ng-template mat-tab-label>OAA Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+			<div mat-subheader>Drawee Party</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='oaa.buyerOrgName'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Name" [disabled]="true" [(ngModel)]='oaa.buyerCompanyName'>
+				</mat-form-field>
+
+			
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Utility" [(ngModel)]='oaa.buyerEndUtility'>
+				</mat-form-field>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			</div>
+			<br/>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Transmission Substation Name" [matAutocomplete]="td1Auto" [(ngModel)]='BTSS' #modelDir="ngModel"
+					 (ngModelChange)="this.filteredBuyerSubstations = filterBuyerSubstations(BTSS);">
+					<mat-autocomplete #td1Auto="matAutocomplete">
+						<mat-option *ngFor="let ss of filteredBuyerSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'buyerSubStation');this.fetchBuyerFeeders();">
+							<span>{{ ss.code }} - {{ ss.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Transmission Voltage" [matAutocomplete]="td2Auto" [(ngModel)]='BTV' ngModel #modelDir="ngModel"
+					 (ngModelChange)="this.filteredVoltageList = filterVoltageList(BTV);">
+					<mat-autocomplete #td2Auto="matAutocomplete">
+						<mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'buyerTV')">
+							<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Feeder Name" [matAutocomplete]="td3Auto" [(ngModel)]='BF' #modelDir="ngModel" (ngModelChange)="this.filteredBuyerFeeders = filterBuyerFeeders(BF);">
+					<mat-autocomplete #td3Auto="matAutocomplete">
+						<mat-option *ngFor="let fr of filteredBuyerFeeders" [value]="fr.name" (onSelectionChange)="acChangeFunc($event, fr, 'buyerFeeder')">
+							<span>{{ fr.code }} - {{ fr.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Distribution Substation Name" [matAutocomplete]="td4Auto" [(ngModel)]='BDSS' #modelDir="ngModel"
+					 (ngModelChange)="this.filteredBuyerSubstations = filterBuyerSubstations(BDSS);">
+					<mat-autocomplete #td4Auto="matAutocomplete">
+						<mat-option *ngFor="let ss of filteredBuyerSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'buyerDSS');">
+							<span>{{ ss.code }} - {{ ss.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Distribution Voltage" [matAutocomplete]="td5Auto" [(ngModel)]='BDV' ngModel #modelDir="ngModel"
+					 (ngModelChange)="this.filteredVoltageList = filterVoltageList(BDV);">
+					<mat-autocomplete #td5Auto="matAutocomplete">
+						<mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'buyerDV')">
+							<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Substation Name" [disabled]="true"  [(ngModel)]="oaa.drawalDistSubstationName">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder Name" [disabled]="true" [(ngModel)]="oaa.drawalFeederName" >
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder Voltage" [disabled]="true" [(ngModel)]="oaa.drawalDistVoltageDesc" >
+				</mat-form-field>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			</div>
+			<br/>
+
+
+			<div mat-subheader>Injecting Party</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='oaa.sellerOrgName'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="{{this.commonUtils.getProp('seller')}} Name" [disabled]="true" [(ngModel)]='oaa.sellerCompanyName'>
+				</mat-form-field>
+
+				
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Utility" [(ngModel)]='oaa.sellerEndUtility'>
+				</mat-form-field>
+
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]='oaa.sellerIsCaptive'>
+						<mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.name">
+							{{iscaptives.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			</div>
+			<br/>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Transmission Substation Name" [matAutocomplete]="td6Auto" [(ngModel)]='STSS' #modelDir="ngModel"
+					 (ngModelChange)="this.filteredSellerSubstations = filterSellerSubstations(STSS);">
+					<mat-autocomplete #td6Auto="matAutocomplete">
+						<mat-option *ngFor="let ss of filteredSellerSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'sellerSubStation');this.fetchSellerFeeders();">
+							<span>{{ ss.code }} - {{ ss.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Transmission Voltage" [matAutocomplete]="td7Auto" [(ngModel)]='STV' ngModel #modelDir="ngModel"
+					 (ngModelChange)="this.filteredVoltageList = filterVoltageList(STV);">
+					<mat-autocomplete #td7Auto="matAutocomplete">
+						<mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'sellerTV')">
+							<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Feeder Name" [matAutocomplete]="td8Auto" [(ngModel)]='SF' #modelDir="ngModel" (ngModelChange)="this.filteredSellerFeeders = filterSellerFeeders(SF);">
+					<mat-autocomplete #td8Auto="matAutocomplete">
+						<mat-option *ngFor="let fr of filteredSellerFeeders" [value]="fr.name" (onSelectionChange)="acChangeFunc($event, fr, 'sellerFeeder')">
+							<span>{{ fr.code }} - {{ fr.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Distribution Substation Name" [matAutocomplete]="td9Auto" [(ngModel)]='SDSS' #modelDir="ngModel"
+					 (ngModelChange)="this.filteredSellerSubstations = filterSellerSubstations(SDSS);">
+					<mat-autocomplete #td9Auto="matAutocomplete">
+						<mat-option *ngFor="let ss of filteredSellerSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'sellerDSS');">
+							<span>{{ ss.code }} - {{ ss.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Distribution Voltage" [matAutocomplete]="td10Auto" [(ngModel)]='SDV' ngModel #modelDir="ngModel"
+					 (ngModelChange)="this.filteredVoltageList = filterVoltageList(SDV);">
+					<mat-autocomplete #td10Auto="matAutocomplete">
+						<mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'sellerDV')">
+							<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Substation Name" [disabled]="true"  [(ngModel)]="oaa.injectionDistSubstationName">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder Name" [disabled]="true" [(ngModel)]="oaa.injectionFeederName" >
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder Voltage" [disabled]="true" [(ngModel)]="oaa.injectionDistVoltageDesc">
+				</mat-form-field>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			</div>
+			<br/>
+
+			<div mat-subheader>Proposed Open Access Period</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Agreement Desc"   [(ngModel)]='oaa.agreementPeriodCode'>
+				</mat-form-field> -->
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Desc" [(ngModel)]="oaa.agreementPeriodCode">
+						<mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+							{{code.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access Period" [disabled]="true" [(ngModel)]='oaa.sellerCompanyName'>
+				</mat-form-field>
+
+				<!--	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access From" [disabled]="true" [(ngModel)]='oaa.fromDate'>
+				</mat-form-field> 
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access To" [disabled]="true" [(ngModel)]='oaa.toDate'>
+				</mat-form-field> -->
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput [(ngModel)]="oaa.fromDate" placeholder="Open Access From" [matDatepicker]="fromDate"  >
+					<mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+					<mat-datepicker #fromDate></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput [(ngModel)]="oaa.toDate" placeholder="Open Access To" [matDatepicker]="toDate"  >
+					<mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+					<mat-datepicker #toDate></mat-datepicker>
+				</mat-form-field>
+
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+			</div>
+			<br/>
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" [(ngModel)]='oaa.intervalTypeCode'>
+
+						<mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+							{{intervalTypeCode.valueDesc}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Quantum(MW)" [(ngModel)]="oaa.approvedTotalUnits" >
+				</mat-form-field>
+				<mat-form-field *ngIf="oaa.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Share Percentage" [(ngModel)]='oaa.sharePercent' (ngModelChange)="onAdd()">
+				</mat-form-field>
+				<div *ngIf="oaa.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+			</div>
+
+			<div *ngIf="oaa.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Peak Units" [(ngModel)]='oaa.peakUnits' (ngModelChange)="onAdd()">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Off Peak Units" [(ngModel)]='oaa.offPeakUnits' (ngModelChange)="onAdd()">
+				</mat-form-field>
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>
+			</div>
+			<div *ngIf="oaa.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="C1 - PeakHour 1" [(ngModel)]='oaa.c1Units' (ngModelChange)="onAdd()">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="C2 - PeakHour 2" [(ngModel)]='oaa.c2Units' (ngModelChange)="onAdd()">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="C3 - PeakHour 3" [(ngModel)]='oaa.c3Units' (ngModelChange)="onAdd()">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="C4 - PeakHour 4" [(ngModel)]='oaa.c4Units' (ngModelChange)="onAdd()">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="C5 - PeakHour 5" [(ngModel)]='oaa.c5Units' (ngModelChange)="onAdd()">
+				</mat-form-field>
+			</div>
+
+			<div mat-subheader>Non Refundable Application Fee</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Payment Type" [(ngModel)]='oaa.paymentTypeCode'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Bank Details" [(ngModel)]='oaa.paymentBankDetails'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Transaction Number" [(ngModel)]='oaa.paymentTxnNo'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Payment Date" [(ngModel)]='oaa.paymentDate'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Payment Amount" [(ngModel)]='oaa.paymentAmount'>
+				</mat-form-field>
+
+			</div>
+			<br/>
+
+		</mat-card-content>
+	</mat-card>
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" *ngIf="oaa.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveOaa('')">Save</button>
+		<button mat-raised-button color="primary" *ngIf="oaa.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveOaa()">Approve</button>
+		<button mat-raised-button color="primary" *ngIf="oaa.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="completeOaa()">Complete</button>
+
+		<button mat-raised-button class="primary" (click)="listOaas()">Cancel/Back</button>
+	</mat-card-actions>
+</mat-card>

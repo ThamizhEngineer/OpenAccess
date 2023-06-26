@@ -1,0 +1,183 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            GENERATOR SUMMARY REPORT
+           </mat-card-title>
+           <mat-card-content>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type" [(ngModel)]='fuelTypeCode'>
+              <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                {{fuelTypes.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                    <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                            {{edc.code}} - {{ edc.name }}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        
+              <br/>
+              <br/>
+              <div>
+              <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+              [scrollbarV]="true">
+              <ngx-datatable-column name="NO" [width]="30"  [frozenLeft]="true">
+                <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{rows.indexOf(row) + 1}}
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="EDC NAME"  [frozenLeft]="true">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.op1}} 
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <!-- <ngx-datatable-column name="EDC" [frozenLeft]="true" >
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op2}}
+                </ng-template>
+             </ngx-datatable-column> -->
+             
+               <!-- <ngx-datatable-column name="FUEL TYPE" [frozenLeft]="true" >
+                  <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op3}}
+                  </ng-template>
+               </ngx-datatable-column>  -->
+    
+               <ngx-datatable-column name="SERVICE NUMBER" [frozenLeft]="true" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op4}}
+                </ng-template>
+               </ngx-datatable-column> 
+               
+               <ngx-datatable-column name="CAPTIVE" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op5}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="CAPTIVE-REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op6 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="CAPTIVE-REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op7}}
+                </ng-template> 
+               </ngx-datatable-column>  -->
+
+               <ngx-datatable-column name="CAPTIVE-NON REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op8 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="CAPTIVE-NON REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op9}}
+                </ng-template> 
+               </ngx-datatable-column>  -->
+
+               <ngx-datatable-column name="THIRD PARTY" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op10}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="THIRD PARTY-REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op11 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="THIRD PARTY-REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op12}}
+                </ng-template> 
+               </ngx-datatable-column>  -->
+
+               <ngx-datatable-column name="THIRD PARTY-NON REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op13 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="THIRD PARTY-NON REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op14}}
+                </ng-template> 
+               </ngx-datatable-column> -->
+               
+               <ngx-datatable-column name="STB" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op15}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="STB-REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op16 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="STB-REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op17}}
+                </ng-template> 
+               </ngx-datatable-column>  -->
+
+               <ngx-datatable-column name="STB-NON REC" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op18 || 'No'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <!-- <ngx-datatable-column name="STB-NON REC COUNT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op19}}
+                </ng-template> 
+               </ngx-datatable-column> -->
+
+               <ngx-datatable-column name="STATUS" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op20 || '-'}}
+                </ng-template> 
+               </ngx-datatable-column>
+
+               <ngx-datatable-footer *ngIf="true">
+                <ng-template ngx-datatable-footer-template >
+                  <div style="padding: 100px 25px">
+                    <hr style="width:100%" >
+                    <div><br/>
+                      CAPTIVE REC: <b>{{this.captiveRec}}</b> &#8192; CAPTIVE NON-REC: <b>{{this.captiveNonrec}}</b> &#8192;
+                      THIRD-PARTY REC: <b>{{this.thirdPartyRec}}</b> &#8192; THIRD-PARTY NON-REC: <b>{{this.thirdPartyNon}}</b> &#8192;
+                      STB REC: <b>{{this.stbRec}}</b> &#8192; STB NON-REC: <b>{{this.stbNon}}</b>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+
+              </ngx-datatable>   
+               
+          </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

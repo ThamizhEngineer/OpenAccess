@@ -1,0 +1,77 @@
+<style>
+  mat-form-field {
+    float: right;
+    padding-right: 149px;
+}
+</style>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+      <mat-card-title>SLDC NOC List</mat-card-title>
+    
+
+      <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding-left: 7px;
+        }
+        </style>
+
+          <div class="date">
+            <mat-form-field  class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+              <input matInput [(ngModel)]="date" [matDatepicker]="DatePickers" placeholder="Date">
+              <mat-datepicker-toggle matSuffix [for]="DatePickers"></mat-datepicker-toggle>
+              <mat-datepicker #DatePickers></mat-datepicker>
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="searchFilter()">Search</button>
+        </mat-card-actions>
+          </div>
+               
+             
+                    <div style="float: center;width: 100%">
+                      <table id="table" style="float: center; border:1;width: 100%">
+                          <tr>
+                              <th style="background: #dcdcdc">SI.NO</th>
+                              <th style="background: #dcdcdc">Consumer No/Name</th>
+                    
+                              <th style="background: #dcdcdc">Application No</th>
+                              <th style="background: #dcdcdc">Applied Date</th>
+                              <th style="background: #dcdcdc">EDC Approved Dt</th>
+                              <!-- <th style="background: #dcdcdc">From Date</th>
+                              <th style="background: #dcdcdc">To Date</th> -->
+                              <th style="background: #dcdcdc">EDC</th>
+                              <th style="background: #dcdcdc">Requested Demand</th>
+                              <th style="background: #dcdcdc">NOC Status</th>
+                              <!-- <th style="background: #dcdcdc">Action</th> -->
+                          </tr>
+                          <tr *ngFor="let sldcNoc of sldcNocList;let i= index">
+                             <td>{{i+1}}</td>
+                              <td>{{sldcNoc.compServNo}}<br>{{sldcNoc.customerName}}</td>
+                             
+                              <td>{{sldcNoc.appliedNo}}</td>
+                              <td>{{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}}</td>
+                              <td>{{sldcNoc.edcApprovalDate | date:'dd-MMM-yyyy'}}</td>
+                              <!-- <td></td>
+                              <td></td> -->
+                              <td>{{sldcNoc.edc}}</td>
+                              <td>{{sldcNoc.region}}</td>
+                              <td>{{sldcNoc.status}}</td>
+                              <!-- <td>
+                                  <mat-card-actions>
+                                      <button mat-raised-button color="primary" class="primary" (click)="detailPage(sldcNoc.id)">View</button>
+                                  </mat-card-actions>
+                              </td> -->
+                          </tr>                                                                        
+                      </table>
+                  
+                        <mat-paginator [length]="100"
+                            [pageSize]="10"
+                            [pageSizeOptions]="[5, 10, 25, 100]">
+                        </mat-paginator>
+                      
+                    </div>
+  </div>
+</div>

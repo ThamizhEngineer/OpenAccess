@@ -1,0 +1,122 @@
+<div class="reportContainer">
+<mat-card >
+<p style="text-align: center;font-size: 30px;font-weight: 700;font-family: serif;">REPORT LIST</p>
+<img  class="top" mat-card-image style="width: 18%;margin-left: 42%;" src="assets/images/main.png" />
+<br>
+</mat-card>
+  <br>
+
+  <mat-list-item *ngFor="let menuitem of menuItems">
+       <mat-nav-list  class="sub-menu" *ngIf="menuitem.type === 'sub'"> 
+      
+      <div  *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+      
+        <div class="column" >
+  <ng-container *ngIf="childitem.directLink == 'Y';else link_content">
+    <ng-container *ngIf="childitem.states;else state_content">
+      <a [routerLink]="[].concat.apply(['/'],childitem.states)" class="relative" mat-ripple>{{ childitem.name }}</a>
+    </ng-container>
+    <ng-template #state_content>
+      <a [routerLink]="['/', childitem.state ]" class="relative" mat-ripple>
+        <div class="reportpages">
+          <img class="size" *ngIf="childitem.name=='02 - Energy LEDGER'"  src="assets/images/energyledger.png" /> 
+          <h1 style="font-size: 14px;">{{ childitem.name }}</h1>
+        </div>
+      </a>
+    </ng-template>
+  </ng-container>
+
+ 
+  <ng-template #link_content >
+   
+    <a [routerLink]="['/', menuitem.state, childitem.state ]" class="relative" mat-ripple>
+      <div class="reportpages">
+      <img class="size"  *ngIf="childitem.name=='10(1)SS-Weg-Report'"  src="assets/images/ss.png" /> 
+      <img class="size"  *ngIf="childitem.name=='01 - Generator wise Consumer Report'"  src="assets/images/genwiseconsumer.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Amr-Download-Report'"  src="assets/images/amr.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Abstract Master Report'"  src="assets/images/abstract.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Banking-TOD-Report'"  src="assets/images/banking.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Captive Wheeling Report'"  src="assets/images/wheeling.png" /> 
+      <img class="size"  *ngIf="childitem.name=='CEA Return Report'"  src="assets/images/cea.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Cons Energy Adjusted Order report'"  src="assets/images/consenergyadjust.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Cons Energy Adjusted Charges report'"  src="assets/images/cons-adjustment-charges.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Consumer Wise Energy Adjustment Order Report'"  src="assets/images/consadjust.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Energy adjusted order report'"  src="assets/images/energyadjust.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Energy Audit Report'"  src="assets/images/energyaudit.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Energy Generation Charges report'"  src="assets/images/utility.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Energy Ledger report'"  src="assets/images/ledger.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generator Summary Report'"  src="assets/images/generation.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generation-summary-charges-report'"  src="assets/images/generationsummarycharge.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generation Statement Report'"  src="assets/images/generationstmt.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Gen Wise Charge Allocation To HT'"  src="assets/images/genchargeallocation.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generator Wise Generation Report'"  src="assets/images/genwisegeneration.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generation Report'"  src="assets/images/generationreport.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generator Contact-Info Report'"  src="assets/images/contactinfo.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Generation Summary Report'"  src="assets/images/consadjust.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Meter Change Report'"  src="assets/images/meterchange.png" /> 
+      <img class="size"  *ngIf="childitem.name=='MONTHLY PROGRESS REPORT'"  src="assets/images/all.png" /> 
+      <img class="size"  *ngIf="childitem.name=='MASTER SOLAR REPORT'"  src="assets/images/solar.png" /> 
+      <img class="size"  *ngIf="childitem.name=='MASTER WIND REPORT'"  src="assets/images/wind.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Nil Generation Report'"  src="assets/images/nillgenerartion.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Progress Report New'"  src="assets/images/progress.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Sale To Board Ledger'"  src="assets/images/stbledger.png" /> 
+      <img class="size"  *ngIf="childitem.name=='SRPC Report'"  src="assets/images/srpc.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Solar Feeder EDCwise'"  src="assets/images/solarfeeder.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Tnerc-Net-Generation-Report'"  src="assets/images/tnercnetgeneration.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Tnerc-Energy-Summary-Report'"  src="assets/images/tnercenergysummary.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Technical-Info-Report'"  src="assets/images/technicalinfo.png" /> 
+      <img class="size"  *ngIf="childitem.name=='TanTransco Generator-Info Report'"  src="assets/images/generatorinfo.png" /> 
+      <img class="size"  *ngIf="childitem.name=='TanTransco Payment Info Report'"  src="assets/images/paymentinfo.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Unutilised Energy Report'"  src="assets/images/unutilisedenergy.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Unutilised Banking New'"  src="assets/images/unutilisedbanking.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Unimported Services Report'"  src="assets/images/unimportedservices.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Utility Report'"  src="assets/images/utility.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Unutilized Banking Report'"  src="assets/images/unutilisedbankingreport.png" /> 
+      <img class="size"  *ngIf="childitem.name=='UnAllocated Gen Stmt Report'"  src="assets/images/unallocatedstmt.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Weg Generator Report'"  src="assets/images/weg.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Weg With Buyer Report'"  src="assets/images/wegconsumer.png" /> 
+      <img class="size"  *ngIf="childitem.name=='Weg Transaction Status Report'"  src="assets/images/transactionstatus.png" /> 
+     
+      <h1 style="font-size: 15px;">{{ childitem.name }}</h1>
+    </div>
+  </a>
+  </ng-template>
+</div>  
+</div> 
+
+    </mat-nav-list>
+  </mat-list-item>
+
+  <br>
+  <br>
+
+  </div>
+
+
+ <style>
+  .sub-menu{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+.column{
+  width: 250px;
+    height: 180px;
+    margin-left: 70px;
+    margin-bottom: 20px;
+}
+.size{
+  margin-top: 14px;
+   width: 31%;
+}
+.reportpages{
+  background: lightcyan;
+    border: 1px solid #CCC;
+    text-align: center;
+}
+div.reportpages:hover{
+  background: rgba(182, 194, 194, 0.596);
+  color: black;
+}
+</style> 

@@ -1,0 +1,510 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>Consumer Noc</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            font: 12px/1.4 Georgia, serif;
+
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 70px;
+            background-color: #ffffff;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        ul {
+            padding-right: 237px;
+        }
+            ul.appl {
+             float: right;
+            }
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 10px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+		p.tex {
+			text-align:right;
+		}
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 10%
+        }
+        td.exis {
+		width:50%;
+		
+		}
+        td.app {
+    	width:40%;
+    	padding-left:40px;
+		}
+        td.meta-head-sno {
+            text-align: left;
+    		background: #eee;
+			
+        }
+        td.meta-head-desc{
+  	  	padding-right: 130px;
+    	margin-left: 150px;
+		}
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+
+        #left {
+            float: left;
+            text-align: left;
+            /* padding-right: 10px; */
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        #right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+        }
+        span.hr {
+            text-align: center;
+            font: bold 17px Helvetica, Sans-Serif;
+        }
+        span.sd {
+			padding-bottom:30px;
+			margin-bottom:20px;
+			margin-top:70px;
+		}
+		tr.k{
+			border-bottom:1px solid black
+		}
+		th.line{
+			background: none;
+            text-align: left;
+            padding: 5px;
+            font-family: Cambria;
+			font-size: 12
+		}
+    </style>
+
+</head>
+
+<body>
+    <div style="float: right;">
+        <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p>
+    </div>
+    <br />
+    <div class="header">
+        <header class="solid">
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+          	<span class="hr">TAMILNADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</span>
+            <p style="text-align: center" th:text="${edc}"> </p>
+            <p style="text-align: center">Consumer NOC Report <strong>[[${appliedDt}]]</strong></p>
+        </header>
+
+    </div>
+
+    <table style="float: left;width: 100%;border: none;">
+        <tr>
+            <td>NOC Code : [[${nocCode}]] </td>
+            <td>Application No / Category: [[${appliedNo}]]  <br /> <div style="float: right;">[[${appCategory}]]</div>   </td>
+            <td>Applied On: [[${appliedDt}]] </td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <div style="margin-left:40%">
+        <br />
+    </div>
+   
+
+    <div>
+
+
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <td class="meta-head-sno">Sl.No</td>
+                <td class="meta-head-desc">Description</td>
+                <td colspan="2" class="meta-head">Details</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Name of the HT Consumer</td>
+                <td colspan="2" th:text="${companyName}"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Htsc Number</td>
+                <td colspan="2" th:text="${compServNo}"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Tariff</td>
+                <td colspan="2" th:text="${tarrif}"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Contracted Demand in KVA</td>
+                <td colspan="2"><span th:text="${capacity}"></span><span>&nbsp;KVA</span></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Contracted Demand in MW</td>
+                <td colspan="2"><span th:text="${capacityBy}"></span><span>&nbsp;MW</span></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Address of Plant location</td>
+                <td colspan="2" th:text="${plantAdr}"></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Communication Address</td>
+                <td colspan="2" th:text="${commsAdr}"></td>
+            </tr>
+
+            <tr>
+                <td>8</td>
+                <td>Name of Region</td>
+                <td colspan="2" th:text="${region}"></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Name of EDC</td>
+                <td colspan="2"  th:text="${edc}"></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Name of Section</td>
+                <td colspan="2" th:text="${section}"></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Name of the connecting feeder with voltage Level</td>
+                <td colspan="2" th:text="${feederWithVoltLevel}"></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Name of Connecting Substation and Voltage ratio</td>
+                <td colspan="2" th:text="${substationWithVoltLevel}"></td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Whether the HT Consumer can be permitted for Open Access(Intra/Inter State)</td>
+                <td colspan="2" th:text="${isHtConPermitForOa=='Y'? 'Yes' : 'Nil'}"></td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>If so eligible quantum of power in MW that can be permitted for Open Access(Intra/Inter State)</td>
+                <td colspan="2"><span th:text="${capacityBy}"></span><span>&nbsp;MW</span></td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Open Access Commitment(Specify the Quantum and Period)</td>
+              
+                <td class="app">Existing</td>
+                <td class="exis">Now applied</td>
+            </tr>
+            <tr >
+                <td>I</td>
+                <td>Intra State Open Access Commitment</td>
+                <td></td>
+                <td></td>
+      
+            </tr>
+            <tr >
+                <td>a.</td>
+                <td>Captive</td>
+                <td > </td>
+                <td ></td>
+                
+            </tr >
+            <tr >
+                <td></td>
+                <td>i) Conventional (Quantum in MW,Period and Name of generator)</td>
+              <tr>
+              <th class="line">Quantum</th>
+              <th class="line">FromDt</th>
+              <th class="line">ToDt</th>
+              <th class="line">CompName</th>
+              <th class="line">AggType</th>
+              </tr>
+              <tr th:each="ext:${exts}" th:if="${ext.appCategory=='Intra State Bilateral Captive Use'}">
+             <td class="line" th:text="${ext.quantum}"></td>
+             <td class="line" th:text="${#temporals.format(ext.periodStartDate, 'dd/MM/yyyy')}"></td>
+             <td class="line" th:text="${#temporals.format(ext.periodEndDate, 'dd/MM/yyyy')}"></td>
+             <td class="line" th:text="${ext.customerName}"></td>
+             <td class="line" th:text="${ext.appType}"></td>
+              </tr>                               
+                 <tr th:if="${commitType!='Intra State Bilateral Captive Use'}">&nbsp;&nbsp;0</tr>  
+               
+                <td th:if="${isExistingOACommitment=='N' && commitType=='Intra State Bilateral Captive Use'}" >
+                <span th:text="${quantum}"></span>
+                <span>MW from</span>
+                <span th:text="${fromPeriod}"></span>
+                <span> to </span>
+                <span th:text="${toPeriod}"></span> <span>,</span>
+                <span th:text="${compName}"></span>
+                </td>
+                <td th:if="${commitType!='Intra State Bilateral Captive Use'}">0</td>
+                
+            </tr>
+               <tr>
+                <td> </td>
+                <td>Total</td>
+               <td> <tr th:each="ext:${exts}" th:if="${ext.appCategory=='Intra State Bilateral Captive Use'}"> <span th:text="${ext.quantum}">
+               </span><span>+</span></tr><span th:if="${commitType=='Intra State Bilateral Captive Use'}">=</span>
+               <span th:if="${commitType=='Intra State Bilateral Captive Use'}" th:text="${existquantum}"></span>
+               <tr th:if="${commitType!='Intra State Bilateral Captive Use'}">0</tr></td>
+                <td></td>
+            </tr >
+            <tr>
+                <td></td>
+                <td>ii) Non-Conventional (Wind/Bio-mass/Solar/Co-gen if any)Qtmm in MW,Period and Name of generator </td>
+               <td > 0</td>
+                <td >0</td>                
+            </tr>
+            <tr >
+                <td></td>
+                <td>Total</td>
+                <td > </td>
+                <td ></td>                
+            </tr >
+            <tr>
+                <td>b.</td>
+                <td>Third Party</td>
+                 <td > </td>
+                <td > </td>               
+            </tr>
+            <tr >
+                <td></td>    	
+                <td>i) Conventional (Quantum in MW,Period and Name of generator)</td>
+                  <tr>
+              <th class="line">Quantum</th>
+              <th class="line">FromDt</th>
+              <th class="line">ToDt</th>
+              <th class="line">CompName</th>
+              <th class="line">AggType</th>
+              </tr>
+              <tr th:each="ext:${exts}" th:if="${ext.appCategory=='Intra State Bilateral Third Party'}">
+             <td class="line" th:text="${ext.quantum}"></td>
+             <td class="line" th:text="${#temporals.format(ext.periodStartDate, 'dd/MM/yyyy')}"></td>
+             <td class="line" th:text="${#temporals.format(ext.periodEndDate, 'dd/MM/yyyy')}"></td>
+             <td class="line" th:text="${ext.customerName}"></td>
+             <td class="line" th:text="${ext.appType}"></td>
+              </tr>            
+                <tr th:if="${commitType!='Intra State Bilateral Third Party'}">&nbsp;&nbsp;0</tr>
+    
+                <td th:if="${commitType=='Intra State Bilateral Third Party'}">
+                <span th:text="${quantum}"></span>
+                <span>MW from</span>
+                <span th:text="${fromPeriod}"></span>
+                <span> to </span>
+                <span th:text="${toPeriod}"></span> <span>and</span>
+                <span th:text="${compName}"></span>
+                 </td>
+                <td th:if="${commitType!='Intra State Bilateral Third Party'}">0</td>  
+            </tr>
+             <tr>
+                <td> </td>
+                <td>Total</td>
+               <td> <tr th:each="ext:${exts}" th:if="${ext.appCategory=='Intra State Bilateral Third Party'}"> <span th:text="${ext.quantum}">
+               </span><span>+</span></tr><span th:if="${commitType=='Intra State Bilateral Third Party'}">=</span>
+               <span th:if="${commitType=='Intra State Bilateral Third Party'}" th:text="${existquantum}"></span>
+               <tr th:if="${commitType!='Intra State Bilateral Third Party'}">0</tr></td>
+                <td></td>
+            </tr >
+            <tr >
+                <td></td>
+                <td>ii) Non-Conventional (Wind/Bio-mass/Solar/Co-gen if any)Qtmm in MW,Period and Name of generator </td>
+              <td >0</td>
+              <td >0</td>
+            </tr>
+            <tr >
+                <td></td>
+                <td>Total</td>
+                <td > </td>
+                <td ></td>
+                
+            </tr >
+            <tr >
+                <td>II</td>
+                <td>Inter State Open Access Commitment</td>
+                 <td></td>
+                <td></td>
+               
+            </tr>
+            <tr >
+                <td>a.</td>
+                <td>Bilateral Transaction</td>
+                <td th:text="${isExistingOACommitment=='N'? '0':'Intra State Bilateral Purchase TANGEDCO'}"> </td>
+                <td th:text="${commitType=='Intra State Bilateral Purchase TANGEDCO'? commitType : '0'}"> </td>
+                
+            </tr>
+            <tr>
+                <td> </td>
+                <td>Name of the Interstate Generator/Trader</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>b.</td>
+                <td>Collective Transaction(Qtm in MW and Period)</td>
+                <td >0</td>   
+       
+                <td >0
+                </td>
+                
+            </tr>
+            <tr>
+                <td></td>
+                <td>Name of Exchange(IEX/PXIL)</td>
+                <td th:text="${isExistingOACommitment=='N'? '0':exBusAval}"> </td>
+                <td th:text="${exBusAval}"></td>
+               
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Total in MW (Should be within Contract Demand)</td>
+                <td ><span th:text="${existquantum}"></span><span>&nbsp;MW</span> </td>
+                <td ><span th:text="${quantum}"></span><span>&nbsp;MW</span></td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>Outstanding dues to transmission/distribution license (As per 
+               9.(5)of TNERC'S Grid Connectivity  and Intra State Open             
+              Access regulation 2014,person having outstanding dues for
+                more than two months billing transmission or distribution license,
+                  shall not be eligible for open access).</td>
+               
+                <td  colspan="2">  nil</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                 <td >
+                     Remarks if any*
+                 </td>
+                 <td colspan="2">
+                         <tr class="k" th:text="${commRemark}" > </tr> 
+                         <tr class="k" th:text="${legalRemark}"> </tr>
+                         <tr th:text="${techRemark}" > </tr>
+                     </td>
+             </tr>
+               
+             <tr>
+             <td></td>
+                <td colspan="4">**Note:Point No.15(I)(a)(ii) and(b)(ii) are kept in abeyance until furtrher orders as per orders of the
+                    honb'le High Court of Madras,Madurai Bench. Subject to Hon'ble TNERC order in respect of T.A.No.6 to 12 of 2022. </td>
+            </tr>
+            
+        </table>
+
+    </div>
+    <div>
+        <br />
+        <br />
+        <br />
+        <br />
+                <p colspan="3" class="tex"> SUPERINTENDING ENGINEER </p> 
+                 <p colspan="3" class="tex" th:text=${edc}> </p> 	
+        </div>
+        
+    <div class="footer">
+
+    </div>
+    <div>
+    </div>
+</body>
+
+</html>

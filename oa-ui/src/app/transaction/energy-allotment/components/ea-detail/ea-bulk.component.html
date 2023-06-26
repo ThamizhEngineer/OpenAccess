@@ -1,0 +1,179 @@
+<mat-toolbar color="primary">
+	<span>Bulk Add</span>
+
+  </mat-toolbar><mat-card class="mat-card-top">
+  <mat-card-title>
+  <strong>Available Units</strong>
+</mat-card-title>
+  <ngx-datatable class="material" [rows]="this.fetchAvailableUnitSummary()" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true"
+  [rowHeight]="'auto'">
+  <ngx-datatable-column name="Source" width="15">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.heading}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="C1 " width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.c1}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="C2 " width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.c2}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="C3 " width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.c3}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="C4 " width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.c4}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="C5 " width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.c5}}
+	  </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Total" width="5">
+	  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+		  {{row.total}}
+	  </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+&nbsp;&nbsp;&nbsp;&nbsp;<mat-error *ngIf="this.errorMessage">{{errorMessage}}</mat-error>
+<div *ngIf="!hideHotColumn"><hot-table height="200" [colWidths]="true"  hotId="hotInstance" [settings]="settings" [data]="hotData">
+     <hot-column width="170"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+	<hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+     <hot-column width="90"></hot-column>
+      <hot-column width="90"></hot-column>
+      <hot-column width="90"></hot-column>
+	<hot-column width="90"></hot-column>
+    </hot-table>{{hotData|json}}</div>
+
+<div *ngIf="hideHotColumn">
+
+<ngx-datatable class="material" [rows]="energySaleMultiAddHeader.energySaleMultiAddLines" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true"
+                [rowHeight]="'auto'">
+                
+                <ngx-datatable-column name="Service - EDC" width="10">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.companyServiceNumber}} 
+                    </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column name="C1 " width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c1}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="C2 " width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c2}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="C3 " width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c3}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="C4 " width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c4}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="C5 " width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c5}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="M.R.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row"  let-value="value" ngx-datatable-cell-template>
+                        {{row.c001}}
+                   
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="O.M.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c002}}
+                    </ng-template>
+                </ngx-datatable-column> 
+                 <ngx-datatable-column name="T.R.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c003}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="S.O.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c004}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="R.K.P" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c005}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="N.E.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c006}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="S.H.C" width="5" *ngIf="!isFossilFuel">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.c007}}
+                    </ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="O.C" width="5" *ngIf="!isFossilFuel">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.c008}}
+				</ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="P.O.C" width="5"  *ngIf="!isFossilFuel">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.c009}}
+                </ng-template>
+            </ngx-datatable-column>
+			
+            
+				<ngx-datatable-column name="Is Clean" width="5">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				<div *ngIf="row.isClean=='Y'"><mat-icon color="success">check</mat-icon></div>
+				<div *ngIf="row.isClean!='Y'"><mat-icon color="warn">close</mat-icon></div>
+				</ng-template>
+			</ngx-datatable-column>
+		
+		<ngx-datatable-column name="Remarks" width="15">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.importRemarks}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+</div>
+<mat-card-actions>
+<button mat-raised-button color="primary" *ngIf="this.validateFlag" (click)="validate()" >Validate</button>
+<button mat-raised-button color="primary" *ngIf="this.energySaleMultiAddHeader.id != null" (click)="importMultiAdd()" >Add</button>
+<button mat-raised-button color="primary" (click)="reset()" >Reset</button>
+<button mat-raised-button color="primary" (click)="back()" >Back</button>
+</mat-card-actions>
+</mat-card>
+<mat-card-footer> &nbsp;&nbsp;
+ <span class = "md-title"><strong>Note</strong></span>
+ <span class = "md-subhead"  *ngIf="isFossilFuel">Please feed ServiceNumber and slots only. The Charges will be ignored. </span><br/>
+ <span class = "md-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class = "md-subhead">Already Existing Service number in this energy sale cannot be added</span><br/>
+<span class = "md-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class = "md-subhead">Invalid Service number cannot be added</span><br/>
+<span class = "md-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class = "md-subhead">Service number without traderelationship cannot be added</span>	</mat-card-footer>

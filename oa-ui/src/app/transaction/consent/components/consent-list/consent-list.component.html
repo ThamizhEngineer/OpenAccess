@@ -1,0 +1,172 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				Existing Consent
+			</mat-card-title>
+
+			<mat-card-content>
+		<!--		<button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newNoc()'><mat-icon>add</mat-icon></button>
+
+				<br/> -->
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;"   placeholder="{{this.commonUtils.getProp('buyer')}} Edc Name" [(ngModel)]='searchBuyerEndOrgId' [required]="isMandatory"
+						 (ngModelChange)="onEdcChange()">
+							<mat-option *ngFor="let edc of edcList" [value]="edc.id">
+								{{ edc.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('buyer')}} Service number" [(ngModel)]='searchBuyerCompanyServiceId'
+						 [required]="isMandatory">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.buyerCompServiceId">
+								{{ companyService.buyerCompanyName}} - {{ companyService.buyerCompServiceNumber }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Drawal Voltage" [(ngModel)]='searchBuyerVoltageCode'>
+							<mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode">
+								{{voltage.valueDesc}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Status" [(ngModel)]="searchStatus">
+							<mat-option *ngFor="let status of statuses" [value]="status.key">
+								{{status.key}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+					<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+				</div>
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="{{this.commonUtils.getProp('seller')}} Edc Name" [(ngModel)]='searchSellerEndOrgId' [required]="isMandatory"
+						 (ngModelChange)="onEdcChange()">
+							<mat-option *ngFor="let edc of edcList" [value]="edc.id">
+								{{ edc.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [(ngModel)]='searchSellerCompanyId'
+						 [required]="isMandatory">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompServiceId">
+								{{ companyService.sellerCompanyName}} - {{ companyService.sellerCompServiceNumber }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+
+
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Consent Number" [(ngModel)]="searchConsentCode">
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+					</mat-form-field>
+					<hr>
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+
+				</div>
+			</mat-card-content>
+
+
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+
+			<!--   <ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} EDC Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.buyerOrgName}}
+						</ng-template>
+					</ngx-datatable-column>  -->
+
+					<ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Company Service Number" [width]="80">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.buyerCompanyName}} - {{row.buyerCompServiceNumber}}
+						</ng-template>
+					</ngx-datatable-column>
+
+
+					<ngx-datatable-column name=" Drawal Voltage">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.drawalVoltageDesc}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="{{this.commonUtils.getProp('seller')}} Company Service Number" ng-class="test">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerCompanyName}} - {{row.sellerCompServiceNumber}}
+						</ng-template>
+					</ngx-datatable-column>
+
+
+
+					<ngx-datatable-column name="Duration From">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{commonService.displayMonth(row.fromMonth) +"-" +row.fromYear}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Duration To">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{commonService.displayMonth(row.toMonth) +"-" +row.toYear}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statusCode}}
+						</ng-template>
+					</ngx-datatable-column>
+				<!--	<ngx-datatable-column name="Consent Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.code}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Energy Sale Intent Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.esIntentCode}}
+						</ng-template>
+					</ngx-datatable-column> -->
+
+
+
+
+					<ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editConsent(row['id'])">Open</button>
+						</ng-template>
+					</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

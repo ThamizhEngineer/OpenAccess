@@ -1,0 +1,30 @@
+<mat-card class="mat-card-top">
+
+        <mat-card-title>{{addScreen?'Add':'Update'}} Fuel Details</mat-card-title> 
+    
+        <mat-card>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Fuel Code" [(ngModel)]='fuel.fuelCode'>
+                    </mat-form-field>
+    
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Fuel Group" [(ngModel)]='fuel.fuelGroup'>
+                    </mat-form-field>
+                 
+               <!-- <div fxLayout="row" fxLayoutAlign="start center"> --> 
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="IS Enabled" [(ngModel)]='fuel.isEnabled'>
+                    </mat-form-field>
+    
+
+    </div> 
+    <mat-card-actions>
+             <button mat-raised-button color="primary" (click)="saveFuel('')">Save </button>
+             <button mat-raised-button class="primary" (click)="listFuel()">Cancel/Back</button>
+         </mat-card-actions>
+    
+    </mat-card-content>
+         </mat-card>
+    

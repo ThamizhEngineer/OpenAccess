@@ -1,0 +1,107 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+           Meter Change Report
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+                
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='stmtMonth'>
+                  <mat-option *ngFor="let month of months" [value]="month.value">
+                    {{month.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear"> -->
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                    placeholder="Statement Year" [(ngModel)]='stmtYear'
+                    readonly>
+                    <mat-option *ngFor="let year of years" [value]="year">
+                        {{ year }}
+                    </mat-option>
+                </mat-select> 
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code" [(ngModel)]='fuelTypeCode'>
+                      <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                        {{fuelTypes.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{edc.code}} - {{ edc.name }}
+                            </mat-option>
+                    </mat-select>
+            </mat-form-field>                  
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary" (click)="reset()">Reset</button>
+                  </mat-card-actions>
+                <!-- <mat-card-actions>				
+                  <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              </mat-card-actions> -->
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+      <div>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="100" [footerHeight]="50" [rowHeight]="50">
+      
+            <ngx-datatable-column name="SI.NO" [width]="20"  [frozenLeft]="true">
+              <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{rows.indexOf(row) + 1}}
+              </ng-template>
+            </ngx-datatable-column> 
+  
+            <ngx-datatable-column name="Service Number"  [frozenLeft]="true">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op1}} 
+              </ng-template>
+            </ngx-datatable-column> 
+  
+            <ngx-datatable-column name="Old Meter No." [frozenLeft]="true" >
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op2 || '-'}}
+              </ng-template>
+           </ngx-datatable-column>
+           
+             <ngx-datatable-column name="New Meter No." [frozenLeft]="true" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                  {{row.op3 || '-'}}
+                </ng-template>
+             </ngx-datatable-column> 
+  
+             <ngx-datatable-column name="Remarks" [frozenLeft]="true" >
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                  {{row.op4 || '-'}}
+              </ng-template>
+             </ngx-datatable-column> 
+
+             <ngx-datatable-column name="Meter Change Date" [frozenLeft]="true" >
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                  {{row.op5 | date: 'dd-MM-yyyy' || '-'}}
+              </ng-template>
+             </ngx-datatable-column>
+             
+            </ngx-datatable>   
+      </div>
+            </mat-card>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+export class ImportSubstationLoss{
+    id:string;
+    orgId:string;
+    orgName:string;
+    substationId:string;
+    substationName:string;
+    lossPercent:string;
+    batchKey:string;
+    month:string;
+    year:string;
+    resultDesc:string;
+    bulkMeterReading:string;
+    totalAllWegs:string;
+    isImported:string;
+    enabled:string;
+    createdBy:string;
+    createdDt:string;
+    modifiedBy:string;
+    modifiedDt:string;
+}

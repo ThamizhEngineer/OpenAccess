@@ -1,0 +1,164 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>Gen Other Charges</mat-card-title>
+
+
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]='disableEdc' [(ngModel)]='geoOtherCharges.sellerOrgId'
+					 [required]="isMandatory" (ngModelChange)="onEdcChange()">
+						<mat-option *ngFor="let edc of orgList" [value]="edc.id">
+							{{ edc.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field> -->
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="isEdc" [(ngModel)]='geoOtherCharges.sellerOrgId' [required]="isMandatory">
+						<mat-option *ngFor="let edc of edcList" [value]="edc.id">
+							{{edc.id}} - {{ edc.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='geoOtherCharges.sellerCompanyServiceId'
+							[required]="isMandatory" (ngModelChange)="onServiceChange()">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+									{{ companyService.companyName }} - {{ companyService.number }}
+							</mat-option>
+					</mat-select>
+			</mat-form-field> -->
+
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Service Number" [matAutocomplete]="tdAuto" name="geoOtherCharges.sellerCompanyServiceId"  [(ngModel)]='geoOtherCharges.sellerCompanyServiceId'  #modelDir="ngModel"
+				[required]="isMandatory" (ngModelChange)="onServiceChange()">
+				  <mat-autocomplete #tdAuto="matAutocomplete">
+						 <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+						   <span> {{ companyService.number }} - {{ companyService.companyName }}</span>
+						 </mat-option>
+				  </mat-autocomplete>
+			 </mat-form-field>  -->
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Service Number" [matAutocomplete]="tdAuto" [(ngModel)]='geoOtherCharges.sellerCompanyServiceNumber'
+					 #modelDir="ngModel" [required]="isMandatory" (ngModelChange)="this.filteredCompanyServiceList = filterSellerCompanyServiceList(geoOtherCharges.sellerCompanyServiceNumber);onServiceChange()">
+					<mat-autocomplete #tdAuto="matAutocomplete">
+						<mat-option *ngFor="let companyService of filteredCompanyServiceList" [value]="companyService.number">
+							<span> {{ companyService.number }} - {{ companyService.companyName }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [disabled]='disableEdc' [(ngModel)]='statementMonth'> <!----[(ngModel)]='geoOtherCharges.month' -->
+						<mat-option *ngFor="let month of months" [value]="month.value">
+							{{ month.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Year" [(ngModel)]="statementYear">
+				</mat-form-field>
+			</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Meter Reading Charges" [(ngModel)]="meterReading" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_mc="ngModel" (ngModelChange)="negativeValue($event)">
+					<mat-error *ngIf="val_mc.invalid && (val_mc.dirty || val_mc.touched) && val_mc.errors.pattern">
+						Must be number.</mat-error>
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="O&M Charges" [(ngModel)]="om" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_om="ngModel" (ngModelChange)="negativeValue($event)">
+					<mat-error *ngIf="val_om.invalid && (val_om.dirty || val_om.touched) && val_om.errors.pattern">
+						Must be number.</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Transmission Charges"  [(ngModel)]="transmission" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_tras="ngModel" (ngModelChange)="negativeValue($event)">
+					<mat-error *ngIf="val_tras.invalid && (val_tras.dirty || val_tras.touched) && val_tras.errors.pattern">
+						Must be number.</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+						<input matInput placeholder="System Operation Charges"  [(ngModel)]="system" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_soc="ngModel" (ngModelChange)="negativeValue($event)">
+						<mat-error *ngIf="val_soc.invalid && (val_soc.dirty || val_soc.touched) && val_soc.errors.pattern">
+							Must be number.</mat-error>
+					</mat-form-field>
+			</div>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+						<input matInput placeholder="RKvah Penalty" [(ngModel)]="rkVah" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_rkv="ngModel" (ngModelChange)="negativeValue($event)">
+						<mat-error *ngIf="val_rkv.invalid && (val_rkv.dirty || val_rkv.touched) && val_rkv.errors.pattern">
+							Must be number.</mat-error>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+							<input matInput placeholder="Negative Energy Charges"  [(ngModel)]="negative" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_neg="ngModel" (ngModelChange)="negativeValue($event)">
+							<mat-error *ngIf="val_neg.invalid && (val_neg.dirty || val_neg.touched) && val_neg.errors.pattern">
+								Must be number.</mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+								<input matInput placeholder="Scheduling Charges"  [(ngModel)]="scheduling" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_sec="ngModel" (ngModelChange)="negativeValue($event)">
+								<mat-error *ngIf="val_sec.invalid && (val_sec.dirty || val_sec.touched) && val_sec.errors.pattern">
+									Must be number.</mat-error>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+									<input matInput placeholder="Audit Charges"  [(ngModel)]="audit" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_aud="ngModel" (ngModelChange)="negativeValue($event)">
+									<mat-error *ngIf="val_aud.invalid && (val_aud.dirty || val_aud.touched) && val_aud.errors.pattern">
+										Must be number.</mat-error>
+								</mat-form-field>
+			</div>
+			
+			
+			<div fxLayout="row" fxLayoutAlign="start center">
+			
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+					<input matInput placeholder="Administrative Charges"[(ngModel)]="administrative" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_Ads="ngModel" (ngModelChange)="negativeValue($event)">
+					<mat-error *ngIf="val_Ads.invalid && (val_Ads.dirty || val_Ads.touched) && val_Ads.errors.pattern">
+						Must be number.</mat-error>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+					<input matInput placeholder="Meter change Charges" [(ngModel)]="meterChange" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_mc="ngModel" (ngModelChange)="negativeValue($event)">
+					<mat-error *ngIf="val_mc.invalid && (val_mc.dirty || val_mc.touched) && val_mc.errors.pattern">
+						Must be number.</mat-error>
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+						<input matInput placeholder="Miscellaneous Charges" [(ngModel)]="miscellaneous" required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_misc="ngModel" (ngModelChange)="negativeValue($event)">
+						<mat-error *ngIf="val_misc.invalid && (val_misc.dirty || val_misc.touched) && val_misc.errors.pattern">
+							Must be number.</mat-error>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+							<input matInput placeholder="Other Charges" [disabled]="true" [(ngModel)]="geoOtherCharges.totalCharges" (ngModelChange)="negativeValue($event)">
+						</mat-form-field>
+			</div>
+
+			
+			
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 50%;">
+					<textarea matInput placeholder="Remarks" [(ngModel)]="geoOtherCharges.remarks">
+			</textarea>
+				</mat-form-field>
+			</div>
+			<hr>
+			<mat-card>
+				<mat-card-actions>
+					<button mat-raised-button color="primary" [disabled]="disableSave" (click)="saveGenOtherCharges('')">Save</button>
+					<button mat-raised-button class="primary" (click)="listGenOtherCharges()">Cancel/Back</button>
+				</mat-card-actions>
+			</mat-card>

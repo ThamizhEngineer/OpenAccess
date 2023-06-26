@@ -1,0 +1,123 @@
+
+<div  fxLayout="row"  fxLayoutWrap="wrap"  fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Seller Company</mat-card-title>
+			<mat-card-content>
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>Company Details</ng-template>
+          <mat-card-content> 
+              
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Company Code" [(ngModel)]='company.code'  (ngModelChange)="onChange($event)" >
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Company Type" (ngModelChange)="onChange($event)" [(ngModel)]='company.companyTypeCode'>
+                  <mat-option *ngFor="let companySetup of companySetups" [value]="companySetup.key" >
+                   {{ companySetup.name }}
+                  </mat-option>
+                </mat-select>
+                </mat-form-field>
+                
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Company Name" (ngModelChange)="onChange($event)" [(ngModel)]='company.name' >
+                </mat-form-field> 
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="PAN Number" (ngModelChange)="onChange($event)" [(ngModel)]='company.pan' >
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="TAN Number" (ngModelChange)="onChange($event)" [(ngModel)]='company.tan' >
+                  </mat-form-field> 
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="GST Number" (ngModelChange)="onChange($event)" [(ngModel)]='company.gst' >
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="CST Number" (ngModelChange)="onChange($event)" [(ngModel)]='company.cst' >
+                  </mat-form-field> 
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Registration Number" (ngModelChange)="onChange($event)" [(ngModel)]='company.registrationNo' >
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Registration Date" (ngModelChange)="onChange($event)" [(ngModel)]='company.registrationDate' >
+                  </mat-form-field> 
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Place Of Incorporation" (ngModelChange)="onChange($event)" [(ngModel)]='company.incorpPlace' >
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Date of Commencement of Business" (ngModelChange)="onChange($event)" [(ngModel)]='company.cobDate' >
+                  </mat-form-field> 
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Is Captive?" (ngModelChange)="onChange($event)" [(ngModel)]='company.isCaptive'>
+                  <mat-option value="Y" >Y</mat-option>
+                  <mat-option value="N" >N</mat-option>
+                </mat-select>
+                </mat-form-field> 
+                
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <textarea matInput placeholder="Purpose Of Setting-up Captive Power plant" (ngModelChange)="onChange($event)" [(ngModel)]='company.captivePurpose'  >
+                  </textarea>
+                </mat-form-field> 
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <textarea matInput placeholder="Remarks" (ngModelChange)="onChange($event)" [(ngModel)]='company.remarks'  >
+                  </textarea>
+                </mat-form-field> 
+              </div>
+          </mat-card-content>
+        </mat-tab>
+        <!--
+        <mat-tab>
+          <ng-template mat-tab-label>Office Details</ng-template>
+          <company-addresses></company-addresses>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>Contact Details</ng-template>
+          <company-contacts></company-contacts>
+        </mat-tab>
+-->
+        <!-- <mat-tab [disabled]="true"> -->
+            <mat-tab>
+
+          <ng-template mat-tab-label>Shareholder Details</ng-template>
+          <company-share-holders></company-share-holders>
+        </mat-tab>
+    
+        <!-- <mat-tab [disabled]="true"> -->
+            <mat-tab>
+          <ng-template mat-tab-label>Services</ng-template>
+          <company-services></company-services>
+        </mat-tab> 
+        <mat-tab>
+          <ng-template mat-tab-label>Meter Details</ng-template>
+            <company-meters></company-meters>
+          </mat-tab> 
+
+      </mat-tab-group>
+			</mat-card-content>
+      <hr>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveCompany()" >Save</button>
+        <button mat-raised-button class="primary" (click)="listCompanies()" >Cancel/Back</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

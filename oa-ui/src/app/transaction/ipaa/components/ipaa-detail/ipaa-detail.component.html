@@ -1,0 +1,206 @@
+<div  fxLayout="row"  fxLayoutWrap="wrap"  fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      <mat-card class="mat-card-top">
+  
+      <mat-card-title><strong> View In Principle Approval Application</strong></mat-card-title>
+              <mat-card-content> 
+               <mat-card-title>{{this.commonUtils.getProp('seller')}}  Company</mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center" >
+            
+                   <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select  class="ml-xs mr-xs" style="width: 100%;"  placeholder="Edc Name" 
+                  [(ngModel)]='ipaa.sellerOrgId'  [required]="isMandatory"  (ngModelChange)="onEdcChange()" [disabled]="true">
+                  <mat-option *ngFor="let edc of edcList" [value]="edc.id"   >
+                    {{ edc.name }}
+                  </mat-option>
+                  </mat-select>
+                  </mat-form-field>  
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Service Number" value="{{ipaa.sellerCompanyServiceNumber}}-{{ipaa.sellerCompanyName}}" [disabled]="true">
+        
+             </mat-form-field> 
+
+             
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;"  >
+                            <input matInput placeholder="Ipaa Number"  [(ngModel)]="ipaa.code"  [disabled]="true">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;"  >
+                            <input matInput placeholder="Energy Sale Intent Number"  [(ngModel)]="ipaa.esIntentCode" [disabled]="true">
+                    </mat-form-field> 
+
+           
+                </div>
+             </mat-card-content>
+
+             <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center" >
+              
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Duration From"   value = "{{commonService.displayMonth(ipaa.fromMonth)}} - {{ipaa.fromYear}}" [disabled]="true">
+                            </mat-form-field>
+            
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Duration To"   value = "{{commonService.displayMonth(ipaa.toMonth)}} - {{ipaa.toYear}}" [disabled]="true">
+                            </mat-form-field>
+                      <!-- <month-picker [(config)]="mpFromConfig" [(model)]="mpFromModel" (mpOnModelChange) ="this.mpOnFromModelChange($event)"></month-picker>
+                      <month-picker [(config)]="mpToConfig" [(model)]="mpToModel" (mpOnModelChange) ="this.mpOnToModelChange($event)"></month-picker>
+                       -->
+                      <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="ipaa.isCaptive">
+                                  <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.name">
+                                      {{iscaptives.name}}
+                                  </mat-option>
+                              </mat-select>
+                              </mat-form-field>  -->
+                                
+                        
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [(ngModel)]="ipaa.agmtPeriodCode" [disabled]="true">
+                                      <mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+                                          {{code.name}}
+                                      </mat-option>
+                                  </mat-select>
+                                  </mat-form-field> 
+
+                                  <mat-form-field *ngIf="ipaa.flowTypeCode=='THIRD-PARTY'" class="ml-xs mr-xs" style="width: 100%;"  >
+                                    <input matInput placeholder="Proposed Quantum(MW)"  [(ngModel)]="ipaa.proposedCapacity" [disabled]="true">
+                            </mat-form-field>
+                                  <div *ngIf="ipaa.flowTypeCode!='THIRD-PARTY'" class="ml-xs mr-xs" style="width: 100%;"> </div>
+                </div>
+             </mat-card-content>
+
+             <mat-card *ngIf="ipaa.flowTypeCode!='THIRD-PARTY'">
+                <mat-card-content>
+                    <mat-card-title>Intented {{this.commonUtils.getProp('buyer')}}  List</mat-card-title>
+
+                    <ngx-datatable class="material" [rows]="ipaa.ipaaLines" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="'auto'">
+                        <ngx-datatable-column name="EDC Name">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.buyerOrgId}} - {{row.buyerOrgName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Service Number">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.buyerCompanyName}} -  {{row.buyerCompServiceNumber}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                
+                  <!--          <ngx-datatable-column name="Drawal Peak">
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        {{row.drawalPeakUnits}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            
+                        <ngx-datatable-column name="Drawal Off Peak ">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.drawalOffPeakUnits}}
+                            </ng-template>
+                        </ngx-datatable-column>  -->
+                        <ngx-datatable-column name="Approved Units(kVA)">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.approvedUnits}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Remarks">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.remarks}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                   
+                        <ngx-datatable-column name="Actions">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <button mat-raised-button mat-icon-button mat-button-sm (click)="editIpaaLine(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                                <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteIpaaLine(row.$$index)"><mat-icon>delete</mat-icon></button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+
+                    <mat-card-title>
+                        <Strong>{{ipaaLineRowIndex>-1?'Update':'Add'}} Intented {{this.commonUtils.getProp('buyers')}} </Strong>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;" >
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Edc Name" [(ngModel)]='ipaaLine.buyerOrgId' [required]="isMandatory" 
+                                    (ngModelChange)="onBuyerEdcChange()">
+                                    <mat-option *ngFor="let edc of edcList" [value]="edc.id" > 
+                                        {{ edc.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Service number" [(ngModel)]='ipaaLine.buyerCompServiceId'
+                                    [required]="isMandatory" (ngModelChange)="onBuyerServiceChange()">
+                                    <mat-option *ngFor="let companyService of buyerCompanyServices" [value]="companyService.id">
+                                        {{ companyService.companyName }} - {{ companyService.number }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Capacity(kVA)" [disabled]="true"  [(ngModel)]='ipaaLine.buyerCapacity'>
+                            </mat-form-field> 
+                            
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Voltage" [disabled]="true" [(ngModel)]='ipaaLine.drawalVoltageDesc'>
+                            </mat-form-field> 
+            
+            
+                            <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+                            
+                        </div><br/>
+                        
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            
+                                
+                           <!--     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput placeholder="Drawal (Peak)" [(ngModel)]='ipaaLine.drawalPeakUnits'>
+                                    </mat-form-field> 
+                                    
+                                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput placeholder="Drawal (Off Peak)" [(ngModel)]='ipaaLine.drawalOffPeakUnits'>
+                                    </mat-form-field>   -->
+                                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput placeholder="Approved Units(kVA)" [disabled]="true" [(ngModel)]='ipaaLine.approvedUnits'>
+                                    </mat-form-field> 
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Loss" [(ngModel)]='ipaaLine.loss'>
+                            </mat-form-field> 
+            
+            
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Remarks" [(ngModel)]='ipaaLine.remarks'>
+                                </mat-form-field> 
+                                <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+                            
+                        </div><br/>
+
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="ipaaLineRowIndex>-1?updateIpaaLine():addIpaaLine()">{{ipaaLineRowIndex>-1?'Update':'Add'}}</button>
+                        <button mat-raised-button (click)="initIpaaLines()">Reset</button>
+                    </mat-card-actions>
+                   
+                </mat-card-content>
+                
+            </mat-card>
+
+            
+                        
+                    </mat-card-content>
+        <hr>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" *ngIf="ipaa.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveIpaa('')">Save</button>
+            <button mat-raised-button color="primary"  *ngIf="ipaa.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveIpaa()">Approve</button>
+    <button mat-raised-button color="primary" *ngIf="ipaa.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="completeIpaa()">Complete</button>
+        
+
+          <button mat-raised-button class="primary" (click)="back()" >Back</button>
+        </mat-card-actions>
+   
+      </mat-card>
+    </div> 
+  </div>

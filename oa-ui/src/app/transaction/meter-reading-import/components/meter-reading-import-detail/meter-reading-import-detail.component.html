@@ -1,0 +1,296 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Meter Reading Import </mat-card-title>
+
+	<ng-template mat-tab-label>Batch Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" *ngIf="!this.addScreen" fxLayoutAlign="start center">
+
+				<!-- 
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput name="To Date" [(ngModel)]="meterReadingImport.importDate" [mdDatepicker]="Importpicker " placeholder="Import Date">
+					<button mdSuffix [mdDatepickerToggle]="Importpicker"></button>
+				</mat-form-field>
+				<mat-datepicker #Importpicker></mat-datepicker> -->
+
+				<mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+					<input matInput [(ngModel)]="meterReadingImport.importDate" [matDatepicker]="Importpicker" placeholder="Import Date">
+					<mat-datepicker-toggle matSuffix [for]="Importpicker"></mat-datepicker-toggle>
+					<mat-datepicker #Importpicker></mat-datepicker>
+				</mat-form-field>
+
+				<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Import Date" [(ngModel)]="meterReadingImport.importDate">
+				</mat-form-field>   -->
+				<mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Source" [(ngModel)]='meterReadingImport.mrSourceCode'>
+					<mat-option *ngFor="let SourceCodeTypes of SourceCodeTypes" [value]="SourceCodeTypes.key">
+						{{SourceCodeTypes.name}}
+					</mat-option>
+				</mat-select>
+				</mat-form-field>
+
+				<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Source" [(ngModel)]="meterReadingImport.mrSourceCode">
+				</mat-form-field> -->
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Batch Status" [readonly]="true" [(ngModel)]="meterReadingImport.statusCode" >
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Batch Code" [readonly]="true" [(ngModel)]="meterReadingImport.code">
+					</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Remarks" [readonly]="true" [(ngModel)]="meterReadingImport.remarks">
+				</mat-form-field>
+			</div>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" (change)="onMonthSelect()" [(ngModel)]='meterReadingImport.readingMonthCode'>
+							<mat-option *ngFor="let  month of months" [value]="month.value"   >
+								{{month.name}}
+							</mat-option>
+						</mat-select>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" (change)="onYearSelect()" [(ngModel)]='meterReadingImport.readingYear'>
+							<mat-option *ngFor="let year of yearsreading" [value]="year.key" >
+								{{year.name}}
+							</mat-option>
+						</mat-select>
+						</mat-form-field> 
+
+						<div class="ml-xs mr-xs" style="width: 100%;"> </div>
+						<div class="ml-xs mr-xs" style="width: 100%;"> </div>
+
+			</div>
+
+			<div mat-subheader><strong>Meter Reading List</strong></div>
+			<ngx-datatable class="material" tabindex="index" [rows]="meterReadingImport.meterReadingImportLines" [columnMode]="'force'"
+			 [headerHeight]="50" [footerHeight]="0" [rowHeight]="'auto'"> 
+
+				<ngx-datatable-column name="Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.serviceNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="MeterNumber">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.meterNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Month-Year">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{commonService.displayMonth(row.readingMonthCode)}} - {{row.readingYear}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Status">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.statusCode}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<!--		<ngx-datatable-column name="Status"> 
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statusCode}}
+						</ng-template>
+					</ngx-datatable-column> 
+                    <ngx-datatable-column name="Remarks"> 
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.remarks}}
+						</ng-template>
+					</ngx-datatable-column>  -->
+				<ngx-datatable-column name="Actions">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<button mat-raised-button mat-icon-button mat-button-sm (click)="editMeterReadingImportLines(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+						<button mat-raised-button mat-icon-button mat-button-sm (click)="deleteMeterReadingImportLines(row.$$index)"><mat-icon>delete</mat-icon></button>
+					</ng-template>
+				</ngx-datatable-column>
+			</ngx-datatable>
+			<mat-card>
+				<mat-card-title>
+					<Strong>{{meterReadingImportLinesRowIndex>-1?'Update':'Add'}} Meter Reading</Strong>
+				</mat-card-title>
+				<mat-card-content>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<!--		  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                       <input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" name="meterReadingImportLine.orgId" [(ngModel)]='meterReadingImportLine.orgId'  #modelDir="ngModel"
+             			 (ngModelChange)="this.filteredEDCs = filterEDCs(meterReadingImportLine.orgId)" [disabled]="isDisabled">
+                        <mat-autocomplete #tdAuto="matAutocomplete">
+                                <mat-option *ngFor="let org of filteredEDCs" [value]="org.code">
+                                  <span>{{ org.name }}</span>
+                                </mat-option>
+                              </mat-autocomplete>
+                    </mat-form-field> -->
+					 
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Service Number" [matAutocomplete]="tdAuto" name="meterReadingImportLine.serviceNumber" [(ngModel)]='meterReadingImportLine.serviceNumber'  #modelDir="ngModel"
+						   (ngModelChange)="this.filteredSellerCompanyServices = filterSellerCompanyServices(meterReadingImportLine.serviceNumber); onSellerChange()" [disabled]="isDisabled" >
+						  <mat-autocomplete #tdAuto="matAutocomplete">
+								 <mat-option *ngFor="let sellercompanyservice of filteredSellerCompanyServices" [value]="sellercompanyservice.number">
+								   <span>{{sellercompanyservice.orgName}} - {{sellercompanyservice.number}}</span>
+								 </mat-option>
+						  </mat-autocomplete>
+					 </mat-form-field> 
+
+					<!--	<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Service Number" [(ngModel)]='meterReadingImportLine.serviceNumber'>
+						</mat-form-field> -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Meter Number" [(ngModel)]='meterReadingImportLine.meterNumber'  readonly>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Multiplication Factor" [(ngModel)]='meterReadingImportLine.mf' readonly>
+						</mat-form-field>
+
+						<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='meterReadingImportLine.readingMonthCode'>
+							<mat-option *ngFor="let  month of months" [value]="month.value"  >
+								{{month.name}}
+							</mat-option>
+						</mat-select>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='meterReadingImportLine.readingYear' >
+							<mat-option *ngFor="let year of yearsreading" [value]="year.key">
+								{{year.name}}
+							</mat-option>
+						</mat-select>
+						</mat-form-field>  -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Month" [(ngModel)]='meterReadingImportLine.readingMonthCode' readonly>
+						</mat-form-field> 
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Year" [(ngModel)]='meterReadingImportLine.readingYear' readonly>
+						</mat-form-field>
+
+					</div>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<!--		  <mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Month" [(ngModel)]='meterReadingImportLine.readingMonth'   >
+					</mat-form-field> 
+
+					<mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Year" [(ngModel)]='meterReadingImportLine.readingYear'  >
+					</mat-form-field>    -->
+					</div>
+					<div mat-subheader>
+						<Strong> Import Data Set</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot1" [(ngModel)]='meterReadingImportLine.impFinalS1'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot2" [(ngModel)]='meterReadingImportLine.impFinalS2'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot3" [(ngModel)]='meterReadingImportLine.impFinalS3'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot4" [(ngModel)]='meterReadingImportLine.impFinalS4'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot5" [(ngModel)]='meterReadingImportLine.impFinalS5'>
+						</mat-form-field>
+					</div>
+					<div mat-subheader>
+						<Strong> Export Data Set</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot1" [(ngModel)]='meterReadingImportLine.expFinalS1'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot2" [(ngModel)]='meterReadingImportLine.expFinalS2'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot3" [(ngModel)]='meterReadingImportLine.expFinalS3'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot4" [(ngModel)]='meterReadingImportLine.expFinalS4'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot5" [(ngModel)]='meterReadingImportLine.expFinalS5'>
+						</mat-form-field>
+					</div>
+
+					<div mat-subheader>
+						<Strong>Other Values</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+					<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="KVAH Initial Import" [(ngModel)]='meterReadingImportLine.impkVahInit'>
+						</mat-form-field> -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="KVAH Import" [(ngModel)]='meterReadingImportLine.impkVahFinal'>
+						</mat-form-field>
+
+					<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="KVAH Initial Export" [(ngModel)]='meterReadingImportLine.expkVahInit'>
+						</mat-form-field> -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="KVAH  Export" [(ngModel)]='meterReadingImportLine.expkVahFinal'>
+						</mat-form-field>
+
+			<!--		<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Initial Import" [(ngModel)]='meterReadingImportLine.impRkvahInit'>
+						</mat-form-field>  -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Import" [(ngModel)]='meterReadingImportLine.impRkvahFinal'>
+						</mat-form-field>
+
+			<!--		<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Initial Export" [(ngModel)]='meterReadingImportLine.expRkvahInit'>
+						</mat-form-field>   -->
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Export" [(ngModel)]='meterReadingImportLine.expRkvahFinal'>
+						</mat-form-field>
+						
+						
+					</div>
+					 
+				
+				</mat-card-content>
+
+				<mat-card-actions>
+					<button mat-raised-button (click)="meterReadingImportLinesRowIndex>-1?updateMeterReadingImportLines():addMeterReadingImportLines()">{{meterReadingImportLinesRowIndex>-1?'Update':'Add'}}</button>
+					<button mat-raised-button (click)="initMeterReadingImportLines()">Reset</button>
+				</mat-card-actions>
+			</mat-card>
+
+			<hr>
+			<mat-card>
+				<mat-card-actions>
+					<button mat-raised-button color="primary" (click)="saveMeterReadingImport('') ">Save</button>
+				    <button mat-raised-button color="primary" *ngIf="!this.addScreen"  (click)="processMeterReadingImport('id')">Process</button> 
+					<button mat-raised-button class="primary" (click)="listMeterReadingImport()">Cancel/Back</button>
+				</mat-card-actions>
+			</mat-card>

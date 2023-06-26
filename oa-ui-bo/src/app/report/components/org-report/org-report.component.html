@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title >
+        Organization Report
+      </mat-card-title> 
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Organization"  
+            [(ngModel)]="searchOrgId" >
+          </mat-form-field> 
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Org Name" [(ngModel)]='searchOrgName'>
+              <mat-option *ngFor="let org of orgList" [value]="org.id">
+                {{org.name}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+
+            <mat-card-actions>				
+                <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+              </mat-card-actions>
+
+        </div>
+        <br/>
+        <br/>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+        [scrollbarV]="true">
+        <ngx-datatable-column name="Type Code">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op4}}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Name">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op3}}
+              </ng-template>
+            </ngx-datatable-column>
+      
+        </ngx-datatable>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

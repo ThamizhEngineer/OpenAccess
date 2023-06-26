@@ -1,0 +1,128 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title>
+          CEA Return Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+               
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                    <mat-option *ngFor="let month of months" [value]="month.value">
+                        {{ month.name }}
+                    </mat-option>
+                </mat-select>
+                 </mat-form-field> 
+
+                 <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc" [(ngModel)]='searchmOrgId'>
+                    <mat-option *ngFor="let org of orgList" [value]="org.id">
+                      {{org.code}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+   -->
+          
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+              <mat-select class="ml-xs mr-xs" style="width: 100%;"
+              placeholder="Year" [(ngModel)]="searchYear">
+                  <mat-option *ngFor="let year of years" [value]="year">
+                      {{ year }}
+                  </mat-option>
+              </mat-select> 
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput placeholder="Type of Share" [(ngModel)]="searchtypeOfShare">
+            </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type"
+                [(ngModel)]='searchfuelType'>
+                <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType.key">
+                  {{ fuelType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+              <mat-card-actions>
+                  <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+                </mat-card-actions>
+
+                         
+              <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="printReport()">
+                      <mat-icon>cloud_download</mat-icon>
+                      Download Pdf
+                  </button>
+                  <button mat-raised-button color="accent" (click)="searchResults()"></button>
+                </mat-card-actions>
+                </div>
+
+                <br/>
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+					<ngx-datatable-column name="TYPE">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.fuelTypeName}}
+            </ng-template>
+
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="MONTH">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.month}}
+            </ng-template>
+          </ngx-datatable-column>
+            <ngx-datatable-column name="YEAR">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.year}}
+              </ng-template>
+					</ngx-datatable-column>
+            <ngx-datatable-column name="TOTAL CAPACITY">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.totalCapacitySum}}
+                </ng-template>
+
+              </ngx-datatable-column>
+              <ngx-datatable-column name="TOTAL GENERATION">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.netGenerationSum}}
+                </ng-template>
+
+					</ngx-datatable-column>
+					<ngx-datatable-column name="TYPE OF SHARE">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.typeOfShare}}
+            </ng-template>
+            
+					</ngx-datatable-column>
+          <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template >
+              <div style="padding: 100px 100px 100px 100px;">
+                <hr style="width: 100%;" >
+                <div><br/>
+                  TOTAL OF TOTAL CAPACITY: <b>{{this.totalop4}}</b> &#8192; TOTAL OF TOTAL GENERATION: <b>{{this.totalop5}}</b> &#8192;</div>
+                  
+              </div>
+            </ng-template>
+          </ngx-datatable-footer>
+           
+
+
+
+
+
+
+				
+				</ngx-datatable>
+      
+                </mat-card-content>
+              </mat-card>
+
+          
+      
+          </div>
+        </div>

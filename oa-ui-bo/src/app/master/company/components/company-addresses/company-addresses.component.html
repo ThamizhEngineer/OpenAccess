@@ -1,0 +1,82 @@
+  <mat-card-content>
+             <ngx-datatable
+				      class="material"
+              tabindex="index"
+				      [rows]="company.addresses"
+				      [columnMode]="'force'"
+				      [headerHeight]="50"
+				      [footerHeight]="0"
+				      [rowHeight]="'auto'">
+				      <ngx-datatable-column name="Office Type"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['type']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Address Line"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['line1']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="City"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['city']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="District"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['district']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-raised-button mat-icon-button mat-button-sm  (click)="editAddress(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                  <button mat-raised-button mat-icon-button mat-button-sm  (click)="deleteAddress(row.$$index)"><mat-icon>delete</mat-icon></button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+				    </ngx-datatable>
+              <mat-card>
+                <mat-card-title><Strong>{{addressRowIndex>-1?'Update':'Add'}} Office</Strong></mat-card-title>
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-select  class="ml-xs mr-xs" style="width: 30%;" placeholder="Office Type"  name="address.type" 
+                        [(ngModel)]='address.type'  [required]="isMandatory" [disabled]="isDisabled"  (ngModelChange)="onChange($event)">
+                          <mat-option *ngFor="let addressType of addressTypes" [value]="addressType.name"   >
+                            {{ addressType.name }}
+                          </mat-option>
+                       </mat-select>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Address Line" name="address.line1" [(ngModel)]='address.line1' >
+                    </mat-form-field> 
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="City" name="address.city" [(ngModel)]='address.city' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="District" name="address.district" [(ngModel)]='address.district' >
+                    </mat-form-field> 
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                       <input matInput placeholder="State" [matAutocomplete]="tdAuto" name="address.state" [(ngModel)]='address.state'  #modelDir="ngModel"
+              (ngModelChange)="this.filteredStates = filterStates(address.state)" [disabled]="isDisabled">
+                        <mat-autocomplete #tdAuto="matAutocomplete">
+                                <mat-option *ngFor="let state of filteredStates" [value]="state.name">
+                                  <span>{{ state.name }}</span>
+                                </mat-option>
+                              </mat-autocomplete>
+                    </mat-form-field>
+                    
+                  
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Pincode" name="address.pinCode" [(ngModel)]='address.pinCode' >
+                    </mat-form-field> 
+                  </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button (click)="addressRowIndex>-1?updateAddress():addAddress()">{{addressRowIndex>-1?'Update':'Add'}}</button>
+                  <button mat-raised-button (click)="initAddresses()">Reset</button>
+                </mat-card-actions>
+              </mat-card>
+    
+          </mat-card-content>

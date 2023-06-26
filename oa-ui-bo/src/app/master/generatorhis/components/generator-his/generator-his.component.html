@@ -1,0 +1,416 @@
+<div fxFlex.gt-sm="100%" fxFlex="100" >
+    <mat-card >
+        <mat-card-title>
+            GENERATOR LEDGER
+        </mat-card-title>
+
+        <mat-card-content >
+            
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" >
+					<input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service No" [(ngModel)]="mCompServNumber">
+                  </mat-form-field>
+                
+                <mat-card-actions style="margin-right: 62%;">
+                    <button mat-raised-button color="primary" class="primary" (click)="getDataHis()">SEARCH</button>
+                </mat-card-actions>
+               
+            </div>
+    
+        </mat-card-content>
+     <br>
+	 <br>
+	 <mat-tab-group >
+
+		<mat-tab label="DETAILS"> 
+			<div class="mat-elevation-z8">
+				<br>
+				<mat-card-content>
+				<div fxLayout="row" fxLayoutAlign="start center">
+                   
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="CIRCLE NAME" [(ngModel)]='rowss.orgName' readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="SERVICE NO" [(ngModel)]='rowss.mCompServNumber' readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="COMPANY NAME" [(ngModel)]='rowss.companyName' readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="DATE OF COMMISION" [value]="rowss.commissionDate | date: 'dd/MM/yyyy'" readonly>
+					</mat-form-field>
+			
+				  </div>
+				  <br>
+				  
+				  <div fxLayout="row" fxLayoutAlign="start center">
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+						<input  matInput placeholder="INJECTION VOLTAGE" [(ngModel)]='rowss.voltageName' readonly>
+					  </mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="CAPACITY" [(ngModel)]="capacityInKV" readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input matInput placeholder="SUBSTATION NAME" [(ngModel)]="rowss.substationName" readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+						<input matInput placeholder="MULTIPLICATION FACTOR" [(ngModel)]="rowss.multiplicationFactor" readonly>
+					  </mat-form-field>
+			
+			
+				  </div>
+				  <br>
+				  
+				  <div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+						<input  matInput placeholder="CATEGORY" [(ngModel)]="captive" readonly>
+					  </mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input  matInput placeholder="REC/NON-REC" [(ngModel)]="rowss.isRec" readonly>
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+					  <input matInput placeholder="METER NO" [(ngModel)]="rowss.meterNumber" readonly>
+					</mat-form-field>
+					
+				  </div>
+				  <br>
+				</mat-card-content>
+	 <mat-card-content>
+
+	 <mat-card-title>
+		 CONSUMER DETAILS
+	</mat-card-title>
+
+		<style>
+			table, th, td {
+			  border: 1px solid black;
+			  border-collapse: collapse;
+			}
+			mat-card-title{
+			  margin: auto;
+			}
+			h1.header {
+			 font-size: 23px;
+			 text-align: center;
+			}
+			th {
+				height: 30px;
+			  }
+
+			</style>
+
+			<br>
+			<br>
+			
+		<div style="float: center;width: 95%; margin-left: auto;">
+			<table id="table" style="float: center; border:1;width: 95%;">     
+				<tr>
+					<th style="background: #dcdcdc;text-align: center;">SL.NO</th>
+					<th style="background: #dcdcdc;text-align: center;">BUYER EDC</th>
+					<th style="background: #dcdcdc;text-align: center;">BUYER SERVICE NUMBER</th>
+					<th style="background: #dcdcdc;text-align: center;">FROM DATE</th>
+					<th style="background: #dcdcdc;text-align: center;">TO DATE</th>
+				</tr>
+	
+				<tr *ngFor="let row of buyerData;let i=index;">  
+					<td style="text-align: center;">{{i+1}}</td> 
+					<td style="text-align: left;">{{row.buyerOrgName}}</td>  
+					<td style="text-align: center;">{{row.buyerCompServiceNumber}}</td>  
+					<td style="text-align: center;">{{row.fromDate| date: 'dd/MM/yyyy'}}</td>  
+					<td style="text-align: center;">{{row.toDate| date: 'dd/MM/yyyy'}}</td> 
+				</tr>   
+	
+			</table>
+			<br>
+			<br>
+		</div>
+
+ </mat-card-content>
+ </div>
+
+
+		</mat-tab>
+
+
+		<mat-tab label="NAME CHANGE"> 
+			<mat-card-content>
+			<div class="mat-elevation-z8">
+				<ngx-datatable class="material"	tabindex="index" [rows]="namechange" [columnMode]="'force'" [headerHeight]="50"
+				[footerHeight]="0" [rowHeight]="'auto'">
+	
+				<ngx-datatable-column name="SI.NO"  >
+				  <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.newName!=NULL">
+					{{namechange.indexOf(row) + 1}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+	
+				<!-- <ngx-datatable-column name="CIRCLE NAME" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					  <div *ngIf="row.newName!=NULL" >
+					 {{row.mOrgName}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column> -->
+
+				<ngx-datatable-column name="SERVICE NO" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newName!=NULL" >
+					 {{row.mCompServNumber}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+
+				  <ngx-datatable-column name="OLD NAME" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newName!=NULL" >
+					 {{row.oldName}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+
+				  <ngx-datatable-column name="NEW NAME" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newName!=NULL" >
+					 {{row.newName}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+
+				  <ngx-datatable-column name="MONTH" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newName!=NULL" >
+					 {{row.nameChangeMonth}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+
+				  <ngx-datatable-column name="YEAR" >
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newName!=NULL" >
+					 {{row.nameChangeYear}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+
+			  </ngx-datatable>
+			</div>
+		</mat-card-content>
+		</mat-tab>
+		<mat-tab label="MIGRATION"> 
+		
+		<div class="mat-elevation-z8">
+			
+			<ngx-datatable class="material"	tabindex="index" [rows]="migration" [columnMode]="'force'" [headerHeight]="50"
+			[footerHeight]="0" [rowHeight]="'auto'">
+
+			<ngx-datatable-column name="SI.NO" >
+				<ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				  {{migration.indexOf(row) + 1}}
+				</div>
+				</ng-template>
+			  </ngx-datatable-column>
+  
+			  <!-- <ngx-datatable-column name="CIRCLE NAME" >
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				  <div *ngIf="row.migratedTo!=NULL" >
+				 {{row.mOrgName}}
+			  </div>
+				</ng-template>
+			  </ngx-datatable-column> -->
+
+			  <ngx-datatable-column name="SERVICE NO" >
+				  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				   {{row.mCompServNumber}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="MIGRATION FROM" >
+				  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				   {{row.migratedFrom}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="MIGRATION TO" >
+				  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				   {{row.migratedTo}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="MONTH" >
+				  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				   {{row.migrationMonth}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="YEAR" >
+				  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<div *ngIf="row.migratedTo!=NULL" >
+				   {{row.migrationYear}}
+				</div>
+				  </ng-template>
+				</ngx-datatable-column>
+				
+		</ngx-datatable>
+        
+		</div>
+		</mat-tab>
+		
+		<mat-tab label="UTILITY CHANGES"> 
+			<div class="mat-elevation-z8">
+
+				<ngx-datatable class="material"	tabindex="index" [rows]="utility" [columnMode]="'force'" [headerHeight]="50"
+				[footerHeight]="0" [rowHeight]="'auto'">
+	
+				<ngx-datatable-column name="SI.NO" >
+					<ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.addedBuyerServiceNo!=NULL || row.removedBuyerServiceno!=NULL" >
+					  {{utility.indexOf(row) + 1}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+	
+				  <ngx-datatable-column name="GENERATOR SERVICE NO" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.addedBuyerServiceNo!=NULL || row.removedBuyerServiceno!=NULL" >
+					   {{row.mCompServNumber}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="NEW BUYER SERVICE NO">
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.addedBuyerServiceNo!=NULL">
+					   {{row.addedBuyerServiceNo}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="NEW BUYER NAME" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.addedBuyerServiceNo!=NULL ">
+					   {{row.addedBuyerName}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="REMOVED BUYER SERVICE NO" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.removedBuyerServiceno!=NULL" >
+					   {{row.removedBuyerServiceno}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="REMOVED BUYER NAME" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.removedBuyerServiceno!=NULL" >
+					   {{row.removedBuyerName}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="MONTH" >
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						  <div *ngIf="row.addedBuyerServiceNo!=NULL || row.removedBuyerServiceno!=NULL" >
+						 {{row.commercialMonth}}
+					  </div>
+						</ng-template>
+					  </ngx-datatable-column>
+
+					  <ngx-datatable-column name="YEAR" >
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						  <div *ngIf="row.addedBuyerServiceNo!=NULL || row.removedBuyerServiceno!=NULL" >
+						 {{row.commercialYear}}
+					  </div>
+						</ng-template>
+					  </ngx-datatable-column>
+					
+			</ngx-datatable>
+			</div>
+		</mat-tab>
+		<mat-tab label="METER CHANGE"> 
+			<div class="mat-elevation-z8">
+
+				<ngx-datatable class="material"	tabindex="index" [rows]="meterchange" [columnMode]="'force'" [headerHeight]="50"
+				[footerHeight]="0" [rowHeight]="'auto'">
+	
+				<ngx-datatable-column name="SI.NO" >
+					<ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.oldmeterno!=NULL">
+					  {{meterchange.indexOf(row) + 1}}
+					</div>
+					</ng-template>
+				  </ngx-datatable-column>
+	
+				  <ngx-datatable-column name="GENERATOR SERVICE NO" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.oldmeterno!=NULL">
+					   {{row.mCompServNumber}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+					
+					<ngx-datatable-column name="OLD METER NO">
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.oldmeterno!=NULL">
+					   {{row.oldmeterno}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="NEW METER NO" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.newmeterno!=NULL ">
+					   {{row.newmeterno}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="MONTH" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.mc_month!=NULL" >
+					   {{row.mc_month}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+	
+					<ngx-datatable-column name="YEAR" >
+					  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<div *ngIf="row.mcyear!=NULL" >
+					   {{row.mcyear}}
+					</div>
+					  </ng-template>
+					</ngx-datatable-column>
+
+					
+					
+			</ngx-datatable>
+			</div>
+		</mat-tab>
+
+		</mat-tab-group>
+	</mat-card>
+</div>

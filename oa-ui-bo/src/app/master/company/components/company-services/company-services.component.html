@@ -1,0 +1,99 @@
+<mat-card-content>
+             <ngx-datatable
+				      class="material"
+              tabindex="index"
+				      [rows]="company.services"
+				      [columnMode]="'force'"
+				      [headerHeight]="50"
+				      [footerHeight]="0"
+				      [rowHeight]="'auto'">
+				      <!-- <ngx-datatable-column name="Type"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['typeName']}}
+				        </ng-template>
+				      </ngx-datatable-column>  -->
+				      <ngx-datatable-column name="EDC Name"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['orgName']}}
+				        </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Generator Service No"> 
+                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row['number']}}
+                  </ng-template>
+                </ngx-datatable-column> 
+                <ngx-datatable-column name="TotalCapacity"> 
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      {{row['capacity']}}
+                    </ng-template>
+                </ngx-datatable-column>
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-raised-button mat-icon-button mat-button-sm  (click)="editService(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                  <button mat-raised-button mat-icon-button mat-button-sm  (click)="deleteService(row.$$index)"><mat-icon>delete</mat-icon></button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+				    </ngx-datatable>
+              <mat-card>
+                <mat-card-title><Strong>{{serviceRowIndex>-1?'Update':'Add'}} Service</Strong></mat-card-title>
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                     <!-- <mat-select  style="width: 100%;" placeholder="Service Type"  name="service.typeCode" 
+                        [(ngModel)]='service.type'>
+                          <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType.valueCode"   >
+                            {{serviceType.valueDesc}}
+                          </mat-option>
+                       </mat-select> -->
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Service Number" name="service.number" [(ngModel)]='service.number' >
+                    </mat-form-field>
+                    <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="EDC Name" name="service.orgName" [(ngModel)]='service.orgName' >
+                    </mat-form-field> -->
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                       <input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" name="service.orgName" [(ngModel)]='service.orgId'  #modelDir="ngModel"
+                     (ngModelChange)="this.filteredOrgList = filterOrgList(service.orgName)" >
+                        <mat-autocomplete #tdAuto="matAutocomplete">
+                            <mat-option *ngFor="let org of filteredOrgList" [value]="org.code"  >
+                              <span>{{ org.name }}</span>
+                            </mat-option>
+                          </mat-autocomplete>
+                    </mat-form-field> 
+                  </div>
+                  
+                  <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center" >
+                     <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Total Capacity" name="service.capacity" [(ngModel)]='service.capacity'>  
+                        <!--  <*ngIf=“service.type==‘BANKING’”   placeholder="tt">
+                    <mdplaceholder *ngIf=“service.type==‘BANKING’”>{{tt}}mdplaceholder> -->
+                  </mat-form-field> 
+
+                   <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select  style="width: 100%;" placeholder="Injecting Voltage"  name="service.voltageCode" 
+                  [(ngModel)]='service.voltageCode'>
+                    <mat-option *ngFor="let injectingVoltage of injectingVoltages" [value]="injectingVoltage.valueCode"   >
+                      {{ injectingVoltage.valueDesc}}
+                    </mat-option>
+                 </mat-select>
+                   </mat-form-field> 
+                  </div>
+                <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel" [(ngModel)]='service.fuelTypeCode'>
+                    <mat-option *ngFor="let fuelCode of fuelTypes" [value]="fuelCode.valueCode">
+                      {{fuelCode.valueDesc}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> 
+              
+              <div class="ml-xs mr-xs" style="width: 100%;"></div>
+               
+              
+              </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button (click)="serviceRowIndex>-1?updateService():addService()">{{serviceRowIndex>-1?'Update':'Add'}}</button>
+                  <button mat-raised-button (click)="initServices()">Reset</button>
+                </mat-card-actions>
+              </mat-card>
+          </mat-card-content>

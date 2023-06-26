@@ -1,0 +1,167 @@
+
+<div fxLayout="row" fxLayoutWrap="wrap"></div>
+
+<div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+        <mat-card-title>
+            TANTRANSCO INVOICE LIST
+        </mat-card-title>
+
+        <mat-card-content>
+            <mat-card-actions>
+            <div class="row1">
+                <!-- <button class="b1" (click)="sendToEdc()">ForwardToEDC</button>
+                <button class="b2" (click)="confirmInvoice()">ConfirmEDC</button> -->
+              </div>
+            </mat-card-actions>
+            
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field *ngIf="this.IsGenrator" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Edc Name" style="width: 100%;" [(ngModel)]='IdasEdc' [required]="isMandatory" readonly>
+                </mat-form-field>
+    
+    
+    
+                   <mat-form-field  *ngIf="!this.IsGenrator"  class="ml-xs mr-xs" style="width: 100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='edcname' [disabled]="IsGenrator">
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]="lineMonth">
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{month.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="lineMonthYear" [matDatepicker]="DatePickers" placeholder="Date">
+                    <mat-datepicker-toggle matSuffix [for]="DatePickers"></mat-datepicker-toggle>
+                    <mat-datepicker #DatePickers></mat-datepicker>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]="lineYear">
+                        <mat-option *ngFor="let year of years" [value]="year.name">
+                            {{year.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+                <!-- <mat-form-field *ngIf="this.HasDfc" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="InvoiceStatus" style="width: 100%;" [(ngModel)]='invStatus'   [required]="isMandatory" readonly>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="this.HasEEoperation" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="InvoiceStatus" style="width: 100%;" [(ngModel)]='invStatus'   [required]="isMandatory" readonly>
+                </mat-form-field> -->
+
+                <mat-form-field  *ngIf="this.HasDfc || this.IsSuperUser || this.IsGenrator" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="InvoiceStatus" [(ngModel)]="invStatus"  [disabled]="IsGenrator" (change)="onInvoicestatus($event.value)">
+                        <mat-option *ngFor="let invstat of invoicestatus" [value]="invstat.value">
+                            {{invstat.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                     <input matInput placeholder="Service No" [disabled]="IsGenrator" [(ngModel)]="mCompServId">
+                </mat-form-field>
+                
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary" (click)="generateResult()">List</button>
+                </mat-card-actions>
+                <!-- <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary" *ngIf="this.HasEEoperation" (click)="bulkForwardtoEdc()">Forwrd to EDC</button>
+                </mat-card-actions>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary"  *ngIf="(this.HasDfc || this.IsSuperUser) && this.stateconfirmed" (click)="bulkinvoiceforConfirm()">Confirm</button>
+                </mat-card-actions>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary"  *ngIf="this.statefinal" (click)="sendEmail()">Send Mail</button>
+                </mat-card-actions> -->
+            </div>
+    
+        </mat-card-content>
+
+        <mat-card-content>
+
+            <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+             [scrollbarV]="true">
+            
+             <!-- <ng-container>
+                <mat-header-cell >Check</mat-header-cell>
+                <mat-cell > 
+                  <mat-checkbox (change)=updateCheckedList(element)></mat-checkbox>
+                </mat-cell>
+              </ng-container>
+              <ngx-datatable-column name="OrgId" ng-class="test">
+                  <mat-checkbox>dsaasd</mat-checkbox>
+              </ngx-datatable-column> -->
+              
+               <!-- <ngx-datatable-column *ngIf ="this.Final" >
+                <ng-template let-row="row" let-value="value" ngx-datatable-header-template>
+                    <mat-checkbox (change)= "selectAll(rows,$event)" >SelectAll</mat-checkbox>
+              </ng-template> 
+                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <mat-checkbox color="primary" [checked]="selectAllrow" (change)= "updateCheckedList(row,$event)" ></mat-checkbox>
+              </ng-template>
+            </ngx-datatable-column> -->
+
+                <ngx-datatable-column name="Circle" ng-class="test">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.mOrgId}}  
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Month">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.lineMonth}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Year">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.lineYear}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="ServiceNo">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.mCompServNo}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="InvoiceStatus">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.invStatus}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column  *ngIf ="this.IsSuperUser && this.statetobeconfirmed"   name="Remarks">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.zenremarks}}
+                    </ng-template>
+                </ngx-datatable-column>
+             
+                <ngx-datatable-column  name="Status">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button  mat-raised-button color="primary"  class="mr-1" (click)="UpdateInvoice(row.mCompServNo,row.lineMonth,row.lineYear,row.id)">Action</button>
+                    </ng-template>
+                </ngx-datatable-column>
+               
+            </ngx-datatable>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>
+<style>
+    .select {
+    padding-left: 92%;
+}
+</style>
+             

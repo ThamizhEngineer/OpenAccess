@@ -1,0 +1,306 @@
+<style>
+    .mat-icon{
+        
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 55px !important;
+    height: 32px !important;  
+}
+</style>
+
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <!-- <mat-card>
+            <mat-card-title> <strong>Import Meter Readings</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Batch Code" [(ngModel)]="searchBatchCode">
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth' readonly>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="searchYear">
+                    </mat-form-field>
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Import Meter Reading</button>
+                    </mat-card-actions>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="result">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+
+      
+        </mat-card> -->
+
+
+
+
+        <!-- <mat-card>
+            <mat-card-title> <strong>Process Generation Statement</strong> </mat-card-title>
+            <mat-card-content>
+
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchmonth' readonly>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="searchyear">
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Process Generation Statement</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+
+                        <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="results">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card> -->
+
+
+        <mat-card>
+            <mat-card-title> <strong>Import Meter Reading from MDMS</strong> </mat-card-title>
+            <mat-card-content>
+
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='importMdmsMonth'>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;"
+						placeholder="Year" [(ngModel)]="importMdmsYear">
+								<mat-option *ngFor="let year of years" [value]="year">
+										{{ year }}
+								</mat-option>
+						</mat-select> 
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="importMeterReadingFromMdms()">Import Meter Reading</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+
+                        <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="importMdmsResult">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-title> <strong>Import Meter Change Meter Reading from MDMS</strong> </mat-card-title>
+            <mat-card-content>
+
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='importMeterChangeMdmsMonth'>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="importMeterChangeMdmsYear">
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="importMeterChangeMeterReadingFromMdms()">Import Meter Change Meter Reading</button>
+                    </mat-card-actions>
+                </div>
+                    <mat-card>
+                    <mat-accordion fxLayout="row" fxLayoutAlign="start center">
+                        <mat-expansion-panel style="width: 100%;">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    VIEW METER CHANGE RESULT 
+                                  
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div>
+                                <button mat-raised-button  class="mat-icon" (click)="refreshmeterchange()">
+                                    <mat-icon>refresh</mat-icon> </button>
+                                     Refresh for New updates process might be running for few mintues after importing meter change
+                                 </div>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                               
+                                <ngx-datatable  [rows]="importMeterChangeMdmsResult" class="material" 
+                                 [columnMode]="'ColumnMode.force'" [headerHeight]="100" [footerHeight]="50" 
+                                 [rowHeight]="50"style="width: 100%; background-color: aliceblue;" [columnMode]="'force'">
+
+					<ngx-datatable-column name="Service No">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.serviceno}}
+
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="OldMeterNo">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.oldmeterno}}
+                            
+						</ng-template>
+					</ngx-datatable-column>
+                    <ngx-datatable-column name="NewMeterNo">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.newmwterno}}
+
+						</ng-template>
+					</ngx-datatable-column>
+                    <ngx-datatable-column name="FuelType">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.fuel}}
+
+						</ng-template>
+					</ngx-datatable-column>
+                    <ngx-datatable-column name="TypeofSS">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.typeofss}}
+
+						</ng-template>
+					</ngx-datatable-column>
+                    
+                     <ngx-datatable-column name="Remarks">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.remarks}}
+	
+                        </ng-template>
+					</ngx-datatable-column>
+
+                    <ngx-datatable-column style="width: 20%;">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-icon *ngIf="row.isprocessed=='N'"  class="material-icons-round" style="color: #bc6a26;">cancel</mat-icon>
+                            <mat-icon  *ngIf="row.isprocessed=='Y'" class="material-icons-round" style="color: #51ac66;">check_circle</mat-icon>
+						</ng-template>
+					</ngx-datatable-column>
+                   
+					
+				</ngx-datatable>
+                            </div>						
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card>
+                
+                
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-title> <strong>Generate Pdf For Generation Statement</strong> </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='gsMonth'>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="gsYear">
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="genratePdf()">Generate Pdf</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-title> <strong>Regenerate Pdf For Generation Statement</strong> </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Generation Statement Id" [(ngModel)]="genStmtId">
+                    </mat-form-field>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="regenerate()">Regenerate Pdf</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+
+</div>

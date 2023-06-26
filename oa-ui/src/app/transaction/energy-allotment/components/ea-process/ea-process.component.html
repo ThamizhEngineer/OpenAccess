@@ -1,0 +1,232 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+      <mat-card>
+
+  <!----  <button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button> -->
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+
+          <br/>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchEdcId'>
+                <mat-option *ngFor="let org of orgList" [value]="org.id">
+                  {{org.code}} - {{org.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Service Number" [disabled]="disableCompanyName" [matAutocomplete]="td1Auto" [(ngModel)]='sellerCompanyServiceNumber' #modelDir="ngModel"
+               (ngModelChange)="this.filteredCompanyList = filterCompanyList(searchCompanyServiceNumber);">
+              <mat-autocomplete #td1Auto="matAutocomplete">
+                <mat-option *ngFor="let company of filteredCompanyList" [value]="company.dispCompanyServiceNumber">
+                  <span>{{ company.dispCompanyServiceNumber }} - {{ company.dispCompanyName }}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='searchMonth'>
+                <mat-option *ngFor="let month of months" required [value]="month.value">
+                  {{ month.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="Year" required [(ngModel)]="searchYear">
+            </mat-form-field>
+          
+            <hr>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" class="primary" (click)="fetchAllGs()">Search</button>
+            </mat-card-actions>
+          </div>
+        <form [formGroup]="firstFormGroup" #formone="ngForm">
+  <!---        <ng-template matStepLabel>Fill out your name</ng-template>   -->
+      <mat-card-content>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Generation Statement Id" formControlName="id" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Status Code" formControlName="statusCode" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Machine Capacity" formControlName="machineCapacity" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Month" formControlName="statementMonth" required>
+          </mat-form-field>
+    </mat-card-content>
+
+          <!-- ------------------------------------------------------------------------------------------------ -->
+
+
+    			<mat-card-content>
+      
+
+            <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true">
+            <ngx-datatable-column name="Service Number">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.dispCompanyServiceNumber}}
+              </ng-template>
+
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Name">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.dispCompanyName}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Month/Year">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.statementMonth}}/{{row.statementYear}}
+              </ng-template>
+
+            </ngx-datatable-column>
+            <ngx-datatable-column name="EDC">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.dispOrgName}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Injection">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.injectingVoltageName}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Net Generation">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.netGeneration}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button mat-raised-button color="primary" class="mr-1" (click)="addItem(row,stepper)">Select</button>
+              </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable>
+
+        </mat-card-content>
+
+          <!-- ----------------------------------------------------------------------------- -->
+          <div>
+            <button type="button" mat-button matStepperNext>Next</button>
+            <!-- <button type="submit" mat-button>submit</button> -->
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup" #formtwo="ngForm">
+     <!---    <ng-template matStepLabel>Fill out your address</ng-template>  -->
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Generation Statement Id" formControlName="id" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Status Code" formControlName="statusCode" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Machine Capacity" formControlName="machineCapacity" required>
+          </mat-form-field>
+          <mat-form-field *ngIf="!hardHidden">
+            <input matInput placeholder="Month" formControlName="statementMonth" required>
+          </mat-form-field>
+          <div>
+
+
+            <!-- --------------------------------- -->
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      Service Data:
+                    </h5>
+                    <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <div *ngIf="isValidServiceDetail=='Y'">
+                        <mat-icon color="success">check</mat-icon>
+                      </div>
+                      <div *ngIf="isValidServiceDetail!='Y'">
+                        <mat-icon color="warn">close</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  Charges:
+                </h5>
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <div *ngIf="isValidCharges=='Y'">
+                    <mat-icon color="success">check</mat-icon>
+                  </div>
+                  <div *ngIf="isValidCharges!='Y'">
+                    <mat-icon color="warn">close</mat-icon>
+                  </div>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  Slots:
+                </h5>
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <div *ngIf="isValidTypeDetails=='Y'">
+                    <mat-icon color="success">check</mat-icon>
+                  </div>
+                  <div *ngIf="isValidTypeDetails!='Y'">
+                    <mat-icon color="warn">close</mat-icon>
+                  </div>
+                </div>
+              </div>
+      
+              <div fxLayout="row" fxLayoutAlign="start center">
+                  <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    Result:
+                  </h5>
+                  <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <div *ngIf="finalMessageStatus=='Y'">
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            {{finalMessage}}
+                            <p>{{timeLeft}} Seconds Left....</p>
+                        </div>
+                    </div>
+                    <div *ngIf="finalMessageStatus!='Y'">
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            {{finalMessage}}
+                        </div>									
+                    </div>
+                  </div>
+                </div>
+              
+            </mat-card-content>
+
+            <!-- ------------------------------------ -->
+            <button type="button" mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button matStepperNext>Next</button>
+            <!-- <button type="submit" mat-button>submit</button> -->
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup" #formthree="ngForm">
+ <!---      <ng-template matStepLabel>Done</ng-template>    -->
+        <mat-form-field>
+          <input matInput placeholder="Creation Status" formControlName="creationStatus" required>
+        </mat-form-field>       
+         <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <!-- <button mat-button type="button" (click)="ngForm.reset();stepper.reset()">Reset</button> -->
+          <!-- <button mat-button type="button" (click)="formone.ngSubmit.emit();formtwo.ngSubmit.emit()">
+        submit
+        </button> -->
+        </div>
+      </form>
+    </mat-step>
+    </mat-horizontal-stepper>
+
+  </mat-card>
+
+</div>
+
+</div>

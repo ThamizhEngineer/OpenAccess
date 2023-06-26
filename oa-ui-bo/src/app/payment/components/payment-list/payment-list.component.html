@@ -1,0 +1,38 @@
+<mat-card>
+	<mat-card-title>
+		Existing Payment - <span mat-subheader>{{titles[paymentType]}}</span><br>
+	</mat-card-title>
+	<mat-card-content>
+		<button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newPayment()'><mat-icon>add</mat-icon></button>
+		<br/>
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+		 [externalPaging]="true" [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)'>
+			<ngx-datatable-column name="Consumer/Generator">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.consumerDetails.orgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Invoice Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.invoiceNumber}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Payment On">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.header.appliedDate}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Amount">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.amount}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" class="mr-1" (click)="editPayment(row['_id'])">Open</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+
+	</mat-card-content>
+</mat-card>

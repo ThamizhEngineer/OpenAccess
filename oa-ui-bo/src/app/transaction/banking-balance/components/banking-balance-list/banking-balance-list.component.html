@@ -1,0 +1,108 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				Banking Balance
+			</mat-card-title>
+
+			<mat-card-content>
+				<button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newBankingBalance()'><mat-icon>add</mat-icon></button> 
+
+				<br/>
+				
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" >
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" (ngModelChange)="onEdcChange()"  placeholder="Edc Name" [(ngModel)]='searchorgId' >
+
+							<mat-option *ngFor="let org of orgList" [value]="org.code">
+								{{org.code}} - {{org.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					
+		
+				    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [(ngModel)]='searchcompanyServiceId'
+						 [required]="isMandatory">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompanyServiceId">
+								{{ companyService.companyName}} - {{ companyService.sellerCompanyServiceNumber }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Month" [(ngModel)]='searchMonth' readonly>
+						<mat-option *ngFor="let month of months" [value]="month.value">
+							{{ month.name }}
+						</mat-option>
+					</mat-select>
+					</mat-form-field>
+					
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;"
+						placeholder="Year" [(ngModel)]="searchYear">
+								<mat-option *ngFor="let year of years" [value]="year">
+										{{ year }}
+								</mat-option>
+						</mat-select> 
+					</mat-form-field>
+					<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Organisation Name" [matAutocomplete]="tdAuto"  [(ngModel)]='searchOrgId'  #modelDir="ngModel"
+									 (ngModelChange)="this.filteredEDCs = filterEDCs(searchOrg)" [disabled]="isDisabled">
+								 <mat-autocomplete #tdAuto="matAutocomplete">
+										 <mat-option *ngFor="let org of filteredEDCs" [value]="org.code">
+											 <span>{{ org.name }}</span>
+										 </mat-option>
+										 </mat-autocomplete>
+							 </mat-form-field> -->
+
+					<hr>
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+
+				</div>
+			</mat-card-content>
+
+
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+		<!--	<ngx-datatable-column name="Edc Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.orgName}}
+					</ng-template>   
+				</ngx-datatable-column>  -->
+				 <ngx-datatable-column name="Edc Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.sellerOrgName}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Company Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.companyName}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.sellerCompanyServiceNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Actions">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<button mat-raised-button color="primary" class="mr-1" (click)="editBankingBalance(row['id'])">Open</button>
+					</ng-template>
+				</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

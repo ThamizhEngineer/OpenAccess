@@ -1,0 +1,104 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title> <strong>In Principle Approval Application </strong> </mat-card-title>
+      <mat-card-content>
+        
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="Edc Name" [(ngModel)]='searchSellerEndOrgId' [required]="isMandatory"
+              (ngModelChange)="onEdcChange()">
+              <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                {{ edc.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='searchSellerCompanyServiceId'
+              [required]="isMandatory">
+              <mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompanyServiceId">
+                {{ companyService.sellerCompanyName}} - {{ companyService.sellerCompanyServiceNumber }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Status" [(ngModel)]="searchStatus">
+                            <mat-option *ngFor="let status of statuses" [value]="status.key">
+                              {{status.key}}
+                            </mat-option>
+                          </mat-select>					
+                          </mat-form-field> -->
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Ipaa Number" [(ngModel)]="searchIpaaCode">
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+          </mat-form-field>
+
+          <hr>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+          </mat-card-actions>
+        </div>
+        <br/>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+          <ngx-datatable-column name="EDC">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerOrgName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Company Name">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerCompanyName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Service Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerCompanyServiceNumber}}
+            </ng-template>
+          </ngx-datatable-column>
+          
+
+          <ngx-datatable-column name="Duration From">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{commonService.displayMonth(row.fromMonth) +"-" +row.fromYear}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Duration To">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{commonService.displayMonth(row.toMonth) +"-" +row.toYear}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Ipaa Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.code}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Es Intent Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.esIntentCode}}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column  *ngIf="this.accessViewFlag"  name="Actions">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <button mat-raised-button color="primary" class="mr-1" (click)="editIpaa(row['id'])">Open</button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

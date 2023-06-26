@@ -1,0 +1,130 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title>
+          Progress Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.name }}
+                            </mat-option>
+                        </mat-select>
+                         </mat-form-field> 
+                         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                          <input matInput type="number" placeholder="Year" [(ngModel)]="searchYear">
+                        </mat-form-field>
+          
+                  
+<!--           
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Division Code" [(ngModel)]="searchncesDivisionCode">
+                      </mat-form-field> -->
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+                      </mat-card-actions>
+
+                      <mat-card-actions>
+                            <button mat-raised-button color="accent" (click)="printReport()">
+                              <mat-icon>cloud_download</mat-icon>
+                              Download Pdf
+                          </button>
+                          <button mat-raised-button color="accent" (click)="searchResults()"></button>
+                        </mat-card-actions>
+                        </div>
+                        <br/>
+                        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+                         [scrollbarV]="true">
+                         <ngx-datatable-column name="TOTAL SERVICES" [width]="500">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.totalServices}}
+                          </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="VALID CAPTIVE" [width]="500">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                              {{row.validCaptiveServices}}
+                            </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="VALID STB" [width]="500">
+                              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.validStbServices}}
+                              </ng-template>
+                              </ngx-datatable-column>
+                              <ngx-datatable-column name="VALID THIRD PARTY" [width]="500">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                  {{row.validWegThirdPartyServices}}
+                                </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="INVALID SERVICES" [width]="500">
+                                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.totalInvalidServices}}
+                                  </ng-template>
+                                  </ngx-datatable-column>
+                                  <ngx-datatable-column name="INVALID CAPTIVE" [width]="500">
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                      {{row.invalidCaptiveServices}}
+                                    </ng-template>
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="INVALID STB" [width]="500">
+                                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        {{row.invalidStbServices}}
+                                      </ng-template>
+                                      </ngx-datatable-column>
+                                      <ngx-datatable-column name="INVALID THIRD PARTY" [width]="500">
+                                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                          {{row.invalidWegThirdPartyServices}}
+                                        </ng-template>
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="METER READINGS DOWNLOADED" [width]="500">
+                                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                            {{row.meterReadingsDownloaded}}
+                                          </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column name="MANUAL MR READING" [width]="500">
+                                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                              {{row.manualMrReading}}
+                                            </ng-template>
+                                            </ngx-datatable-column>
+                                        <ngx-datatable-column name="TOTAL STMTS" [width]="500">
+                                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                            {{row.totalStatements}}
+                                          </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column name="CAPTIVE STMTS" [width]="500">
+                                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                              {{row.captiveStatements}}
+                                            </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="STB STMTS" [width]="500">
+                                              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                                {{row.stbStatements}}
+                                              </ng-template>
+                                              </ngx-datatable-column>
+                                              <ngx-datatable-column name="WEG THIRD PARTY STMTS" [width]="500">
+                                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                                  {{row.wegThirdPartyStatements}}
+                                                </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="ALLOTMENTS CREATED" [width]="500">
+                                                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                                    {{row.allotmentsCreated}}
+                                                  </ng-template>
+                                                  </ngx-datatable-column>
+                                                  <ngx-datatable-column name="ALLOTMENTS COMPLETED" [width]="500">
+                                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                                      {{row.allotmentsCompleted}}
+                                                    </ng-template>
+                                                    </ngx-datatable-column>
+                                                    
+                        </ngx-datatable>
+
+                        </mat-card-content>
+                      </mat-card>
+              
+                  </div>
+                </div>

@@ -1,0 +1,115 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Amr-Download-Status-Report
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="20%">
+                    <input matInput placeholder="Statment Year" [(ngModel)]="stmtYear">
+                  </mat-form-field> -->
+                  
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{edc.code}} - {{ edc.name }}
+                            </mat-option>
+                    </mat-select>
+            </mat-form-field> 
+           <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='readYear'>
+                  <mat-option *ngFor="let yr of Year" [value]="yr.id">
+                    {{yr.year}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="To Month" [(ngModel)]='readMonth'>
+                  <mat-option *ngFor="let month of months" [value]="month.value">
+                    {{month.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code" [(ngModel)]='fuelTypeCode'>
+                  <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                    {{fuelTypes.valueDesc}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Reading Type" [(ngModel)]='readingType'>
+                  <mat-option *ngFor="let rY of ReadingType" [value]="rY.id">
+                    {{rY.readingtype}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-card-actions>				
+                <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+              </mat-card-actions>
+              <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+             </mat-card-actions>
+             <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+               <mat-icon>cloud_download</mat-icon>
+               Download As XL</button>
+             </mat-card-actions>
+
+        </div>
+
+            <mat-card-content>
+                <style>
+                    table, th, td {
+                      border: 1px solid black;
+                      border-collapse: collapse;
+                    }
+                    </style>
+                    
+                <div style="float: center;width: 100%">
+                    <table id="table" style="float: center; border:1;width: 100%;">     
+                        <tr>
+                            <th style="background: #dcdcdc">S.NO</th>
+                            <th style="background: #dcdcdc">M ORG ID</th>
+                            <th style="background: #dcdcdc">M ORG NAME</th>
+                            <th style="background: #dcdcdc">M COMP SERV NUMBER</th>
+                            <th style="background: #dcdcdc">METER NUMBER</th>
+                            <th style="background: #dcdcdc">FUEL TYPE CODE</th>
+                            <th style="background: #dcdcdc">READING_MONTH</th> 
+                            <th style="background: #dcdcdc">READING YEAR</th>
+                            <th style="background: #dcdcdc">READING DT</th>
+                            <th style="background: #dcdcdc">STMT DT</th>
+                            <th style="background: #dcdcdc">DOWNLOAD STATUS</th>
+                                                
+                        </tr>
+            
+                        <tr *ngFor="let report of uer;let i=index;">  
+                            <td>{{i+1}}</td> 
+                            <td>{{report.op1}}</td>  
+                            <td>{{report.op2}}</td>  
+                            <td>{{report.op3}}</td>  
+                            <td>{{report.op4}}</td>  
+                            <td>{{report.op5}}</td>   
+                            <td>{{report.op6}}</td>
+                            <td>{{report.op7}}</td> 
+                            <td>{{report.op8}}</td> 
+                            <td>{{report.op10}}</td>
+                            <td>{{report.op9}}</td> 
+                            
+                        </tr>   
+            
+                    </table>
+                </div>
+                </mat-card-content>
+                </mat-card>
+        
+    </div>

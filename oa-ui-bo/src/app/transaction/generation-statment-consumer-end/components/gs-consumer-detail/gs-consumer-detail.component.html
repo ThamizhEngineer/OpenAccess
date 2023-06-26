@@ -1,0 +1,520 @@
+<div  fxLayout="row"  fxLayoutWrap="wrap"  fxLayoutAlign="center start" id="printSection">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+
+    <mat-card-title><strong> View Generation Statement</strong></mat-card-title>
+			<mat-card-content> 
+            <mat-card-content>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Company Name" [(ngModel)]='gs.dispCompanyName' readonly>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="EDC Name" [(ngModel)]='gs.dispOrgName' readonly>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Generator Service Number" [(ngModel)]='gs.dispCompanyServiceNumber' readonly>
+                </mat-form-field> 
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="gs.statementGenerationDate" [matDatepicker]="statementGenerationDate" placeholder="Statement Generation Date">
+                    <mat-datepicker-toggle matSuffix [for]="statementGenerationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #statementGenerationDate></mat-datepicker>
+                </mat-form-field> 
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Source Type"   [(ngModel)]="gs.mrSourceCode" [disabled]="disableControls">
+                    <mat-option *ngFor="let sourcecode of mrSourceCodes" [value]="sourcecode.key">
+                     {{sourcecode.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>           
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Statement Month" [(ngModel)]='gs.statementMonth' readonly>
+                      <mat-option *ngFor="let month of months" [value]="month.value">
+                        {{ month.name }}
+                      </mat-option>
+                  </mat-select>
+                  </mat-form-field> 
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;"> 
+                     <input matInput placeholder="Statement Year" [(ngModel)]='gs.statementYear' readonly>
+                   </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput [(ngModel)]="gs.initStatementDate" [matDatepicker]="initStatementDate" placeholder="Initial Statement Date">
+                        <mat-datepicker-toggle matSuffix [for]="initStatementDate"></mat-datepicker-toggle>
+                        <mat-datepicker #initStatementDate></mat-datepicker>
+                    </mat-form-field>
+                      <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput [(ngModel)]="gs.finalStatementDate" [matDatepicker]="finalStatementDate" placeholder="Final Statement Date">
+                        <mat-datepicker-toggle matSuffix [for]="finalStatementDate"></mat-datepicker-toggle>
+                        <mat-datepicker #finalStatementDate></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Substation" [(ngModel)]='gs.disSubstationName' readonly>
+                      </mat-form-field>
+              
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Injecting Voltage" [(ngModel)]='gs.injectingVoltageName' readonly>
+                    </mat-form-field>
+                   
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Multiplication Factor" [(ngModel)]='gs.mf' readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Total Import Generation" [(ngModel)]='gs.totalImportGeneration' readonly>
+                      </mat-form-field>
+                     
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Total Export Generation" [(ngModel)]='gs.totalExportGeneration' readonly>
+                      </mat-form-field>
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="gs.typeOfSS=='SECTION 10(1)SS'">
+                        <input matInput placeholder="Loss Percet" [(ngModel)]='gs.ssLossPercent' readonly>
+                      </mat-form-field>
+                  
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Machine Capacity(kW)" [(ngModel)]='gs.machineCapacity' readonly>
+                      </mat-form-field>
+                                        
+                      <mat-form-field  *ngIf="isCaptive !='Y'" class="ml-xs mr-xs"  style="width: 100%;">
+                        <input matInput placeholder="Total Charged Amount" [(ngModel)]='gs.totalChargedAmount' readonly>
+                      </mat-form-field>
+<!--                       
+                     <mat-form-field  *ngIf="isStb !='Y'" class="ml-xs mr-xs"  style="width: 100%;">
+                        <input matInput placeholder="Total Charged Amount" [(ngModel)]='gs.netPayable' readonly>
+                      </mat-form-field>    
+                       -->
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Date of Commissioning" [value]="gs.commissionDate | date: 'dd/MM/yyyy'" readonly>
+                      </mat-form-field>
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Rec" [(ngModel)]='gs.isRec' readonly>
+                      </mat-form-field>
+
+                      <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Category" [(ngModel)]='gs.isCaptive' readonly>
+                      </mat-form-field> -->
+                      <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" *ngIf="gs.flowTypeCode!='THIRD-PARTY'">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Category"   [(ngModel)]="gs.isCaptive" [disabled]="disableControls">
+                          <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                           {{iscaptives.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Category" [(ngModel)]='gs.flowTypeCode' readonly>
+                      </mat-form-field>
+
+          
+                          
+              </div>
+            </mat-card-content>
+            
+          
+          
+          <div *ngIf='isNewMeter'>
+          <mat-card-title ><strong> Generation Statement Import Slot-Old Meter </strong></mat-card-title> 
+          <mat-card-content>
+            <ngx-datatable 
+              class="material"
+              [rows]="oldGenerationStatementImportChargesForPrint"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="40">
+              <ngx-datatable-column name="" style="text-decoration: bold">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.heading}}</strong>
+                </ng-template>                
+              </ngx-datatable-column>
+              <ngx-datatable-column name="C1 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c1}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C2 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c2}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C3 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c3}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C4 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c4}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C5 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c5}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+            </ngx-datatable>
+          </mat-card-content> 
+          <br>
+
+               <mat-card-title ><strong> Generation Statement Export Slot-Old Meter </strong></mat-card-title> 
+              <mat-card-content>
+                <ngx-datatable 
+                  class="material"
+                  [rows]="oldGenerationStatementExportChargesForPrint"
+                  [columnMode]="'force'"
+                  [headerHeight]="50"
+                  [footerHeight]="50"
+                  [rowHeight]="40">
+             <ngx-datatable-column name="" style="text-decoration: bold">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.heading}}</strong>
+                </ng-template>                
+              </ngx-datatable-column>
+              <ngx-datatable-column name="C1 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c1}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C2 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c2}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C3 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c3}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C4 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c4}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C5 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c5}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+            </ngx-datatable>
+          </mat-card-content>    
+          <mat-card-title ><strong> Generation Statement Import Slot-New Meter </strong></mat-card-title> 
+          <mat-card-content>
+            <ngx-datatable 
+              class="material"
+              [rows]="newGenerationStatementImportChargesForPrint"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="40">
+              <ngx-datatable-column name="" style="text-decoration: bold">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.heading}}</strong>
+                </ng-template>                
+              </ngx-datatable-column>
+              <ngx-datatable-column name="C1 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c1}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C2 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c2}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C3 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c3}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C4 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c4}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C5 " >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.c5}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+            </ngx-datatable>
+          </mat-card-content> 
+
+          <mat-card-title ><strong> Generation Statement Export Slot-New Meter </strong></mat-card-title> 
+          <mat-card-content>
+            <ngx-datatable 
+              class="material"
+              [rows]="newGenerationStatementExportChargesForPrint"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="40">
+         <ngx-datatable-column name="" style="text-decoration: bold">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.heading}}</strong>
+            </ng-template>                
+          </ngx-datatable-column>
+          <ngx-datatable-column name="C1 " >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.c1}}</strong>
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="C2 " >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.c2}}</strong>
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="C3 " >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.c3}}</strong>
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="C4 " >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.c4}}</strong>
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="C5 " >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <strong>{{row.c5}}</strong>
+            </ng-template>
+          </ngx-datatable-column> 
+        </ngx-datatable>
+      </mat-card-content>   
+
+    </div>
+
+    <mat-card-title *ngIf='isNewMeter' ><strong>Consolidated Generation Statement Import Slot </strong></mat-card-title> 
+    <mat-card-title *ngIf='!isNewMeter' ><strong> Generation Statement Import Slot </strong></mat-card-title> 
+    <mat-card-content>
+      <ngx-datatable 
+        class="material"
+        [rows]="generationStatementImportChargesForPrint"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="40">
+        <ngx-datatable-column name="" style="text-decoration: bold">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.heading}}</strong>
+          </ng-template>                
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C1 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c1}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C2 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c2}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C3 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c3}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C4 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c4}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C5 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c5}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+      </ngx-datatable>
+    </mat-card-content> 
+    <br>
+    <mat-card-title *ngIf='isNewMeter' ><strong>Consolidated Generation Statement Export Slot </strong></mat-card-title> 
+    <mat-card-title *ngIf='!isNewMeter' ><strong> Generation Statement Export Slot </strong></mat-card-title> 
+      
+        <mat-card-content>
+          <ngx-datatable 
+            class="material"
+            [rows]="generationStatementExportChargesForPrint"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="40">
+       <ngx-datatable-column name="" style="text-decoration: bold">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.heading}}</strong>
+          </ng-template>                
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C1 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c1}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C2 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c2}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C3 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c3}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C4 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c4}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+        <ngx-datatable-column name="C5 " >
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{row.c5}}</strong>
+          </ng-template>
+        </ngx-datatable-column> 
+      </ngx-datatable>
+    </mat-card-content>    
+
+
+
+
+
+        <div *ngIf="gs.isStb !='Y'">  
+          <mat-card-title ><strong> Banking Details </strong></mat-card-title> 
+           <mat-card-content>
+             <div  fxLayout="row" fxLayoutAlign="start center" >
+
+           
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+               <input matInput placeholder="C1 " [(ngModel)]='bankingSlot1' readonly>
+             </mat-form-field>
+
+               <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                 <input matInput placeholder="C2 " [(ngModel)]='bankingSlot2' readonly>
+               </mat-form-field>
+
+               <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                 <input matInput placeholder="C3 " [(ngModel)]='bankingSlot3' readonly>
+               </mat-form-field>
+ 
+                 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                   <input matInput placeholder="C4 " [(ngModel)]='bankingSlot4' readonly>
+                 </mat-form-field>
+
+                 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="C5 " [(ngModel)]='bankingSlot5' readonly>
+                </mat-form-field>
+                     </div> 
+             </mat-card-content>    
+            </div> 
+
+
+          
+          
+          <mat-card-title ><strong> Generation Summaries </strong></mat-card-title> 
+          <mat-card-content>
+            <ngx-datatable 
+              class="material"
+              [rows]="generationSummaryForPrint"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="40">
+              <ngx-datatable-column name="" >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.heading}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Rkvah" *ngIf='!isNewMeter' >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.rKvah}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="kVah" *ngIf='!isNewMeter'>
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.kVah}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Total Import">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.importGeneration}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Total Export">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.exportGeneration}}
+                </ng-template>
+              </ngx-datatable-column>  
+            </ngx-datatable>
+          </mat-card-content>  
+
+          <div fxLayout="row" fxLayoutAlign="start center" > 
+               <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                 <input matInput placeholder="Net Generation(in Units)" [(ngModel)]='gs.netGeneration' readonly>
+               </mat-form-field>
+ 
+                 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                   <input matInput placeholder="Power Factor" [(ngModel)]='gs.powerFactor' readonly>
+                 </mat-form-field>
+            </div>
+
+            <div  *ngIf="gs.isStb !='N'" fxLayout="row" fxLayoutAlign="start center" > 
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="WEG-Group" [(ngModel)]='gs.plantClassTypeDesc' readonly>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Tariff-Rate(Rs)" [(ngModel)]='gs.tariffRate' readonly>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="TariffChargedAmount(Rs)" [(ngModel)]='gs.tariffNetAmount' readonly>
+                  </mat-form-field>
+
+            </div>
+            
+
+          <mat-card-title ><strong> Generation Statement Charges </strong></mat-card-title> 
+          <mat-card-content>
+            <ngx-datatable 
+              class="material"
+              [rows]="gs.generationStatementCharges"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="40">
+              <ngx-datatable-column name="Charge Code" >
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.chargeCode}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Charge Description">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                   {{row.chargeDesc}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Total Charges">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.totalCharges}}
+                </ng-template>
+              </ngx-datatable-column> 
+           </ngx-datatable>
+             
+          
+          </mat-card-content> 
+          
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="gs.stmtRemarks!=null">
+            <input matInput placeholder="Statment Remarks" [(ngModel)]='gs.stmtRemarks' readonly>
+          </mat-form-field>
+          
+      </mat-card-content>
+      <hr>
+      <mat-card-actions>
+
+        <button mat-raised-button class="primary" (click)="listGss()" >Back</button>
+    <button mat-raised-button color="primary" class="primary" (click)="printGenstmt()" >Print</button>
+    <small *ngIf="message" class="mat-text-warn">{{message}}</small>
+    <!-- <button mat-raised-button color="primary" class="primary" (click)="getPdf(gs)" >Print</button> -->
+      </mat-card-actions>
+    </mat-card>
+  </div> 
+</div>

@@ -1,0 +1,223 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+    <mat-card>
+      <mat-card-title >
+         MONTHLY PROGRESS REPORT
+         </mat-card-title>
+         <div fxLayout="row" fxLayoutAlign="start center">
+                
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="Usertype=='EDC User'" >
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                          <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                  {{edc.code}} - {{ edc.name }}
+                          </mat-option>
+                  </mat-select> 
+          </mat-form-field> 
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='readMonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <!-- <input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear"> -->
+                <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                placeholder="Year" [(ngModel)]='readYear'
+                readonly>
+                <mat-option *ngFor="let year of years" [value]="year">
+                    {{ year }}
+                </mat-option>
+            </mat-select> 
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel" [(ngModel)]='fuelTypeCode'>
+                  <mat-option *ngFor="let fuelType of fuelTypeList" [value]="fuelType.key">
+                    <span>{{ fuelType.name}}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>				
+              <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+            </mat-card-actions>
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+             </mat-card-actions>
+             <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+               <mat-icon>cloud_download</mat-icon>
+               Download As XL</button>
+             </mat-card-actions>
+      </div>
+      <mat-card-content>
+        <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+            </style>
+            
+        <div style="float: center;width: 100%">
+            <table id="table" style="float: center; border:1;width: 100%;">     
+
+              <tr>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th>
+                <th class="col" style="text-align: center;" colspan="3">TOTAL SERVICES</th>
+                <th class="col"  class="line" style="text-align: center; " colspan="1"></th>
+                <th class="col" class="amr" style="text-align: center; " colspan="3">METER READING FROM AMR </th>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th> 
+                <th class="col" class="manual" style="text-align: center;" colspan="3">MANUAL READING ENTRY</th>
+                <th class="col" class="line" style="text-align: center;" colspan="1"></th> 
+                <th class="col" class="machine" style="text-align: center;" colspan="3">MACHINE NOT RUNNING SERVICES</th>
+              </tr>
+                <tr>
+                    <th class="col" style="text-align: center;" colspan="1">S.NO</th>
+                    <th class="col" style="text-align: center;" colspan="1">EDC ID</th>
+                    <th class="col" style="text-align: center;" colspan="1">EDC NAME</th>
+                    <th class="col"  style="text-align: center;" colspan="1">TOTAL SERVICES IN OA</th>
+                      <th class="col" style="text-align: center;" colspan="1">CAPTIVE</th>
+                    <th class="col" style="text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th class="col" class="totalstb" style="text-align: center;" colspan="1">STB</th>   
+                    <th class="col" style="text-align: center; " colspan="1">AMR</th>
+                    <th class="col" class="amr"  style="text-align: center;" colspan="1">CAPTIVE</th>
+                    <th class="col" class="amr" style="text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th class="col" class="amrstb" style="text-align: center;" colspan="1">STB</th>
+                    <th class="col" style="text-align: center;" colspan="1">MANUAL READING</th> 
+                    <th class="col" class="manual" style="text-align: center;" colspan="1">CAPTIVE</th>
+                    <th class="col" class="manual" style="text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th class="col" class="manualstb" style="text-align: center;" colspan="1">STB</th>           
+                    <th class="col" style="text-align: center;" colspan="1">MACHINE NOT RUNNING/DC SERVICES</th>    
+                    <th class="col" class="machine" style="text-align: center;" colspan="1">CAPTIVE</th>
+                    <th class="col" class="machine" style="text-align: center;" colspan="1">THIRD PARTY</th> 
+                    <th class="col" class="machinestb" style="text-align: center;" colspan="=1">STB</th>                  
+                </tr>
+    
+                <tr *ngFor="let report of meteropt;let i=index;">  
+                    <td style="text-align: center;width: 20px;">{{i+1}}</td> 
+                    <td style="text-align: center;">{{report.op1}}</td>  
+                    <td style="text-align: center;">{{report.op2}}</td>  
+                    <td style="text-align: center;"><a class="total" (click)="getspeificvalue(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op3}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getTotaCap(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op4}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getTotalThird(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op5}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getTotalSTB(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op6}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getAmrvalue(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op7}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getAmrCap(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op8}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getAmrThird(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op9}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getAmrSTB(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op10}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getManualvalue(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op11}}</a></td>
+                    <td style="text-align: center;"><a class="total" (click)="getManualCap(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op12}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getManualThird(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op13}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getManualSTB(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op14}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getNotReading(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op15}}</a></td>         
+                    <td style="text-align: center;"><a class="total" (click)="getMNRCap(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op16}}</a></td>  
+                    <td style="text-align: center;"><a class="total" (click)="getMNRThird(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op17}}</a></td> 
+                    <td style="text-align: center;"><a class="total" (click)="getMNRSTB(report.op1,readMonth,readYear,fuelTypeCode)">{{report.op18}}</a></td> 
+                </tr>   
+                <tr class="tt" *ngIf="meteropt!=null&& Usertype!='EDC User'" >
+                  <td class="noline"></td>
+                  <td class="noline"></td>
+                  <td class="noline" style="width: 20px;font-family: 'Material Icons';font-size: larger; ">TOTAL</td>
+                  <td style="text-align: center;font-size: larger;">{{sumTotalService}}</td>
+                  <td style="text-align: center;font-size: larger;">{{sumCaptive}}</td>
+                  <td style="text-align: center;font-size: larger;">{{sumThird}}</td>
+                  <td style="text-align: center;font-size: larger;">{{sumSTB}}</td>
+                  <td style="text-align: center;font-size: larger;">{{sumAMRServices}}</td>
+                  <td class="countamr" style="text-align: center;font-size: larger;">{{sumCAPAMR}}</td>
+                  <td class="countamr" style="text-align: center;font-size: larger;">{{sumTHIRDAMR}}</td>
+                  <td class="countamr" style="text-align: center;font-size: larger;">{{sumSTBAMR}}</td>
+                  <td style="text-align: center;font-size: larger;">{{sumManualService}}</td>
+                  <td class="countman" style="text-align: center;font-size: larger;">{{sumManualCAP}}</td>
+                  <td class="countman" style="text-align: center;font-size: larger;">{{sumManualTHIRD}}</td>
+                  <td class="countman" style="text-align: center;font-size: larger;">{{sumManualSTB}}</td>
+                  <td  style="text-align: center;font-size: larger;">{{sumNotrunService}}</td>
+                  <td class="countMNR" style="text-align: center;font-size: larger;">{{sumNotrunCAP}}</td>
+                  <td class="countMNR" style="text-align: center;font-size: larger;">{{sumNotrunTHIRD}}</td>
+                  <td class="countMNR" style="text-align: center;font-size: larger;">{{sumNotrunSTB}}</td>
+                </tr>
+    
+            </table>
+        </div>
+      </mat-card-content>
+      <br>
+              </mat-card>
+          
+  </div>
+  </div>
+<style>
+  td {
+    width: 0px;
+}
+td.noline {
+  border-style: none;
+  font-weight: 700;
+  }
+ th.line {
+  border-bottom: 1px solid aquamarine;
+  background: aquamarine;
+}
+a.total:hover {
+color: red;
+}
+a.total{
+  color: darkblue;
+}
+th.col{
+  background: aquamarine;
+}
+th.line{
+  background: aquamarine;
+}
+tr.tt{
+  background: aquamarine;
+}
+th.amr {
+    background: aqua;
+}
+th.amrstb {
+    background: aqua;
+    width: 41px;
+}
+th.manual {
+    background: aquamarine;
+    color: red;
+    font-size: 16px;
+}
+th.machine {
+    background: gold;
+}
+td.countamr{
+  background: aqua;
+}
+td.countman{
+  background: aquamarine;
+    color: red;
+    font-size: 18px;
+}
+td.countMNR{
+  background: gold;
+}
+th.totalstb{
+  background: aquamarine;
+  width: 41px;
+}
+th.manualstb {
+    background: aquamarine;
+    color: red;
+    font-size: 16px;
+    width: 41px;
+}
+th.machinestb{
+  background: gold;
+  width: 41px;
+}
+</style>

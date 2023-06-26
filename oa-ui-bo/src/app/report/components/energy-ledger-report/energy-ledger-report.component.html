@@ -1,0 +1,137 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Energy Ledger Report
+        </mat-card-title>
+      <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            
+  
+              <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='dispOrgCode'>
+                    <mat-option *ngFor="let org of edcList" [value]="org.name">
+                      {{org.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                          <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                                  {{edc.code}} - {{ edc.name }}
+                          </mat-option>
+                  </mat-select>
+          </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                    <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Gen Service Number" [(ngModel)]="searchGenServiceNo">
+            </mat-form-field>
+  
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="From Month" [(ngModel)]='fMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <!-- <input matInput type="number" placeholder="From Year" [(ngModel)]="fYear"> -->
+              <mat-select class="ml-xs mr-xs" style="width: 100%;"
+              placeholder="From Year" [(ngModel)]='fYear'
+              readonly>
+              <mat-option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+              </mat-option>
+          </mat-select> 
+            </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="To Month" [(ngModel)]='tMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <!-- <input matInput type="number" placeholder="To Year" [(ngModel)]="tYear"> -->
+              <mat-select class="ml-xs mr-xs" style="width: 100%;"
+              placeholder="To Year" [(ngModel)]='tYear'
+              readonly>
+              <mat-option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+              </mat-option>
+          </mat-select> 
+            </mat-form-field>
+            
+            <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">				
+              <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+            </mat-card-actions>
+
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+               <mat-icon>cloud_download</mat-icon>
+               Download As XL</button>
+             </mat-card-actions>
+             </div>
+          <br/>
+          <br/>
+  
+     
+          <br/>
+          <br/>
+        </mat-card-content>
+
+      <mat-card-content>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+          }
+          </style>
+          <div style="float: center;width: 100%">
+            <table id="table" style="float: center; border:1;width: 100%">
+              <tr>
+                <th style="background: #dcdcdc">S.NO</th>
+                <th style="background: #dcdcdc">Company Name</th>
+                <th style="background: #dcdcdc">Service No</th>
+                <th style="background: #dcdcdc">Month</th>
+                <th style="background: #dcdcdc">Year</th>
+                <th style="background: #dcdcdc">OpenBanking</th>
+                <th style="background: #dcdcdc">Generation Units</th>
+                <th style="background: #dcdcdc">AllotedGross</th>
+                <th style="background: #dcdcdc">AllotedNet</th>
+                <th style="background: #dcdcdc">AdjustedNet</th>
+                <th style="background: #dcdcdc">HTBanking</th>
+                <th style="background: #dcdcdc">UnAlloted Units</th>
+                <th style="background: #dcdcdc">ClosingBanking</th>
+              </tr>
+              <tr *ngFor="let row of rows;let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{row.op13}}</td>
+                <td>{{row.op1}}</td>
+                <td>{{row.op2}}</td>
+                <td>{{row.op3}}</td>
+                <td>{{row.op5}}</td>
+                <td>{{row.op6}}</td>
+                <td>{{row.op7}}</td>
+                <td>{{row.op8}}</td>
+                <td>{{row.op9}}</td>
+                <td>{{row.op10}}</td>
+                <td>{{row.op11}}</td>
+                <td>{{row.op12}}</td>
+              </tr>
+            </table>
+          </div>
+</mat-card-content>  
+
+</mat-card>
+</div>
+</div>
+  
+  
+    

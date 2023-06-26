@@ -1,0 +1,63 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Tnerc-net-generation-report
+        </mat-card-title>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="9">TNERC RETURN WEG GENERATION ALL CATEGORY FY 2020 21 -Q1</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th> 
+                        <th style="text-align: center;background: #dcdcdc" colspan="3">NET KWH EXPORT</th> 
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="4">PERCENTAGE GENERATION</th>
+                        
+                        
+                    </tr>
+        
+                    <tr>
+                        <th style="background: #dcdcdc">MONTH AND YEAR</th>
+                        <th style="background: #dcdcdc">SALE TO BOARD</th>
+                        <th style="background: #dcdcdc">CAPTIVE</th>
+                        <th style="background: #dcdcdc">THIRD PARTY SALE</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                        <th style="background: #dcdcdc">SALE TO BOARD</th>
+                        <th style="background: #dcdcdc">CAPTIVE</th>
+                        <th style="background: #dcdcdc">THIRD PARTY SALE</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                        
+                    </tr>
+        
+                    <tr *ngFor="let report of tnerc;let i=index;">   
+                        <td>{{report.op4}}</td>  
+                        <td>{{report.op5}}</td> 
+                        <td>{{report.op6}}</td> 
+                        <td>{{report.op7}}</td>   
+                        <td>{{report.op8}}</td>
+                        <td>{{report.op9}}</td> 
+                        <td>{{report.op10}}</td>
+                        <td>{{report.op11}}</td>
+                        <td>{{report.op12}}</td>
+                    </tr>   
+        
+                </table>
+               
+        
+        
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

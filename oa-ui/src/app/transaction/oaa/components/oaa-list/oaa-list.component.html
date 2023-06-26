@@ -1,0 +1,148 @@
+<mat-card>
+	<mat-card-title >Existing Open Access Applications</mat-card-title> 
+	<mat-card-content>
+		<!-- <button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newOaa()'><mat-icon>add</mat-icon></button> -->
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" style="width: 80%;">
+				<input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" [(ngModel)]='searchEDCName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(searchEDCName);this.fetchBuyerCompanyServices();this.fetchSellerCompanyServices()">
+				<mat-autocomplete #tdAuto="matAutocomplete">
+				  <mat-option *ngFor="let org of filteredOrgList" [value]="org.name" (onSelectionChange)="acChangeFunc($event, org, 'searchEDC')">
+					<span>{{ org.name }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			  </mat-form-field>
+			 
+			<mat-form-field class="ml-xs mr-xs" style="width: 120%;">
+				<input matInput placeholder="{{this.commonUtils.getProp('seller')}} Name" [matAutocomplete]="td2Auto" [(ngModel)]='searchSellerName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredSellerList = filterSellerList(searchSellerName);">
+				<mat-autocomplete #td2Auto="matAutocomplete">
+				  <mat-option *ngFor="let seller of filteredSellerList" [value]="seller.companyName" (onSelectionChange)="acChangeFunc($event, seller, 'searchSeller')">
+					<span>{{ seller.companyName }} </span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 120%;">
+				<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Name" [matAutocomplete]="td1Auto" [(ngModel)]='searchBuyerName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredBuyerList = filterBuyerList(searchBuyerName);">
+				<mat-autocomplete #td1Auto="matAutocomplete">
+				  <mat-option *ngFor="let buyer of filteredBuyerList" [value]="buyer.companyName" (onSelectionChange)="acChangeFunc($event, buyer, 'searchBuyer')">
+					<span>{{ buyer.companyName }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+			
+	<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="From Date" [(ngModel)]='searchFromDate'>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="To Date" [(ngModel)]='searchToDate'>
+			</mat-form-field> -->
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput [(ngModel)]="searchFromDate" [matDatepicker]="FromDate" placeholder="From Date">
+				<mat-datepicker-toggle matSuffix [for]="FromDate"></mat-datepicker-toggle>
+				<mat-datepicker #FromDate></mat-datepicker>
+			 </mat-form-field>
+			 
+		<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			
+		
+		</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput [(ngModel)]="searchToDate" [matDatepicker]="ToDate" placeholder="To Date">
+							<mat-datepicker-toggle matSuffix [for]="ToDate"></mat-datepicker-toggle>
+							<mat-datepicker #ToDate></mat-datepicker>
+						</mat-form-field> 
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input  matInput placeholder="Open Access Number" [(ngModel)]="searchOaaCode">
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input  matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+			</mat-form-field>			
+			<mat-card-actions>	
+				<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+			</mat-card-actions>
+			
+		</div>
+		
+		<br/>
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+		[scrollbarV]="true">
+		<!--	<ngx-datatable-column name="EDC Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerOrgName}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerCompServiceNumber}}
+					</ng-template>
+				</ngx-datatable-column>  -->
+				<ngx-datatable-column name="Company Name" [width]="90">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerCompServiceNumber}} - {{row.buyerCompanyName}}
+					</ng-template>
+				</ngx-datatable-column>
+	   	<ngx-datatable-column name="From Date">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.fromDate | date: 'dd/MM/yyyy'}}
+					</ng-template>
+				</ngx-datatable-column> 
+
+				<ngx-datatable-column name="To Date">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.toDate | date: 'dd/MM/yyyy'}}
+					</ng-template>
+				</ngx-datatable-column>
+		<!--<ngx-datatable-column name="Quantum">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.approvedTotalUnits}}
+					</ng-template>
+				</ngx-datatable-column> -->
+				<ngx-datatable-column name="Peak Units">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.peakUnits}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Off-Peak Units">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.offPeakUnits}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Status">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.statusCode}}
+					</ng-template>
+				</ngx-datatable-column>
+
+	<!--	<ngx-datatable-column name="Open Access No">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.code}}
+					</ng-template>
+				</ngx-datatable-column>
+
+					<ngx-datatable-column name="Energy SaleIntent No">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.esIntentCode}}
+						</ng-template>
+					</ngx-datatable-column> -->
+
+				<ngx-datatable-column name="Actions">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<button  *ngIf="this.accessViewFlag"  mat-raised-button color="primary" class="mr-1" (click)="editOaa(row['id'])">Open</button>
+					</ng-template>
+				</ngx-datatable-column>
+			
+			<ngx-datatable-column name="Process">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" (click)="onClick($event)" id="test" *ngIf="row.statusCode=='CREATED' && this.accessApproveFlag" (click)="approve(row['id'])">Approve</button>
+					<button mat-raised-button color="primary"  *ngIf="row.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="complete(row['id'])">Complete</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+				  
+      </mat-card-content>
+	</mat-card>

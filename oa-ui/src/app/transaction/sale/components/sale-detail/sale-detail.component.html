@@ -1,0 +1,101 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>
+		<strong>{{saleType}}</strong>
+	</mat-card-title>
+   
+	<mat-card-content>
+	<form novalidate #saleForm="ngForm">
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput placeholder="Company" [matAutocomplete]="tdCompanies" [(ngModel)]='sale.companyName' (ngModelChange)="this.companyNames = filterCompanies(companyName)" required #val_companyName="ngModel" name="dis_companyName">
+				<mat-autocomplete #tdCompanies="matAutocomplete">
+					<mat-option *ngFor="let c of companyNames" [value]="c.name">
+						<span>{{c.name}}</span>
+					</mat-option>
+				</mat-autocomplete>
+				<mat-hint>Select Company</mat-hint>
+				<mat-error *ngIf="val_companyName.invalid && (val_companyName.dirty || val_companyName.touched)">Company Name shouldnot be empty</mat-error>
+			</mat-form-field>
+		</div><br/>
+		
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput placeholder="EDC Name" [matAutocomplete]="tdEDC" [(ngModel)]='sale.edcName' (ngModelChange)="this.orgList = filterOrgs(edcName)" required #val_edcName="ngModel" name="dis_edcName">
+				<mat-autocomplete #tdEDC="matAutocomplete">
+					<mat-option *ngFor="let c of orgList" [value]="c.name">
+						<span>{{c.code}} - {{c.name}}</span>
+					</mat-option>
+				</mat-autocomplete>
+				<mat-hint>Select EDC</mat-hint>
+				<mat-error *ngIf="val_edcName.invalid && (val_edcName.dirty || val_edcName.touched)">EDC Name shouldnot be empty</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput [matDatepicker]="minDatePicker" [(ngModel)]="sale.fromDate" placeholder="Duration From" required #val_fromDate="ngModel" name="dis_fromDate" (ngModelChange)="checkDate();">
+				<mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
+				<mat-datepicker #minDatePicker></mat-datepicker>
+				<mat-hint>Select Date</mat-hint>
+				<mat-error *ngIf="val_fromDate.invalid && (val_fromDate.dirty || val_fromDate.touched)">From Date shouldnot be empty</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput [matDatepicker]="maxDatePicker" [(ngModel)]="sale.toDate" placeholder="Duration To" name="toDt" required #val_toDate="ngModel" name="dis_toDate" (ngModelChange)="checkDate();">
+				<mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
+				<mat-datepicker #maxDatePicker></mat-datepicker>
+				<mat-hint>Select Date</mat-hint>
+				<mat-error *ngIf="val_toDate.invalid && (val_toDate.dirty || val_toDate.touched)">To Date shouldnot be empty</mat-error>
+			</mat-form-field>
+		</div><br/>
+		
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput placeholder="Seller Service Number" [matAutocomplete]="tdService" [(ngModel)]='sale.sellerServiceId' (ngModelChange)="this.sellerList = filterSellers(serviceNumber)" required #val_sellerServiceId="ngModel" name="dis_sellerServiceId">
+				<mat-autocomplete #tdService="matAutocomplete">
+					<mat-option *ngFor="let c of sellerList" [value]="c.serviceNumber">
+						<span>{{c.serviceNumber}}</span>
+					</mat-option>
+				</mat-autocomplete>
+				<mat-hint>Select Service Number</mat-hint>
+				<mat-error *ngIf="val_sellerServiceId.invalid && (val_sellerServiceId.dirty || val_sellerServiceId.touched)">Service Number shouldnot be empty</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<mat-select placeholder="State" [(ngModel)]="sale.agreementPeriod" required  #val_agreementPeriod="ngModel" name="dis_agreementPeriod">
+					<mat-option *ngFor="let a of agreementPeriods" [value]="a">{{a}}</mat-option>
+				</mat-select>
+				<mat-hint>Must be Alphanumeric</mat-hint>
+				<mat-error *ngIf="val_agreementPeriod.invalid && (val_agreementPeriod.dirty || val_agreementPeriod.touched) && !val_agreementPeriod.errors.pattern">Agreement Period Shouldnot be empty</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput [matDatepicker]="appliedDatePicker" [(ngModel)]="sale.appliedDate" placeholder="Applied Date" name="appliedDt">
+				<mat-datepicker-toggle matSuffix [for]="appliedDatePicker"></mat-datepicker-toggle>
+				<mat-datepicker #appliedDatePicker></mat-datepicker>
+			</mat-form-field>
+		</div><br/>
+		
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput placeholder="Generator Capacity" [(ngModel)]='sale.genCapacity' required pattern="[0-9]+" #val_genCapacity="ngModel" name="dis_genCapacity">
+				<mat-hint>Must be Numeric</mat-hint>
+				<mat-error *ngIf="val_genCapacity.invalid && (val_genCapacity.dirty || val_genCapacity.touched) && !val_genCapacity.errors.pattern">Generator Capacity Shouldnot be empty</mat-error>
+				<mat-error *ngIf="val_genCapacity.invalid && (val_genCapacity.dirty || val_genCapacity.touched) && val_genCapacity.errors.pattern">Generator Capacity must be Numeric</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="30" fxFlex.gt-xs="50" fxFlex="100">
+				<input matInput placeholder="Proposed Quantity" [(ngModel)]='sale.proposedQty' required pattern="[0-9]+" #val_proposedQty="ngModel" name="dis_proposedQty">
+				<mat-hint>Must be Numeric</mat-hint>
+				<mat-error *ngIf="val_proposedQty.invalid && (val_proposedQty.dirty || val_proposedQty.touched)  && !val_proposedQty.errors.pattern">Proposed Quantity Shouldnot be empty</mat-error>
+				<mat-error *ngIf="val_proposedQty.invalid && (val_proposedQty.dirty || val_proposedQty.touched) && val_proposedQty.errors.pattern">Proposed Quantity must be Numeric</mat-error>
+			</mat-form-field>
+		</div><br/>
+	</form>
+	</mat-card-content>
+	
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" (click)="save()" [disabled]="!saleForm.form.valid">Apply</button>
+		<button mat-raised-button class="primary" (click)="previous()">Back</button>
+	</mat-card-actions>
+</mat-card>

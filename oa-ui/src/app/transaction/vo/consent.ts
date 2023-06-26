@@ -1,0 +1,59 @@
+export class Consent {
+	id?: string;
+	code?:string;
+	buyerOrgId?: string;
+	buyerOrgName?: string;
+	buyerCompServiceId?: string;
+	buyerCompServiceNumber?: string;
+	buyerCompanyName?: string;
+	buyerCompanyId?: string;
+	drawalSubstationId?: string;
+	drawalSubstationName?: string;
+	drawalFeederId?: string;
+	drawalFeederName?: string;
+	drawalVoltageCode?: string;
+	drawalVoltageDesc?: string;
+	agreementPeriodCode?: string;
+	agreementPeriodDesc?: string;
+	agreementDate?: string;
+	periodDuration?: string;
+	tNocId?: string;
+	isNocEnclosed?: string;
+	proposedCapacity?: string;
+	approvedCapacity?: string;
+	isAbtInstalled?: string;
+	noAbtReason?: string;
+	hasRealTimeCon?: string;
+	exemptRc?: string;      // (Y/N)
+	hasDues?: string;      // (Y/N)
+	dueDetails?: string;
+	pendingCaseDetails?: string;
+	technicalFeasibilityDetails?: string;
+	sellerOrgId?: string;
+	sellerOrgName?: string;
+	sellerCompServiceId?: string;
+	sellerCompServiceNumber?: string;
+	sellerCompanyName?: string;
+	sellerCompanyId?: string;
+	sellerIsCaptive?: string;
+	injectionVoltageCode?: string;
+	injectionVoltageDesc?: string;
+	injectionSubstationId?: string;
+	injectionSubstationName?: string;
+	injectionFeederId?: string;
+	injectionFeederName?: string;
+	appliedDate?: string;
+	approvedDate?: string;
+	statusCode?: string;
+	statusDesc?: string;
+	consentNumber?: string;
+	remarks?: string;
+	createdBy?: string;
+	createdDate?: string;
+	modifiedBy?: string;
+	modifiedDate?: string;
+	tEsIntentId?: string;
+	existingOAAs?: string;
+	fromDate?: string;
+	toDate?: string
+}

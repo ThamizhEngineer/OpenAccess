@@ -1,0 +1,158 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title>
+          TanTransco-Payment-Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+  
+  
+            <mat-form-field *ngIf="!this.HasEdc" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="EDC"
+                [(ngModel)]='OrgName1'>
+                <mat-option *ngFor="let org of orgList" [value]="org.id">
+                  {{org.code}}-{{org.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="this.HasEdc" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="Edc Name" style="width: 100%;" [(ngModel)]='OrgName' readonly>
+          </mat-form-field>
+           
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service Number" [(ngModel)]="serviceNo">
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput [(ngModel)]="PaymentMonthYear" [matDatepicker]="DatePickers" placeholder="Date">
+                <mat-datepicker-toggle matSuffix [for]="DatePickers"></mat-datepicker-toggle>
+                <mat-datepicker #DatePickers></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Payment Status"
+                  [(ngModel)]='paymentStatus'>
+                  <mat-option *ngFor="let PaymentStatuslist of paymentStatuslist" [value]="PaymentStatuslist.key">
+                    {{PaymentStatuslist.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-card-actions class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+            
+          
+              <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+               <mat-icon>cloud_download</mat-icon>
+               Download As XL</button>
+             </mat-card-actions>
+          </div>
+  
+          <div>
+            <ngx-datatable class="material" [rows]="rows" [headerHeight]="50" [footerHeight]="50"
+              [rowHeight]="50" [scrollbarV]="true">
+  
+  
+              <!-- <ngx-datatable-column name="Generator EDC">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op3}}
+              </ng-template>
+             </ngx-datatable-column> -->
+  
+              <ngx-datatable-column name="Sl.No">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  {{rows.indexOf(row)+1}}
+  
+                </ng-template>
+              </ngx-datatable-column>
+  
+  
+              <ngx-datatable-column name="Service No">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op1}}
+                </ng-template>
+              </ngx-datatable-column>
+  
+  
+              <ngx-datatable-column name="Viritual Account Number">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op2}}
+                </ng-template>
+              </ngx-datatable-column>
+  
+              <ngx-datatable-column name="Company Name">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op3}}
+                </ng-template>
+              </ngx-datatable-column>
+  
+  
+              <ngx-datatable-column name="Bill Year">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op4}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Bill Month">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op5}}
+                </ng-template>
+              </ngx-datatable-column>
+         <ngx-datatable-column name="Bill Amount">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op6}}
+          </ng-template>
+        </ngx-datatable-column>
+  
+              <!-- <ngx-datatable-column name="Company PhoneNo">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op7}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Company EmailId">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op8}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Gst-No">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op9}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Pan-No">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op10}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Capacity">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op11}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Flow Type">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op12}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="REC">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op13}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Agreement Date">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op14}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Period Of Agreement In Years">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.op15}}
+                </ng-template>
+              </ngx-datatable-column> -->
+  
+  
+            </ngx-datatable>
+  
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

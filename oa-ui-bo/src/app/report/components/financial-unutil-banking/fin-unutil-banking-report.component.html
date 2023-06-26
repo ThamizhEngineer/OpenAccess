@@ -1,0 +1,108 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title>
+        Unutilized Banking Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+
+            
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='selOrgName'(ngModelChange)="onChange(selOrgName)"  >
+                <mat-option *ngFor="let org of orgList" [value]="org.id">
+                  {{org.id}} {{org.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.name }}
+                            </mat-option>
+                        </mat-select>
+                         </mat-form-field> 
+                         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+                          <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                          placeholder="Year" [(ngModel)]="searchYear">
+                              <mat-option *ngFor="let year of years" [value]="year">
+                                  {{ year }}
+                              </mat-option>
+                          </mat-select> 
+                        </mat-form-field>
+          
+                  
+<!--           
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Division Code" [(ngModel)]="searchncesDivisionCode">
+                      </mat-form-field> -->
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+                      </mat-card-actions>
+
+                      <mat-card-actions>
+                            <button mat-raised-button color="accent" (click)="printReport()">
+                              <mat-icon>cloud_download</mat-icon>
+                              Download Pdf
+                          </button>
+                          <button mat-raised-button color="accent" (click)="searchResults()"></button>
+                        </mat-card-actions>
+                        </div>
+                        <br/>
+                        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+                         [scrollbarV]="true">
+                       
+                         <ngx-datatable-column name="Sl.No" [width]="10">
+                          <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                             {{rows.indexOf(row)+1}}  
+                          </ng-template>
+                        </ngx-datatable-column> 
+
+                         <ngx-datatable-column name="GENERATOR NUMBER" [width]="50">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.serviceNumber}}
+                          </ng-template>
+                          </ngx-datatable-column>
+
+                          <ngx-datatable-column name="GENERATOR NAME" [width]="50">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                              {{row.serviceName}}
+                            </ng-template>
+                            </ngx-datatable-column>
+
+
+                            <ngx-datatable-column name="TOTAL UNITS" [width]="50">
+                              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.stTotal}}
+                              </ng-template>
+                              </ngx-datatable-column>
+
+                              <ngx-datatable-column name="75% OF TOTAL" [width]="50">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                  {{row.unutilisedEnergy}}
+                                </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column name="RATE" [width]="50">
+                                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.rate}}
+                                  </ng-template>
+                                  </ngx-datatable-column>
+
+                                  <ngx-datatable-column name="AMOUNT(Rs)" [width]="50">
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                      {{row.amount}}
+                                    </ng-template>
+                                    </ngx-datatable-column>
+
+                        
+               </ngx-datatable>
+
+                        </mat-card-content>
+                      </mat-card>
+              
+                  </div>
+                </div>

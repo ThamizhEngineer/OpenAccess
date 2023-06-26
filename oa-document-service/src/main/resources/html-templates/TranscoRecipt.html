@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>
+    GENERATOR WISE GENERATION REPORT
+    </title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"></div>
+    <div class="header">
+        <header class="solid">
+
+          <p style="font-size:x-large">TAMILNADU TRANSMISSION CORPORATION LIMITED<br/>
+          E-receipt for Open Access Charges<br/>
+          For the month of&nbsp;&nbsp;<span
+						th:text="${transcoInvoiceRecipt.ReciptMonth}"></span>/<span
+						th:text="${transcoInvoiceRecipt.ReciptYear}"></span></p>
+      </header>
+
+    </div>
+
+
+    <div>
+     <table style="float: center; border:1;width: 100%;"> 
+        
+                    
+                <tr>
+                <td style="font-size: x-large;background: #eee;">TANTRANSCO Receipt No. / Date</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.ReciptNo}+${Date}"></td>
+                </tr>
+                 <tr>
+                <td style="font-size: x-large;background: #eee;">Generator No.</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.GeneratorNo}"></td>
+                </tr>
+                 <tr>
+                <td style="font-size: x-large;background: #eee;">Name of the Generator</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.GeneratorName}"></td>
+                </tr>
+                 <tr>
+                <td style="font-size: x-large;background: #eee;">Virtual Account No.</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.ViritualAccNo}"></td>
+                </tr>
+                 <tr>
+                <td style="font-size: x-large;background: #eee;">Amount paid</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.AmountPaid}"></td>
+                </tr>
+                 <tr>
+                <td style="font-size: x-large;background: #eee;">Bank Transaction Details</td>
+                <td style="font-size:x-large;"th:text="${transcoInvoiceRecipt.BankTransactionDetails}"></td>
+                </tr>
+           
+                </table>
+
+</div>
+<div>
+<br />
+</div>
+</body>
+
+</html>

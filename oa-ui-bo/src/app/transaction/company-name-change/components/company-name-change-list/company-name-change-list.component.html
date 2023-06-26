@@ -1,0 +1,90 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title>
+                Existing Company Name Change
+            </mat-card-title>
+
+            <mat-card-content>
+                <button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newCompanyNameChange()'><mat-icon>add</mat-icon></button>
+
+                <br/>
+
+               
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="{{this.commonUtils.getProp('seller')}} Edc Name" [(ngModel)]='searchSellerEndOrgId' [required]="isMandatory"
+                         (ngModelChange)="onEdcChange()">
+                            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                {{edc.id}} - {{ edc.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [(ngModel)]='searchCompanyServiceId'
+                         [required]="isMandatory">
+                            <mat-option *ngFor="let companyService of companyServices" [value]="companyService.serviceId">
+                                {{ companyService.companyName}} - {{ companyService.serviceNumber }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+                    </mat-card-actions>
+                    <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                </div>
+            </mat-card-content>
+
+
+            <mat-card-content>
+
+                <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+                 [scrollbarV]="true">
+
+            <!--   <ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} EDC Name">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.buyerOrgName}}
+                        </ng-template>
+                    </ngx-datatable-column>  -->
+
+                    <ngx-datatable-column name="Edc Name" ng-class="test">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.orgName}} 
+                            </ng-template>
+                        </ngx-datatable-column>             
+
+                    <ngx-datatable-column name="{{this.commonUtils.getProp('seller')}} Company Name" ng-class="test">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.companyName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="{{this.commonUtils.getProp('seller')}} Company Service Number" ng-class="test">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.serviceNumber}}
+                        </ng-template>
+                    </ngx-datatable-column>   
+
+
+                    <ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <button mat-raised-button color="primary" class="mr-1" (click)="editCompanyNameChange(row['id'],row['flowTypeCode'])">Open</button>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

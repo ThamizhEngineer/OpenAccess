@@ -1,0 +1,85 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title>SAMAST NOC IMPORT</mat-card-title>
+            <mat-tab-group (selectedTabChange)="tabClick($event)">
+                <mat-tab label="SAMAST Application Import">
+                    <mat-card-title>SAMAST NOC Application Import</mat-card-title>
+                
+                    <mat-card-content>
+                        <mat-card-actions>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button [disabled]="isClick" mat-raised-button color="primary" (click)="importApplication()"
+                                    class="primary">Import SAMAST Application</button>
+                            </div>
+                            <br>
+                            <br>
+                                <table *ngIf="isClick" class='head'>
+                                    <tr class='label'>
+                                       <label> Batch Key :      {{this.outPut?.batchKey}}</label>
+                                                                         
+                                    </tr>
+                                    <tr class='label'>
+                                     <label>No Of Records Imported :        {{this.outPut?.noOfRecords}}  </label>
+                                                                      
+                                    </tr>
+                                    <tr class='label'>
+                                        <label>Remarks :        {{this.outPut?.remarks}}  </label>
+                                                                     
+                                    </tr>
+                                    <tr class='label'>
+                                        <label>From Date :         {{this.outPut?.fromDt | date:'dd-MMM-yyyy'}}</label>
+                                                                        
+                                    </tr>
+                                    <tr class='label'>
+                                        <label>To Date :         {{this.outPut?.toDt | date:'dd-MMM-yyyy'}} </label>
+                                                                       
+                                    </tr>
+                                </table>
+                        </mat-card-actions>
+                    </mat-card-content>
+                
+                </mat-tab>    
+                
+                
+                <mat-tab label="SAMAST Approval Import">
+                    <mat-card-title>SAMAST NOC Approval Import</mat-card-title>
+                
+                    <mat-card-content>
+                        <mat-card-actions>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <button [disabled]="isClick" mat-raised-button color="primary" (click)="importApproval()"
+                                    class="primary">Import SAMAST Approval</button>
+                            </div>
+                            <div *ngIf="isClick" fxLayout="row">
+                                <table class='head'>
+                                    <tr class='label'>
+                                        <th> Batch Key :</th>
+                                        <td>{{this.outPut?.batchKey}}</td>                                    
+                                    </tr>
+                                    <tr class='label'>
+                                        <th>No Of Records Imported :</th>
+                                        <td>{{this.outPut?.noOfRecords}}</td>                                    
+                                    </tr>
+                                    <tr class='label'>
+                                        <th>Remarks :</th>
+                                        <td>{{this.outPut?.remarks}}</td>                                    
+                                    </tr>
+                                    <tr class='label'>
+                                        <th>From Date :</th>
+                                        <td>{{this.outPut?.fromDt | date:'dd-MMM-yyyy'}}</td>                                    
+                                    </tr>
+                                    <tr class='label'>
+                                        <th>To Date :</th>
+                                        <td>{{this.outPut?.toDt | date:'dd-MMM-yyyy'}}</td>                                    
+                                    </tr>
+                                </table>
+                            </div>
+                        </mat-card-actions>
+                    </mat-card-content>
+                
+                </mat-tab>                
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

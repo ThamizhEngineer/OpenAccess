@@ -1,0 +1,108 @@
+<mat-toolbar color="primary">
+	<span>Add feeder Loss</span>
+	<span fxFlex></span>
+</mat-toolbar>
+<br />
+<br />
+
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+</style>
+<div class="table-responsive m-t-40">
+	<table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
+		width="100%">
+		<thead>
+			<tr>
+				<th data-sort-initial="true" data-toggle="true">#</th>
+				<th data-sort-initial="true" data-toggle="true" style="width: 15%;">Edc/SubStation/Feeder</th>
+				<!-- <th data-sort-initial="true" data-toggle="true" style="width: 15%;">SubStation</th> -->
+				<!-- <th data-sort-initial="true" data-toggle="true" style="width: 15%;">Feeder</th> -->
+				<th data-sort-initial="true" data-toggle="true" style="width: 8%;">Month</th>
+				<th data-sort-initial="true" data-toggle="true" style="width: 10%;">Year</th>
+				<th data-sort-initial="true" data-toggle="true" style="width: 10%;">Bulk Meter Reading</th>
+				<th data-sort-initial="true" data-toggle="true" style="width: 10%;">Total All Gen</th>
+				<th data-sort-initial="true" data-toggle="true" style="width: 10%;">Loss Percentage</th>
+				<!-- <th data-sort-initial="true" data-toggle="true" style="width: 5%;">Result Desc</th> -->
+				<th data-sort-initial="true" data-toggle="true" style="width: 10%;" *ngIf="impFeederLoss.length > 1">
+					Options</th>
+
+			</tr>
+		</thead>
+		<tbody *ngFor="let rows of impFeederLoss; let iter=index">
+			<tr>
+				<td>{{iter+1}}</td>
+				<td>
+					<select [(ngModel)]="rows.orgId" [ngModelOptions]="{standalone: true}" #id
+						(change)="subStationNames($event.target.value,iter)">
+						<option *ngFor="let org of orgList" [ngValue]="org.id">
+							{{org.name}}
+						</option>
+					</select>
+					<select [(ngModel)]="rows.substationId" [ngModelOptions]="{standalone: true}"
+						(change)="findFeeder($event.target.value,iter)">
+						<option *ngFor="let sub of tempArr[iter]['subStationList']" [value]="sub.id">
+							{{sub.name}}
+						</option>
+					</select>
+					<select [(ngModel)]="rows.feederId" [ngModelOptions]="{standalone: true}">
+						<option *ngFor="let feed of tempArr[iter]['feederName']" [value]="feed.id">
+							{{feed.name}}
+						</option>
+					</select>
+				</td>
+				<td>
+					<select [(ngModel)]="rows.month" [ngModelOptions]="{standalone: true}">
+						<option *ngFor="let month of months" [value]="month.value">
+							{{month.name}}
+						</option>
+					</select>
+					<!-- <input type="number" id="month"  [(ngModel)]="rows.month"  [ngModelOptions]="{standalone: true}" placeholder="month" class="form-control form-control-line"> -->
+
+				</td>
+				<td>
+					<input type="number" id="year" [(ngModel)]="rows.year" [ngModelOptions]="{standalone: true}"
+						placeholder="year" class="form-control form-control-line">
+				</td>
+				<td>
+					<input type="number" id="bulkMeterReading" [(ngModel)]="rows.bulkMeterReading"
+						[ngModelOptions]="{standalone: true}" placeholder="Bulk Meter Reading"
+						class="form-control form-control-line">
+				</td>
+				<td>
+					<input type="number" id="totalAllGen" [(ngModel)]="rows.totalAllGen"
+						[ngModelOptions]="{standalone: true}" placeholder="Total All Gens"
+						class="form-control form-control-line">
+				</td>
+				<td>
+					<input type="number" id="lossPercentage" [(ngModel)]="rows.lossPercentage"
+						[ngModelOptions]="{standalone: true}" placeholder="Loss Percentage"
+						class="form-control form-control-line">
+				</td>
+				<!-- <td>
+					<textarea id="resultDesc"  rows="4" cols="50" [(ngModel)]="rows.resultDesc"
+					[ngModelOptions]="{standalone: true}" placeholder="Result Desc"
+					class="form-control form-control-line">
+					</textarea>
+				</td> -->
+
+				<td class="text-nowrap">
+
+					<button mat-raised-button color="primary" class="primary" *ngIf="impFeederLoss.length > 1"
+						(click)="deleteFieldValue(iter)">Delete</button>
+					<i class="fa fa-plus text-danger m-r-10"></i>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div><br><br>
+<div>
+	<button mat-raised-button color="primary" class="primary" (click)="save()">Import</button>
+	<button mat-raised-button color="primary" class="primary" (click)="addBillRows()">Add</button>
+	<button mat-raised-button color="warn" (click)="dialog.closeAll()">Close</button>
+</div>
+<div>
+</div>

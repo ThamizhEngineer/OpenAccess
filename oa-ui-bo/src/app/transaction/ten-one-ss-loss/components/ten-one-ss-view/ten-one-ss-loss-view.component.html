@@ -1,0 +1,22 @@
+<mat-card class="mat-card-top">
+
+	<!-- <mat-card-title>{{addScreen?'Add':'Update'}} Meter Reading Import </mat-card-title> -->
+	<mat-card-title>10(1)SS Type</mat-card-title>
+
+	
+	<mat-card>
+	
+
+	
+			
+				<mat-card-content>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="50%">
+						<mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Type" (ngModelChange)="onChange($event)" [(ngModel)]='substationLoss'>
+							<mat-option value="By SubStation" >By SubStation</mat-option>
+							<mat-option value="By EDC" >By EDC</mat-option>
+						  </mat-select>
+					</mat-form-field>
+					</mat-card-content>
+					</mat-card>
+					</mat-card>
+					

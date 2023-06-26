@@ -1,0 +1,140 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				Generation Summary Report
+			</mat-card-title>
+			<mat-card-content id="printSection">
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchOrgId'>
+							<mat-option *ngFor="let org of orgList" [value]="org.id">
+								{{org.code}} - {{org.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month"
+							[(ngModel)]='searchMonth'>
+							<mat-option *ngFor="let month of months" [value]="month.value">
+								{{ month.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+						<mat-select class="ml-xs mr-xs" style="width: 100%;"
+						placeholder="Year" [(ngModel)]="searchYear">
+								<mat-option *ngFor="let year of years" [value]="year">
+										{{ year }}
+								</mat-option>
+						</mat-select> 
+					</mat-form-field>
+
+                     
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type"
+							[(ngModel)]='searchFlowTypeCode'>
+							<mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+								{{ flowType.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Group"
+							[(ngModel)]='dispFuelTypeGroup'>
+							<mat-option *ngFor="let fuelType of fuelGroup" [value]="fuelType.key">
+								{{ fuelType.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Rec/Non-Rec"
+							[(ngModel)]='searchIsRec'>
+							<mat-option *ngFor="let isRec of isRecs" [value]="isRec.key">
+								{{ isRec.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field> 
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" (click)="orgWiseGeneration()">Search</button>
+					</mat-card-actions>
+					<mat-card-actions>
+						<button mat-raised-button color="primary" (click)="restSearch()">Reset</button>
+					</mat-card-actions>
+					<mat-card-actions>
+						<button mat-raised-button color="accent" (click)="exportAsXLSX()">
+						  <mat-icon>cloud_download</mat-icon>
+						  Download XL
+					  </button>
+					</mat-card-actions>    
+				</div>
+				<br />
+
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+					[footerHeight]="50" [rowHeight]="'auto'">
+					<ngx-datatable-column name="Operation Circle">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.orgName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Flow Type">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<!-- {{row.flowTypeCode}} -->
+							<span *ngIf="row.flowTypeCode === 'IS-CAPTIVE'">CAPTIVE</span>
+							<span *ngIf="row.flowTypeCode === 'STB'">STB</span>
+							<span *ngIf="row.flowTypeCode === 'THIRD-PARTY'">THIRD-PARTY</span>
+							<span *ngIf="row.flowTypeCode === '-'">-</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Fuel Type">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.fuelCode}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Rec/Non-Rec">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<!-- {{row.isRec === 'Y' ? 'Rec' : 'Non-Rec'}} -->
+							<!-- {{row.isRec}} -->
+							<span *ngIf="row.isRec === 'N'">Non-Rec</span>
+							<span *ngIf="row.isRec === 'Y'">Rec</span>
+							<span *ngIf="row.isRec === '-'">-</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Total Capacity(mW)">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalMachineCapacity/1000}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Total Import(mU)">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalImportUnits/1000000}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Total Export(mU)">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalExportUnits/1000000}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Total Generation(mU)">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalUnits/1000000}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Service Count">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.recCount}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-footer></ngx-datatable-footer>
+				</ngx-datatable>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>

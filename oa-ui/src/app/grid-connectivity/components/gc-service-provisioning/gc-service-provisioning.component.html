@@ -1,0 +1,179 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Service Details</mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput placeholder="Generator Service No" [(ngModel)]='gc.genServiceNumber'>
+      </mat-form-field>
+
+      <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput placeholder="Approval Number" [(ngModel)]='gc.genServiceApprovalNumber'>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="EDC Name" [matAutocomplete]="reactiveAuto" [formControl]="EDCNameCtrl">
+          </mat-form-field> -->
+
+      <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput placeholder="Date" [(ngModel)]='gc.genServiceDate'>
+      </mat-form-field> -->
+
+      <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput [(ngModel)]="gc.genServiceDate" [max]="maxDate" [matDatepicker]="genServiceDate"  placeholder=" Date" >
+        <mat-datepicker-toggle matSuffix [for]="genServiceDate"></mat-datepicker-toggle>
+
+        <mat-datepicker #genServiceDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <br/>
+    
+      <mat-card-content>
+        <mat-card-title>Generator Commission Details</mat-card-title>
+        <div *ngFor="let service of gc.genUnits;let index = index" fxLayout="row" fxLayoutAlign="start center">
+          <!-- <ngx-datatable class="material" tabindex="index" [rows]="gc.genUnits" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+        [rowHeight]="'auto'" fxFlex.gt-sm="75%">
+        <ngx-datatable-column name="Name">
+          <ng-template  ngx-datatable-cell-template let-row="row" let-value="value" >
+            {{row.name}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Date of Commisioning">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"  let-row="row" >
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="{{rowIndex}}" (ngModelChange)="onRowChange(rowIndex)"  [(ngModel)]='finalCod'>
+                <strong>{{value}} - {{rowIndex}}</strong>
+            </mat-form-field>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Commercial Operation Date">
+          <ng-template ngx-datatable-cell-template let-row="row" let-value="value"  >
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="s" [(ngModel)]='finalCopd'>
+            </mat-form-field>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable> -->
+  
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Name" [(ngModel)]="service.name" disabled>
+          </mat-form-field>
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Date of Commisioning" [(ngModel)]="service.finalCod">
+          </mat-form-field> -->
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [(ngModel)]="gc.finalCod" [max]="maxDate" [matDatepicker]="finalCod"   placeholder="Date of Commisioning" >
+            <mat-datepicker-toggle matSuffix [for]="finalCod"></mat-datepicker-toggle>
+    
+            <mat-datepicker #finalCod></mat-datepicker>
+          </mat-form-field>
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Commercial Operation Date" [(ngModel)]="service.finalCopd">
+          </mat-form-field> -->
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [(ngModel)]="gc.finalCopd" [max]="maxDate" [matDatepicker]="finalCopd"  placeholder="Commercial Operation Date" >
+            <mat-datepicker-toggle matSuffix [for]="finalCopd"></mat-datepicker-toggle>
+    
+            <mat-datepicker #finalCopd></mat-datepicker>
+          </mat-form-field>
+
+
+        </div>
+        <div mat-subheader>Meter Details</div>
+        <!--	<div fxLayout="row" fxLayoutAlign="start center"> -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Meter Number" [(ngModel)]='gc.meterNumber'>
+          </mat-form-field>
+
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Meter Make" [(ngModel)]='gc.meterMakeCode'>
+              <mat-option *ngFor="let metermakecode of meterMake" [value]="metermakecode.valueCode">
+                {{metermakecode.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Meter Make" [(ngModel)]='gc.meterMakeCode'>
+            </mat-form-field>  -->
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Accuracy Class" [(ngModel)]='gc.accuracyClassCode'>
+
+              <mat-option *ngFor="let accrcyclass of accuracyclass" [value]="accrcyclass.key">
+                {{ accrcyclass.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="Accuracy Class" [(ngModel)]='gc.accuracyClassCode'>
+            </mat-form-field> -->
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is ABT Meter" [(ngModel)]='gc.isAbtMeter'>
+
+              <mat-option *ngFor="let isABTMtrs of isABTMeter" [value]="isABTMtrs.key">
+                {{ isABTMtrs.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!--				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="Is ABT Meter" [(ngModel)]='gc.isAbtMeter'>
+            </mat-form-field>  -->
+        </div>
+
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Modem Number" [(ngModel)]='gc.modemNumber'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter CT1 serialNo" [(ngModel)]='gc.meterCt1'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter CT2 serialNo" [(ngModel)]='gc.meterCt2'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter CT3 serialNo" [(ngModel)]='gc.meterCt3'>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter PT1" [(ngModel)]='gc.meterPt1'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter PT2" [(ngModel)]='gc.meterPt2'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Meter PT3" [(ngModel)]='gc.meterPt3'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Multiplication Factor" [(ngModel)]='gc.multiplicationFactor'>
+          </mat-form-field>
+
+
+        </div>
+
+
+
+      </mat-card-content>
+    
+  </mat-card-content>
+</mat-card>

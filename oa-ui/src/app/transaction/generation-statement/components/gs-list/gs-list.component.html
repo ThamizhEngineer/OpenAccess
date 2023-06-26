@@ -1,0 +1,87 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title> <strong>Generation Statements</strong> </mat-card-title>
+			<mat-card-content>
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchOrgId'>
+							<mat-option *ngFor="let org of orgList" [value]="org.id">
+								{{org.code}} - {{org.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Company Name" [(ngModel)]="searchCompanyName">
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Service Number" [(ngModel)]="searchcompanyServiceNumber" [disabled]="disableCompanyName">
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='statementMonth' readonly>
+							<mat-option *ngFor="let month of months" [value]="month.value">
+								{{ month.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Statement Year" [(ngModel)]="statementYear">
+					</mat-form-field>
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="fetchResult()">Search</button>
+					</mat-card-actions>
+
+				</div>
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+
+					<ngx-datatable-column name="Edc Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.dispOrgName}}
+
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Company Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.dispCompanyName}}
+
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Service Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.dispCompanyServiceNumber}}
+
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Statement Month">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{commonService.displayMonth(row.statementMonth)}}
+
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Statement Year">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statementYear}}
+
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editGs(row['id'])">Open</button>
+						</ng-template>
+					</ngx-datatable-column>
+				</ngx-datatable>
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

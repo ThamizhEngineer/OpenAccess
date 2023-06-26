@@ -1,0 +1,39 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Substation Details</mat-card-title> 
+
+    <mat-card>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Substation Code" [(ngModel)]='ss.code'>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Substation name" [(ngModel)]='ss.name'>
+                </mat-form-field>
+             
+           <!-- <div fxLayout="row" fxLayoutAlign="start center"> --> 
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Remarks" [(ngModel)]='ss.remarks'>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="OrgID" [(ngModel)]='ss.orgId'>
+                </mat-form-field>
+
+               <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="status" [(ngModel)]='ss.status'>
+                </mat-form-field>
+
+           <!--   <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="enabled" [(ngModel)]='ss.enabled'> 
+                </mat-form-field> -->
+</div> 
+<mat-card-actions>
+         <button mat-raised-button color="primary" (click)="saveSs('')">Save </button>
+         <button mat-raised-button class="primary" (click)="listSs()">Cancel/Back</button>
+     </mat-card-actions>
+
+</mat-card-content>
+     </mat-card>

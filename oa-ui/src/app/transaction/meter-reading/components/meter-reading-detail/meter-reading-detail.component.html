@@ -1,0 +1,260 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>Meter Reading</mat-card-title>
+
+	<ng-template mat-tab-label>Batch Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Company Name" [(ngModel)]="meterReading.companyName" [disabled]="disableControls">
+				</mat-form-field>
+
+				<!-- <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Source" [(ngModel)]='meterReading'>
+						<mat-option *ngFor="let SourceCodeTypes of SourceCodeTypes" [value]="SourceCodeTypes">
+							{{SourceCodeTypes.name}}
+						</mat-option>
+				</mat-select>  
+                     -->
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Service Number" [readonly]="true" [(ngModel)]="meterReading.companyServiceNumber" [disabled]="disableControls">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Modem Number" [readonly]="true" [(ngModel)]="meterReading.modemNumber" [disabled]="disableControls">
+				</mat-form-field>
+		
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Remarks" [readonly]="true" [(ngModel)]="meterReading.remarks" [disabled]="disableControls">
+			</mat-form-field>
+			</div>
+
+			 <div fxLayout="row" fxLayoutAlign="start center">
+
+ 
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Meter Number" [(ngModel)]='meterReading.companyMeterNumber' [disabled]="disableControls">
+						</mat-form-field>
+
+		
+												<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Reading Month" [(ngModel)]='meterReading.readingMonthCode' [disabled]="disableControls">
+						</mat-form-field>
+												<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Reading Year" [(ngModel)]='meterReading.readingYear' [disabled]="disableControls">
+						</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Status" [readonly]="true" [(ngModel)]="meterReading.statusCode" [disabled]="disableControls">
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="SourceType"   [(ngModel)]="meterReading.mrSourceCode" [disabled]="disableControls">
+					  <mat-option *ngFor="let sourcecode of mrSourceCodes" [value]="sourcecode.key">
+					   {{sourcecode.name}}
+					  </mat-option>
+					</mat-select>
+				  </mat-form-field>
+					</div> 
+
+			<div mat-subheader><strong></strong></div>
+
+			<mat-card>
+				<mat-card-title>
+					<Strong></Strong>
+				</mat-card-title>
+				<mat-card-content>
+					<!-- <div fxLayout="row" fxLayoutAlign="start center">
+
+
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Service Number" [(ngModel)]='meterReadingSlot'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Meter Number" [(ngModel)]='meterReadingSlot'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Multiplication Factor" [(ngModel)]='meterReadingSlot'>
+						</mat-form-field>
+
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='meterReadingSlot'>
+							<mat-option *ngFor="let  month of monthsreading" [value]="month.key">
+								{{month.name}}
+							</mat-option>
+						</mat-select>
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='meterReadingSlot'>
+							<mat-option *ngFor="let year of yearsreading" [value]="year.key">
+								{{year.name}}
+							</mat-option>
+						</mat-select>
+					</div> -->
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+					</div>
+					<!-- <div mat-subheader>
+						<Strong> Import Data Set</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot1" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot2" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot3" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot4" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot5" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+					</div>
+					<div mat-subheader>
+						<Strong> Export Data Set</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot1" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot2" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot3" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot4" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Slot5" [(ngModel)]='meterReadingImportLines'>
+						</mat-form-field>
+					</div> -->
+
+					<mat-card-title><strong>Meter Reading Slot Details</strong></mat-card-title> 
+             <ngx-datatable 
+              class="material"
+              [rows]="meterReading.meterReadingSlot"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [scrollbarH]="true"
+              [rowHeight]="'auto'" >
+              <ngx-datatable-column name=" Slot " width="15">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template >
+                  {{row.slotCode}} 
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import Intial" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.impInitial}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import Final" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.impFinal}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import Difference" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.impDifference}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import Units" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.impUnits}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Export Intial" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.expInitial}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Export Final" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.expFinal}}
+                </ng-template>
+			  </ngx-datatable-column> 
+			  <ngx-datatable-column name="Export Difference" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.expDifference}}
+                </ng-template>
+			  </ngx-datatable-column> 
+			  <ngx-datatable-column name="Export Units" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.expUnits}}
+                </ng-template>
+              </ngx-datatable-column> 
+              
+            </ngx-datatable> 
+
+					<div mat-subheader>
+						<Strong>Other Values</Strong>
+					</div><br>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="kVah Initial Import" [(ngModel)]='meterReading.kVahInitial' [disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="kVah Final Import" [(ngModel)]='meterReading.kVahFinal' [disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="kVah Initial Export" [(ngModel)]='meterReading.eXpKvahInitial'[disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="kVah Final Export" [(ngModel)]='meterReading.eXpKvahFinal' [disabled]="disableControls">
+						</mat-form-field>
+
+					</div>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Initial Import" [(ngModel)]='meterReading.rKvahInitial' [disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Final Import" [(ngModel)]='meterReading.rKvahFinal' [disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Initial Export" [(ngModel)]='meterReading.eXpRkvahInitial' [disabled]="disableControls">
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="RKVAH Final Export" [(ngModel)]='meterReading.eXpRkvahFinal' [disabled]="disableControls">
+						</mat-form-field>
+					</div>
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+					</div>
+				</mat-card-content>
+
+
+			</mat-card>
+
+			<hr>
+			<mat-card>
+				<mat-card-actions>
+		<!--	<button mat-raised-button color="primary" (click)="processGenerationStatement()">Process Generation Statement</button> -->
+					<button mat-raised-button class="primary" (click)="listMeterReading()">Cancel/Back</button>
+				</mat-card-actions>
+			</mat-card>

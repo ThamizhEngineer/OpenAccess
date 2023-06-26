@@ -1,0 +1,45 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+      <mat-card-title> <strong>Agreement</strong> </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Buyer Org Name" [(ngModel)]="agreement.buyerOrgName" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Buyer Service Number" [(ngModel)]="agreement.buyerCompanyServiceNumber" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Buyer Company Name" [(ngModel)]="agreement.buyerCompanyName" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Seller Company Name" [(ngModel)]="agreement.sellerCompanyName" disabled>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Agreement Period Code" [(ngModel)]="agreement.agreementPeriodCode" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="From Date" [(ngModel)]="agreement.fromDate" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="To Date" [(ngModel)]="agreement.toDate" disabled>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [(ngModel)]="agreement.agreementDate" placeholder="Agreement Date" [matDatepicker]="fromDate" [disabled]="disableControls">
+            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+
+            <mat-datepicker #fromDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" class="mr-1" (click)="complete()">Complete</button>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<mat-toolbar color="primary">
+
+	<span>Please select a Generator statement to allocate</span>
+	<span fxFlex></span>
+</mat-toolbar>
+<br/>
+<br/>
+<div fxLayout="row" fxLayoutAlign="start center">
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchEdcId'>
+			<mat-option *ngFor="let org of orgList" [value]="org.id">
+				{{org.code}} - {{org.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+		<input matInput placeholder="Service Number" [disabled]="disableCompanyName" [matAutocomplete]="td1Auto" [(ngModel)]='sellerCompanyServiceNumber' #modelDir="ngModel"
+		 (ngModelChange)="this.filteredCompanyList = filterCompanyList(searchCompanyServiceNumber);">
+		<mat-autocomplete #td1Auto="matAutocomplete">
+			<mat-option *ngFor="let company of filteredCompanyList" [value]="company.dispCompanyServiceNumber">
+				<span>{{ company.dispCompanyServiceNumber }} - {{ company.dispCompanyName }}</span>
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='searchMonth'>
+			<mat-option *ngFor="let month of months" required [value]="month.value">
+				{{ month.name }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<input matInput placeholder="Year" required [(ngModel)]="searchYear">
+	</mat-form-field>
+
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+	</mat-card-actions>
+</div>
+<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+ [scrollbarV]="true">
+	<ngx-datatable-column name="Edc">
+		<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+			{{row.dispOrgName}}
+		</ng-template>
+	</ngx-datatable-column>
+	<ngx-datatable-column name="Service Number">
+		<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+			{{row.dispCompanyServiceNumber}}-{{row.dispCompanyName}}
+		</ng-template>
+	</ngx-datatable-column>
+
+	<ngx-datatable-column name="Statement Duration">
+		<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+			{{commonService.displayMonth(row.statementMonth)}} - {{row.statementYear}}
+		</ng-template>
+	</ngx-datatable-column>
+	<ngx-datatable-column name="Net Generation">
+		<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+			{{row.netGeneration}}
+		</ng-template>
+	</ngx-datatable-column>
+	<ngx-datatable-column name="Actions(Energy Sale)">
+		<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+			<button mat-raised-button color="primary" class="mr-1" [disabled]="isFinalDisabled" (click)="addEs(row)">Create</button>
+		</ng-template>
+	</ngx-datatable-column>
+</ngx-datatable>

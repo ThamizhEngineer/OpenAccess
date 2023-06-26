@@ -1,0 +1,96 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Unutilised Energy Report
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="20%">
+                    <input matInput placeholder="Statment Year" [(ngModel)]="stmtYear">
+                  </mat-form-field> -->
+
+                  <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='stmtYear'>
+                      <mat-option *ngFor="let yr of Year" [value]="yr.id">
+                        {{yr.year}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{edc.code}} - {{ edc.name }}
+                            </mat-option>
+                    </mat-select>
+            </mat-form-field>  
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="accent" (click)="printReport()">
+                    <mat-icon>cloud_download</mat-icon>
+                    Download Pdf
+                </button>
+                </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">     
+                    <tr>
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">EDC</th>
+                        <th style="background: #dcdcdc">WEG SERVICE NUMBER</th>
+                        <th style="background: #dcdcdc">GENERATOR NAME</th>
+                        <th style="background: #dcdcdc">COMISSION DATE</th>
+                        <th style="background: #dcdcdc">RATE IN (RS)</th>
+                        <th style="background: #dcdcdc">75% OF PURCHASE RATE</th> 
+                        <th style="background: #dcdcdc">UNUTILISED ENERGY (KWH)</th>
+                        <th style="background: #dcdcdc">POWER PURCHASE COST PAYABLE (RS)</th>
+                                         
+                    </tr>
+        
+                    <tr *ngFor="let report of uer;let i=index;">  
+                        <td>{{i+1}}</td> 
+                        <td>{{report.op1}}</td>  
+                        <td>{{report.op2}}</td>  
+                        <td>{{report.op3}}</td>  
+                        <td>{{report.op4 | date: 'dd-MM-yyyy'}}</td>  
+                        <td>{{report.op5}}</td> 
+                        <td>{{report.op6}}</td> 
+                        <td  style="text-align: right;">{{report.op7}}</td> 
+                        <td style="text-align: right;">{{report.op8}}</td> 
+                        
+                        
+                    </tr>  
+                    <tr >
+                      <td colspan="5"  style="text-align: center;"><b>TOTAL</b> &#8192; </td>
+                      <td  style="text-align: left;"> <b>{{this.totalop5}}</b> &#8192; </td>
+                      <td  style="text-align: left;"> <b>{{this.totalop6}}</b> &#8192; </td>
+                      <td  style="text-align: right;"> <b>{{this.totalUnutilisedEneregy}}</b> &#8192; </td>
+                      <td style="text-align: right;"> <b>{{this.totalPowerPurchasecostPayable}}</b> &#8192;</td></tr> 
+               
+        
+                </table>
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

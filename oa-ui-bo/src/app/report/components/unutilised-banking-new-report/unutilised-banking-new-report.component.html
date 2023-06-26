@@ -1,0 +1,157 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Unutilised Banking Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                {{edc.code}} - {{ edc.name }}
+                        </mat-option>
+                </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Financial Year" [(ngModel)]='stmtYear'>
+                <mat-option *ngFor="let year of Year" [value]="year.key">
+                    {{ year.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-card-actions>				
+            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+        </mat-card-actions>
+
+        <mat-card-actions>				
+            <button mat-raised-button color="accent" (click)="printReport()">
+            <mat-icon>cloud_download</mat-icon>
+            Download Pdf
+        </button>
+        </mat-card-actions>
+
+        <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+             <mat-icon>cloud_download</mat-icon>
+             Download As XL</button>
+           </mat-card-actions>           
+            <div class="ml-xs mr-xs"  fxFlex.gt-sm="100%"></div>
+        
+
+      </div>
+          <br/>
+          <br/>
+          <div>
+          <ngx-datatable class="material" [rows]="unutilised" [columnMode]="'ColumnMode.force'" [headerHeight]="50" [footerHeight]="75" [rowHeight]="50"
+          [scrollbarV]="true">
+  
+          <ngx-datatable-column name="NO" [width]="20"  >
+            <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{unutilised.indexOf(row) + 1}}
+            </ng-template>
+          </ngx-datatable-column> 
+
+          <ngx-datatable-column name="EDC"  >
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op1}} 
+            </ng-template>
+          </ngx-datatable-column> 
+
+          <ngx-datatable-column name="WEG SERVICE NUMBER" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op2}}
+            </ng-template>
+         </ngx-datatable-column>
+         
+           <ngx-datatable-column name="GENERATOR NAME" >
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op3}}
+              </ng-template>
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="COMISSION DATE" >
+            <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op4 | date: 'dd/MM/yyyy'}}
+            </ng-template>
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="UNUTILISED C1" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op5}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="UNUTILISED C2" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op6}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="UNUTILISED C3" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op7}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="UNUTILISED C4" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op8}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="UNUTILISED C5" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op9}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           
+           <ngx-datatable-column name="UNUTILISED BANKING" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op10}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="RATE" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op11}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-column name="75% OF PURCHASE TARIFF">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op12}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-column name="AMOUNT IN RUPEES" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op13}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template >
+              <div style="padding: 100px 100px 100px 100px;">
+                <hr style="width: 100%;" >
+                <div><br/>
+                  TOTAL UNUTILISED C1: <b>{{this.totalop5}}</b> &#8192; TOTAL UNUTILISED C2: <b>{{this.totalop6}}</b> &#8192; TOTAL UNUTILISED C3: <b>{{this.totalop7}}</b> &#8192; 
+                  <br/><br/> TOTAL UNUTILISED C4: <b>{{this.totalop8}}</b> &#8192; TOTAL UNUTILISED C5: <b>{{this.totalop9}}</b> &#8192; TOTAL UNUTILISED BANKING: <b>{{this.totalop10}}</b>&#8192;
+                  TOTAL RATE: <b>{{this.totalop11}}</b> &#8192;<br/><br/>TOTAL 75% OF PURCHASE TARIFF: <b>{{this.totalop12}}</b> &#8192;TOTAL AMOUNT IN RUPEES: <b>
+                    {{this.totalop13}}</b> &#8192;</div>
+                  
+              </div>
+            </ng-template>
+          </ngx-datatable-footer>
+           
+        </ngx-datatable>
+          
+        <!-- <mat-card-actions>				
+          <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+          </mat-card-actions> -->
+      </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

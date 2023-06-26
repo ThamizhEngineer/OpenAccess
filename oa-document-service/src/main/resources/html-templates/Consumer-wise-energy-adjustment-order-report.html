@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>
+    CONSUMER WISE ENERGY ADJUSTMENT ORDER REPORT 
+    </title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+          <p>CONSUMER WISE ENERGY ADJUSTMENT ORDER REPORT</p>
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%"> 
+        
+        <tr>
+        <th style="text-align: center;" colspan="1"></th>
+        <th style="text-align: center;" colspan="7">Generation Details</th>
+        <th style="text-align: center;" colspan="4">Consumption Details</th>
+        </tr>
+                    <tr>
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">MONTH</th>
+                        <th style="background: #dcdcdc">YEAR</th>
+                         <th style="background: #dcdcdc">EDC NAME</th>
+                        <th style="background: #dcdcdc; text-align: center;" colspan="2">GENERATOR / COMPANY NAME</th>
+                        <th style="background: #dcdcdc">EXPORT GENERATION</th>
+                         <th style="background: #dcdcdc">NET GENERATION</th>
+                        <th style="background: #dcdcdc">EDC NAME</th>
+                        <th style="background: #dcdcdc; text-align: center;" colspan="2">SERVICE NUMBER / CONSUMER NAME</th>
+                        <th style="background: #dcdcdc">ADJUSTED UNITS</th>                                         
+                    </tr>
+                <tr class="item-row" th:each="consWiseEnergy,item : ${consWiseEnergy}">
+                <td th:text="${item.index+1}"></td>
+                <td th:text="${consWiseEnergy.op1}"></td>
+                <td th:text="${consWiseEnergy.op2}"></td>
+                <td th:text="${consWiseEnergy.op3}"></td>
+                <td th:text="${consWiseEnergy.op4}"></td>
+                <td th:text="${consWiseEnergy.op5}"></td>
+                <td th:text="${consWiseEnergy.op6}"></td>
+                <td th:text="${consWiseEnergy.op7}"></td>
+                <td th:text="${consWiseEnergy.op8}"></td>
+                <td th:text="${consWiseEnergy.op9}"></td>
+ 				<td th:text="${consWiseEnergy.op10}"></td>
+ 				<td th:text="${consWiseEnergy.op11}"></td>
+       
+            </tr>
+            <td colspan="6" style="text-align: center;">Total</td>
+           
+            <td th:text="${totalgen}"></td>
+            <td th:text="${totalnet}"></td>
+            <td colspan="3" style="text-align: center;">Total Adjusted Units</td>
+            <td th:text="${totaladj}"> </td>
+                </table>
+
+</div>
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+
+</body>
+
+</html>

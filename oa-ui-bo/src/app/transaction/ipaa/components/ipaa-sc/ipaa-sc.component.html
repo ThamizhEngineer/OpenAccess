@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+
+	<span>Apply Standing Clearance</span>
+	<span fxFlex></span>
+</mat-toolbar>
+<br/>
+<br/>
+<div fxLayout="row" fxLayoutAlign="start center">
+
+    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput [max]="maxDate" [(ngModel)]="ipaStandingClearance.fromDt" [matDatepicker]="fromDate" placeholder="From Date"> 
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <input matInput [(ngModel)]="ipaStandingClearance.toDt" [matDatepicker]="toDate" placeholder="To Date">
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+    
+
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<input matInput placeholder="Quantum(kW)"  [(ngModel)]='ipaStandingClearance.Quantum'>
+	</mat-form-field>
+
+    <hr>
+	<mat-card-actions class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<button mat-raised-button color="primary" class="primary"  (click)="addIpaSc()">Apply</button>
+    </mat-card-actions>
+    
+</div>
+
+<ngx-datatable class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+		 [limit]="10">
+			<ngx-datatable-column name="Sl.No" [width] ="30">
+				<ng-template let-row="row" ngx-datatable-cell-template>
+					{{row.$$index  + 1}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="From Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.fromDt}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="To date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.toDt}}
+				</ng-template>
+			</ngx-datatable-column>
+</ngx-datatable>

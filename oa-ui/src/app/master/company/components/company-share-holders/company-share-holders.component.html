@@ -1,0 +1,54 @@
+
+<mat-card-content>
+    <ngx-datatable
+    class="material"
+    tabindex="index"
+    [rows]="company.shareHolders"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="0"
+    [rowHeight]="'auto'"> 
+    <ngx-datatable-column name="Company Name"> 
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['companyId']}}
+      </ng-template>
+    </ngx-datatable-column> 
+    <ngx-datatable-column name="Share% "> 
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['share']}}
+      </ng-template>
+    </ngx-datatable-column> 
+    <ngx-datatable-column name="Actions">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button mat-icon-button mat-button-sm  (click)="editShareHolder(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+        <button mat-raised-button mat-icon-button mat-button-sm  (click)="deleteShareHolder(row.$$index)"><mat-icon>delete</mat-icon></button>
+      </ng-template>
+    </ngx-datatable-column> 
+  </ngx-datatable>
+    <mat-card>
+      <mat-card-title><Strong>{{shareHolderRowIndex>-1?'Update':'Add'}} ShareHolder</Strong></mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center" >
+         
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                       <input matInput placeholder="Share holding Company Name" [matAutocomplete]="tdAuto"   [(ngModel)]='shareHolder.companyId'  #modelDir="ngModel" 
+                        (ngModelChange)="this.filteredCompanies= filterCompanies(shareHolder.companyId)" >
+                        <mat-autocomplete #tdAuto="matAutocomplete">
+                                <mat-option *ngFor="let company of filteredCompanies" [value]="company.id">
+                                  <span>{{company.code}} - {{company.name}}</span>
+                                </mat-option>
+                              </mat-autocomplete>
+                    </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input type="text" #share%  matInput placeholder="Share %"  name="shareHolder.share" [(ngModel)]='shareHolder.share' >
+  
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="shareHolderRowIndex>-1?updateShareHolder():addShareHolder()">{{shareHolderRowIndex>-1?'Update':'Add'}}</button>
+        <button mat-raised-button (click)="initShareHolders()">Reset</button>
+      </mat-card-actions>
+    </mat-card>
+</mat-card-content>

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>MONTHLY PROGRESS REPORT</title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+      
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+        td.noline {
+  border-style: none;
+  }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p>MONTHLY PROGRESS REPORT  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;">FUEL -</span><span th:text="${fuel}"></span></p>
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="18"> MONTHLY PROGRESS REPORT AS ON <span th:text="${month}"></span><span>-</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th>
+                <th style="background: #dcdcdc;text-align: center;" colspan="3">TOTAL SERVICES</th>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th>
+                <th style="background: #dcdcdc;text-align: center;" colspan="3">METER READING FROM AMR </th>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th> 
+                <th style="background: #dcdcdc;text-align: center;" colspan="3">MANUAL READING ENTRY</th>
+                <th class="line" style="background: #dcdcdc;text-align: center;border-bottom: 2px solid #dcdcdc;" colspan="1"></th> 
+                <th style="background: #dcdcdc;text-align: center;" colspan="3">MACHINE NOT RUNNING SERVICES</th>
+              </tr>
+        
+                    <tr>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">S.NO</th>             
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">EDC NAME</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">TOTAL SERVICES IN OA</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">CAPTIVE</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">STB</th>   
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">AMR</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">CAPTIVE</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">STB</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">MANUAL READING</th> 
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">CAPTIVE</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">THIRD PARTY</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">STB</th>           
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">MACHINE NOT RUNNING/DC SERVICES</th>    
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">CAPTIVE</th>
+                    <th style="background: #dcdcdc;text-align: center;" colspan="1">THIRD PARTY</th> 
+                    <th style="background: #dcdcdc;text-align: center;" colspan="=1">STB</th>                  
+                </tr>
+                    
+                <tr class="item-row" th:each="meterReadingImportReport,item : ${meterReadingImportReport}">
+                <td style="text-align: center;" th:text="${item.index+1}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op2}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op3}"></td>    
+                 <td style="text-align: center;" th:text="${meterReadingImportReport.op4}"></td>
+                  <td style="text-align: center;" th:text="${meterReadingImportReport.op5}"></td>
+                   <td style="text-align: center;" th:text="${meterReadingImportReport.op6}"></td>             
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op7}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op8}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op9}"></td>
+                  <td style="text-align: center;" th:text="${meterReadingImportReport.op10}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op11}"></td>    
+                 <td style="text-align: center;" th:text="${meterReadingImportReport.op12}"></td>
+                  <td style="text-align: center;" th:text="${meterReadingImportReport.op13}"></td>
+                   <td style="text-align: center;" th:text="${meterReadingImportReport.op14}"></td>             
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op15}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op16}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op17}"></td>
+                 <td style="text-align: center;" th:text="${meterReadingImportReport.op18}"></td>      
+            </tr>
+            
+            <tr th:if="${meterReadingImportReport}">
+            <td class="noline" style="background: #dcdcdc;"></td>
+            <td class="noline" style="background: #dcdcdc;">TOTAL</td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalServices}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalCaptive}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalThird}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalSTB}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalAmr}"></td>
+             <td style="text-align: center;background: #dcdcdc;" th:text="${totalCaptiveAMR}"></td>
+              <td style="text-align: center;background: #dcdcdc;" th:text="${totalThirdAMR}"></td>
+               <td style="text-align: center;background: #dcdcdc;" th:text="${totalSTBAMR}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalManual}"></td>
+             <td style="text-align: center;background: #dcdcdc;" th:text="${totalCaptiveMANUAL}"></td>
+              <td style="text-align: center;background: #dcdcdc;" th:text="${totalThirdMANUAL}"></td>
+               <td style="text-align: center;background: #dcdcdc;" th:text="${totalSTBMANUAL}"></td>
+            <td style="text-align: center;background: #dcdcdc;" th:text="${totalNonread}"></td>
+             <td style="text-align: center;background: #dcdcdc;" th:text="${totalCaptiveMNR}"></td>
+              <td style="text-align: center;background: #dcdcdc;" th:text="${totalThirdMNR}"></td>
+               <td style="text-align: center;background: #dcdcdc;" th:text="${totalSTBMNR}"></td>
+            </tr>
+        
+                </table>
+
+</div>
+<div>
+<br />
+</div>
+</body>
+
+</html>

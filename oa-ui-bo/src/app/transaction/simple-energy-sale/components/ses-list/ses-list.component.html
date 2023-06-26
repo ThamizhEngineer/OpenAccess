@@ -1,0 +1,78 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+		        <div fxFlex.gt-sm="100%" fxFlex="100">
+<mat-card>
+      <mat-card-title > <strong>Simple Energy Sale</strong> </mat-card-title> 
+			<mat-card-content>
+				<button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)="newSes()"><mat-icon>add</mat-icon></button>
+						
+				<div fxLayout="row" fxLayoutAlign="start center">
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="EDC Name"  [(ngModel)]="searchEdcName" >
+						</mat-form-field> 
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="{{this.commonUtils.getProp('buyer')}} Company Service Number"  [(ngModel)]="buyerCompanyServiceNumber" >
+						</mat-form-field> 
+	
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Statement Month" [(ngModel)]='searchMonth' readonly>
+							<mat-option *ngFor="let month of months" [value]="month.value">
+								{{ month.name }}
+							</mat-option>
+						</mat-select>
+						</mat-form-field> 
+						
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+							<mat-select class="ml-xs mr-xs" style="width: 100%;"
+							placeholder="Year"  [(ngModel)]="searchYear">
+								<mat-option *ngFor="let year of years" [value]="year">
+										{{ year }}
+								</mat-option>
+						</mat-select> 
+						</mat-form-field> 
+							 
+								
+								<hr>
+	
+								<mat-card-actions>				
+									<button mat-raised-button color="primary" class="primary" [disabled]="searching" (click)="searchResults()">{{searching?'Searching...': 'Search'}}</button>
+								</mat-card-actions>
+							</div>
+				<br/>
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				[scrollbarV]="true">
+				      <ngx-datatable-column name="{{this.commonUtils.getProp('seller')}} Company">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row.sellerEndOrgName}} 
+				        </ng-template>
+					</ngx-datatable-column> 
+					<ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Company">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				         {{row.sellerCompanyName}} 
+				        </ng-template>
+				      </ngx-datatable-column> 
+					  <ngx-datatable-column name="Service Number">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row.sellerCompanyServiceNumber}} 
+				        </ng-template>
+				      </ngx-datatable-column>  
+				      
+				      <ngx-datatable-column name="Duration">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				        {{commonService.displayMonth(row.month)}}  - {{row.year}}
+				        </ng-template>
+				      </ngx-datatable-column>
+							
+				      <ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-raised-button color="primary" class="mr-1" (click)="editSes(row['id'])">View</button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+				    </ngx-datatable>
+      </mat-card-content>
+	</mat-card>
+		
+  </div>
+  
+</div>

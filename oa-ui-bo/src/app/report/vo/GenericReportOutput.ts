@@ -1,0 +1,46 @@
+export class GenericReportOutput{
+    op1?:string;
+    op2?:string;
+    op3?:string;
+    op4?:string;
+    op5?:string;
+    op6?:string;
+    op7?:string;
+    op8?:string;
+    op9?:string;
+    op10?:string;
+    op11?:string;
+    op12?:string;
+    op13?:string;
+    op14?:string;
+    op15?:string;
+    op16?:string;
+    op17?:string;
+    op18?:string;
+    op19?:string;
+    op20?:string;
+    op21?:string;
+    op22?:string;
+    op23?:string;
+    op24?:string;
+    op25?:string;
+    op26?:string;
+    op27?:string;
+    op28?:string;
+    op29?:string;
+    op30?:string;
+    op31?:string;
+    op32?:string;
+    op33?:string;
+    op34?:string;
+    op35?:string;
+    op36?:string;
+    op37?:string;
+    op38?:string;
+    op39?:string;
+    op40?:string;
+    op41?:string;
+    $$index?:string;
+}
+
+ 

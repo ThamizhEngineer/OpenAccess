@@ -1,0 +1,99 @@
+// .dateField {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+// }
+
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+  }
+
+
+.plusButton {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+}
+
+.deleteButton {
+    position: absolute;
+    right: 15px;
+    transform: translateX(10px);
+}
+
+.d-flex {
+    display: flex;
+}
+
+#buyerTable {
+
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+
+    thead {
+        td {
+            text-align: center;
+            border: 1px solid black;
+            background-color: dimgrey;
+            color: honeydew;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+}
+
+buyerButton {
+    font-size: initial;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+td {
+    border: 1px solid black;
+    width: 100%;
+    padding: 0px;
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input {
+
+        text-align: center;
+
+        &:-webkit-outer-spin-button,
+        &:-webkit-inner-spin-button {
+            -webkit-appearance: non10.251.45.85e;
+            margin: 0;
+        }
+
+        /* Firefox */
+        -moz-appearance: textfield;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+
+        font-size: 18px;
+        height: 40px;
+        border:none;
+        width: 100%;
+        margin-right: 2px;
+    }
+}
+

@@ -1,0 +1,858 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+
+		<mat-card class="mat-card-top">
+
+
+			<mat-card-title>{{addScreen?'Add':'Update'}} Signup Details</mat-card-title>
+
+
+			<ng-template mat-tab-label>Organistaion Information</ng-template>
+
+			<mat-card>
+
+				<mat-card-content>
+
+
+					<div fxLayout="row" fxLayoutAlign="start center">
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Edc Name" [matAutocomplete]="td1Auto" [(ngModel)]='signup.orgName' #modelDir="ngModel" (ngModelChange)="this.filteredEdcList = filterEDCList(signup.orgName); ">
+							<mat-autocomplete #td1Auto="matAutocomplete">
+								<mat-option *ngFor="let edc of filteredEdcList" [value]="edc.name">
+									<span>{{ edc.code }} - {{ edc.name }}</span>
+								</mat-option>
+							</mat-autocomplete>
+						</mat-form-field>
+						<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="EDC Name" [(ngModel)]='signup.orgId' (ngModelChange)="fetchSubstations(signup.orgId)">
+
+								<mat-option *ngFor="let org of orgList" [value]="org.code">
+									{{org.code}} - {{org.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field> -->
+
+						<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="EDC Name" [(ngModel)]='signup.orgId'>
+							</mat-form-field>  -->
+
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Company Name" [(ngModel)]='signup.companyName'>
+						</mat-form-field>
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Generator Service No(old)" [(ngModel)]='signup.htscNumberOld'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Generator Service No(New)" [(ngModel)]='signup.htscNumber'>
+						</mat-form-field>
+
+					</div>
+
+
+					<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Company Code" [readonly]="true" [(ngModel)]='signup.companyCode'>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Registration Number" [(ngModel)]='signup.registrationNumber'>
+							</mat-form-field>
+							<div [hidden]='true'>
+							 <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Purpose" [(ngModel)]="signup.purposeCode">
+								<mat-option *ngFor="let Purpose of Purposes" [value]="Purpose.valueCode">
+									{{Purpose.valueDesc}}
+								</mat-option>
+							</mat-select> 
+							</div>
+						 </div>
+						 <br>
+	
+						 <div fxLayout="row" fxLayoutAlign="start center">
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput [(ngModel)]="signup.registrationDate" [matDatepicker]="regpicker" placeholder="Registration Date" [disabled]="disableControls">
+								<mat-datepicker-toggle matSuffix [for]="regpicker"></mat-datepicker-toggle>
+								<mat-datepicker #regpicker></mat-datepicker>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput [(ngModel)]="signup.dateOfCommission" [matDatepicker]="dateOfCommission" placeholder="Date of Commission" [disabled]="disableControls">
+								<mat-datepicker-toggle matSuffix [for]="dateOfCommission"></mat-datepicker-toggle>
+								<mat-datepicker #dateOfCommission></mat-datepicker>
+							</mat-form-field> 
+							
+					 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Signup Completed" [readonly]="true" [(ngModel)]='signup.isComplete'>
+							</mat-form-field> -->
+
+
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Total Capacity(kW)" [(ngModel)]='signup.totalCapacity'>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" (click)="fetchSubstations(signup.orgId)" placeholder="Substation" [(ngModel)]='signup.substationId'
+							 (ngModelChange)="fetchFeeders(signup.substationId)">
+								<mat-option *ngFor="let ss of substationList" [value]="ss.id">
+									{{ss.code}} - {{ss.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Feeder" [(ngModel)]='signup.feederId'>
+								<mat-option *ngFor="let feeder of feederList" [value]="feeder.id">
+									{{feeder.code}} - {{feeder.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Voltages" [(ngModel)]='signup.voltageCode'>
+
+								<mat-option *ngFor="let Voltage of Voltages" [value]="Voltage.valueCode">
+									{{Voltage.valueDesc}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+
+
+					</div>
+
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Machine Location with S.F No" [(ngModel)]='signup.addressLine'>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Village" [(ngModel)]='signup.village'>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Taluk" [(ngModel)]='signup.talukCode'>
+
+								<mat-option *ngFor="let taluk of TalukList" [value]="taluk.valueCode">
+									{{taluk.valueDesc}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="District" [(ngModel)]='signup.districtCode'>
+
+								<mat-option *ngFor="let district of District" [value]=" district.valueCode">
+									{{district.valueDesc}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+
+						<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<textarea matInput placeholder="Company Address" [(ngModel)]='signup.companyAddress'> </textarea>
+							</mat-form-field> -->
+
+					</div>
+
+					<div fxLayout="row" fxLayoutAlign="start center">
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="Total No of Generator Unit" [(ngModel)]='signup.totalGeneratorUnit'>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput [(ngModel)]="signup.dateOfCommission" [matDatepicker]="dateOfCommission" placeholder="Date of Commissioning"
+							 [disabled]="disableControls">
+							<mat-datepicker-toggle matSuffix [for]="dateOfCommission"></mat-datepicker-toggle>
+							<mat-datepicker #dateOfCommission></mat-datepicker>
+						</mat-form-field>
+
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive/selltoboard" [(ngModel)]="signup.isCaptive"
+							 (ngModelChange)="onBuyerChangeAsStb()">
+
+								<mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+									{{iscaptives.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Surplus Energy" [(ngModel)]="signup.surplusEnergyCode">
+
+								<mat-option *ngFor="let surplusEnergys of surplusEnergys" [value]="surplusEnergys.key">
+									{{surplusEnergys.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Accelerated Depreciation" [(ngModel)]="signup.acceleratedDepreciation">
+
+								<mat-option *ngFor="let acceleratedDepreciations of acceleratedDepreciations" [value]="acceleratedDepreciations.key">
+									{{acceleratedDepreciations.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+					</div>
+
+
+				
+
+					<br>
+
+
+					<!--                <div mat-subheader>Infrastructure Information</div><br>
+						<div fxLayout="row" fxLayoutAlign="start center">
+	
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" name="signup.orgId" [(ngModel)]='signup.orgId' #modelDir="ngModel"
+								 (ngModelChange)="this.filteredEDCs = filterEDCs(signup.orgId)" [disabled]="isDisabled">
+								<mat-autocomplete #tdAuto="matAutocomplete">
+									<mat-option *ngFor="let org of filteredEDCs" [value]="org.code">
+										<span>{{ org.name }}</span>
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Substation" [matAutocomplete]="tdAuto1" name="signup.substationId" [(ngModel)]='signup.substationId'
+								 #modelDir="ngModel" (ngModelChange)="this.filteredSubstations = filterSubstations(signup.substationId)" [disabled]="isDisabled">
+								<mat-autocomplete #tdAuto1="matAutocomplete">
+									<mat-option *ngFor="let substation of filteredSubstations" [value]="substation.id">
+										<span>{{ substation.name }}</span>
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Feeder" [matAutocomplete]="tdAuto2" name="signup.feederId" [(ngModel)]='signup.feederId' #modelDir="ngModel"
+								 (ngModelChange)="this.filteredFeeders = filterFeeders(signup.feederId)" [disabled]="isDisabled">
+								<mat-autocomplete #tdAuto2="matAutocomplete">
+									<mat-option *ngFor="let feeder of filteredFeeders" [value]="feeder.id">
+										<span>{{feeder.name }}</span>
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="HTSC Number" [(ngModel)]='signup.htscNumber'>
+							</mat-form-field>
+	
+						</div><br/> 
+						<div mat-subheader>User Details</div><br>
+						<div fxLayout="row" fxLayoutAlign="start center">
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="UserName" [(ngModel)]='signup.userName'>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="UserID" [(ngModel)]='signup.userId'>
+							</mat-form-field>
+	
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Password" [(ngModel)]='signup.password'>
+							</mat-form-field>
+	
+							<div class="ml-xs mr-xs" style="width: 100%;"></div>
+						</div><br> -->
+
+					<div class="hide" *ngIf="signup.purposeCode!='01'">
+
+
+						<div mat-subheader>Turbine Details</div>
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Turbine Sl.No" [(ngModel)]='signup.turbineSlNo'>
+							</mat-form-field>
+
+
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Turbine Rotor Dia" [(ngModel)]='signup.turbineRotorDia'>
+							</mat-form-field>
+
+
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Turbine Hub Height" [(ngModel)]='signup.turbineHubHeight'>
+							</mat-form-field>
+
+						</div>
+						<br>
+
+
+						<!--		<div class="hide" *ngIf="signup.purposeCode!='01'">  -->
+
+
+						<div mat-subheader>Wind Generator Details</div>
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="WEG Group Classification" [(ngModel)]='signup.plantClassTypeCode'>
+
+									<mat-option *ngFor="let PowerPlantType of powerPlantClassTypes" [value]="PowerPlantType.valueCode">
+										{{PowerPlantType.valueDesc}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="REC/Non-REC " [(ngModel)]='signup.isREC'>
+
+									<mat-option *ngFor="let isRECss of isRECs" [value]="isRECss.name">
+										{{ isRECss.name }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Wind Pass Name " [(ngModel)]='signup.windPassCode'>
+
+									<mat-option *ngFor="let windpass of edcPassTypes" [value]=" windpass.valueCode">
+										{{windpass.valueDesc}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+						</div>
+						<br>
+
+						<!--		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="No of Units" [(ngModel)]='signup.noOfGenerators'>
+								</mat-form-field>
+	
+						
+	
+							<!--        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="PowerPlantType" [(ngModel)]='signup.powerPlantTypeCode'>
+									<mat-option *ngFor="let plantType of powerPlantTypes" [value]="plantType.valueCode">
+										{{plantType.valueDesc }}
+									</mat-option>
+								</mat-select>
+	
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="PowerplantName" [readonly]="true" [(ngModel)]='signup.powerPlantName'>
+								</mat-form-field>
+	
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput [(ngModel)]="signup.applicationDate" [matDatepicker]="applicationDate" placeholder="Application Date" [disabled]="disableControls">
+									<mat-datepicker-toggle matSuffix [for]="applicationDate"></mat-datepicker-toggle>
+									<mat-datepicker #applicationDate></mat-datepicker>
+								</mat-form-field>
+	
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput [(ngModel)]="signup.dateOfApproval" [matDatepicker]="dateOfApproval" placeholder="Approval Date" [disabled]="disableControls">
+									<mat-datepicker-toggle matSuffix [for]="dateOfApproval"></mat-datepicker-toggle>
+									<mat-datepicker #dateOfApproval></mat-datepicker>
+								</mat-form-field>
+							</div><br>
+	
+							<div fxLayout="row" fxLayoutAlign="start center">
+	
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Used" [(ngModel)]='signup.fuelCode'>
+									<mat-option *ngFor="let fuelType of fuelPlantTypes" [value]="fuelType.valueCode">
+										{{fuelType.valueDesc}}
+									</mat-option>
+								</mat-select>
+	
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Generator-Model" [(ngModel)]='signup.generatorModelCode'>
+									<mat-option *ngFor="let generatorModel of generatorModelTypes" [value]="generatorModel.valueCode">
+										{{ generatorModel.valueDesc}} - {{ generatorModel.valueCode}}
+									</mat-option>
+								</mat-select>
+							</div><br>
+	
+							<div fxLayout="row" fxLayoutAlign="start center">
+	
+								
+								<div [hidden]='true'>
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="BuyerTypes" multiple [(ngModel)]='signup.buyerTypeCode'>
+									<mat-option *ngFor="let buyerTypes of buyerTypes" [value]="buyerTypes.valueCode">
+										{{buyerTypes.valueDesc}}
+									</mat-option>
+								</mat-select>
+								</div>
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Generation Capacity" [(ngModel)]='signup.generatorCapacity'>
+								</mat-form-field> -->
+
+
+
+
+						<div mat-subheader>Meter Details</div>
+						<!--	<div fxLayout="row" fxLayoutAlign="start center"> -->
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Meter Number" [(ngModel)]='signup.meterNumber'>
+							</mat-form-field>
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Meter Make" [(ngModel)]='signup.meterMakeCode'>
+									<mat-option *ngFor="let metermakecode of meterMake" [value]="metermakecode.valueCode">
+										{{metermakecode.valueDesc}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+							<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+									<input matInput placeholder="Meter Make" [(ngModel)]='signup.meterMakeCode'>
+								</mat-form-field>  -->
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Accuracy Class" [(ngModel)]='signup.accuracyClassCode'>
+
+									<mat-option *ngFor="let accrcyclass of accuracyclass" [value]="accrcyclass.key">
+										{{ accrcyclass.name }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+							<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+									<input matInput placeholder="Accuracy Class" [(ngModel)]='signup.accuracyClassCode'>
+								</mat-form-field> -->
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is ABT Meter" [(ngModel)]='signup.isAbtMeter'>
+
+									<mat-option *ngFor="let isABTMtrs of isABTMeter" [value]="isABTMtrs.key">
+										{{ isABTMtrs.name }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+							<!--				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Is ABT Meter" [(ngModel)]='signup.isAbtMeter'>
+								</mat-form-field>  -->
+						</div>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is DLMS Meter" [(ngModel)]='signup.isDlmsMeter'>
+
+									<mat-option *ngFor="let isDLMSMtrs of isDLMSMeter" [value]="isDLMSMtrs.key">
+										{{ isDLMSMtrs.name }}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter CT Ratio" [(ngModel)]='signup.meterCtRatio'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter PT Ratio" [(ngModel)]='signup.meterPtRatio'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Multiplication Factor" [(ngModel)]='signup.multiplicationFactor'>
+							</mat-form-field>
+
+						</div>
+
+
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Modem Number" [(ngModel)]='signup.modemNumber'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter CT1 serialNo" [(ngModel)]='signup.meterCt1'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter CT2 serialNo" [(ngModel)]='signup.meterCt2'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter CT3 serialNo" [(ngModel)]='signup.meterCt3'>
+							</mat-form-field>
+
+						</div>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter PT1" [(ngModel)]='signup.meterBt1'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter PT2" [(ngModel)]='signup.meterBt2'>
+							</mat-form-field>
+
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="Meter PT3" [(ngModel)]='signup.meterBt3'>
+							</mat-form-field>
+
+							<div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+
+						</div>
+
+
+
+						<!--	 </div><br>-->
+
+						<!--        <div mat-subheader>PowerPlant Location</div><br>
+							<div fxLayout="row" fxLayoutAlign="start center">
+	
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Village" [(ngModel)]='signup.village'>
+								</mat-form-field>
+	
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Town" [(ngModel)]='signup.town'>
+								</mat-form-field>
+	
+							</div><br>
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="City" [(ngModel)]='signup.cityCode'>
+								</mat-form-field>
+	
+								
+	
+								<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="State" [(ngModel)]='signup.stateCode'>
+									<mat-option *ngFor="let state of State" [value]="state.valueCode">
+										{{state.valueDesc}}
+									</mat-option>
+								</mat-select>
+	
+							<div class="ml-xs mr-xs" style="width: 100%;"></div> -->
+					</div>
+					<br>
+					<ngx-datatable class="material" tabindex="index" [rows]="signup.genUnits" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+					 [rowHeight]="'auto'">
+
+
+						<ngx-datatable-column name="GeneratorUnit Make/Model Name">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								{{row['makeCode']}}
+							</ng-template>
+						</ngx-datatable-column>
+
+
+						<ngx-datatable-column name="GeneratorUnit Capacity(kW)">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								{{row['capacity']}}
+							</ng-template>
+						</ngx-datatable-column>
+
+
+						<ngx-datatable-column name="No Of GeneratorUnits">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								{{row['noOfUnits']}}
+							</ng-template>
+						</ngx-datatable-column>
+
+
+
+						<ngx-datatable-column name="Actions">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								<button mat-raised-button mat-icon-button mat-button-sm (click)="editGenUnit(row.$$index)">
+									<mat-icon>mode_edit</mat-icon>
+								</button>
+								<button mat-raised-button mat-icon-button mat-button-sm (click)="deleteGenUnit(row.$$index)">
+									<mat-icon>delete</mat-icon>
+								</button>
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+
+					<mat-card>
+
+						<mat-card-title>
+
+							<Strong>{{genUnitRowIndex>-1?'Update':'Add'}} GeneratorUnit</Strong>
+						</mat-card-title>
+
+						<mat-card-content>
+
+							<div fxLayout="row" fxLayoutAlign="start center">
+
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Model Name" [(ngModel)]='genUnit.makeCode'>
+										<mat-option *ngFor="let generatorModelType of generatorModelTypes" [value]="generatorModelType.valueCode">
+											{{generatorModelType.valueDesc}}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+								<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<input matInput placeholder="Model Name" [(ngModel)]='genUnit.makeCode'>
+									</mat-form-field> -->
+
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Capacity(kW)" [(ngModel)]='genUnit.capacity'>
+								</mat-form-field>
+
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="No Of Units" [(ngModel)]='genUnit.noOfUnits'>
+								</mat-form-field>
+
+							</div>
+						</mat-card-content>
+
+						<mat-card-actions>
+							<button *ngIf="signup.isComplete != 'Y'" mat-raised-button (click)="genUnitRowIndex>-1?updateGenUnit():addGenUnit()">{{genUnitRowIndex>-1?'Update':'Add'}}</button>
+							<button *ngIf="signup.isComplete != 'Y'" mat-raised-button (click)="initGenUnits()">Reset</button>
+						</mat-card-actions>
+					</mat-card>
+					<hr>
+
+
+					<div *ngIf="!this.mrtUserLogin">
+
+						<ngx-datatable class="material" tabindex="index" [rows]="signup.signupTradeRelationships" [columnMode]="'force'" [headerHeight]="50"
+						 [footerHeight]="0" [rowHeight]="'auto'">
+
+
+							<ngx-datatable-column name="EDC Name">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['buyerOrgCode']}}-{{row['buyerOrgName']}}
+								</ng-template>
+							</ngx-datatable-column>
+
+
+							<ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Company Name/Service No">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['buyerCompanyName']}} -{{row['buyerCompServiceNumber']}}
+								</ng-template>
+							</ngx-datatable-column>
+
+							<!--	<ngx-datatable-column name="Is Captive">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								{{(row['isCaptive'])?'Yes':'No'}}
+							</ng-template>
+						</ngx-datatable-column> -->
+
+							<!-- <ngx-datatable-column name="Buyer Service Number">
+	
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['buyerCompServiceNumber']}}
+								</ng-template>
+							</ngx-datatable-column> 
+
+
+					<ngx-datatable-column name="Quantum(kVA)">
+
+							<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+								{{row['quantum']}}
+							</ng-template>
+						</ngx-datatable-column>  -->
+
+							<ngx-datatable-column name="Share Percent">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['sharePercent']}}
+								</ng-template>
+							</ngx-datatable-column>
+
+
+							<ngx-datatable-column name="From date">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['fromDate']| date: 'dd/MM/yyyy'}}
+								</ng-template>
+							</ngx-datatable-column>
+
+							<ngx-datatable-column name="To date">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									{{row['toDate']| date: 'dd/MM/yyyy'}}
+								</ng-template>
+							</ngx-datatable-column>
+
+
+							<ngx-datatable-column name="Actions">
+
+								<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									<button mat-raised-button mat-icon-button mat-button-sm (click)="editBuyerCompany(row.$$index)">
+										<mat-icon>mode_edit</mat-icon>
+									</button>
+									<button mat-raised-button mat-icon-button mat-button-sm (click)="deleteBuyerCompany(row.$$index)">
+										<mat-icon>delete</mat-icon>
+									</button>
+								</ng-template>
+							</ngx-datatable-column>
+						</ngx-datatable>
+
+
+
+						<mat-card>
+
+							<mat-card-title>
+
+								<Strong>{{tradeRelationshipRowIndex>-1?'Update':'Add'}} TradeRelationship(Captive/ThirdParty Users)</Strong>
+							</mat-card-title>
+
+							<mat-card-content>
+
+								<div fxLayout="row" fxLayoutAlign="start center">
+
+
+									<!--			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<input matInput placeholder="EDC Name" [(ngModel)]='tradeRelationship.orgId'>
+									</mat-form-field>  -->
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="EDC Name" [(ngModel)]='tradeRelationship.buyerOrgId' [required]="isMandatory"
+										 (ngModelChange)="onBuyerOrgChange()">
+
+											<mat-option *ngFor="let org of orgList " [value]="org.id">
+												{{org.code}} - {{org.name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+
+
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('buyer')}} Company Name/service No"
+										 [(ngModel)]='tradeRelationship.buyerCompServiceId' [required]="isMandatory" (ngModelChange)="onConsumerChange()">
+
+											<mat-option *ngFor="let buyerCompanyService of buyerCompanyServices" [value]="buyerCompanyService.id">
+												{{ buyerCompanyService.number}} - {{buyerCompanyService.companyName }}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+
+
+
+									<!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="BuyerCompanyCode" [(ngModel)]='tradeRelationship.buyerCompanyCode'>
+									</mat-form-field> -->
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<input matInput [(ngModel)]="tradeRelationship.fromDate" [max]="maxDate" [matDatepicker]="fromDate" placeholder="From Date"
+										 [disabled]="disableControls">
+										<mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+
+										<mat-datepicker #fromDate></mat-datepicker>
+									</mat-form-field>
+
+
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<input matInput [(ngModel)]="tradeRelationship.toDate" [matDatepicker]="toDate" placeholder="To Date" [disabled]="disableControls">
+										<mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+
+										<mat-datepicker #toDate></mat-datepicker>
+									</mat-form-field>
+								</div>
+
+								<div fxLayout="row" fxLayoutAlign="start center">
+
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<input matInput placeholder="Sanctioned Capacity(kVA)" [(ngModel)]="tradeRelationship.sanctionedCapacity" disabled="true">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" (change)="onIntervalTypeChange()" [(ngModel)]='tradeRelationship.intervalTypeCode'>
+
+											<mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+												{{intervalTypeCode.valueDesc}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+									<!-- <span class="ml-xs mr-xs" style="width: 30%;"><mat-checkbox [(ngModel)]='tradeRelationship.isCaptive'  >Is Captive</mat-checkbox></span> -->
+									<!-- <mat-form-field *ngIf="tradeRelationship.isCaptive" class="ml-xs mr-xs" style="width: 100%;">
+									<input matInput placeholder="Share Percentage" [(ngModel)]='tradeRelationship.sharePercent'>
+								</mat-form-field> 
+					         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Quantum(kVA)" [(ngModel)]="tradeRelationship.quantum" disabled="true">
+								</mat-form-field>  -->
+									<mat-form-field *ngIf="tradeRelationship.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="Share Percentage" [(ngModel)]='tradeRelationship.sharePercent' (ngModelChange)="onAdd()">
+									</mat-form-field>
+									<div *ngIf="tradeRelationship.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+
+								</div>
+
+								<div *ngIf="tradeRelationship.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="Peak Units" [(ngModel)]='tradeRelationship.peakUnits' (ngModelChange)="onAdd()">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="Off Peak Units" [(ngModel)]='tradeRelationship.offPeakUnits' (ngModelChange)="onAdd()">
+									</mat-form-field>
+									<div class="ml-xs mr-xs" style="width: 100%;"></div>
+									<div class="ml-xs mr-xs" style="width: 100%;"></div>
+								</div>
+								<div *ngIf="tradeRelationship.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="C1 " [(ngModel)]='tradeRelationship.c1' (ngModelChange)="onAdd()">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="C2 " [(ngModel)]='tradeRelationship.c2' (ngModelChange)="onAdd()">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="C3 " [(ngModel)]='tradeRelationship.c3' (ngModelChange)="onAdd()">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="C4 " [(ngModel)]='tradeRelationship.c4' (ngModelChange)="onAdd()">
+									</mat-form-field>
+
+									<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+										<input matInput placeholder="C5 " [(ngModel)]='tradeRelationship.c5' (ngModelChange)="onAdd()">
+									</mat-form-field>
+								</div>
+							</mat-card-content>
+
+							<mat-card-actions>
+								<button *ngIf="signup.isComplete != 'Y'" mat-raised-button (click)="tradeRelationshipRowIndex>-1?updateBuyerCompany():addBuyerCompany()">{{tradeRelationshipRowIndex>-1?'Update':'Add'}}</button>
+								<button *ngIf="signup.isComplete != 'Y'" mat-raised-button (click)="initBuyerCompany()">Reset</button>
+							</mat-card-actions>
+						</mat-card>
+					</div>
+
+				</mat-card-content>
+			</mat-card>
+
+			<hr>
+			<mat-card-actions>
+				<button *ngIf="signup.isComplete != 'Y' && signup.modifiedDate==null" mat-raised-button color="primary" [disabled]=(disableControls)
+				 (click)="saveSignup()">{{addScreen?'Add':'Verify'}}</button>
+				<button *ngIf="signup.isComplete != 'Y' && this.accessCompleteFlag" mat-raised-button color="primary" [disabled]=(disableControls)
+				 (click)="confirmComplete()">Complete</button>
+				<button mat-raised-button class="primary" (click)="listSignup()">Cancel/Back</button>
+			</mat-card-actions>
+		</mat-card>
+
+	</div>
+
+</div>

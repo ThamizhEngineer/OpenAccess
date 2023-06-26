@@ -1,0 +1,918 @@
+<style>
+    td.spaceh {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        font-size: 15px;
+    }
+
+    td.space {
+        padding-top: 11px;
+        font-size: 15px;
+        padding-left: 3px;
+    }
+</style>
+<mat-card>
+    <mat-card-title class="card-container-left" style="color: #0a21f0;">NOC {{sldcNoc.nocPurpose}}</mat-card-title>
+    <mat-card-content>
+    <table class='head'>
+        <tr class='label'>
+            <td> NOC Code</td>
+            <td> Status</td>
+            <td> AgreementType</td>
+            <td> Applied No</td>
+        </tr>
+        <tr>
+            <td> {{sldcNoc.nocCode}}</td>
+            <td> {{sldcNoc.status}}</td>
+            <td> {{sldcNoc.applnType}}</td>
+            <td> {{sldcNoc.appliedNo}}</td>
+
+        </tr>
+        <tr>
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr class='label'>
+            <td>Generator Name</td>
+            <td  *ngIf="isCon">Htsc Number </td>
+            <td  *ngIf="!isCon">Generator No</td>
+            <td *ngIf="!isCon">Address of Plant Location </td>
+            <td *ngIf="!isCon"> Communication address</td>
+            <td *ngIf="isCon">Tarrif<span style="color: red;">*</span></td>
+            <td *ngIf="isCon">Contracted Demand</td>
+        </tr>
+        <tr>
+            <td> {{mCompService.companyName}}</td>
+            <td *ngIf="!isCon"> {{sldcNoc.compServNo}}</td>
+            <td *ngIf="isCon"> {{sldcNoc.compServNo}}</td>
+            <td *ngIf="!isCon"> {{sldcNoc.plantAdr}}</td>
+            <td *ngIf="!isCon"> {{sldcNoc.commsAdr}}</td>
+            <!-- <td *ngIf="isCon"> {{sldcNoc.tarrif}}</td> -->
+            <td *ngIf="isCon"><input type="text" (keydown)="numberFormat($event)" id="tarrif" name="tarrif" [(ngModel)]="sldcNoc.tarrif" > </td>
+            <td *ngIf="isCon"> {{contrDmd}}MW</td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr  *ngIf="!isCon" class='label'>
+            <td>Installed Capacity of the plant in MW </td>
+            <td>Internal Auxilary /InHouse Consumption in MW <span style="color:red">*</span></td>
+            <td>Ex-Bus availability </td>
+            <td>Approved Power Evacuation Capacity </td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td> {{Installcap}}MW</td>
+            <td> <input type="text" (keydown)="numberFormat($event)" id="intlAuxilary" name="intlAuxilary" [(ngModel)]="sldcNoc.intlAuxilary" >
+                <input type="text" (keydown)="numberFormat($event)" id="intlInhouseConsump" name="intlInhouseConsump" [(ngModel)]="sldcNoc.intlInhouseConsump" ></td>
+            <td> {{sldcNoc.exBusAval}} </td>
+            <td> {{sldcNoc.approvPwrEvacCap}} </td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr  *ngIf="isCon" class='label'>
+            <td>Type of Fuel Used</td>
+            <td>Name of the connecting feeder with voltage level</td>
+            <td>Name of the connecting substation with voltage ratio</td>
+            <td>Date of grid conectivity approval</td>
+        </tr>
+        <tr  *ngIf="isCon">
+            <td>{{sldcNoc.fuelType}}</td>
+            <td>{{sldcNoc.feederWithVoltLevel}}</td>
+            <td>{{sldcNoc.substationWithVoltLevel}}</td>
+            <td>{{sldcNoc.gridApprovalDt | date:'dd/MM/yyyy'}}</td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr  *ngIf="!isCon" class='label'>
+            <td>Date of commercial operation decleration (COD)</td>
+            <td>Whether ABT meter with AMR facility is provided in the plant</td>
+            <td>Whether data downloading facility is available in the meter installed</td>
+            <td *ngIf="sldcNoc.isAbtAndAmr=='Y'">Make of the ABT meter</td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td>{{sldcNoc.codDt}}</td>
+            <td>
+                <select [(ngModel)]="sldcNoc.isAbtAndAmr">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+            <td>
+                <select [(ngModel)]="sldcNoc.isMeterDownloadAndInstall">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="sldcNoc.isAbtAndAmr=='Y'">{{sldcNoc.abyMeterName}}
+
+            </td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr  *ngIf="!isCon" class='label'>
+            <td>Meter MF</td>
+            <td>CT ratio & class of accuracy*</td>
+            <td>PT ratio & class of accuracy*</td>
+            <td>Commitment of TNEB /TANGEDCO throw PPA</td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td>{{sldcNoc.meterMfName}}</td>
+            <td>{{sldcNoc.ctRatioAndClassAcc}}</td>
+            <td>{{sldcNoc.ptRatioAndClassAcc}}</td>
+            <td>{{sldcNoc.tnebTangedcoThrowPpa}}</td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="!isCon" class='label'>
+          <td>Applied Date</td>
+            <td >Whether online data monitoring facility with SLDC is provided by the generator<span style="color:red;">*</span></td>
+            <td *ngIf="sldcNoc.isDataMonitoringWithSldc=='Y'">Any commitment to TANGEDCO through traders</td>
+            <td *ngIf="sldcNoc.isDataMonitoringWithSldc=='Y'">CC Arrears Available</td>
+        </tr>
+        <tr >
+          <td *ngIf="!isCon"> {{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}} (since 3 days)</td>
+            <td *ngIf="!isCon">
+                <select [(ngModel)]="sldcNoc.isDataMonitoringWithSldc">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="!isCon&&sldcNoc.isDataMonitoringWithSldc=='Y'">
+                <select [(ngModel)]="sldcNoc.isCommitToTangedco">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="!isCon&&sldcNoc.isDataMonitoringWithSldc=='Y'">
+                <select [(ngModel)]="sldcNoc.ccArrearsAval">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr  *ngIf="!isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="!isCon&&sldcNoc.isDataMonitoringWithSldc=='Y'" class='label'>
+            <td>Date of grid conectivity approval<span style="color:red">*</span></td>
+            <td >Comply with OpenAccess Requirments</td>
+        </tr>
+        <tr  *ngIf="!isCon&&sldcNoc.isDataMonitoringWithSldc=='Y'">
+            <td><input type="date" id="fname" name="fname" [(ngModel)]="sldcNoc.gridApprovalDt"></td>
+            <td >
+              <select [(ngModel)]="sldcNoc.isComplyWithOaRequirment">
+                  <option *ngFor="let decn of decisions" [value]="decn.key">
+                      {{decn.name}}
+                  </option>
+              </select>
+          </td>
+        </tr>
+        <tr>
+            <td colspan=4> <br/></td>
+        </tr>
+
+
+        <tr  *ngIf="isCon" class='label'>
+            <td>Location of the plant/Industry </td>
+            <td>Address for Communication</td>
+            <td>Region / EDC / Section</td>
+            <td>Existing Total Commitment </td>
+        </tr>
+        <tr  *ngIf="isCon">
+            <td>{{sldcNoc.plantAdr}}</td>
+            <td>{{sldcNoc.commsAdr}}</td>
+            <td> {{sldcNoc.region}} <br> {{sldcNoc.edc}} <br> {{sldcNoc.section}} </td>
+            <td> {{mCompService.capacity}}KVA </td>
+        </tr>
+        <tr *ngIf="isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="isCon" class='label'>
+            <td>Existing</td>
+            <td>New Total Commitment</td>
+            <td>Whether the HT Consumer can be Permitted for Open Access (Intra/Inter state)<span style="color:red">*</span></td>
+            <td >Requested Quantity</td>
+
+        </tr>
+        <tr *ngIf="isCon">
+            <td>{{sldcNoc.existingKv}}</td>
+            <td>{{sldcNoc.quantity}}</td>
+            <td>
+              <select [(ngModel)]="sldcNoc.isHtConPermitForOa">
+              <option *ngFor="let decn of decisions" [value]="decn.key">
+                  {{decn.name}}
+              </option>
+          </select>
+      </td>
+      <td >{{sldcNoc.quantity}}</td>
+
+        </tr>
+        <tr *ngIf="isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="isCon" class='label'>
+
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'">CC Arrears Available</td>
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'">Comply with OpenAccess Requirments</td>
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'">If so eligible quantum of power in MW can be purchased under Open Access(Intra/Inter state)</td>
+            <td > Applied Date</td>
+        </tr>
+        <tr *ngIf="isCon">
+
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'">
+                <select [(ngModel)]="sldcNoc.ccArrearsAval">
+                    <option *ngFor="let decn of decisions" [value]="decn.key">
+                        {{decn.name}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'"><select [(ngModel)]="sldcNoc.isComplyWithOaRequirment">
+                <option *ngFor="let decn of decisions" [value]="decn.key">
+                    {{decn.name}}
+                </option>
+            </select></td>
+            <td *ngIf="sldcNoc.isHtConPermitForOa=='Y'">
+              <select [(ngModel)]="sldcNoc.eligibleQuantumInWv">
+                <option *ngFor="let decn of decisions" [value]="decn.key">
+                    {{decn.name}}
+                </option>
+            </select>
+          </td>
+            <td > {{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}} (since 3 days)</td>
+        </tr>
+        <tr *ngIf="isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="isCon&&sldcNoc.isHtConPermitForOa=='Y'" class='label'>
+
+            <td >Requested Start Date</td>
+            <td >Requested End Date</td>
+            <td >Approved Quantity:</td>
+            <td >Period Start Date:</td>
+        </tr>
+        <tr *ngIf="isCon&&sldcNoc.isHtConPermitForOa=='Y'">
+
+            <td >{{sldcNoc.periodStartDate | date: 'dd/MM/yyyy'}}</td>
+            <td >{{sldcNoc.periodEndDate | date: 'dd/MM/yyyy'}}</td>
+            <td ><input type="text" (keydown)="numberFormat($event)" id="approvedQuantity" name="approvedQuantity" [(ngModel)]="sldcNoc.approvedQuantity"></td>
+            <td ><input type="date" id="fname" name="fname" [(ngModel)]="sldcNoc.periodStartDate"></td>
+        </tr>
+        <tr *ngIf="isCon">
+            <td colspan=4> <br/></td>
+        </tr>
+        <tr *ngIf="isCon&&sldcNoc.isHtConPermitForOa=='Y'" class='label'>
+
+            <td >Period End Date:</td>
+            <td >Section<span style="color: red;">*</span></td>
+        </tr>
+        <tr *ngIf="isCon&&sldcNoc.isHtConPermitForOa=='Y'">
+
+            <td ><input type="date" id="fname" name="fname" [(ngModel)]="sldcNoc.periodEndDate"></td>
+            <td ><input type="text" id="section" name="section" [(ngModel)]="sldcNoc.section"></td>
+        </tr>
+
+        </table>
+        <!-- <label for="approvedQuantity">Approved Quantity:</label>
+        <input type="text" id="approvedQuantity" name="approvedQuantity" [(ngModel)]="sldcNoc.approvedQuantity"><br><br>
+        <label for="fname">Period Start Date:</label>
+        <input type="date" id="fname" name="fname" [(ngModel)]="sldcNoc.periodStartDate"><br><br>
+        <label for="fname">Period End Date:</label>
+        <input type="date" id="fname" name="fname" [(ngModel)]="sldcNoc.periodEndDate"><br><br> -->
+    <!-- <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <div class="input-placeholder">
+                <div>
+                    input 1
+                    <br> input 2
+                    <br>
+                    <input matInput value="25 MW" readonly>
+                </div>
+            </div>
+        </mat-form-field>
+    </div> -->
+    </mat-card-content>
+    <mat-card-title align="center" *ngIf="(sldcNoc.isHtConPermitForOa=='Y')||(sldcNoc.isDataMonitoringWithSldc=='Y')">Power Sale commitments for the {{sldcNoc.nocPurpose}}</mat-card-title>
+    <mat-card-content *ngIf="(sldcNoc.isHtConPermitForOa=='Y') || (sldcNoc.isDataMonitoringWithSldc=='Y')">
+        <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
+            <mat-tab [disabled]="sldcNoc.isExisting=='N'" label="Existing">
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%" *ngIf="sldcNoc.nocPurpose=='Buyer'">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <th class="spaceh" style="background: #dcdcdc">From Date</th>
+                                    <th class="spaceh" style="background: #dcdcdc">To Date</th>
+
+                                    <!-- <th style="background: #dcdcdc">From Period</th>
+                                    <th style="background: #dcdcdc">To Period</th>
+                                    <th style="background: #dcdcdc">Quantum</th> -->
+                                </tr>
+                                <tr *ngIf="collSale">
+                                    <td colspan="5"><h4>Intra State Collective Sale</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Collective Sale'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                           -
+                                            {{item.customerName}}
+                                        </td>
+                                        <td  class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    <!-- <td>{{item.fromPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.toPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.quantum}}
+                                        <mat-form-field class="hideUnderLine" fxFlex.gt-sm="100%">
+                                            <input matInput [(ngModel)]="item.quantum" value="0.2">
+                                        </mat-form-field>
+                                    </td> -->
+                                </ng-container>
+                                </tr>
+
+                                <tr *ngIf="bil">
+                                    <td colspan="5"><h4>Intra State Bilateral</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                         <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                </ng-container>
+                                </tr>
+
+                                <tr *ngIf="bilSale">
+                                    <td colspan="5"><h4>Intra State Bilateral Sale</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Sale'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space" >{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                         <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                </ng-container>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral TANGEDCO'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+
+                                 </tr>
+
+                              <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Third Party'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+
+                                 </tr>
+
+                                 <tr *ngFor="let item of sldcApprovalbuyer;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Captive Use'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+                                 </tr>
+                            </table>
+
+                            <table id="table" style="float: center; border:1;width: 100%" *ngIf="sldcNoc.nocPurpose=='Seller'">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <th class="spaceh" style="background: #dcdcdc">From Date</th>
+                                    <th class="spaceh" style="background: #dcdcdc">To Date</th>
+
+                                </tr>
+                                <tr *ngIf="collSale">
+                                    <td colspan="5"><h4>Intra State Collective Sale</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Collective Sale'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                           -
+                                            {{item.customerName}}
+                                        </td>
+                                        <td  class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                </ng-container>
+                                </tr>
+
+                                <tr *ngIf="bil">
+                                    <td colspan="5"><h4>Intra State Bilateral</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                </ng-container>
+                                </tr>
+
+                                <tr *ngIf="bilSale">
+                                    <td colspan="5"><h4>Intra State Bilateral Sale</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Sale'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space" >{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                         <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                </ng-container>
+                                </tr>
+                                <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral TANGEDCO'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+
+                                 </tr>
+                              <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Third Party'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                         <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+
+                                 </tr>
+                                 <tr *ngFor="let item of sldcApprovalseller;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Captive Use'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW</td>
+                                         <td class="space">{{item.appType}}</td>
+                                         <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    </ng-container>
+                                 </tr>
+                            </table>
+                        </div>
+                </mat-tab>
+                <mat-tab *ngIf="isCon" [disabled]="sldcNoc.isExisting=='Y'" label="Proposed">
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <!-- <th class="spaceh" style="background: #dcdcdc">Applied Date</th> -->
+
+                                    <!-- <th style="background: #dcdcdc">From Period</th>
+                                    <th style="background:029094140042 #dcdcdc">To Period</th>
+                                    <th style="background: #dcdcdc">Quantum</th> -->
+                                </tr>
+                                <tr *ngFor="let item of sldcLine ;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Purchase TANGEDCO'&& item.isExisting=='N'">
+                                    <td class="space">{{i+1}}</td>
+                                    <td class="space">{{item.compServNo}}
+                                        -
+                                         {{item.customerName}}
+                                     </td>
+
+                                     <td class="space" >{{item.quantum}}MW</td>
+                                    <td class="space">{{item.aggrementType}}</td>
+                                    <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+
+                                    <!-- <td>{{item.fromPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.toPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.quantum}}
+                                        <mat-form-field class="hideUnderLine" fxFlex.gt-sm="100%">
+                                            <input matInput [(ngModel)]="item.quantum" value="0.2">
+                                        </mat-form-field>
+                                    </td> -->
+                                </ng-container>
+                                </tr>
+                                <tr *ngFor="let item of sldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Collective Purchase'&& item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                </ng-container>
+                                </tr>
+
+                              <tr *ngFor="let item of sldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Third Party'&& item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                    </ng-container>
+
+                                 </tr>
+                                 <tr *ngFor="let item of sldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Captive Use' && item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                    </ng-container>
+
+                                 </tr>
+                            </table>
+                        </div>
+                </mat-tab>
+                <mat-tab *ngIf="!isCon" [disabled]="sldcNoc.isExisting=='Y'" label="Proposed">
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <!-- <th class="spaceh" style="background: #dcdcdc">Applied Date</th> -->
+
+                                    <!-- <th style="background: #dcdcdc">From Period</th>
+                                    <th style="background:029094140042 #dcdcdc">To Period</th>
+                                    <th style="background: #dcdcdc">Quantum</th> -->
+                                </tr>
+                                <tr *ngFor="let item of selsldcLine ;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Purchase TANGEDCO'&& item.isExisting=='N'">
+                                    <td class="space">{{i+1}}</td>
+                                    <td class="space">{{item.compServNo}}
+                                        -
+                                         {{item.customerName}}
+                                     </td>
+
+                                     <td class="space" >{{item.quantum}}MW</td>
+                                    <td class="space">{{item.aggrementType}}</td>
+                                    <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+
+                                    <!-- <td>{{item.fromPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.toPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.quantum}}
+                                        <mat-form-field class="hideUnderLine" fxFlex.gt-sm="100%">
+                                            <input matInput [(ngModel)]="item.quantum" value="0.2">
+                                        </mat-form-field>
+                                    </td> -->
+                                </ng-container>
+                                </tr>
+                                <tr *ngIf="collPur">
+                                    <td colspan="5"><h4>Intra State Collective Purchase</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of selsldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Collective Purchase'&& item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                </ng-container>
+                                </tr>
+
+                              <tr *ngFor="let item of selsldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Third Party'&& item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                    </ng-container>
+
+                                 </tr>
+                                 <tr *ngFor="let item of selsldcLine;let i=index">
+                                    <ng-container *ngIf="item.commitType=='Intra State Bilateral Captive Use' && item.isExisting=='N'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.compServNo}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW</td>
+                                        <td class="space">{{item.aggrementType}}</td>
+                                        <!-- <td class="space">{{item.fromPeriod | date:'dd-MMM-yyyy'}}</td> -->
+                                    </ng-container>
+
+                                 </tr>
+                            </table>
+                        </div>
+                </mat-tab>
+
+                <mat-tab *ngIf="isCon" [disabled]="sldcNoc.isExisting=='Y'" label="Withdraw">
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <th class="spaceh" style="background: #dcdcdc">From Date</th>
+                                    <th class="spaceh" style="background: #dcdcdc">To Date</th>
+
+                                    <!-- <th style="background: #dcdcdc">From Period</th>
+                                    <th style="background:029094140042 #dcdcdc">To Period</th>
+                                    <th style="background: #dcdcdc">Quantum</th> -->
+                                </tr>
+                                <tr *ngFor="let item of buyerWithdraw ;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Purchase TANGEDCO'">
+                                    <td class="space">{{i+1}}</td>
+                                    <td class="space">{{item.eosGcApprovalNumber}}
+                                        -
+                                         {{item.customerName}}
+                                     </td>
+
+                                     <td class="space" >{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                    <td class="space">{{item.appType}}</td>
+                                    <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    <!-- <td>{{item.fromPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.toPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.quantum}}
+                                        <mat-form-field class="hideUnderLine" fxFlex.gt-sm="100%">
+                                            <input matInput [(ngModel)]="item.quantum" value="0.2">
+                                        </mat-form-field>
+                                    </td> -->
+                                </ng-container>
+                                </tr>
+                                <tr *ngFor="let item of buyerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Collective Purchase'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                </ng-container>
+                                </tr>
+
+                              <tr *ngFor="let item of buyerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Third Party'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                    </ng-container>
+
+                                 </tr>
+                                 <tr *ngFor="let item of buyerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Captive Use'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eosGcApprovalNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}} MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                    </ng-container>
+
+                                 </tr>
+                            </table>
+                        </div>
+                </mat-tab>
+                <mat-tab *ngIf="!isCon" [disabled]="sldcNoc.isExisting=='Y'" label="Withdraw">
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th class="spaceh" style="background: #dcdcdc">SI.NO</th>
+                                    <th class="spaceh" *ngIf="isCon" style="background: #dcdcdc">Seller</th>
+                                    <th class="spaceh" *ngIf="!isCon" style="background: #dcdcdc">Buyers</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Quantum in MW</th>
+                                    <th class="spaceh" style="background: #dcdcdc">Type of Transaction</th>
+                                    <th class="spaceh" style="background: #dcdcdc">From Date</th>
+                                    <th class="spaceh" style="background: #dcdcdc">To Date</th>
+
+                                    <!-- <th style="background: #dcdcdc">From Period</th>
+                                    <th style="background:029094140042 #dcdcdc">To Period</th>
+                                    <th style="background: #dcdcdc">Quantum</th> -->
+                                </tr>
+                                <tr *ngFor="let item of sellerWithdraw ;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Purchase TANGEDCO'">
+                                    <td class="space">{{i+1}}</td>
+                                    <td class="space">{{item.eobHtConsumerNumber}}
+                                        -
+                                         {{item.customerName}}
+                                     </td>
+
+                                     <td class="space" >{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                    <td class="space">{{item.appType}}</td>
+                                    <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                    <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+
+                                    <!-- <td>{{item.fromPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.toPeriod | date:"MM/yy"}}</td>
+                                    <td>{{item.quantum}}
+                                        <mat-form-field class="hideUnderLine" fxFlex.gt-sm="100%">
+                                            <input matInput [(ngModel)]="item.quantum" value="0.2">
+                                        </mat-form-field>
+                                    </td> -->
+                                </ng-container>
+                                </tr>
+                                <tr *ngIf="collPur">
+                                    <td colspan="5"><h4>Intra State Collective Purchase</h4></td>
+                                </tr>
+                                <tr *ngFor="let item of sellerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Collective Purchase'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                </ng-container>
+                                </tr>
+
+                              <tr *ngFor="let item of sellerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Third Party'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space" >{{item.quantum}}MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                    </ng-container>
+
+                                 </tr>
+                                 <tr *ngFor="let item of sellerWithdraw;let i=index">
+                                    <ng-container *ngIf="item.appCategory=='Intra State Bilateral Captive Use'">
+                                        <td class="space">{{i+1}}</td>
+                                        <td class="space">{{item.eobHtConsumerNumber}}
+                                            -
+                                             {{item.customerName}}
+                                         </td>
+                                         <td class="space">{{item.quantum}} MW -<span *ngIf="item.quantum=='0'"> NonPartial</span><span *ngIf="item.quantum!='0'"> Partial</span></td>
+                                        <td class="space">{{item.appType}}</td>
+                                        <td class="space">{{item.periodStartDate | date:'dd-MMM-yyyy'}}</td>
+                                        <td class="space">{{item.periodEndDate | date:'dd-MMM-yyyy'}}</td>
+                                    </ng-container>
+
+                                 </tr>
+                            </table>
+                        </div>
+                </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+    <mat-card-content *ngIf="(sldcNoc.isHtConPermitForOa=='Y') || (sldcNoc.isDataMonitoringWithSldc=='Y')">
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <textarea (change)="checkRemarks()" matInput [(ngModel)]="sldcNoc.techRemark" placeholder="Technical Remark*"></textarea>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <textarea (change)="checkRemarks()" matInput [(ngModel)]="sldcNoc.legalRemark" placeholder="Legal Remark*"></textarea>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <textarea (change)="checkRemarks()" matInput [(ngModel)]="sldcNoc.commRemark" placeholder="Commercial Remark*"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="left">
+        <button [disabled]="sldcNoc.status!='CREATED'" (click)="save('save')"  mat-raised-button color="primary">Save</button>
+        <button [disabled]="sldcNoc.isHtConPermitForOa=='N'||sldcNoc.isDataMonitoringWithSldc=='N'" (click)="printSldcNoc()" mat-raised-button color="primary">Print</button>
+        <button [disabled]="sldcNoc.isHtConPermitForOa=='N'||sldcNoc.isDataMonitoringWithSldc=='N'" (click)="save('EDC-APPROVED')"  mat-raised-button color="primary">Approve</button>
+        <button [disabled]="sldcNoc.isHtConPermitForOa=='Y'||sldcNoc.isDataMonitoringWithSldc=='Y'" (click)="save('EDC-REJECTED')"  mat-raised-button color="primary">Reject</button>
+        <button  (click)="back()"  mat-raised-button color="primary">Back</button>
+    </mat-card-actions>
+</mat-card>

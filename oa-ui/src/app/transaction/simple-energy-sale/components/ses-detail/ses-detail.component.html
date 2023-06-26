@@ -1,0 +1,153 @@
+<div  fxLayout="row"  fxLayoutWrap="wrap"  fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+
+    <mat-card-title><strong> Simple Energy Sales</strong></mat-card-title> 
+            
+             <mat-card-content>
+              <mat-card-title>Buyer Information</mat-card-title> 
+			  <div fxLayout="row" fxLayoutAlign="start center" >
+          <month-picker [(config)]="mpConfig" [(model)]="mpModel" (mpOnModelChange) ="this.mpOnModelChange($event)"></month-picker>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" [(ngModel)]='ses.sellerEndOrgName'
+                      #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(ses.sellerEndOrgName);this.fetchSubstations();this.fetchBuyerCompanyServices();">
+                    <mat-autocomplete #tdAuto="matAutocomplete">
+                      <mat-option *ngFor="let org of filteredOrgList" [value]="org.name">
+                        <span>{{ org.name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+				  
+				  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Name" [matAutocomplete]="td1Auto" [(ngModel)]='buyerName'
+                      #modelDir="ngModel" (ngModelChange)="this.filteredBuyerList = filterBuyerList(buyerName);">
+                    <mat-autocomplete #td1Auto="matAutocomplete">
+                      <mat-option *ngFor="let buyer of filteredBuyerList" [value]="buyer.buyerCompanyName">
+                        <span>{{ buyer.buyerCompServiceNumber }} - {{ buyer.buyerCompanyName }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+               
+              </div><br/>
+			  <div fxLayout="row" fxLayoutAlign="start center" >
+				 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Drawal Point" [matAutocomplete]="td2Auto" [(ngModel)]='drawalVoltageName'
+                      #modelDir="ngModel" (ngModelChange)="this.filteredSubstation = filterSubstations(drawalVoltageName);">
+                    <mat-autocomplete #td2Auto="matAutocomplete">
+                      <mat-option *ngFor="let ss of filteredSubstation" [value]="ss.name">
+                        <span>{{ ss.name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+				  
+					
+					
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					  <input matInput placeholder="Loss" [(ngModel)]='ses.loss' readonly>
+					</mat-form-field>
+			  </div>
+			  <br/>
+			  <mat-card-title>Total Consumption</mat-card-title> 
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="C1" [(ngModel)]='ses.c1' readonly>
+				</mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="C2" [(ngModel)]='ses.c2' readonly>
+				</mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="C3" [(ngModel)]='ses.c3' readonly>
+				</mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="C4" [(ngModel)]='ses.c4' readonly>
+				</mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="C5" [(ngModel)]='ses.c5' readonly>
+				</mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				  <input matInput placeholder="Total Consumption" [(ngModel)]='ses.netAllocation' readonly>
+				</mat-form-field>
+
+				
+              </div> 
+            </mat-card-content>
+
+            <mat-card-title><strong>Datewise Consumption</strong></mat-card-title> 
+            <hot-table height="800"  [colWidths]="true"  hotId="hotInstance" [settings]="settings" [data]="datewiseConsumption">
+                   <hot-column  data="usageDate" width="200%"> </hot-column>
+                   <hot-column data="c1" width="200%" ></hot-column>
+                   <hot-column data="c2" width="200%" ></hot-column>
+                   <hot-column data="c3" width="200%" ></hot-column>
+                   <hot-column data="c4" width="200%" ></hot-column>
+                   <hot-column data="c5" width="200%" ></hot-column>
+                  
+                   <hot-column data="total" width="200%" ></hot-column>
+             
+                  </hot-table>
+              
+             <!-- <ngx-datatable 
+              class="material"
+              [rows]="datewiseConsumption"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+			  [scrollbarH]="true"
+              [rowHeight]="'auto'" >
+              <ngx-datatable-column name="Date" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template >
+                  {{row.usageDate | slice:0:10}} 
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C1" width="4">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <mat-form-field class="ml-xs mr-xs">
+					  <input matInput placeholder="C1" [(ngModel)]='row.c1' (ngModelChange)="updateDetailTotal()">
+					</mat-form-field>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C2" width="4">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <mat-form-field class="ml-xs mr-xs">
+					  <input matInput placeholder="C2" [(ngModel)]='row.c2' (ngModelChange)="updateDetailTotal()">
+					</mat-form-field>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C3" width="4">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <mat-form-field class="ml-xs mr-xs">
+					  <input matInput placeholder="C3" [(ngModel)]='row.c3' (ngModelChange)="updateDetailTotal()">
+					</mat-form-field>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C4" width="4">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <mat-form-field class="ml-xs mr-xs">
+					  <input matInput placeholder="C4" [(ngModel)]='row.c4' (ngModelChange)="updateDetailTotal()">
+					</mat-form-field>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="C5" width="4">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <mat-form-field class="ml-xs mr-xs">
+					  <input matInput placeholder="C5" [(ngModel)]='row.c5' (ngModelChange)="updateDetailTotal()">
+					</mat-form-field>
+                </ng-template>
+              </ngx-datatable-column>  
+              <ngx-datatable-column name="Day - Total" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.total}}
+                </ng-template>
+              </ngx-datatable-column>  
+           </ngx-datatable>   -->
+
+            
+      <hr>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" *ngIf="this.accessUpdateFlag"   (click)="saveSes('')" >Save</button>
+        <!-- <button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveSes(nextEaStatus)" >{{nextAction}}</button>
+        <button mat-raised-button class="primary" (click)="saveEa('Disapproved')" *ngIf="nextEaStatus=='Approved'" >Disapprove</button> -->
+        <button mat-raised-button color="primary" *ngIf="this.accessApproveFlag" (click)="finalSes('')" >Approve</button>
+        <button mat-raised-button class="primary" (click)="listSess()" >Back</button>
+      </mat-card-actions>
+    </mat-card>
+  </div> 
+</div>

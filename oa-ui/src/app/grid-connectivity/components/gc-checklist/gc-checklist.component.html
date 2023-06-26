@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title><Strong>Checklist</Strong></mat-card-title>
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <div *ngFor="let clItem of gc.checkList" fxLayout="row" fxLayoutAlign="start center">
+        <mat-checkbox [(ngModel)]='clItem.docSubmitted' fxFlex.gt-sm="100%"   (ngModelChange)="onValueChange()"> {{clItem.documentDesc}}</mat-checkbox>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,330 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title class="card-container-left">NOC Approval Director</mat-card-title>
+            <!-- <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Consumer No" [(ngModel)]="searchServiceNo">
+                    </mat-form-field>
+                </div>
+            </mat-card-content> -->
+            <mat-card-content>
+                <mat-tab-group (selectedTabChange)="tabClick($event)" mat-align-tabs="center">
+                    <mat-tab label="Buyer">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Consumer No" [(ngModel)]="searchSldc.compServNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="From Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="To Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name"
+                                    [disabled]="isEdc" [(ngModel)]="searchSldc.edcId">
+                                    <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                                        {{edc.code}} - {{ edc.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Requested Demand" [(ngModel)]="searchSldc.cntrctDemand">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="NOC Code" [(ngModel)]="searchSldc.nocCode">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Appication No" [(ngModel)]="searchSldc.appliedNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Applied Date" [(ngModel)]="searchSldc.appliedDt">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;"
+                                    placeholder="Status">
+                                    <mat-option *ngFor="let edc of status" [value]="edc.key">
+                                        {{edc.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary" class="primary"
+                                    (click)="searchResult('Buyer')">Search</button>
+                            </mat-card-actions>
+                        </div>
+                        <style>
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                            }
+                        </style>
+                        <div style="float: center;width: 100%" *ngIf="type=='Buyer'">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th style="background: #dcdcdc">Check</th>
+                                    <th style="background: #dcdcdc">Consumer No/Name</th>
+                                    <th style="background: #dcdcdc">NOC Code</th>
+                                    <th style="background: #dcdcdc">Application No</th>
+                                    <th style="background: #dcdcdc">Applied Date</th>
+                                    <!-- <th style="background: #dcdcdc">From Date</th>
+                                        <th style="background: #dcdcdc">To Date</th> -->
+                                    <th style="background: #dcdcdc">EDC</th>
+                                    <th style="background: #dcdcdc">Requested Demand</th>
+                                    <th style="background: #dcdcdc">NOC Status</th>
+                                    <th style="background: #dcdcdc">Action</th>
+                                </tr>
+                                <tr *ngFor="let sldcNoc of sldcNocList">
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="sldcNoc.isSelected">
+                                        </mat-checkbox>
+                                    </td>
+                                    <td>{{sldcNoc.compServNo}}<br>{{sldcNoc.compName}}</td>
+                                    <td>{{sldcNoc.nocCode}}</td>
+                                    <td>{{sldcNoc.appliedNo}}</td>
+                                    <td>{{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}}</td>
+                                    <!-- <td></td>
+                                        <td></td> -->
+                                    <td>{{sldcNoc.edc}}</td>
+                                    <td>{{sldcNoc.region}}</td>
+                                    <td>{{sldcNoc.status}}</td>
+                                    <td>
+                                        <mat-card-actions>
+                                            <button mat-raised-button color="primary" class="primary"
+                                                (click)="detailPage(sldcNoc.id)">View</button>
+                                        </mat-card-actions>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                            <!-- <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" class="primary">Approve</button>
+                                </mat-card-actions>
+                            </div> -->
+                        </div>
+                    </mat-tab>
+
+
+
+                    <mat-tab label="Seller">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Consumer No" [(ngModel)]="searchSldc.compServNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="From Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="To Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name"
+                                    [disabled]="isEdc" [(ngModel)]="searchSldc.edcId">
+                                    <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                                        {{edc.code}} - {{ edc.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Requested Demand" [(ngModel)]="searchSldc.cntrctDemand">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="NOC Code" [(ngModel)]="searchSldc.nocCode">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Appication No" [(ngModel)]="searchSldc.appliedNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Applied Date" [(ngModel)]="searchSldc.appliedDt">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;"
+                                    placeholder="Status">
+                                    <mat-option *ngFor="let edc of status" [value]="edc.key">
+                                        {{edc.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary" class="primary"
+                                    (click)="searchResult('Seller')">Search</button>
+                            </mat-card-actions>
+                        </div>
+                        <style>
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                            }
+                        </style>
+                        <div style="float: center;width: 100%" *ngIf="type=='Seller'">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th style="background: #dcdcdc">Check</th>
+                                    <th style="background: #dcdcdc">Consumer No/Name</th>
+                                    <th style="background: #dcdcdc">NOC Code</th>
+                                    <th style="background: #dcdcdc">Application No</th>
+                                    <th style="background: #dcdcdc">Applied Date</th>
+                                    <!-- <th style="background: #dcdcdc">From Date</th>
+                                        <th style="background: #dcdcdc">To Date</th> -->
+                                    <th style="background: #dcdcdc">EDC</th>
+                                    <th style="background: #dcdcdc">Requested Demand</th>
+                                    <th style="background: #dcdcdc">NOC Status</th>
+                                    <th style="background: #dcdcdc">Action</th>
+                                </tr>
+                                <tr *ngFor="let sldcNoc of sldcNocList">
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="sldcNoc.isSelected">
+                                        </mat-checkbox>
+                                    </td>
+                                    <td>{{sldcNoc.compServNo}}<br>{{sldcNoc.compName}}</td>
+                                    <td>{{sldcNoc.nocCode}}</td>
+                                    <td>{{sldcNoc.appliedNo}}</td>
+                                    <td>{{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}}}</td>
+                                    <!-- <td></td>
+                                        <td></td> -->
+                                    <td>{{sldcNoc.edc}}</td>
+                                    <td>{{sldcNoc.region}}</td>
+                                    <td>{{sldcNoc.status}}</td>
+                                    <td>
+                                        <mat-card-actions>
+                                            <button mat-raised-button color="primary" class="primary"
+                                                (click)="detailPage(sldcNoc.id)">View</button>
+                                        </mat-card-actions>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                            <!-- <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" class="primary">Approve</button>
+                                </mat-card-actions>
+                            </div> -->
+                        </div>
+                    </mat-tab>
+
+
+
+                    <!-- <mat-tab label="Trader NOC">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Consumer No" [(ngModel)]="searchSldc.compServNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="From Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="To Date" [(ngModel)]="searchServiceNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name"
+                                    [disabled]="isEdc" [(ngModel)]="searchSldc.edcId">
+                                    <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                                        {{edc.code}} - {{ edc.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Requested Demand" [(ngModel)]="searchSldc.cntrctDemand">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="NOC Code" [(ngModel)]="searchSldc.nocCode">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Appication No" [(ngModel)]="searchSldc.appliedNo">
+                            </mat-form-field>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Applied Date" [(ngModel)]="searchSldc.appliedDt">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;"
+                                    placeholder="Status">
+                                    <mat-option *ngFor="let edc of status" [value]="edc.key">
+                                        {{edc.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary" class="primary"
+                                    (click)="searchResult('Trader')">Search</button>
+                            </mat-card-actions>
+                        </div>
+                        <style>
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                            }
+                        </style>
+                        <div style="float: center;width: 100%" *ngIf="type=='Trader'">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th style="background: #dcdcdc">Check</th>
+                                    <th style="background: #dcdcdc">Consumer No/Name</th>
+                                    <th style="background: #dcdcdc">NOC Code</th>
+                                    <th style="background: #dcdcdc">Application No</th>
+                                    <th style="background: #dcdcdc">Applied Date</th>
+                                     <th style="background: #dcdcdc">From Date</th>
+                                        <th style="background: #dcdcdc">To Date</th> 
+                                    <th style="background: #dcdcdc">EDC</th>
+                                    <th style="background: #dcdcdc">Requested Demand</th>
+                                    <th style="background: #dcdcdc">NOC Status</th>
+                                    <th style="background: #dcdcdc">Action</th>
+                                </tr>
+                                <tr *ngFor="let sldcNoc of sldcNocList">
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="sldcNoc.isSelected">
+                                        </mat-checkbox>
+                                    </td>
+                                    <td>{{sldcNoc.compServNo}}<br>{{sldcNoc.compName}}</td>
+                                    <td>{{sldcNoc.nocCode}}</td>
+                                    <td>{{sldcNoc.appliedNo}}</td>
+                                    <td>{{sldcNoc.appliedDt | date:'dd-MMM-yyyy'}}}</td>
+                                     <td></td>
+                                        <td></td> 
+                                    <td>{{sldcNoc.edc}}</td>
+                                    <td>{{sldcNoc.region}}</td>
+                                    <td>{{sldcNoc.status}}</td>
+                                    <td>
+                                        <mat-card-actions>
+                                            <button mat-raised-button color="primary" class="primary"
+                                                (click)="detailPage(sldcNoc.id)">View</button>
+                                        </mat-card-actions>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                             <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" class="primary">Approve</button>
+                                </mat-card-actions>
+                            </div> 
+                        </div>
+                    </mat-tab> -->
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,264 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+            <mat-card>
+                <mat-card-title>Energy Audit Report</mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Gen Service Number" [(ngModel)]="searchGenServNumber">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                    placeholder="From Month" [(ngModel)]='searchfromMonth'>
+                                    <mat-option *ngFor="let month of months" [value]="month.value">
+                                        {{ month.name }}
+                                    </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <!-- <input matInput type="number" placeholder="From Year" [(ngModel)]="searchFromYear"> -->
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                            placeholder="From Year" [(ngModel)]='searchFromYear'
+                            readonly>
+                            <mat-option *ngFor="let year of years" [value]="year">
+                                {{ year }}
+                            </mat-option>
+                        </mat-select> 
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                    placeholder="To Month" [(ngModel)]='searchtoMonth'>
+                                    <mat-option *ngFor="let month of months" [value]="month.value">
+                                        {{ month.name }}
+                                    </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <!-- <input matInput placeholder="To Year" [(ngModel)]="searchToYear"> -->
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                placeholder="To Year" [(ngModel)]='searchToYear'
+                                readonly>
+                                <mat-option *ngFor="let year of years" [value]="year">
+                                    {{ year }}
+                                </mat-option>
+                            </mat-select> 
+                        </mat-form-field>
+                        <mat-card-actions>
+                            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+                        </mat-card-actions>
+                    </div>  
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-card-actions *ngIf="resultSet">
+                        <button  mat-raised-button color="accent" (click)="exportAsXLSX()">
+                         <mat-icon>cloud_download</mat-icon>
+                         Download As XL</button>
+                       </mat-card-actions>
+                    </div>
+                    <br/>
+                    <mat-card-title *ngIf="resultSet">Generator Details</mat-card-title>
+                    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="resultSet">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Service Number"
+                                [(ngModel)]='searchGenServNumber' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Company Name"
+                                [(ngModel)]='sellerCompany' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="EDC"
+                                [(ngModel)]='sellerEdc' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Fuel Type"
+                                [(ngModel)]='fuelType' readonly>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-content *ngIf="resultSet">
+                    <style>
+                        table, th, td {
+                          border: 1px solid black;
+                          border-collapse: collapse;
+                        }
+                        </style>
+                        <div style="float: center;width: 100%">
+                            <table id="table" style="float: center; border:1;width: 100%">
+                                <tr>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="1"></th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="1"></th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="1"></th>
+                                    <th *ngIf="!ShowOpenBalance" style="text-align: center;background: #f3f1f1" colspan="2">Open Banking</th>
+                                    <th *ngIf="ShowOpenBalance" style="text-align: center;background: #f3f1f1" colspan="7">Open Banking</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">Generated Units</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">Alloted</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">Adjusted</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">Surplus</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">UnAlloted Units</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="6">Closing Banking</th>
+                                    <th style="text-align: center;background: #f3f1f1" colspan="1"></th>
+                                </tr>
+                                <tr>
+                                    <th style="background: #dcdcdc">S.NO</th>
+                                    <th style="background: #dcdcdc">Month</th>
+                                    <th style="background: #dcdcdc">Year</th>
+                                    <th *ngIf="ShowOpenBalance" style="background: #dcdcdc">C1</th>
+                                    <th *ngIf="ShowOpenBalance" style="background: #dcdcdc">C2</th>
+                                    <th *ngIf="ShowOpenBalance" style="background: #dcdcdc">C3</th>
+                                    <th *ngIf="ShowOpenBalance" style="background: #dcdcdc">C4</th>
+                                    <th *ngIf="ShowOpenBalance" style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">DETAIL</th>
+
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">C1</th>
+                                    <th style="background: #dcdcdc">C2</th>
+                                    <th style="background: #dcdcdc">C3</th>
+                                    <th style="background: #dcdcdc">C4</th>
+                                    <th style="background: #dcdcdc">C5</th>
+                                    <th style="background: #dcdcdc">TOTAL</th>
+                                    <th style="background: #dcdcdc">Detail</th>
+                                </tr>
+                                <tr *ngFor="let row of eaListForCsv;let i=index;">
+                                    <td>{{i+1}}</td>
+                                    <td>{{row.month}}</td>
+                                    <td>{{row.year}}</td>
+                                    <td *ngIf="ShowOpenBalance">{{row.openBc1}}</td>
+                                    <td *ngIf="ShowOpenBalance">{{row.openBc2}}</td>
+                                    <td *ngIf="ShowOpenBalance">{{row.openBc3}}</td>
+                                    <td *ngIf="ShowOpenBalance">{{row.openBc4}}</td>
+                                    <td *ngIf="ShowOpenBalance">{{row.openBc5}}</td>
+                                    <td>{{row.totalopenBc}}</td>
+                                    <td>
+                                        <button mat-icon-button color="primary" (click)="showopenbalance()">
+                                            <mat-icon>open_in_new</mat-icon>
+                                        </button>
+                                    </td>
+
+                                    <td>{{row.generatedc1}}</td>
+                                    <td>{{row.generatedc2}}</td>
+                                    <td>{{row.generatedc3}}</td>
+                                    <td>{{row.generatedc4}}</td>
+                                    <td>{{row.generatedc5}}</td>
+                                    <td>{{row.totalgenerated}}</td>
+
+                                    <td>{{row.allotedC1}}</td>
+                                    <td>{{row.allotedC2}}</td>
+                                    <td>{{row.allotedC3}}</td>
+                                    <td>{{row.allotedC4}}</td>
+                                    <td>{{row.allotedC5}}</td>
+                                    <td>{{row.totalalloted}}</td>                                    
+                                    <td>{{row.adjustedC1}}</td>
+                                    <td>{{row.adjustedC2}}</td>
+                                    <td>{{row.adjustedC3}}</td>
+                                    <td>{{row.adjustedC4}}</td>
+                                    <td>{{row.adjustedC5}}</td>
+                                    <td>{{row.totaladjusted}}</td>
+                                    <td>{{row.surplusC1}}</td>
+                                    <td>{{row.surplusC2}}</td>
+                                    <td>{{row.surplusC3}}</td>
+                                    <td>{{row.surplusC4}}</td>
+                                    <td>{{row.surplusC5}}</td>
+                                    <td>{{row.totalsurplus}}</td>
+                                    <td>{{row.unAllotedC1}}</td>
+                                    <td>{{row.unAllotedC2}}</td>
+                                    <td>{{row.unAllotedC3}}</td>
+                                    <td>{{row.unAllotedC4}}</td>
+                                    <td>{{row.unAllotedC5}}</td>
+                                    <td>{{row.totalunAlloted}}</td>
+                                    <td>{{row.closingC1}}</td>
+                                    <td>{{row.closingC2}}</td>
+                                    <td>{{row.closingC3}}</td>
+                                    <td>{{row.closingC4}}</td>
+                                    <td>{{row.closingC5}}</td>
+                                    <td>{{row.totalclosing}}</td>
+                                    <td>
+                                        <button mat-icon-button color="primary" (click)="detailPage(row['serviceNo'],row['month'],row['year'],searchfromMonth,searchFromYear,searchtoMonth,searchToYear)">
+                                            <mat-icon>open_in_new</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td colspan="3"  style="text-align: center;"><b>TOTAL</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop3}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop4}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop5}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop6}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop7}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop8}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b></b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop9}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop10}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop11}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop12}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop13}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop14}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop15}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop16}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop17}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop18}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop19}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop20}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop21}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop22}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop23}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop24}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop25}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop26}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop27}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop28}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop29}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop30}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop31}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop32}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop33}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop34}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop35}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop36}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop37}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop38}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop39}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop40}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop41}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop42}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop43}}</b> &#8192; </td>
+                                    <td  style="text-align: center;"> <b>{{this.totalop44}}</b> &#8192; </td>
+                                    <td></td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>

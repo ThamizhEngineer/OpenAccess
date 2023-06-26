@@ -1,0 +1,12 @@
+.forcolour{
+
+    color: rgb(49, 124, 15);
+
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

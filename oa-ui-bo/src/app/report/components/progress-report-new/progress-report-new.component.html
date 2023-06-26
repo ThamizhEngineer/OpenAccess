@@ -1,0 +1,141 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Weg Progress Report
+           </mat-card-title>
+           <mat-card-content>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="To Month" [(ngModel)]='stmtMonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear">
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel" [(ngModel)]='fuelTypeCode'>
+                  <mat-option *ngFor="let fuelType of fuelTypeList" [value]="fuelType.key">
+                    <span>{{ fuelType.name}}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+        <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code" [(ngModel)]='fuelTypeCode'>
+              <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                {{fuelTypes.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+
+                <mat-card-actions>				
+                  <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        
+              <br/>
+              <br/>
+              <div>
+
+                <!-- <mat-card-title *ngIf="resultSet">Progress Report</mat-card-title> -->
+                    <!-- <div fxLayout="row" fxLayoutAlign="start center" *ngIf="resultSet">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Month"
+                                [(ngModel)]='stmtMonth' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Year"
+                                [(ngModel)]='stmtYear' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Fuel"
+                                [(ngModel)]='fuelTypeCode' readonly>
+                        </mat-form-field>
+                    </div> -->
+              <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="100" [footerHeight]="50" [rowHeight]="50">
+      
+              <ngx-datatable-column name="SI.NO" [width]="20"  [frozenLeft]="true">
+                <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{rows.indexOf(row) + 1}}
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="ORG ID"  [frozenLeft]="true">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.op2}} 
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="EDC" [frozenLeft]="true" >
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op3}}
+                </ng-template>
+             </ngx-datatable-column>
+             
+               <ngx-datatable-column name="METER READING" [frozenLeft]="true" >
+                  <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op4}}
+                  </ng-template>
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="WEG THIRD PARTY" [frozenLeft]="true" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op8}}
+                </ng-template>
+               </ngx-datatable-column> 
+               
+               <ngx-datatable-column name="CAPTIVE ALLOTMENT" [frozenLeft]="true">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op9}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="TOTAL ALLOTMENT" [frozenLeft]="true">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op10}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <ngx-datatable-column name="MANUAL READING" [frozenLeft]="true">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op11}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-footer  *ngIf="resultSet">
+                <ng-template ngx-datatable-footer-template >
+                  <div style="padding: 100px 25px">
+                    <hr style="width:100%" >
+                    <div><br/>
+                      TOTAL METER READING: <b>{{this.totalMeterReading}}</b> &#8192; TOTAL THIRD PARTY: <b>{{this.totalThirdParty}}</b> &#8192; TOTAL CAPTIVE: <b>{{this.totalCaptive}}</b> &#8192; 
+                      TOTAL ALLOTMENT: <b>{{this.totalTotalAllot}}</b> &#8192; TOTAL MANUAL READING: <b>{{this.totalManualReading}}</b></div>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+
+              </ngx-datatable>   
+          </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

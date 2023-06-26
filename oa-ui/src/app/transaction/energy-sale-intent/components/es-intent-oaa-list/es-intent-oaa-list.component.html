@@ -1,0 +1,89 @@
+<mat-card>
+	<mat-card-title>Existing Open Access Applications</mat-card-title>
+	<mat-card-content>
+		<!-- <button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newOaa()'><mat-icon>add</mat-icon></button> -->
+		<div fxLayout="row" fxLayoutAlign="start center">
+
+
+			<!-- <mat-form-field class="ml-xs mr-xs" style="width: 120%;">
+				<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Name" [matAutocomplete]="td1Auto" [(ngModel)]='searchBuyerName'
+				 #modelDir="ngModel" (ngModelChange)="this.filteredBuyerList = filterBuyerList(searchBuyerName);">
+				<mat-autocomplete #td1Auto="matAutocomplete">
+					<mat-option *ngFor="let buyer of filteredBuyerList" [value]="buyer.companyName">
+						<span>{{ buyer.companyName }}</span>
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field> -->
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('buyer')}} Number" [(ngModel)]="searchBuyerServiceId"  >
+						<mat-option *ngFor="let esIntentLine of esIntentLines" [value]="esIntentLine.buyerCompanyServiceId"  >
+							{{esIntentLine.buyerCompanyServiceNumber}} - {{esIntentLine.buyerCompanyName}}
+						</mat-option> 
+					</mat-select>
+					 </mat-form-field> 
+
+          
+
+			<mat-card-actions class="ml-xs mr-xs" style="width:10%;">
+				<button mat-raised-button color="primary" class="primary" (click)="filterOaa()">Filter</button>
+			</mat-card-actions>
+
+			<mat-card-actions class="ml-xs mr-xs" style="width:10%;">
+				<button mat-raised-button color="primary" class="primary" (click)="searchOaa()">Show All</button>
+			</mat-card-actions>
+
+			<mat-card-actions class="ml-xs mr-xs" style="width:10%;">
+				<button mat-raised-button color="primary" class="primary" (click)="addOaa()">Add OAA</button>
+			</mat-card-actions>
+			<mat-card-actions class="ml-xs mr-xs" style="width:10%;">
+				<button mat-raised-button color="primary" class="primary" (click)="listEsIntent()">Back</button>
+			</mat-card-actions>
+			<!-- <div class="ml-xs mr-xs" style="width: 150%;"></div> -->
+
+		</div>
+
+
+		<br/>
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+		 [scrollbarV]="true">
+			<ngx-datatable-column name="Company Name" [width]="90">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.buyerCompServiceNumber}} - {{row.buyerCompanyName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="From Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.fromDate | date: 'dd/MM/yyyy'}}
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="To Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.toDate | date: 'dd/MM/yyyy'}}
+				</ng-template>
+			</ngx-datatable-column>
+		<ngx-datatable-column name="Quantum">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.approvedTotalUnits}}
+					</ng-template>
+				</ngx-datatable-column>
+	
+
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button *ngIf="this.accessViewFlag" mat-raised-button color="primary" class="mr-1" (click)="editOaa(row['id'])"> {{(row.statusCode=='COMPLETED'?"View":"Edit")}}</button>
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="Process">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" (click)="onClick($event)" id="test" *ngIf="row.statusCode=='CREATED' && this.accessApproveFlag"
+					 (click)="approve(row['id'])">Approve</button>
+					<button mat-raised-button color="primary" *ngIf="row.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="complete(row['id'])">Complete</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+
+	</mat-card-content>
+</mat-card>

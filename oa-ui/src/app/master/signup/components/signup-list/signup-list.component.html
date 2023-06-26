@@ -1,0 +1,104 @@
+<mat-card>
+	<mat-card-title>
+		List Signups
+	</mat-card-title>
+	<mat-card-content>
+		<button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newSignup()'><mat-icon>add</mat-icon></button>
+		<br/>
+
+		<div fxLayout="row" fxLayoutAlign="start center">
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchOrgid' [required]="isMandatory">
+					<mat-option *ngFor="let edc of edcList" [value]="edc.id">
+						{{ edc.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Company Name" [(ngModel)]="searchCompanyName">
+			</mat-form-field>
+	<!--		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Generator Service No" [(ngModel)]="searchHtscNumberOld">
+			</mat-form-field> -->
+
+         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="GeneratorServiceNo(New)" [(ngModel)]="searchHtscNumber"> 
+			</mat-form-field>   
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Meter Number" [(ngModel)]="searchMeterNumber">
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]='searchIsCaptive'>
+					<mat-option *ngFor="let isCaptive of isCaptives" [value]="isCaptive.key">
+						{{ isCaptive.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Completed" [(ngModel)]='searchIsComplete'>
+					<mat-option *ngFor="let complete of completeList" [value]="complete.key">
+						{{ complete.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<hr>
+			<mat-card-actions>
+				<button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+			</mat-card-actions>
+
+		</div>
+		<ngx-datatable class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+		 [limit]="10">
+			<ngx-datatable-column name="Sl.No" [width] ="30">
+				<ng-template let-row="row" ngx-datatable-cell-template>
+					{{row.$$index  + 1}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Edc Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.orgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Company Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.companyName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<!-- <ngx-datatable-column name="GeneratorServiceNo">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.htscNumberOld}}
+				</ng-template>
+			</ngx-datatable-column> -->
+            <ngx-datatable-column name="GeneratorServiceNo(New)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.htscNumber}}
+				</ng-template>
+			</ngx-datatable-column>  
+			<ngx-datatable-column name="Meter Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.meterNumber}}
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="Is Captive (Y/N)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.isCaptive}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Completed (Y/N)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.isComplete}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" class="mr-1" (click)="editSignup(row['id'])">Open</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+	</mat-card-content>
+</mat-card>

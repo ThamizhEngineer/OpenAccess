@@ -1,0 +1,143 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <!-- <mat-card>
+            <mat-card-title> <strong>Import Meter Readings</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Batch Code" [(ngModel)]="searchBatchCode">
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth' readonly>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="searchYear">
+                    </mat-form-field>
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Import Meter Reading</button>
+                    </mat-card-actions>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="result">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+
+      
+        </mat-card> -->
+
+
+
+
+        <!-- <mat-card>
+            <mat-card-title> <strong>Process Generation Statement</strong> </mat-card-title>
+            <mat-card-content>
+
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchmonth' readonly>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="searchyear">
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Process Generation Statement</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+
+                        <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="results">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card> -->
+
+
+        <mat-card>
+            <mat-card-title> <strong>Import Meter Reading from MDMS</strong> </mat-card-title>
+            <mat-card-content>
+
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='importMdmsMonth'>
+                        <mat-option *ngFor="let month of months" [value]="month.value">
+                            {{ month.name }}
+                        </mat-option>
+                    </mat-select>
+                     </mat-form-field> 
+
+                     <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Year" [(ngModel)]="importMdmsYear">
+                    </mat-form-field> 
+
+
+                    <hr>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="importMeterReadingFromMdms()">Import Meter Reading</button>
+                    </mat-card-actions>
+                </div>
+            </mat-card-content>
+
+                        <mat-card-title> <strong>Result</strong> </mat-card-title>
+            <mat-card-content>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Result" [(ngModel)]="importMdmsResult">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

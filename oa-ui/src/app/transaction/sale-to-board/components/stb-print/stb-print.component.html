@@ -1,0 +1,151 @@
+
+<div id="printSectionId" >
+<div align="center">
+    <img height="150px" width="150px" src="./../../../assets/images/tneb-tangedco-logo_360.png"/>
+   
+</div>
+ <br/>
+  
+<div align="center">
+
+    <table class="noborder" width="80%">
+        <tr >
+            <td  >Company Name </td>
+            <td >{{stb.header.generatorPlantName}} </td>
+            <td >Generator Service Number</td>
+            <td >{{stb.header.serviceNumber}}</td>
+        </tr>
+
+        <tr >
+            <td >Month </td>
+            <td >{{stb.header.month}}</td>
+            <td >Year</td>
+            <td >{{stb.header.year}}</td>
+        </tr>
+         <tr >
+            <td  >Injection Voltage </td>
+            <td >{{stb.header.injectingVoltage}} </td>
+            <td >EDC Name</td>
+            <td >{{stb.header.orgName}}</td>
+        </tr>
+
+        <tr >
+            <td >Multiplication Factor</td>
+            <td >{{stb.header.multiplicationFactor}}</td>
+            <td >Load</td>
+            <td >{{stb.header.load}}</td>
+        </tr>
+    </table>
+    <br/>
+     <table  width="90%" >
+               <thead> 
+                  <tr> 
+                    <td ></td>
+                    <td ><strong>Export</strong></td> 
+                    <td ><strong>Import</strong></td> 
+                    <td ><strong>rKVAH</strong></td> 
+                    <td ><strong>iKVAH</strong></td> 
+                  </tr>
+               </thead>
+                <tbody>
+                  <tr>
+                    <td ><strong>Final Reading</strong></td>
+                    <td >{{final1}}</td>
+                    <td >{{final2}}</td>
+                    <td >{{final3}}</td>
+                    <td >{{final4}}</td>
+                  </tr>
+                  <tr>
+                    <td ><strong>Initial Reading</strong></td>
+                    <td >{{initial1}}</td>
+                    <td >{{initial2}}</td>
+                    <td >{{initial3}}</td>
+                    <td >{{initial4}}</td>
+                  </tr>
+                  <tr>
+                    <td ><strong>Difference</strong></td>
+                    <td >{{difference1}}</td>
+                    <td >{{difference2}}</td>
+                    <td >{{difference3}}</td>
+                    <td >{{difference4}}</td>
+                  </tr>
+                  <tr>
+                    <td ><strong>M.Factor</strong></td>
+                    <td >400</td>
+                    <td >400</td>
+                    <td >400</td>
+                    <td >400</td>
+                  </tr>
+                  <tr>
+                    <td ><strong>Generation</strong></td>
+                    <td >{{generation1}}</td>
+                    <td >{{generation2}}</td>
+                    <td >{{generation3}}</td>
+                    <td >{{generation4}}</td>
+                  </tr>
+                 
+                </tbody>
+              </table> 
+
+              <br>
+              
+            <table width="90%" >
+                
+                  <tbody>
+                     <tr>  
+                      <td><strong> Generation </strong></td>
+                      <td>{{stb.header.netGeneration}}</td>
+                      <td><strong>Power Factor</strong></td>
+                      <td>{{stb.header.powerFactor}} </td>
+                      </tr>
+                      <tr>
+                      <td colspan="2"><strong>10% of Net Generation (in Units)</strong></td>
+                      <td colspan="2">{{ tenOfNet| number : '1.0-0'}}</td> 
+                     </tr>     
+                  </tbody>
+                </table>  
+
+                    <br>
+                
+                <table width="60%">
+                  <thead> 
+                      <tr>
+                        <td><strong>Charges</strong></td>
+                        <td><strong>Amount(Rupees)</strong></td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                     <tr>  
+                      <td  width="60%">Net Generation Units (2.90paise/unit)</td>
+                      <td  width="60%">  {{ netGenerationUnit| number : '1.0-0'}}</td>
+                  </tr>
+                  <tr>  
+                      <td width="60%">Less : RKVah Penalty @ {{penaltyRate}} paise/unit</td>
+                      <td width="60%">{{rKVAKPenalty}} </td>
+                  </tr>
+                     <tr>  
+                      <td  width="60%">Less : Monthly Meter Reading Charges</td>
+                      <td  width="60%"> {{monthlyMeterReading}}  </td>
+                  </tr>
+                     
+                     <tr>  
+                      <td  width="60%">Less : Electricity Tax</td>
+                      <td  width="60%">  {{electricityTax}}</td>
+                  </tr>
+                    <tr>  
+                      <td  width="60%">Less : O & M Charges</td>
+                      <td  width="60%"> {{omCharges| number : '1.0-0'}}</td>
+                  </tr>
+                 
+                     <tr>  
+                      <td  width="60%"><strong>Net Payable</strong></td>
+                      <td  width="60%"> <strong> {{netPayable| number : '1.0-0'}}</strong></td>
+                  </tr>
+                  </tbody>
+                </table>                              
+    </div>
+  
+    <p>As per TNERC ORDER NO:3 Dt:15.05.06 EPA Executed & System Operating Charges Collected(Y/N):Yes</p>
+
+</div>
+

@@ -1,0 +1,496 @@
+<div>
+        <mat-card>
+                <div class="meterChange">
+                        <div style="display: flex; width: 100%;">
+                                <input (keydown)="numberFormat($event)" type="text" onKeyPress="if(this.value.length==12) return false;" placeholder="enter service no" [(ngModel)]="serviceNo"
+                                        style="border: 1px solid #000; padding: 10px; height: 15px; width: 100%;">
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Reading Month"
+                                                [(ngModel)]='readingMonth' readonly>
+                                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                                        {{ month.name }}
+                                                </mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput placeholder="Reading Year" [(ngModel)]="readingYear">
+                                </mat-form-field>
+
+                                <mat-card-actions>
+                                        <button mat-raised-button color="primary"
+                                                style="margin-left: 35%; margin-top: -6px;" class="primary"
+                                                (click)="getServiceDetails()">Search</button>
+                                </mat-card-actions>
+                        </div>
+                        <div>
+                                <mat-form-field style="width: 15%; margin-top: 10px; margin-left: 9px;">
+                                        <input matInput placeholder="Company Name" [(ngModel)]="companyName" readonly>
+                                </mat-form-field>
+
+                                <mat-form-field style="width: 15%; margin-top: 10px; margin-left: 9px;">
+                                        <input matInput placeholder="Date Of Commision" [(ngModel)]="commissionDate" readonly>
+                                </mat-form-field>
+
+                                <mat-form-field style="width: 15%; margin-top: 10px; margin-left: 9px;">
+                                        <input matInput placeholder="Flow Type Code" [(ngModel)]="flowTypeCode" readonly>
+                                </mat-form-field>
+                                
+                                <table class="mfClass" style="border-collapse: collapse;">
+                                        <tbody>
+                                                <tr>
+                                                        <td><b>MF</b></td>
+                                                        <td style="border-left: -1px;"><b>{{mfValue}}</b></td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+
+                                <mat-card-title style="text-align:center; margin-top: -9px;">Old Meter Reading</mat-card-title>
+                        </div>
+                        <table class="readingTable">
+                                <tbody>
+                                        <tr>
+                                                <td rowspan="2" style="width: 100%;"><b>HTSC NO: {{oldMeterNo}}</b></td>
+                                                <td colspan="4" style="width: 100%;"><b>IMPORT</b></td>
+                                                <td colspan="4" style="width: 100%;"><b>EXPORT</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>KVAH IMP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>KVAH EXP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>RKVAH IMP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>RKVAH EXP</b></td>
+                                        </tr>
+                                        <tr>
+                                                <td><b>C1</b></td>
+                                                <td><b>C2</b></td>
+                                                <td><b>C4</b></td>
+                                                <td><b>C5</b></td>
+                                                <td><b>C1</b></td>
+                                                <td><b>C2</b></td>
+                                                <td><b>C4</b></td>
+                                                <td><b>C5</b></td>
+                                        </tr>
+                                        <tr>
+                                                <td>Initial</td>
+                                                <td><input class="td-input" type="number" name="oldIniImpC1"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniImpC1"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniImpC2"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniImpC2"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniImpC4"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniImpC4"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniImpC5"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniImpC5"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniExpC1"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniExpC1"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniExpC2"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniExpC2"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniExpC4"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniExpC4"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniExpC5"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniExpC5"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniKvahImp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniKvahImp"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniKvahExp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniKvahExp"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldIniRkvahImp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniRkvahImp"
+                                                                (change)="calculateOldMeter()">
+                                                </td>
+                                                <td><input class="td-input" type="number" name="oldIniRkvahExp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldIniRkvahExp"
+                                                                (change)="calculateOldMeter()">
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td>Final</td>
+                                                <td><input class="td-input" type="number" name="oldFinImpC1"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinImpC1"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinImpC2"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinImpC2"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinImpC4"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinImpC4"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinImpC5"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinImpC5"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinExpC1"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinExpC1"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinExpC2"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinExpC2"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinExpC4"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinExpC4"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinExpC5"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinExpC5"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinKvahImp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinKvahImp"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinKvahExp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinKvahExp"
+                                                                (change)="calculateOldMeter()"></td>
+                                                <td><input class="td-input" type="number" name="oldFinRkvahImp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinRkvahImp"
+                                                                (change)="calculateOldMeter()">
+                                                </td>
+                                                <td><input class="td-input" type="number" name="oldFinRkvahExp"
+                                                                onKeyPress="if(this.value.length==7) return false;"
+                                                                ngDefaultControl [(ngModel)]="oldFinRkvahExp"
+                                                                (change)="calculateOldMeter()">
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td>Difference</td>
+                                                <td> {{oldDifImpC1}}</td>
+                                                <td> {{oldDifImpC2}} </td>
+                                                <td> {{oldDifImpC4}} </td>
+                                                <td> {{oldDifImpC5}} </td>
+                                                <td> {{oldDifExpC1}} </td>
+                                                <td> {{oldDifExpC2}} </td>
+                                                <td> {{oldDifExpC4}} </td>
+                                                <td> {{oldDifExpC5}} </td>
+                                                <td> {{oldDifKvahImp}} </td>
+                                                <td> {{oldDifKvahExp}} </td>
+                                                <td> {{oldDifRkvahImp}} </td>
+                                                <td> {{oldDifRkvahExp}} </td>
+                                        </tr>
+                                        <tr>
+                                                <td>Total Units</td>
+                                                <td> {{oldTotImpC1}} </td>
+                                                <td> {{oldTotImpC2}} </td>
+                                                <td> {{oldTotImpC4}} </td>
+                                                <td> {{oldTotImpC5}} </td>
+                                                <td> {{oldTotExpC1}} </td>
+                                                <td> {{oldTotExpC2}} </td>
+                                                <td> {{oldTotExpC4}} </td>
+                                                <td> {{oldTotExpC5}} </td>
+                                                <td> {{oldTotKvahImp}} </td>
+                                                <td> {{oldTotKvahExp}} </td>
+                                                <td> {{oldTotRkvahImp}} </td>
+                                                <td> {{oldTotRkvahExp}} </td>
+                                        </tr>
+
+                                </tbody>
+                        </table>
+
+                        <mat-card-title style="text-align:center;">New Meter Reading</mat-card-title>
+                        <table class="readingTable" border="1">
+                                <tbody>
+                                        <tr>
+                                                <td rowspan="2" style="width: 100%;"><b>Meter No: {{newMeterNo}}</b>
+                                                </td>
+                                                <td colspan="4" style="width: 100%;"><b>IMPORT</b></td>
+                                                <td colspan="4" style="width: 100%;"><b>EXPORT</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>KVAH IMP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>KVAH EXP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>RKVAH IMP</b></td>
+                                                <td rowspan="2" style="width: 100%;"><b>RKVAH EXP</b></td>
+                                        </tr>
+                                        <tr>
+                                                <td>c1</td>
+                                                <td>c2</td>
+                                                <td>c4</td>
+                                                <td>c5</td>
+                                                <td>c1</td>
+                                                <td>c2</td>
+                                                <td>c4</td>
+                                                <td>c5</td>
+                                        </tr>
+                                        <tr>
+                                                <td>Initial</td>
+                                                <td><input class="td-input" type="number" name="newIniImpC1"
+                                                                ngDefaultControl [(ngModel)]="newIniImpC1"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniImpC2"
+                                                                ngDefaultControl [(ngModel)]="newIniImpC2"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniImpC4"
+                                                                ngDefaultControl [(ngModel)]="newIniImpC4"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniImpC5"
+                                                                ngDefaultControl [(ngModel)]="newIniImpC5"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniExpC1"
+                                                                ngDefaultControl [(ngModel)]="newIniExpC1"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniExpC2"
+                                                                ngDefaultControl [(ngModel)]="newIniExpC2"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniExpC4"
+                                                                ngDefaultControl [(ngModel)]="newIniExpC4"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniExpC5"
+                                                                ngDefaultControl [(ngModel)]="newIniExpC5"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniKvahImp"
+                                                                ngDefaultControl [(ngModel)]="newIniKvahImp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniKvahExp"
+                                                                ngDefaultControl [(ngModel)]="newIniKvahExp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniRkvahImp"
+                                                                ngDefaultControl [(ngModel)]="newIniRkvahImp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newIniRkvahExp"
+                                                                ngDefaultControl [(ngModel)]="newIniRkvahExp"
+                                                                (change)="calculateNewMeter()"></td>
+                                        </tr>
+                                        <tr>
+                                                <td>Final</td>
+                                                <td><input class="td-input" type="number" name="newFinImpC1"
+                                                                ngDefaultControl [(ngModel)]="newFinImpC1"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinImpC2"
+                                                                ngDefaultControl [(ngModel)]="newFinImpC2"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinImpC4"
+                                                                ngDefaultControl [(ngModel)]="newFinImpC4"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinImpC5"
+                                                                ngDefaultControl [(ngModel)]="newFinImpC5"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinExpC1"
+                                                                ngDefaultControl [(ngModel)]="newFinExpC1"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinExpC2"
+                                                                ngDefaultControl [(ngModel)]="newFinExpC2"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinExpC4"
+                                                                ngDefaultControl [(ngModel)]="newFinExpC4"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinExpC5"
+                                                                ngDefaultControl [(ngModel)]="newFinExpC5"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinKvahImp"
+                                                                ngDefaultControl [(ngModel)]="newFinKvahImp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinKvahExp"
+                                                                ngDefaultControl [(ngModel)]="newFinKvahExp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinRkvahImp"
+                                                                ngDefaultControl [(ngModel)]="newFinRkvahImp"
+                                                                (change)="calculateNewMeter()"></td>
+                                                <td><input class="td-input" type="number" name="newFinRkvahExp"
+                                                                ngDefaultControl [(ngModel)]="newFinRkvahExp"
+                                                                (change)="calculateNewMeter()"></td>
+                                        </tr>
+                                        <tr>
+                                                <td>Difference</td>
+                                                <td> {{newDifImpC1}}</td>
+                                                <td> {{newDifImpC2}} </td>
+                                                <td> {{newDifImpC4}} </td>
+                                                <td> {{newDifImpC5}} </td>
+                                                <td> {{newDifExpC1}} </td>
+                                                <td> {{newDifExpC2}} </td>
+                                                <td> {{newDifExpC4}} </td>
+                                                <td> {{newDifExpC5}} </td>
+                                                <td> {{newDifKvahImp}} </td>
+                                                <td> {{newDifKvahExp}} </td>
+                                                <td> {{newDifRkvahImp}} </td>
+                                                <td> {{newDifRkvahExp}} </td>
+                                        </tr>
+                                        <tr>
+                                                <td>Total Units</td>
+                                                <td> {{newTotImpC1}} </td>
+                                                <td> {{newTotImpC2}} </td>
+                                                <td> {{newTotImpC4}} </td>
+                                                <td> {{newTotImpC5}} </td>
+                                                <td> {{newTotExpC1}} </td>
+                                                <td> {{newTotExpC2}} </td>
+                                                <td> {{newTotExpC4}} </td>
+                                                <td> {{newTotExpC5}} </td>
+                                                <td> {{newTotKvahImp}} </td>
+                                                <td> {{newTotKvahExp}} </td>
+                                                <td> {{newTotRkvahImp}} </td>
+                                                <td> {{newTotRkvahExp}} </td>
+                                        </tr>
+
+                                </tbody>
+                        </table>
+
+                        <mat-card-title style="text-align:center;">Total Generation</mat-card-title>
+
+                        <table class="readingTable">
+                                <tbody>
+                                        <tr>
+                                                <td rowspan="2"><b>HTSC NO</b></td>
+                                                <td colspan="4"><b>IMPORT</b></td>
+                                                <td colspan="4"><b>EXPORT</b></td>
+                                                <td rowspan="2"><b>KVAH IMP</b></td>
+                                                <td rowspan="2"><b>KVAH EXP</b></td>
+                                                <td rowspan="2"><b>RKVAH IMP</b></td>
+                                                <td rowspan="2"><b>RKVAH EXP</b></td>
+                                        </tr>
+                                        <tr>
+                                                <td>c1</td>
+                                                <td>c2</td>
+                                                <td>c4</td>
+                                                <td>c5</td>
+                                                <td>c1</td>
+                                                <td>c2</td>
+                                                <td>c4</td>
+                                                <td>c5</td>
+                                        </tr>
+                                        <tr>
+                                                <td><b>Total Units</b></td>
+                                                <td> {{totImpC1}} </td>
+                                                <td> {{totImpC2}} </td>
+                                                <td> {{totImpC4}} </td>
+                                                <td> {{totImpC5}} </td>
+                                                <td> {{totExpC1}} </td>
+                                                <td> {{totExpC2}} </td>
+                                                <td> {{totExpC4}} </td>
+                                                <td> {{totExpC5}} </td>
+                                                <td> {{totImpKvah}} </td>
+                                                <td> {{totExpKvah}} </td>
+                                                <td> {{totImpRkvah}} </td>
+                                                <td> {{totExpRkvah}} </td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <br>
+
+                        <div class="totalTables" style="display:flex;">
+                                <table class="totalImportTable" style="border-collapse: collapse;">
+                                        <tbody>
+                                                <tr>
+                                                        <td rowspan="6"><b>Total Import</b></td>
+                                                </tr>
+
+                                                <tr>
+                                                        <td><b>C1</b></td>
+                                                        <td> {{totImpC1}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C2</b></td>
+                                                        <td> {{totImpC2}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C4</b></td>
+                                                        <td> {{totImpC4}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C5</b></td>
+                                                        <td> {{totImpC5}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>Total</b></td>
+                                                        <td> {{totalImports}} </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+
+                                <table class="totalExportTable" style="border-collapse: collapse;">
+                                        <tbody>
+                                                <tr>
+                                                        <td rowspan="6"><b>Total Export</b></td>
+                                                </tr>
+
+                                                <tr>
+                                                        <td><b>C1</b></td>
+                                                        <td> {{totExpC1}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C2</b></td>
+                                                        <td> {{totExpC2}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C4</b></td>
+                                                        <td> {{totExpC4}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C5</b></td>
+                                                        <td> {{totExpC5}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>Total</b></td>
+                                                        <td> {{totalExports}} </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+
+                                <table class="unitsTable" style="border-collapse: collapse;">
+                                        <tbody>
+                                                <tr>
+                                                        <td rowspan="6"><b>Total Net Units</b></td>
+                                                </tr>
+
+                                                <tr>
+                                                        <td><b>C1</b></td>
+                                                        <td> {{totNetC1}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C2</b></td>
+                                                        <td> {{totNetC2}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C4</b></td>
+                                                        <td> {{totNetC4}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>C5</b></td>
+                                                        <td> {{totNetC5}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>Total</b></td>
+                                                        <td> {{totalNetUnits}} </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+
+                                <table class="kvahTable" style="border-collapse: collapse;">
+                                        <tbody>
+                                                <tr>
+                                                        <td><b>KVAH IMP</b></td>
+                                                        <td> {{totImpKvah}} </td>
+                                                </tr>
+                                                <tr>
+                                                        <td><b>RKVAH IMP</b></td>
+                                                        <td> {{totExpRkvah}} </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+                        </div>
+                        <mat-card-actions align="end">
+                                <button mat-raised-button color="primary" class="primary"
+                                        (click)="saveMeterReadings()">save</button>
+                        </mat-card-actions>
+                </div>
+        </mat-card>
+</div>

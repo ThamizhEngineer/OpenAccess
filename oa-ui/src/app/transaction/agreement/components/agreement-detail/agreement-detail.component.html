@@ -1,0 +1,385 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+
+            <mat-card-title><strong> View Agreement</strong></mat-card-title>
+            <mat-card-content>
+                <mat-card-title>{{this.commonUtils.getProp('seller')}} Company</mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='agreement.sellerOrgId' [required]="isMandatory"
+                                (ngModelChange)="onEdcChange()">
+                                <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{ edc.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='agreement.sellerCompanyServiceId'
+                                [required]="isMandatory" (ngModelChange)="onServiceChange()">
+                                <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+                                    {{ companyService.companyName }} - {{ companyService.number }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="agreement.isCaptive">
+                                <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                                    {{iscaptives.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [(ngModel)]="agreement.agreementPeriodCode">
+                                <mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.key">
+                                    {{code.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput [(ngModel)]="agreement.fromDate" [max]="maxDate" [matDatepicker]="fromDate" placeholder="Duration From" >
+                                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+    
+                                    <mat-datepicker #fromDate></mat-datepicker>
+                                </mat-form-field>
+                
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput [(ngModel)]="agreement.toDate" [max]="maxDate" [matDatepicker]="toDate" placeholder="Duration To" >
+                                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        
+                                        <mat-datepicker #toDate></mat-datepicker>
+                                    </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Signatory Party 1" [(ngModel)]="agreement.signatoryParty1">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Signatory Party 2" [(ngModel)]="agreement.signatoryParty2">
+                        </mat-form-field>
+                        <!-- <div class="ml-xs mr-xs" style="width: 100%;"></div> -->
+
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Signatory Party 3" [(ngModel)]="agreement.signatoryParty3">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput [(ngModel)]="agreement.agreementDate" [max]="maxDate" [matDatepicker]="agreementDate" placeholder="Agreement Signed Date" >
+                                <mat-datepicker-toggle matSuffix [for]="agreementDate"></mat-datepicker-toggle>
+
+                                <mat-datepicker #agreementDate></mat-datepicker>
+                            </mat-form-field>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+                    </div>
+
+                </mat-card-content>
+                <mat-card-content *ngIf="agreement.buyerCompanyServiceId!=null">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Company Name" value="{{agreement.buyerCompanyName}}-{{agreement.buyerCompanyServiceNumber}}" disabled="true">
+                        </mat-form-field>
+                
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" [(ngModel)]='agreement.intervalTypeCode'>
+    
+                                    <mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+                                        {{intervalTypeCode.valueDesc}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <span class="ml-xs mr-xs" style="width: 30%;"><mat-checkbox [(ngModel)]='agreementLine.isCaptive'  >Is Captive</mat-checkbox></span> -->
+                            <!-- <mat-form-field *ngIf="agreementLine.isCaptive" class="ml-xs mr-xs" style="width: 100%;">
+                                                                        <input matInput placeholder="Share Percentage" [(ngModel)]='agreementLine.sharePercent'>
+                                                                    </mat-form-field> -->
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Quantum" [(ngModel)]="agreement.totalUnits" disabled="true">
+                            </mat-form-field>
+                            <mat-form-field *ngIf="agreement.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+                                <input matInput placeholder="Share Percentage" [(ngModel)]='agreement.sharePercent'>
+                            </mat-form-field>
+                            <div *ngIf="agreement.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+                            
+                   
+
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                     
+
+
+
+                    </div>
+
+                    <div *ngIf="agreement.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Peak Units" [(ngModel)]='agreement.peakUnits'>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Off Peak Units" [(ngModel)]='agreement.offPeakUnits'>
+                        </mat-form-field>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                    </div>
+                    <div *ngIf="agreement.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="C1 - PeakHour 1" [(ngModel)]='agreement.c1'>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="C2 - PeakHour 2" [(ngModel)]='agreement.c2'>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="C3 - PeakHour 3" [(ngModel)]='agreement.c3'>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="C4 - PeakHour 4" [(ngModel)]='agreement.c4'>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="C5 - PeakHour 5" [(ngModel)]='agreement.c5'>
+                        </mat-form-field>
+                    </div>
+
+                </mat-card-content>
+
+                <mat-card *ngIf="!this.diableBuyerList">
+                    <mat-card-content>
+                        <mat-card-title>Intented {{this.commonUtils.getProp('buyer')}} List</mat-card-title>
+
+                        <ngx-datatable class="material" tabindex="index" [rows]="agreement.agreementLines" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="0" [rowHeight]="'auto'">
+
+
+                            <ngx-datatable-column name="Company Name">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.buyerCompanyName}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Service Number">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.buyerCompanyServiceNumber}}
+                                </ng-template>
+                            </ngx-datatable-column>
+
+                            <ngx-datatable-column name="Approved Capacity">
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        {{row.approvedCapacity}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+
+                            <!-- <ngx-datatable-column name="Actions">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <button mat-raised-button mat-icon-button mat-button-sm (click)="editAgreementLine(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                                    <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteAgreementLine(row.$$index)"><mat-icon>delete</mat-icon></button>
+                                </ng-template>
+                            </ngx-datatable-column> -->
+                        </ngx-datatable>
+<!-- 
+                        <mat-card-title>
+                            <Strong>{{agreementLineRowIndex>-1?'Update':'Add'}} Intented {{this.commonUtils.getProp('buyers')}} </Strong>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='agreementLine.buyerOrgId' [required]="isMandatory"
+                                        (ngModelChange)="onBuyerEdcChange()">
+                                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                            {{ edc.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='agreementLine.buyerCompanyServiceId'
+                                        [required]="isMandatory" (ngModelChange)="onBuyerServiceChange()">
+                                        <mat-option *ngFor="let companyService of buyerCompanyServices" [value]="companyService.id">
+                                            {{ companyService.companyName }} - {{ companyService.number }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="agreementLine.isCaptive">
+                                        <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                                            {{iscaptives.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Sanctioned Capacity" [(ngModel)]="agreementLine.sanctionedCapacity" disabled="true">
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" [(ngModel)]='agreementLine.intervalTypeCode'>
+
+                                        <mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+                                            {{intervalTypeCode.valueDesc}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                           
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Quantum" [(ngModel)]="agreementLine.approvedCapacity" disabled="true">
+                                </mat-form-field>
+                                <mat-form-field *ngIf="agreementLine.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="Share Percentage" [(ngModel)]='agreementLine.sharePercent'>
+                                </mat-form-field>
+                                <div *ngIf="agreementLine.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+
+                            </div>
+
+                            <div *ngIf="agreementLine.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="Peak Units" [(ngModel)]='agreementLine.peakUnits'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="Off Peak Units" [(ngModel)]='agreementLine.offPeakUnits'>
+                                </mat-form-field>
+                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                            </div>
+                            <div *ngIf="agreementLine.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C1 - PeakHour 1" [(ngModel)]='agreementLine.c1'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C2 - PeakHour 2" [(ngModel)]='agreementLine.c2'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C3 - PeakHour 3" [(ngModel)]='agreementLine.c3'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C4 - PeakHour 4" [(ngModel)]='agreementLine.c4'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C5 - PeakHour 5" [(ngModel)]='agreementLine.c5'>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div mat-subheader>Non Refundable Application Fee</div>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Payment Type" [(ngModel)]='agreementLine.paymentTypeCode'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Bank Details" [(ngModel)]='agreementLine.paymentBankDetails'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Transaction Number" [(ngModel)]='agreementLine.paymentTxnNo'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Payment Date" [(ngModel)]='agreementLine.paymentDate'>
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Payment Amount" [(ngModel)]='agreementLine.paymentAmount'>
+                                </mat-form-field>
+
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Transmission losses" [(ngModel)]="agreementLine.isTransmissionLoss">
+                                        <mat-option *ngFor="let isTransmissionLoss of isTransmissionLossess" [value]="isTransmissionLoss.name">
+                                            {{isTransmissionLoss.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field *ngIf="agreementLine.isTransmissionLoss == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="35%">
+                                    <input matInput placeholder="State Transmission Losses" [(ngModel)]="agreementLine.stateTransLoss">
+                                </mat-form-field>
+                                <div *ngIf="agreementLine.isTransmissionLoss != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Transmission Charges" [(ngModel)]="agreementLine.isTransmissionCharges">
+                                        <mat-option *ngFor="let isTransmissionCharges of isTransmissionCharg" [value]="isTransmissionCharges.name">
+                                            {{isTransmissionCharges.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field *ngIf="agreementLine.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="State Transmission Charges" [(ngModel)]="agreementLine.stateTransCharges">
+                                </mat-form-field>
+
+                                <mat-form-field *ngIf="agreementLine.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="System Operation Charges" [(ngModel)]="agreementLine.systemOprCharges">
+                                </mat-form-field>
+
+                                <mat-form-field *ngIf="agreementLine.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Scheduling Charges" [(ngModel)]="agreementLine.schedulingCharges">
+                                </mat-form-field>
+
+                                <div *ngIf="agreementLine.isTransmissionCharges != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                                <div *ngIf="agreementLine.isTransmissionCharges != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                                <div *ngIf="agreementLine.isTransmissionCharges != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                            </div>
+
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button (click)="agreementLineRowIndex>-1?updateAgreementLine():addAgreementLine()">{{agreementLineRowIndex>-1?'Update':'Add'}}</button>
+                            <button mat-raised-button (click)="initEsIntentLines()">Reset</button>
+                        </mat-card-actions> -->
+
+                    </mat-card-content>
+
+                </mat-card>
+                <hr>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="saveAgreement('')">Save</button>
+                    <button mat-raised-button color="primary" (click)="agreementSigned('')">Agreement Signed</button>
+                    <!-- <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" addScreen!=true">Process</button> -->
+                    <!-- <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" addScreen!=true && agreement.statusCode!='PROCESS'">Process</button> -->
+                    <button mat-raised-button class="primary" (click)="listAgreement()">Back</button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

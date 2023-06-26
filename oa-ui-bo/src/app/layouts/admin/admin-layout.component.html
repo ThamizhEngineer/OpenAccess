@@ -1,0 +1,110 @@
+<style>
+  mat-sidenav.sidebar-panel .mat-list-item.open>.mat-list-item-content {
+      max-height: 4000px;
+      background: rgba(0,0,0,.04);
+  }
+  </style>
+<div class="app" dir="ltr"  [ngClass]="{'app-dark': dark, 'boxed': boxed, 'collapsed-sidebar': collapseSidebar, 'compact-sidebar': compactSidebar}">
+  <mat-toolbar class="main-header" color="primary">
+    <button (click)="sidemenu.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button> 
+    <div class="search-bar" fxFlex>Open Access Accounting</div>
+    <div class="search-bar" fxFlex> </div>
+	
+	<button [matMenuTriggerFor]="user" mat-icon-button class="ml-xs">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #user="matMenu" x-position="before">
+      <button mat-menu-item>
+        <mat-icon>mood</mat-icon>
+        <Strong>{{this.userDetail}}</Strong>
+      </button>
+      <!-- <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        {{this.userTypeName}} 
+      </button> -->
+	  <button mat-menu-item>
+      <mat-icon>access_time</mat-icon>
+        {{this.currentDate}}
+      </button>
+	  <button mat-menu-item [routerLink]="['/settings']">
+        <mat-icon>settings</mat-icon>
+        Change Password
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Sign Out
+      </button>
+    </mat-menu>
+    
+    <button appToggleFullscreen mat-icon-button>
+      <mat-icon>fullscreen</mat-icon>
+    </button> 
+  </mat-toolbar>
+
+  <mat-sidenav-container class="app-inner">
+    <mat-sidenav #sidemenu class="sidebar-panel" id="sidebar-panel" [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" (mouseover)="menuMouseOver()" (mouseout)="menuMouseOut()">
+      <mat-nav-list appAccordion class="navigation">
+        <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems">
+		      <a appAccordionToggle class="relative" mat-ripple [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+                <!-- <mat-icon>{{ menuitem.icon }}</mat-icon> -->
+                <span>{{ menuitem.name }}</span>
+                <span fxFlex></span>
+                <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+		      <a appAccordionToggle class="relative" mat-ripple href="{{menuitem.state}}" *ngIf="menuitem.type === 'extLink'">
+            <!-- <mat-icon>{{ menuitem.icon }}</mat-icon> -->
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a appAccordionToggle class="relative" mat-ripple href="{{menuitem.state}}" target="_blank" *ngIf="menuitem.type === 'extTabLink'">
+            <!-- <mat-icon>{{ menuitem.icon }}</mat-icon> -->
+            <span>{{ menuitem.name}}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <div *ngIf="menuitem.type === 'sub'" >
+            <a appAccordionToggle class="relative" mat-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'&& menuitem.state!='reports'" >
+              <!-- <mat-icon>{{ menuitem.icon }}</mat-icon> -->
+              <span >{{ menuitem.name }}</span>
+              <span fxFlex></span>
+              <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+              <!-- <mat-icon class="menu-caret">arrow_drop_down</mat-icon> -->
+               <mat-icon class="menu-caret" *ngIf="menuitem.state!='reports'" >arrow_drop_down</mat-icon> 
+            </a>
+          <a appAccordionToggle class="relative" mat-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'&&menuitem.state == 'reports'" (click)="reportPage()">
+            <!-- <mat-icon>{{ menuitem.icon }}</mat-icon> -->
+            <span >{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+            <!-- <mat-icon class="menu-caret">arrow_drop_down</mat-icon> -->
+             <mat-icon class="menu-caret" *ngIf="menuitem.state!='reports'" >arrow_drop_down</mat-icon> 
+          </a>
+        </div>
+           <mat-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'&& menuitem.state!='reports'"> 
+            <!-- <mat-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'"> -->
+            <mat-list-item *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+				<ng-container *ngIf="childitem.directLink == 'Y';else link_content">
+					<ng-container *ngIf="childitem.states;else state_content">
+						<a [routerLink]="[].concat.apply(['/'],childitem.states)" class="relative" mat-ripple>{{ childitem.name }}</a>
+					</ng-container>
+					<ng-template #state_content>
+						<a [routerLink]="['/', childitem.state ]" class="relative" mat-ripple>{{ childitem.name }}</a>
+					</ng-template>
+				</ng-container>
+				<ng-template #link_content>
+					<a [routerLink]="['/', menuitem.state, childitem.state ]" class="relative" mat-ripple>{{ childitem.name }}</a>
+				</ng-template>
+              
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+
+
+</div>

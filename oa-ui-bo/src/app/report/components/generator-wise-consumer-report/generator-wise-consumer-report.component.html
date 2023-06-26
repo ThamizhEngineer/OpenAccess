@@ -1,0 +1,187 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+    <mat-card>
+      <mat-card-title >
+        Generator Wise Consumer Report
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                    <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                            {{edc.code}} - {{ edc.name }}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service No" [(ngModel)]="serviceNo">
+    </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='fromMonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <!-- <input matInput type="number" placeholder="Year" [(ngModel)]="year"> -->
+            <mat-select class="ml-xs mr-xs" style="width: 100%;"
+            placeholder="Year" [(ngModel)]='year'
+            readonly>
+            <mat-option *ngFor="let year of years" [value]="year">
+                {{ year }}
+            </mat-option>
+        </mat-select> 
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type" [(ngModel)]='flowTypeCode'>
+							<mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+								{{ flowType.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type" [(ngModel)]='fuelTypeCode'>
+              <mat-option *ngFor="let fuelTypes of fuelTypeCodes" [value]="fuelTypes.key">
+                {{fuelTypes.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="EDC" [(ngModel)]='selOrgName'>
+              <mat-option *ngFor="let org of orgList" [value]="org.id">
+                {{org.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Code" [(ngModel)]='selFuel'>
+              <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                {{fuelTypes.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+         
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Voltage" [(ngModel)]="selVoltage"  >
+              <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode"  >
+                {{voltage.valueDesc}}
+              </mat-option> 
+            </mat-select>
+          </mat-form-field>  -->
+
+          <mat-card-actions>				
+          <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+          </mat-card-actions>
+
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+             <mat-icon>cloud_download</mat-icon>
+             Download As XL</button>
+           </mat-card-actions>
+
+    </div>
+        <br/>
+        <br/>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+        [scrollbarV]="true">
+         <ngx-datatable-column name="Seller Name">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op1}}
+          </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Seller Company Name">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op2}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Generator Service No">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op3}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Comission Date">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op14 | date: 'dd/MM/yyyy'}}
+          </ng-template>
+       </ngx-datatable-column>
+
+         <ngx-datatable-column name="Seller Org Id">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op4}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Flow Type">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op5}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Fuel Type">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op6}}
+          </ng-template>
+       </ngx-datatable-column>
+
+         <ngx-datatable-column name="Buyer Name">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op7}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <!-- <ngx-datatable-column name="Buyer Org Id">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op8}}
+            </ng-template>
+         </ngx-datatable-column> -->
+
+         <ngx-datatable-column name="Buyer Company Name">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op9}}
+            </ng-template>
+         </ngx-datatable-column>
+              
+         <ngx-datatable-column name="HT service No">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op11}}
+            </ng-template>
+         </ngx-datatable-column>
+              
+         <ngx-datatable-column name="From Date">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op12 | date: 'dd/MM/yyyy'}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="To Date">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op13 | date: 'dd/MM/yyyy'}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         
+
+       <ngx-datatable-column name="Agreement Date">
+        <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+          {{row.op15 | date: 'dd/MM/yyyy'}}
+        </ng-template>
+     </ngx-datatable-column>
+
+      </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

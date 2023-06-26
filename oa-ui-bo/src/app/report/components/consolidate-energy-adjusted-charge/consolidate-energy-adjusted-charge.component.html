@@ -1,0 +1,133 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Cons Energy Adjusted Charge Report
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="15%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Disp Org Code" [disabled]="disableEdc" [(ngModel)]='dispOrgCode'>
+                    <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                            {{edc.code}} - {{ edc.name }}
+                    </mat-option>
+            </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="15%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Stmt Month" [(ngModel)]='stmtMonth'>
+                    <mat-option *ngFor="let month of months" [value]="month.value">
+                      {{month.name}}
+                    </mat-option>
+                   </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="15%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Stmt Year" [(ngModel)]='stmtYear'>
+                    <mat-option *ngFor="let year of years" [value]="year">
+                      {{year}}
+                    </mat-option>
+                   </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="15%">
+                    <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Disp Service Number" [(ngModel)]="dispServiceNumber">
+                  </mat-form-field>
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+
+                <mat-card-actions>				
+                  <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">     
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Seller</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="2">Buyer</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="9">Charges</th>
+                    </tr>   
+                    <tr>
+                        <th style="background: #dcdcdc">SI.NO</th>
+                        <th style="background: #dcdcdc">Month</th>
+                        <th style="background: #dcdcdc">Year</th>
+                        <th style="background: #dcdcdc">Edc Name</th>
+                        <th style="background: #dcdcdc">Service No</th>
+                        <th style="background: #dcdcdc">Generator Name</th>
+                        <th style="background: #dcdcdc">Fuel Type</th>
+                        <th style="background: #dcdcdc">Flow Type</th>
+                        <th style="background: #dcdcdc">REC</th>
+                        <th style="background: #dcdcdc">M.F</th>
+                        <th style="background: #dcdcdc">Tariff</th>
+                        <th style="background: #dcdcdc">SC No</th>
+                        <th style="background: #dcdcdc">Name</th>
+                        <th style="background: #dcdcdc">O And M Charges</th>
+                       <th style="background: #dcdcdc">Transmission Charges</th>
+                        <th style="background: #dcdcdc">System Operation Charges</th>
+                        <th style="background: #dcdcdc">RKVAH Penalty</th>
+                        <th style="background: #dcdcdc">Negative Energy Charges</th>
+                        <th style="background: #dcdcdc">Scheduling Charges</th>
+                        <th style="background: #dcdcdc">Meter Reading Charges</th>
+                        <th style="background: #dcdcdc">Other Charges</th>
+                        <th style="background: #dcdcdc">Total Charges</th>                      
+                    </tr>
+        
+                    <tr *ngFor="let report of cons;let i=index;">  
+                        <td>{{report.op1}}</td>  
+                        <td>{{report.op2}}</td>  
+                        <td>{{report.op3}}</td>  
+                        <td>{{report.op4}}</td>  
+                        <td>{{report.op5}}</td> 
+                        <td>{{report.op6}}</td> 
+                        <td>{{report.op7}}</td>   
+                        <td>{{report.op8}}</td>
+                        <td>{{report.op9}}</td> 
+                        <td>{{report.op10}}</td>
+                        <td>{{report.op11}}</td>
+                        <td>{{report.op12}}</td>
+                        <td>{{report.op13}}</td>  
+                        <td>{{report.op14}}</td>  
+                        <td>{{report.op15}}</td>  
+                        <td>{{report.op16}}</td>  
+                        <td>{{report.op17}}</td> 
+                        <td>{{report.op18}}</td> 
+                        <td>{{report.op19}}</td>   
+                        <td>{{report.op20}}</td>
+                        <td>{{report.op21}}</td> 
+                        <td>{{report.op22}}</td>
+                    </tr>   
+        
+                </table>
+               
+        
+        
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

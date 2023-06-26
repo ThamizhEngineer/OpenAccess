@@ -1,0 +1,138 @@
+<mat-card>
+  <mat-card-content>
+    <ngx-datatable class="material" tabindex="index" [rows]="gc.genUnits" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.name}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Capacity(MW)">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.capacity}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Make">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.makeCode}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="IsCaptive">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.isCaptive}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Serial Number">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.serialNumber}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="editGenUnit(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteGenUnit(row.$$index)"><mat-icon>delete</mat-icon></button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <mat-card>
+      <mat-card-title>
+        <Strong>{{genUnitRowIndex>-1?'Update':'Add'}} Generator Unit</Strong>
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Name" [(ngModel)]='genUnit.name'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Capacity(MW)" [(ngModel)]='genUnit.capacity'>
+          </mat-form-field>
+          <!-- <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Make" [(ngModel)]='genUnit.make'>
+            <mat-option *ngFor="let genMake of generatorMakes" [value]="genMake">
+              {{ genMake }}
+            </mat-option>
+          </mat-select> -->
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Make" [(ngModel)]='genUnit.makeCode'>
+						<mat-option *ngFor="let generatorModelType of generatorModelTypes" [value]="generatorModelType.valueCode">
+							{{generatorModelType.valueDesc}}
+						</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+          
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Serial Number" [(ngModel)]='genUnit.serialNumber'>
+          </mat-form-field>
+          <!-- <mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Rotor Dia" [(ngModel)]='genUnit.rotorDia' >
+          </mat-form-field> 
+          <mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Hub Height" [(ngModel)]='genUnit.hubHeight' >
+          </mat-form-field>  -->
+        </div>
+        <div *ngIf="isWind== false" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="MW Rating(MW)" [(ngModel)]='genUnit.mwRating'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="MVA Rating(MVA)" [(ngModel)]='genUnit.mvRating'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="KV Rating(kV)" [(ngModel)]='genUnit.kvRating'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Damping Factor" [(ngModel)]='genUnit.dampingFactor'>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isWind== false" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Amateur Resistance(Ra)" [(ngModel)]='genUnit.amateurResistance'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Direct Assistance Reactance(Xd)" [(ngModel)]='genUnit.directAssistanceReactance'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Negative Sequence Reactance(Xn)" [(ngModel)]='genUnit.negativeSequenceReactance'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Zero Sequence Reactance(Xo)" [(ngModel)]='genUnit.zeroSequenceReactance'>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="isWind== false" fxLayout="row" fxLayoutAlign="start center">
+             
+          <div class="mb-1" style="width: 100%;">
+            <label>Is Captive</label> <br/>
+            <mat-radio-group [(ngModel)]='genUnit.isCaptive'>
+              <mat-radio-button value="Y">Yes</mat-radio-button>
+              <mat-radio-button value="N">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+         
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Winding Connection(YNd1)" [(ngModel)]='genUnit.windingConnection'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Mass Number" [(ngModel)]='genUnit.massNumber'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Stiffness Coefficient" [(ngModel)]='genUnit.stiffnessCoefficient'>
+          </mat-form-field>
+          
+            <!--    <mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Status" [(ngModel)]='genUnit.status' >
+          </mat-form-field>  -->
+          
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="genUnitRowIndex>-1?updateGenUnit():addGenUnit()">{{genUnitRowIndex>-1?'Update':'Add'}}</button>
+        <button mat-raised-button (click)="initGenUnits()">Reset</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-card-content>
+</mat-card>

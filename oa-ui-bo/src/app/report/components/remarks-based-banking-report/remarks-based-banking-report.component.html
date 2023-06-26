@@ -1,0 +1,172 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Report Based Banking Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            
+  
+              <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='selOrgName'>
+                    <mat-option *ngFor="let org of orgList" [value]="org.name">
+                      {{org.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Gen Service Number" [(ngModel)]="searchGenServiceNo">
+            </mat-form-field>
+  
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <input matInput type="number" placeholder="Year" [(ngModel)]="searchYear">
+            </mat-form-field>
+            
+            <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">				
+              <button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+              </mat-card-actions>
+             
+            <div class="ml-xs mr-xs"  fxFlex.gt-sm="100%"></div>
+        
+
+      </div>
+          <br/>
+          <br/>
+  
+     
+          <br/>
+          <br/>
+          <div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+    
+           <!-- <ngx-datatable-column name="EDC">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op2}}
+            </ng-template> 
+          </ngx-datatable-column>  -->
+          <ngx-datatable-column name="Sl.No">
+            <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+               <!-- {{rows.indexOf(row)+1}}  -->
+                {{row.op1}} 
+            </ng-template>
+          </ngx-datatable-column> 
+           
+           <ngx-datatable-column name="Generator Service No">
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op2}}
+              </ng-template>
+           </ngx-datatable-column>  
+           
+         <ngx-datatable-column name="OpenC1">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op3}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="OpenC2">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op4}}
+              </ng-template>
+           </ngx-datatable-column>   
+
+           <ngx-datatable-column name="OpenC3">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op5}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="OpenC4">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op6}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-column name="OpenC5">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op7}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="ClosingC1">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op8}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="ClosingC2">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op9}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="ClosingC3">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op10}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="ClosingC4">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op11}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+          <ngx-datatable-column name="ClosingC5">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op12}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="SurplusC1">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op13}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="SurplusC2"> 
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op14}}
+            </ng-template> 
+           </ngx-datatable-column> 
+                
+           <ngx-datatable-column name="SurplusC3">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op15}}
+            </ng-template> 
+           </ngx-datatable-column> 
+        
+
+        <ngx-datatable-column name="SurplusC4">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op16}}
+            </ng-template> 
+           </ngx-datatable-column> 
+     
+        <ngx-datatable-column name="SurplusC5">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op17}}
+            </ng-template> 
+          </ngx-datatable-column> 
+       
+   </ngx-datatable> 
+
+        <!-- <mat-card-actions>				
+          <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+          </mat-card-actions> -->
+      </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

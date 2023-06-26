@@ -1,0 +1,415 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+
+		<mat-card>
+			<mat-card-title>
+				Generator Information
+			</mat-card-title>
+
+			<mat-card-content>
+				<mat-accordion>
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Service Summary
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								EDC Name:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{powerplant?.orgName}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Generator Service No:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{companyService?.number}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Company Name:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{powerplant?.companyName}}
+							</div>
+						</div>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Substation Name:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{powerplant?.subStationName}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Feeder Name:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{companyService?.feederName}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Rec/Non-Rec:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{companyService?.isRec}}
+							</div>
+						</div>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Flow Type:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<!-- {{company?.isCaptive}} -->
+								{{companyService?.flowTypeCode}}
+
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Total Capacity:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{powerplant?.totalCapacity}} kW
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Voltage:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{companyService?.voltageName}}
+							</div>
+						</div>
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Date of Commission:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{powerplant?.CommissionDate | date:'dd-MMM-yyyy'}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Plant Status:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									{{powerplant?.status}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									Fuel Type Name:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{powerplant?.fuelTypeCode}}
+								</div>
+							
+						</div>
+					</mat-expansion-panel>
+
+
+					<!-- contact related fields -->
+					<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									Contact Details
+								</mat-panel-title>
+							</mat-expansion-panel-header>
+	
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Authorised Contact Person:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.contactFullName}}
+								</div>
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Designation:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.contactDesignation}}
+								</div>
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Registered Office Address:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.regOfficeAddr}}
+								</div>
+							</div>
+	
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Contact Phone Number:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.contactPhoneNo}}
+								</div>
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Contact Email:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.contactEmail}}
+								</div>
+								<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										Plant Address:
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										{{contact?.plantAddr}}
+								</div>
+							</div>
+	
+							
+						</mat-expansion-panel>
+	
+
+					<!-- contact related fields -->
+
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Meter Details
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Generator Service No:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{companyService?.number}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Meter Number:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.meterNumber}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Meter Make:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.meterMakeName}}
+							</div>
+						</div>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Is Abt:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<!-- {{meters.isAbtMeter}} -->
+								{{(meters?.isAbtMeter=='Y'?"Yes":"No")}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Multiplication Factor:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.multiplicationFactor}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								Modem Number:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.modemNumber}}
+							</div>
+						</div>
+						<div fxLayout="row" fxLayoutAlign="start center">
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								CT Ratio:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.ctRatio}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								PT Ratio:
+							</h5>
+							<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								{{meters?.ptRatio}}
+							</div>
+							<h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								</h5>
+								<div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								</div>
+						</div>
+					</mat-expansion-panel>
+
+
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Generating Units
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div>
+							<ngx-datatable class="material" [rows]="powerplant?.generators" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+							 [rowHeight]="50">
+								<ngx-datatable-column name="Sl.No">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										{{row.$$index + 1}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Gen Units">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.powerplantId}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Gen Make">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.makeName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Gen Model">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.modelName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Gen Capacity(mW)">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.capacity}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="No Of Units">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.noOfUnits}}
+									</ng-template>
+								</ngx-datatable-column>
+							</ngx-datatable>
+						</div>
+
+					</mat-expansion-panel>
+
+					<!-- <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Shareholder Info
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+						
+						<div>
+                            <ngx-datatable class="material" [rows]="powerplant?.generators" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50">
+								<ngx-datatable-column name="Company Name">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.companyName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="HT Service No">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.htscNo}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Share Percentage">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.share}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Quantum">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.quantum}}
+									</ng-template>
+								</ngx-datatable-column>
+							</ngx-datatable>
+                        </div>
+
+                    </mat-expansion-panel> -->
+
+					<!-- <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Associated Powerplants
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+						
+						<div>
+                            <ngx-datatable class="material" [rows]="powerplant?.generators" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50">
+								<ngx-datatable-column name="EDC Name">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.orgName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Service No">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.serviceNumber}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Capacity">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.capacity}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Feeder Name">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.feederName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Substation Name">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.subStationName}}
+									</ng-template>
+								</ngx-datatable-column>
+							</ngx-datatable>
+                        </div>
+
+					</mat-expansion-panel> -->
+
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								HT Consumer Details
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<div>
+							<ngx-datatable class="material" [rows]="powerplant?.tradeRelationships" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+							 [rowHeight]="50">
+								<ngx-datatable-column name="Sl.No">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										{{row.$$index + 1}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="EDC">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.buyerOrgName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Service No">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.buyerCompServiceNumber}}
+										</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Consumer Name">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.buyerCompanyName}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Quantum(mW)">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.quantum}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="From Date">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.fromDate | date:'dd/MM/yyyy'}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="To Date">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+										{{row.toDate | date:'dd/MM/yyyy'}}
+									</ng-template>
+								</ngx-datatable-column>
+
+							</ngx-datatable>
+						</div>
+
+					</mat-expansion-panel>
+
+
+				</mat-accordion>
+
+			</mat-card-content>
+			<hr>
+			<mat-card-actions>
+				<button mat-raised-button class="primary" (click)="listMyPowerplant()">Cancel/Back</button>
+				<button mat-raised-button color="primary" class="primary" (click)="printPowerplantGenerator()">Print</button>
+				<button mat-raised-button color="primary" class="primary" [disabled]="disableConfirm" (click)="confirmMaster()">Confirm</button>
+
+
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>

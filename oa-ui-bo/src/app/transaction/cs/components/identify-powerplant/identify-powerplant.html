@@ -1,0 +1,52 @@
+<mat-card class="mat-card-top"><br/>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+			<input matInput placeholder="{{this.commonUtils.getProp('seller')}} EDC Name" [matAutocomplete]="tdAuto" [disabled]="stepDisable" [(ngModel)]='cs.sellerOrgName'
+			  #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(cs.sellerOrgName);">
+			<mat-autocomplete #tdAuto="matAutocomplete">
+			  <mat-option *ngFor="let org of filteredOrgList" [value]="org.name" (onSelectionChange)="acChangeFunc($event, org, 'cs.sellerOrgCode');fetchSellerCompanyServiceList();">
+				<span>{{ org.name }}</span>
+			  </mat-option>
+			</mat-autocomplete>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="{{this.commonUtils.getProp('seller')}} Service Number" [matAutocomplete]="tdAuto1" [disabled]="stepDisable" [(ngModel)]='cs.sellerCompanyServiceNumber'
+					#modelDir="ngModel" (ngModelChange)="this.filteredCompanyServiceList = filterSellerCompanyServiceList(cs.sellerCompanyServiceNumber);onServiceChange();onChange($event)">
+				<mat-autocomplete #tdAuto1="matAutocomplete">
+					<mat-option *ngFor="let companyService of filteredCompanyServiceList" [value]="companyService.serviceNumber" >
+					<span>{{ companyService.serviceNumber }} - {{ companyService.companyName }}</span>
+					</mat-option>
+				</mat-autocomplete>
+				</mat-form-field>
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [disabled]="stepDisable" (change)="this.filteredCompanyServiceList = filterSellerCompanyServiceList(cs.sellerCompanyName);onServiceChange()" [(ngModel)]='cs.sellerCompanyName'
+					 [required]="isMandatory">
+						<mat-option *ngFor="let companyService of sellerCompanyServices" [value]="companyService.companyName" >
+							{{ companyService.number}} - {{ companyService.companyName }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field> -->
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput [matDatepicker]="picker" [min]="minDate" placeholder="Effective Date" [disabled]="stepDisable" (ngModelChange)="onChange()" [(ngModel)]='cs.effectiveDate' >
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+
+	
+	</div><br/>
+	<div fxLayout="row" fxLayoutAlign="start center">
+	
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Voltage" [(ngModel)]="cs.voltageName" disabled="true">
+		</mat-form-field>
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Capacity" [(ngModel)]="cs.approvedCapacity" disabled="true">
+		</mat-form-field>
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Fuel Type" [(ngModel)]="cs.fuelTypeName" disabled="true">
+		</mat-form-field>
+	</div>
+			
+</mat-card>
+<br/>

@@ -1,0 +1,38 @@
+<mat-card class="mat-card-top">
+    <mat-card-title>Company Ownership Change </mat-card-title>
+
+	<mat-vertical-stepper #stepper>
+		<mat-step label="Company Details">
+			<company-details [companyNameChange]="companyNameChange" [stepDisable]="step1Disable" ></company-details>
+			<div>
+				<button *ngIf="companyNameChange.statusCode==null" mat-raised-button  color="primary" (click)="addCompanyNameChange()">Create</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div> 
+		</mat-step>
+	  
+		
+		
+		<mat-step label="Cancel Existing Agreements">
+			<cancel-existing-agreements [companyNameChange]="companyNameChange" [stepDisable]="step2Disable" *ngIf="step2"></cancel-existing-agreements>
+			<div *ngIf="step2">
+				<button  mat-raised-button  color="primary" (click)="prevStep()">Back</button>
+				<!-- <button  mat-raised-button *ngIf="companyNameChange.statusCode!='COMPLETED'" color="primary" (click)="nextStep()">Save</button>
+				<button  mat-raised-button *ngIf="companyNameChange.statusCode!='COMPLETED'"  color="primary" (click)="nextStep()">Submit</button> -->
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div>  
+		</mat-step>
+		<mat-step label="Cancel Existing Agreements">
+			<approve-captive-change [companyNameChange]="companyNameChange" [stepDisable]="step3Disable" *ngIf="step3"></approve-captive-change>
+			<div *ngIf="step3">
+				<button  mat-raised-button  color="primary" (click)="prevStep()">Back</button>
+				<button  mat-raised-button *ngIf="companyNameChange.statusCode!='APPROVED'" color="primary" (click)="approveCompanyNameChange()">Approve</button>
+				
+				<button  mat-raised-button  color="primary" (click)="listCompanyNameChange()">Close</button>
+			</div>  
+		</mat-step>
+	
+		
+		
+
+</mat-vertical-stepper>
+</mat-card>

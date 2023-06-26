@@ -1,0 +1,154 @@
+<mat-card>
+	<mat-card-title>
+		Existing Wheeling Applications
+	</mat-card-title>
+	<mat-card-content>
+		<!-- <button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newEwa()'><mat-icon>add</mat-icon></button> -->
+
+		<!-- 		
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" [(ngModel)]='searchEDCName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(searchEDCName);this.fetchBuyerCompanyServices();">
+				<mat-autocomplete #tdAuto="matAutocomplete">
+				  <mat-option *ngFor="let org of filteredOrgList" [value]="org.name" (onSelectionChange)="acChangeFunc($event, org, 'searchEDC')">
+					<span>{{ org.name }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			  </mat-form-field>
+			  
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Buyer Name" [matAutocomplete]="td1Auto" [(ngModel)]='searchBuyerName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredBuyerList = filterBuyerList(searchBuyerName);">
+				<mat-autocomplete #td1Auto="matAutocomplete">
+				  <mat-option *ngFor="let buyer of filteredBuyerList" [value]="buyer.companyName" (onSelectionChange)="acChangeFunc($event, buyer, 'searchBuyer')">
+					<span>{{ buyer.companyName }} - {{ buyer.bankingServiceNumber }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Voltage" [matAutocomplete]="td2Auto" [(ngModel)]='searchVoltageName' ngModel #modelDir="ngModel" (ngModelChange)="this.filteredVoltageList = filterVoltageList(searchVoltageName);">
+				<mat-autocomplete #td2Auto="matAutocomplete">
+				  <mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'searchVoltage')">
+					<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="From Date" [(ngModel)]='searchFromDate'>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="To Date" [(ngModel)]='searchToDate'>
+			</mat-form-field>
+			
+			<mat-card-actions>				
+				<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+			</mat-card-actions>
+		</div>
+		 -->
+
+		<div fxLayout="row" fxLayoutAlign="start center">
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Edc Name" [(ngModel)]='searchSellerEndOrgId' [disabled]="isEdc" [required]="isMandatory"
+				 (ngModelChange)="onEdcChange()">
+					<mat-option *ngFor="let edc of orgList" [value]="edc.id">
+						{{edc.id}} - {{ edc.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [(ngModel)]='searchSellerCompanyId'
+				 [required]="isMandatory">
+					<mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompanyId">
+						{{ companyService.sellerCompanyName}} - {{ companyService.sellerCompServiceNumber }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+
+
+
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Status" [(ngModel)]="searchStatus">
+					<mat-option *ngFor="let status of statuses" [value]="status.key">
+						{{status.key}}
+					</mat-option>
+				</mat-select>					
+				</mat-form-field> -->
+
+
+
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Wheeling Application Number" [(ngModel)]="searchEwaCode">
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+			</mat-form-field>
+			<hr>
+
+			<mat-card-actions>
+				<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+			</mat-card-actions>
+		</div>
+		<br/>
+
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+		 [scrollbarV]="true">
+
+
+			<ngx-datatable-column name="EDC Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerOrgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Service Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerCompServiceNumber}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Duration From">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<!-- {{commonService.displayMonth(row.fromMonth) +"-" +row.fromYear}}  -->
+					{{row.fromDate | date: 'dd/MM/yyyy'}} 
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Duration To">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.toDate | date: 'dd/MM/yyyy'}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Voltage ">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerInjectionVoltageDesc}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Status">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.statusCode}}
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="Wheeling Application Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.code}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Energy Sale Intent Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.esIntentCode}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" class="mr-1" (click)="editEwa(row['id'])">Open</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,89 @@
+ <mat-card-content>
+             <ngx-datatable
+				      class="material"
+              tabindex="index"
+				      [rows]="company.employees"
+				      [columnMode]="'force'"
+				      [headerHeight]="50"
+				      [footerHeight]="0"
+				      [rowHeight]="'auto'">
+				      <ngx-datatable-column name="Director"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['designation']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Name"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['name']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Landline"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['landline']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Mobile"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['mobile']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Email"> 
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['email']}}
+				        </ng-template>
+				      </ngx-datatable-column>  
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-raised-button mat-icon-button mat-button-sm  (click)="editEmployee(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                  <button mat-raised-button mat-icon-button mat-button-sm  (click)="deleteEmployee(row.$$index)"><mat-icon>delete</mat-icon></button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+				    </ngx-datatable>
+              <mat-card>
+                <mat-card-title><Strong>{{employeeRowIndex>-1?'Update':'Add'}} Director</Strong></mat-card-title>
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 50%;">
+                      <input matInput placeholder="Director Name" name="employee.name" [(ngModel)]='employee.name' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Address" name="employee.line1" [(ngModel)]='employee.line1' >
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="City" name="employee.city" [(ngModel)]='employee.city' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="District" name="employee.district" [(ngModel)]='employee.district' >
+                    </mat-form-field> 
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="State" name="employee.state" [(ngModel)]='employee.state' >
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Pincode" name="employee.pinCode" [(ngModel)]='employee.pinCode' >
+                    </mat-form-field> 
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Landline" name="employee.landline" [(ngModel)]='employee.landline' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Mobile" name="employee.mobile" [(ngModel)]='employee.mobile' >
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" >
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Email" name="employee.email" [(ngModel)]='employee.email' >
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Fax" name="employee.fax" [(ngModel)]='employee.fax' >
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button (click)="employeeRowIndex>-1?updateEmployee():addEmployee()">{{employeeRowIndex>-1?'Update':'Add'}}</button>
+                  <button mat-raised-button (click)="initEmployees()">Reset</button>
+                </mat-card-actions>
+              </mat-card>
+          </mat-card-content>

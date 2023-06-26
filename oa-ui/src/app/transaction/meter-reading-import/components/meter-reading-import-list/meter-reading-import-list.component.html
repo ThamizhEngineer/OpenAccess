@@ -1,0 +1,89 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+		        <div fxFlex.gt-sm="100%" fxFlex="100">
+<mat-card>
+      <mat-card-title >
+        Existing Meter Reading Import
+      </mat-card-title> 
+			<mat-card-content>
+            <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newMeterReadingImport()'><mat-icon>add</mat-icon></button>
+						<div fxLayout="row" fxLayoutAlign="start center">
+							
+				
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput placeholder="Batch Code"  [(ngModel)]="searchBatchCode" >
+								</mat-form-field> 
+									 
+								<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+									<input matInput [(ngModel)]="searchImportDate" [matDatepicker]="importDatepicker" placeholder="Import Date" >
+									<mat-datepicker-toggle matSuffix [for]="importDatepicker"></mat-datepicker-toggle>
+									<mat-datepicker #importDatepicker></mat-datepicker>
+								</mat-form-field>
+
+								<mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+									<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Source" [(ngModel)]='searchMrSourceCode'>
+										<mat-option *ngFor="let SourceCodeTypes of SourceCodeTypes" [value]="SourceCodeTypes.key">
+											{{SourceCodeTypes.name}}
+										</mat-option>
+									</mat-select>
+									</mat-form-field>
+
+								<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select  class="ml-xs mr-xs"  style="width: 100%;" placeholder="Status" [(ngModel)]='searchStatus'>
+                      <mat-option *ngFor="let status of statues" [value]="status.key">
+                        {{ status.name }}
+                      </mat-option>
+                  </mat-select>
+									</mat-form-field> 
+									
+							
+										<hr>
+			
+										<mat-card-actions>				
+											<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+										</mat-card-actions>
+								
+									</div>
+						<br/>
+						
+						<br/>
+						<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+						[scrollbarV]="true">
+							<ngx-datatable-column name="Batch Code">
+									<ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+										{{row.code}}
+									</ng-template>
+								</ngx-datatable-column>
+				      <ngx-datatable-column name="Import Date">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['importDate']| date: 'dd/MM/yyyy'}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Source">
+				        <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+						
+									<span *ngIf="row.mrSourceCode==01">MDMS</span>
+									<span *ngIf="row.mrSourceCode==02">UI</span>
+								</ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Batch Status">
+				        <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+				          {{row.statusCode}}
+				        </ng-template>
+							</ngx-datatable-column>
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									<section layout="row">
+									<button mat-raised-button color="primary" class="mr-1" (click)="editMeterReadingImport(row['id'])">Open</button>
+									
+									<!-- <button mat-raised-button color='primary' class="mr-1" (click)="importMeterReadingImport(row['id'])">Process</button> -->
+								</section>
+								</ng-template>
+							</ngx-datatable-column> 
+				    </ngx-datatable>
+      </mat-card-content>
+	</mat-card>
+		
+  </div>
+  
+</div>

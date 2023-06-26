@@ -1,0 +1,10 @@
+CREATE OR REPLACE PROCEDURE OPENACCESS.TEN_ONE_SS 
+(
+  M_SUBSTATION_ID IN VARCHAR2 
+, M_ORG_ID IN VARCHAR2 
+) AS 
+BEGIN
+dbms_output.put_line (select * from v_company_service);
+
+  
+END TEN_ONE_SS;

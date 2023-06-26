@@ -1,0 +1,343 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+    
+        <mat-card-title>{{addScreen?'Add':'Update'}} Company Meter Change</mat-card-title>
+    
+        <ng-template mat-tab-label> Company Meter Change Details</ng-template>
+        <mat-card-content>
+                <mat-card-title>{{this.commonUtils.getProp('seller')}}  Information</mat-card-title> 
+                <div fxLayout="row" fxLayoutAlign="start center" >
+           
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='companyMeterChange.orgId' [required]="isMandatory"
+                        (ngModelChange)="onEdcChange()">
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='companyMeterChange.serviceId'
+                        [required]="isMandatory" (ngModelChange)="onServiceChange()">
+                        <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+                            {{ companyService.companyName }} - {{ companyService.number }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <input matInput placeholder="Substation Name" [(ngModel)]="companyMeterChange.substationName" disabled="true">
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput [(ngModel)]="companyMeterChange.meterChangeDate" [matDatepicker]="meterChangeDate" placeholder="Meter Change Date" >
+                <mat-datepicker-toggle matSuffix [for]="meterChangeDate"></mat-datepicker-toggle>
+
+                <mat-datepicker #meterChangeDate></mat-datepicker>
+              </mat-form-field>
+                 
+                </div><br/>
+                <div mat-subheader>Meter Details</div>
+                <!--	<div fxLayout="row" fxLayoutAlign="start center"> -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Meter Number" [(ngModel)]='companyMeterChange.meterNumber' disabled="true">
+                  </mat-form-field>
+    
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Meter Make" [(ngModel)]='companyMeterChange.meterMakeCode' disabled="true">
+                      <mat-option *ngFor="let metermakecode of meterMake" [value]="metermakecode.valueCode">
+                        {{metermakecode.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    
+                  <!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Meter Make" [(ngModel)]='companyMeterChange.meterMakeCode'>
+                    </mat-form-field>  -->
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Accuracy Class" [(ngModel)]='companyMeterChange.accuracyClassCode' disabled="true">
+    
+                      <mat-option *ngFor="let accrcyclass of accuracyclass" [value]="accrcyclass.key">
+                        {{ accrcyclass.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    
+                  <!--<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Accuracy Class" [(ngModel)]='companyMeterChange.accuracyClassCode'>
+                    </mat-form-field> -->
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is ABT Meter" [(ngModel)]='companyMeterChange.isAbtMeter'disabled="true">
+    
+                      <mat-option *ngFor="let isABTMtrs of isABTMeter" [value]="isABTMtrs.key">
+                        {{ isABTMtrs.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    
+                  <!--				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <input matInput placeholder="Is ABT Meter" [(ngModel)]='companyMeterChange.isAbtMeter'>
+                    </mat-form-field>  -->
+                </div>
+    
+    
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Modem Number" [(ngModel)]='companyMeterChange.modemNumber' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter CT1 serialNo" [(ngModel)]='companyMeterChange.meterCt1' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter CT2 serialNo" [(ngModel)]='companyMeterChange.meterCt2' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter CT3 serialNo" [(ngModel)]='companyMeterChange.meterCt3' disabled="true">
+                  </mat-form-field>
+    
+                </div>
+    
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter PT1" [(ngModel)]='companyMeterChange.meterPt1' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter PT2" [(ngModel)]='companyMeterChange.meterPt2' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Meter PT3" [(ngModel)]='companyMeterChange.meterPt3' disabled="true">
+                  </mat-form-field>
+    
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Multiplication Factor" [(ngModel)]='companyMeterChange.multiplicationFactor' disabled="true">
+                  </mat-form-field>
+    
+    
+                </div>
+                <div mat-subheader>Is Meter Number Change</div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Meter Number Change" [(ngModel)]="companyMeterChange.isMeterNumberChange">
+                          <mat-option *ngFor="let isMeterNumberChange of isMeterNumberChanges" [value]="isMeterNumberChange.name">
+                              {{isMeterNumberChange.name}}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                  <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                  <div class="ml-xs mr-xs" style="width: 100%;"></div>
+              
+              </div>
+               
+
+              <div fxLayout="row" *ngIf="companyMeterChange.isMeterNumberChange== 'Y'" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="Old Meter Number" [(ngModel)]='companyMeterChange.meterNumber' disabled="true">
+                    </mat-form-field>
+      
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Old Meter Make" [(ngModel)]='companyMeterChange.meterMakeCode' disabled="true">
+                        <mat-option *ngFor="let metermakecode of meterMake" [value]="metermakecode.valueCode">
+                          {{metermakecode.valueDesc}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+      
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Old Accuracy Class" [(ngModel)]='companyMeterChange.accuracyClassCode' disabled="true">
+      
+                        <mat-option *ngFor="let accrcyclass of accuracyclass" [value]="accrcyclass.key">
+                          {{ accrcyclass.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Old Is ABT Meter" [(ngModel)]='companyMeterChange.isAbtMeter'disabled="true">
+      
+                        <mat-option *ngFor="let isABTMtrs of isABTMeter" [value]="isABTMtrs.key">
+                          {{ isABTMtrs.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Old Multiplication Factor" [(ngModel)]='companyMeterChange.multiplicationFactor' disabled="true">
+                      </mat-form-field>
+        
+    
+              </div>
+              <div fxLayout="row" *ngIf="companyMeterChange.isMeterNumberChange== 'Y'" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input matInput placeholder="New Meter Number" [(ngModel)]='companyMeterChange.newMeterNumber' >
+                    </mat-form-field>
+      
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="New Meter Make" [(ngModel)]='companyMeterChange.newMeterMakeCode'>
+                        <mat-option *ngFor="let metermakecode of meterMake" [value]="metermakecode.valueCode">
+                          {{metermakecode.valueDesc}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+      
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="New Accuracy Class" [(ngModel)]='companyMeterChange.newAccuracyClassCode'>
+      
+                        <mat-option *ngFor="let accrcyclass of accuracyclass" [value]="accrcyclass.key">
+                          {{ accrcyclass.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+      
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="New Is ABT Meter" [(ngModel)]='companyMeterChange.newIsAbtMeter'>
+      
+                        <mat-option *ngFor="let isABTMtrs of isABTMeter" [value]="isABTMtrs.key">
+                          {{ isABTMtrs.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="New Multiplication Factor" [(ngModel)]='companyMeterChange.newMf' >
+                      </mat-form-field>
+        
+    
+              </div>
+         
+
+            <div mat-subheader>Is Meter Set Change</div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Meter Set Change" [(ngModel)]="companyMeterChange.isMeterSetChange">
+                      <mat-option *ngFor="let isMeterSetChange of isMeterSetChanges" [value]="isMeterSetChange.name">
+                          {{isMeterSetChange.name}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <div class="ml-xs mr-xs" style="width: 100%;"></div>
+              <div class="ml-xs mr-xs" style="width: 100%;"></div>
+              <div class="ml-xs mr-xs" style="width: 100%;"></div>
+             
+          </div>
+
+          <div fxLayout="row" *ngIf="companyMeterChange.isMeterSetChange== 'Y'" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter CT1" [(ngModel)]='companyMeterChange.meterCt1' disabled="true">
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter CT2" [(ngModel)]='companyMeterChange.meterCt2' disabled="true">
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter CT3" [(ngModel)]='companyMeterChange.meterCt3' disabled="true">
+                </mat-form-field>
+
+                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+          </div>
+          <div fxLayout="row" *ngIf="companyMeterChange.isMeterSetChange== 'Y'" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter PT1" [(ngModel)]='companyMeterChange.meterPt1' disabled="true">
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter PT2" [(ngModel)]='companyMeterChange.meterPt2' disabled="true">
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="Old Meter PT3" [(ngModel)]='companyMeterChange.meterPt3' disabled="true">
+                </mat-form-field>
+  
+
+                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+          </div>
+
+          <div fxLayout="row" *ngIf="companyMeterChange.isMeterSetChange== 'Y'" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter CT1" [(ngModel)]='companyMeterChange.newMeterCt1'>
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter CT2" [(ngModel)]='companyMeterChange.newMeterCt2'>
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter CT3" [(ngModel)]='companyMeterChange.newMeterCt3'>
+                </mat-form-field>
+
+                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+          </div>
+          <div fxLayout="row" *ngIf="companyMeterChange.isMeterSetChange== 'Y'" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter PT1" [(ngModel)]='companyMeterChange.newMeterPt1'>
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter PT2" [(ngModel)]='companyMeterChange.newMeterPt2'>
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                  <input matInput placeholder="New Meter PT3" [(ngModel)]='companyMeterChange.newMeterPt3'>
+                </mat-form-field>
+  
+
+                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+
+          </div>
+          <div mat-subheader>Is Modem Number Change</div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Modem Number Change" [(ngModel)]="companyMeterChange.isModemNumberChange">
+                    <mat-option *ngFor="let isModemNumberChange of isModemNumberChanges" [value]="isModemNumberChange.name">
+                        {{isModemNumberChange.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="companyMeterChange.isModemNumberChange== 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%" >
+                <input matInput placeholder="Old Modem Number" [(ngModel)]="companyMeterChange.modemNumber" disabled="true">
+            </mat-form-field> 
+            <mat-form-field *ngIf="companyMeterChange.isModemNumberChange== 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <input matInput placeholder="New Modem Number" [(ngModel)]="companyMeterChange.newModemNumber">
+          </mat-form-field> 
+            <div *ngIf="companyMeterChange.isModemNumberChange != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div *ngIf="companyMeterChange.isModemNumberChange != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+        
+        </div>
+              </mat-card-content>              
+        <hr>
+        <mat-card-actions>
+                <button mat-raised-button color="primary" *ngIf="companyMeterChange.statusCode!='APPROVED'"(click)="saveCompanyMeterChange('')">Save</button>
+                <button mat-raised-button color="primary" *ngIf="companyMeterChange.statusCode!='APPROVED' && companyMeterChange.statusCode=='CREATED' " (click)="approveCompanyMeterChange('')">Approve</button>
+                <button mat-raised-button class="primary" (click)="listCompanyMeterChange()">Cancel/Back</button>
+    
+            
+        </mat-card-actions>
+    </mat-card>
+
+    </div> 
+</div>        

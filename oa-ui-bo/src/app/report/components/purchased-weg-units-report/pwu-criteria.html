@@ -1,0 +1,36 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        <strong>Purchased WEG Units Report</strong>
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]="reportMonth">
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput type="number" placeholder="Year" [(ngModel)]="reportYear">
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+
+          </mat-card-actions>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="reset()">Reset</button>
+
+          </mat-card-actions>
+
+          <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

@@ -1,0 +1,117 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title >
+        WEG-10(1)SSLoss
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+  
+  
+              <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='selOrgName'>
+                    <mat-option *ngFor="let org of orgList" [value]="org.id">
+                      {{org.code}} - {{org.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+             <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+               </mat-select>
+             </mat-form-field>
+             <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <!--<input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear">-->
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='searchYear'>
+              <mat-option *ngFor="let yr of year" [value]="yr.id">
+                {{yr.year}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+         <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+              </mat-card-actions>
+          </div>
+  
+          <div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+  
+  
+           <!-- <ngx-datatable-column name="Generator EDC">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op3}}
+            </ng-template>
+           </ngx-datatable-column> -->
+  
+           <ngx-datatable-column name="Sl.No"  [width]="200">
+              <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              {{rows.indexOf(row)+1}}
+  
+              </ng-template>
+           </ngx-datatable-column>
+  
+  
+           <ngx-datatable-column name="Circle Name" [width]="300">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op2}}
+          </ng-template>
+       </ngx-datatable-column>
+
+
+        <ngx-datatable-column name="Substation Name" [width]="300" >
+            <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+              {{row.op1}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Total Services "  [width]="300">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op4}}
+            </ng-template>
+         </ngx-datatable-column>
+
+
+         <ngx-datatable-column name="Billings" [width]="300">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op5}}
+            </ng-template>
+         </ngx-datatable-column>
+         <ngx-datatable-column name="Exp-Units" [width]="300">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op6}}
+          </ng-template>
+       </ngx-datatable-column>
+
+
+
+      <ngx-datatable-column name="Month" [width]="220">
+        <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op7}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Year" [width]="300">
+        <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+          {{row.op8}}
+        </ng-template>
+      </ngx-datatable-column>
+
+     <!--</ngx-datatable-column>
+     <ngx-datatable-column name="DATE OF MANUAL ENTRY" [width]="300">
+      <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+          {{row.op10}}
+      </ng-template>
+    </ngx-datatable-column>-->
+
+      </ngx-datatable>
+
+    </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

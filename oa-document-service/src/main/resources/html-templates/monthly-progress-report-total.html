@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title th:if="${ip6=='Total'}">MONTHLY PROGRESS REPORT FOR TOTAL SERVICE</title>
+     <title th:if="${ip6=='AMR'}">MONTHLY PROGRESS REPORT FOR AMR</title>
+      <title th:if="${ip6=='MANUAL'}">MONTHLY PROGRESS REPORT FOR MANUAL READING</title>
+       <title th:if="${ip6=='NotReading'}">MONTHLY PROGRESS REPORT FOR MACHINE NOT RUNNING</title>
+       <title th:if="${ip6=='TOTALCAPTIVE'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR CAPTIVE</title>
+       <title th:if="${ip6=='AMRCAPTIVE'}">MONTHLY PROGRESS REPORT FROM AMR FOR CAPTIVE</title>
+       <title th:if="${ip6=='MANUALCAPTIVE'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR CAPTIVE</title>
+       <title th:if="${ip6=='NOTRUNNINGCAPTIVE'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR CAPTIVE</title>
+       <title th:if="${ip6=='TOTALTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR THIRD-PARTY</title>
+       <title th:if="${ip6=='AMRTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM AMR FOR THIRD-PARTY</title>
+       <title th:if="${ip6=='MANUALTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR THIRD-PARTY</title>
+       <title th:if="${ip6=='NOTRUNNINGTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR THIRD-PARTY</title>
+       <title th:if="${ip6=='TOTALSTB'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR STB</title>
+       <title th:if="${ip6=='AMRSTB'}">MONTHLY PROGRESS REPORT FROM AMR FOR STB</title>
+       <title th:if="${ip6=='MANUALSTB'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR STB</title>
+       <title th:if="${ip6=='NOTRUNNINGSTB'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR STB</title>
+   
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+        td.noline {
+  border-style: none;
+  }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p th:if="${ip6=='Total'}">MONTHLY PROGRESS REPORT FOR TOTAL SERVICE  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='AMR'}">MONTHLY PROGRESS REPORT FOR AMR <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='MANUAL'}">MONTHLY PROGRESS REPORT FOR MANUAL READING  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='NotReading'}">MONTHLY PROGRESS REPORT FOR MACHINE NOT RUNNING <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            
+            <p th:if="${ip6=='TOTALCAPTIVE'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR CAPTIVE  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='AMRCAPTIVE'}">MONTHLY PROGRESS REPORT FROM AMR FOR CAPTIVE  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='MANUALCAPTIVE'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR CAPTIVE  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='NOTRUNNINGCAPTIVE'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR CAPTIVE  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            
+            <p th:if="${ip6=='TOTALTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR THIRD-PARTY  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='AMRTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM AMR FOR THIRD-PARTY  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='MANUALTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR THIRD-PARTY  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='NOTRUNNINGTHIRD-PARTY'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR THIRD-PARTY  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            
+            <p th:if="${ip6=='TOTALSTB'}">MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR STB  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='AMRSTB'}">MONTHLY PROGRESS REPORT FROM AMR FOR STB  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='MANUALSTB'}">MONTHLY PROGRESS REPORT FROM MANUAL READING FOR STB  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            <p th:if="${ip6=='NOTRUNNINGSTB'}">MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR STB  <span th:if="${fuel}!=null" class="dt" style="padding-left: 50px;" >FUEL -</span><span th:text="${fuel}"></span></p>
+            
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr th:if="${ip6=='Total'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FOR TOTAL SERVICE
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='AMR'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FOR AMR
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='MANUAL'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FOR MANUAL READING 
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='NotReading'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FOR MACHINE NOT RUNNING 
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='TOTALCAPTIVE'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR CAPTIVE
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='AMRCAPTIVE'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM AMR FOR CAPTIVE
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='MANUALCAPTIVE'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MANUAL READING FOR CAPTIVE
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='NOTRUNNINGCAPTIVE'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR CAPTIVE 
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='TOTALTHIRD-PARTY'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR THIRD-PARTY
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='AMRTHIRD-PARTY'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM AMR FOR THIRD-PARTY
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='MANUALTHIRD-PARTY'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MANUAL READING FOR THIRD-PARTY 
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='NOTRUNNINGTHIRD-PARTY'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR THIRD-PARTY
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='TOTALSTB'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR STB
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='AMRSTB'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM AMR FOR STB
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                     <tr th:if="${ip6=='MANUALSTB'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MANUAL READING FOR STB 
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+                    
+                     <tr th:if="${ip6=='NOTRUNNINGSTB'}">
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR STB
+                        <span class="dt" style="padding-left: 50px;">Month Year -</span><span th:text="${month}"></span><span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+        
+                    <tr>								
+                        <th style="background: #dcdcdc;text-align: center;">S.NO</th>              
+                        <th style="background: #dcdcdc;text-align: center;">EDC NAME</th>
+                        <th style="background: #dcdcdc;text-align: center;">SERVICE NO</th>
+                        <th style="background: #dcdcdc;text-align: center;">COMPANY NAME</th>
+                        <th style="background: #dcdcdc;text-align: center;">FLOW TYPE</th>      
+                         <th style="background: #dcdcdc;text-align: center;">METER NUMBER</th>    
+                         <th th:if="${ip6=='MANUAL'||ip6=='MANUALCAPTIVE'||ip6=='MANUALTHIRD-PARTY'||ip6=='MANUALSTB'}" style="background: #dcdcdc;text-align: center;">CREATED DATE</th>    
+                    </tr>
+                <tr class="item-row" th:each="meterReadingImportReport,item : ${meterReadingImportReport}">
+                <td style="text-align: center;" th:text="${item.index+1}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op2}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op3}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op4}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op5}"></td>
+                <td style="text-align: center;" th:text="${meterReadingImportReport.op6}"></td>
+                <td th:if="${ip6=='MANUAL'||ip6=='MANUALCAPTIVE'||ip6=='MANUALTHIRD-PARTY'||ip6=='MANUALSTB'}" style="text-align: center;" th:text="${meterReadingImportReport.op7}"></td>
+                
+            </tr>   
+             </table>
+
+</div>
+<div>
+<br />
+</div>
+</body>
+
+</html>

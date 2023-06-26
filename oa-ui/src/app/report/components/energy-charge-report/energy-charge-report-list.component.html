@@ -1,0 +1,47 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+  
+      <mat-card>
+        <mat-card-title>
+          Energy charge Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+  
+
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                    <mat-option *ngFor="let month of months" [value]="month.value">
+                        {{ month.name }}
+                    </mat-option>
+                </mat-select>
+                 </mat-form-field> 
+  
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+              <!-- <input matInput placeholder="Year" [(ngModel)]="searchYear"> -->
+              <mat-select class="ml-xs mr-xs" style="width: 100%;"
+              placeholder="Year" [(ngModel)]='searchYear'
+              readonly>
+              <mat-option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+              </mat-option>
+          </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput placeholder="Supplier code" [(ngModel)]="searchSellerServiceNumber">
+              </mat-form-field>
+  
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="printReport()">
+                <mat-icon>cloud_download</mat-icon>
+                Download Pdf
+            </button>
+          </mat-card-actions>
+          </div>
+
+          </mat-card-content>
+        </mat-card>
+
+    </div>
+  </div>

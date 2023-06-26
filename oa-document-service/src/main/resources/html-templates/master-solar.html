@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>MASTER SOLAR REPORT</title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p>MASTER SOLAR REPORT</p>
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="20"> MASTER SOLAR REPORT 
+                        <span th:if="${year}!=null" style="padding-left: 50px;">Year: </span> <span th:text="${year}"></span></th>
+                    </tr>  
+        
+                    <tr>								
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">EDC NAME</th>
+                        <th style="background: #dcdcdc">SERVICE NO</th>
+                        <th style="background: #dcdcdc">GENERATOR NAME</th>
+                        <th style="background: #dcdcdc">COMMISSION DATE</th>
+                        <th style="background: #dcdcdc">CAPACITY</th>
+                        <th style="background: #dcdcdc">DISTRICT</th>
+                        <th style="background: #dcdcdc">FLOW TYPE</th>
+                      <!--  <th style="background: #dcdcdc">REC/NON-REC</th> -->
+                        <th th:if="${flow}=='STB'"  style="background: #dcdcdc">TARIFF</th>
+                        <th style="background: #dcdcdc">CT RATIO</th>
+                        <th style="background: #dcdcdc">PT RATIO</th>
+                        <th style="background: #dcdcdc;width:80px">MF</th>       
+                        <th style="background: #dcdcdc">MODEM NUMBER</th>  
+ 						<th style="background: #dcdcdc">METER NO</th> 
+ 						<th style="background: #dcdcdc; width: 160px">SUBSTATION NAME</th>
+ 						<th style="background: #dcdcdc">FEEDER NAME</th>
+                     <!--   <th style="background: #dcdcdc">FEEDER LINE LENGTH</th>   -->
+                        <th style="background: #dcdcdc">TYPE OF SS</th>  
+                        <th style="background: #dcdcdc">PLANT STATUS</th>  
+                        <th style="background: #dcdcdc">REMARKS</th> 
+                    </tr>
+                <tr class="item-row" th:each="masterSolar,item : ${masterSolar}">
+                <td th:text="${item.index+1}"></td>
+                <td th:text="${masterSolar.op2}"></td>
+                  <td th:text="${masterSolar.op3}"></td>
+                 <td th:text="${masterSolar.op4}"></td>
+                <td th:text="${masterSolar.op5}"></td>
+                <td th:text="${masterSolar.op7}"></td>
+                <td th:text="${masterSolar.op9}"></td>
+                <td th:text="${masterSolar.op10}"></td>
+             <!--   <td th:text="${masterSolar.op11}"></td> -->
+                <td th:if="${flow}=='STB'" th:text="${masterSolar.op15}"></td>
+                 <td th:text="${masterSolar.op17}"></td>
+                 <td th:text="${masterSolar.op18}"></td>
+                  <td th:text="${masterSolar.op19}"></td>
+                  <td th:text="${masterSolar.op20}"></td>
+                   <td th:text="${masterSolar.op21}"></td>
+                   <td th:text="${masterSolar.op23}"></td>
+                   <td th:text="${masterSolar.op24}"></td>
+                <!--   <td th:text="${masterSolar.op26}"></td> -->
+                   <td th:text="${masterSolar.op27}"></td>
+                    <td th:text="${masterSolar.op28}"></td>
+                     <td th:text="${masterSolar.op29}"></td>
+            </tr>
+        
+                </table>
+
+</div>
+<div>
+<br />
+</div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+      <mat-card class="mat-card-top">
+
+          <mat-card-title><strong> View Energy Sale Intent -{{esIntent.flowTypeCode}}</strong></mat-card-title>
+          <mat-card-content>
+              <!-- <mat-card-title>Seller Company</mat-card-title> -->
+              <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+            
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='esIntent.sellerEndOrgId' [required]="isMandatory"
+                              (ngModelChange)="onEdcChange()">
+                              <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                  {{ edc.name }}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='esIntent.sellerCompanyServiceId'
+                            [required]="isMandatory" (ngModelChange)="onSellerServiceChange()">
+                            <mat-option *ngFor="let companyService of sellerCompanyServices" [value]="companyService.id">
+                                {{ companyService.companyName }} - {{ companyService.number }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <month-picker class="ml-xs mr-xs" style="width: 100%;" [(config)]="mpFromConfig" [(model)]="mpFromModel" (mpOnModelChange)="this.mpOnFromModelChange($event)"></month-picker>
+                    <month-picker class="ml-xs mr-xs" style="width: 100%;" [(config)]="mpToConfig" [(model)]="mpToModel" (mpOnModelChange)="this.mpOnToModelChange($event)"></month-picker>
+
+                    
+                  </div>
+             
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [(ngModel)]="esIntent.agmtPeriodCode">
+                              <mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+                                  {{code.name}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                  <input matInput placeholder="Energy Sale Intent Number" [(ngModel)]="esIntent.code" readonly>
+                              </mat-form-field>
+
+                              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="Proposed Quantum" [(ngModel)]='esIntentLine.proposedQuantum'>  
+                                </mat-form-field>
+
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]="esIntent.isCaptive">
+                                <mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+                                    {{iscaptives.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                
+
+                  </div>
+               
+                  <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Noc Generator Status" value=" {{(esIntent.nocGeneratorStatusCode==null)?'Not Started':esIntent.nocGeneratorStatusCode}}" readonly>
+                    </mat-form-field>
+            
+                      <mat-form-field class="ml-xs mr-xs" style="width: 100%;" *ngIf="esIntent.agmtPeriodCode!='STOA'">
+                          <input matInput placeholder="Epa Status" value=" {{(esIntentLine.epaStatusCode==null)?'Not Started':esIntentLine.epaStatusCode}}"
+                              readonly>
+                      </mat-form-field>  
+
+                     
+                      <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+                        <input matInput placeholder="OA Agreement Status" value=" {{(esIntentLine.oaAgmtStatusCode==null)?'Not Started':esIntentLine.oaAgmtStatusCode}}"
+                            readonly>
+                    </mat-form-field>
+
+                                
+                                
+                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                  </div>
+
+              </mat-card-content>
+
+
+              
+              <hr>
+              <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="saveEsIntent('')" *ngIf="esIntent.statusCode!='COMPLETED'">Save</button>
+                  <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" !(addScreen==true || esIntent.statusCode=='COMPLETED') ">Process</button>
+                  <!-- <button mat-raised-button color="primary" (click)="processEsIntent('')"  *ngIf=" addScreen!=true && esIntent.statusCode!='PROCESS'">Process</button> -->
+                  <button mat-raised-button class="primary" (click)="listEsIntent()">Back</button>
+              </mat-card-actions>
+          </mat-card-content>
+      </mat-card>
+  </div>
+</div>

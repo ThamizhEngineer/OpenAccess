@@ -1,0 +1,61 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title class="card-container-left" >NOC Approval Detail FOR {{sldcNoc.nocPurpose}}</mat-card-title>
+            <mat-card-content>
+
+
+
+                <table class='head'>
+                    <tr class='label'>
+                        <td> NOC Code</td>
+                        <td> Status</td>
+                        <td> Applied No</td>
+                        <td> Applied Date</td>
+                    </tr>
+                    <tr>
+                        <td> {{sldcNoc.nocCode}}</td>
+                        <td> {{sldcNoc.status}}</td>
+                        <td> {{sldcNoc.appliedNo}}</td>
+                        <td> {{sldcNoc.appliedDt}} (since 3 days)</td> 
+                    </tr>
+                    <tr>
+                        <td colspan=4> <br/></td>
+                    </tr>
+
+                    <tr class='label'>
+                        <td> {{sldcNoc.nocPurpose}} Name</td>
+                        <td *ngIf="isCon"> Htsc Number</td>
+                        <td *ngIf="!isCon"> {{sldcNoc.nocPurpose}} Number</td>
+                        <td> EDC</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>  {{mCompService.companyName}}</td>
+                        <td> {{sldcNoc.compServNo}}</td>
+                        <td> {{sldcNoc.edc}}</td>
+                        <td> </td> 
+                    </tr>
+                    <tr>
+                        <td colspan=4> <br/></td>
+                    </tr>
+                    
+                    </table>
+               
+            </mat-card-content>
+            <mat-card-content>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <textarea [(ngModel)]="sldcNoc.ceRemark" matInput placeholder="Remarks"></textarea>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <textarea [(ngModel)]="sldcNoc.ceReason" matInput placeholder="Reason"></textarea>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="left">
+                <button (click)="save('CE-APPROVED')" [disabled]="sldcNoc.status=='CREATED' || sldcNoc.status=='EDC-REJECTED'" mat-raised-button color="primary">Approve</button>
+                <button (click)="save('CE-DISAPPROVED')" [disabled]="sldcNoc.ceRemark==null || sldcNoc.ceRemark==''" mat-raised-button color="primary">Reject</button>
+                <button mat-raised-button color="primary" (click)="back()">Back</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

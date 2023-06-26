@@ -1,0 +1,4163 @@
+[  
+   {  
+      "listCode":"ACCURACY_CLASS_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"01",
+      "valueDesc":"0.2 Class",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"ACCURACY_CLASS_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"02",
+      "valueDesc":"0.5 Class",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AGMT_TYPE_CODE",
+      "listName":"Agreement Type Code",
+      "valueCode":"LTOA",
+      "valueDesc":"Long Term Open Access",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AGMT_TYPE_CODE",
+      "listName":"Agreement Type Code",
+      "valueCode":"MTOA",
+      "valueDesc":"Medium Term Open Access",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AGMT_TYPE_CODE",
+      "listName":"Agreement Type Code",
+      "valueCode":"STOA",
+      "valueDesc":"Short Term Open Access",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AMENDMENT_TYPE_CODE",
+      "listName":"Amendment Type code",
+      "valueCode":"01",
+      "valueDesc":"CAPTIVE-STATUS-CHANGE",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AMENDMENT_TYPE_CODE",
+      "listName":"Amendment Type code",
+      "valueCode":"02",
+      "valueDesc":"OAA-QUANTUM-REDUCTION",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AMENDMENT_TYPE_CODE",
+      "listName":"Amendment Type code",
+      "valueCode":"03",
+      "valueDesc":"OAA-PERIOD-REDUCTION",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"AMENDMENT_TYPE_CODE",
+      "listName":"Amendment Type code",
+      "valueCode":"04",
+      "valueDesc":"CANCELLATION",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"BUYER_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"01",
+      "valueDesc":"Mere Parallel",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"BUYER_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"02",
+      "valueDesc":"Sale to Board",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"BUYER_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"03",
+      "valueDesc":"Captive Use",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"BUYER_TYPE_CODE",
+      "listName":"Meter Accuracy Type",
+      "valueCode":"04",
+      "valueDesc":"Third Party",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHARGE_TYPE_CODE",
+      "listName":"Charge Type Code",
+      "valueCode":"FORMULA",
+      "valueDesc":"Formula Based Charge",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHARGE_TYPE_CODE",
+      "listName":"Charge Type Code",
+      "valueCode":"LUMP_SUM",
+      "valueDesc":"Lump Sum Charge",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"001",
+      "valueDesc":"Memorandum of Association",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"002",
+      "valueDesc":"Articles of Association",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"003",
+      "valueDesc":"Certificate on share holding pattern issued by appropriate authority along with Form 2",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"004",
+      "valueDesc":"Certificate of issued and paid up Equity Capital (with voting rights)",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"005",
+      "valueDesc":"Authenticated descriptive write up about the plant process with process flow chart.",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"006",
+      "valueDesc":"Certificate on details of investment made vide serial No. 3 of this format cited above issued by the Charted Accountant",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"007",
+      "valueDesc":"Write up on generator protection scheme with protection diagrams in quadruplicate.",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"008",
+      "valueDesc":"Consent letter from captive users if wheeling is proposed.",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"009",
+      "valueDesc":"Latest auditor certified balance sheet",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"010",
+      "valueDesc":"Topo Map of the Plant's Physical Location (showing the Plant's sit with substations of the Board and other land marks etc to physically identify the location of the plant)",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"011",
+      "valueDesc":"Physical Location Sketch (Not to scale) Fuel Linkage Agreements",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CHECK_LIST_CODE",
+      "listName":"CHECK LIST CODE",
+      "valueCode":"012",
+      "valueDesc":"Copy of the Application Fee Receipt",
+      "enabled":"Y",
+      "attrib1":"GC-GENERAL",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"COMPANY_TYPE_CODE",
+      "listName":"Company Type Code",
+      "valueCode":"01",
+      "valueDesc":"Sole Proprietary",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"COMPANY_TYPE_CODE",
+      "listName":"Company Type Code",
+      "valueCode":"02",
+      "valueDesc":"Co-Op",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"COMPANY_TYPE_CODE",
+      "listName":"Company Type Code",
+      "valueCode":"03",
+      "valueDesc":"Association Of Person",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"COMPANY_TYPE_CODE",
+      "listName":"Company Type Code",
+      "valueCode":"04",
+      "valueDesc":"Private Ltd",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"COMPANY_TYPE_CODE",
+      "listName":"Company Type Code",
+      "valueCode":"05",
+      "valueDesc":"Others",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CONFIGURATION_CODE",
+      "listName":"All generic values will be accomodated here",
+      "valueCode":"SCHEDULING-CHARGE",
+      "valueDesc":"Scheduling charge per day",
+      "enabled":"Y",
+      "attrib1":"160",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CONFIGURATION_CODE",
+      "listName":"All generic values will be accomodated here",
+      "valueCode":"STATE-TRANS-LOSS-CHARGE-RATE",
+      "valueDesc":"State transmission loss charge Rate (Rs./MWh)",
+      "enabled":"Y",
+      "attrib1":"126.55",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CONFIGURATION_CODE",
+      "listName":"All generic values will be accomodated here",
+      "valueCode":"STATE-TRANS-LOSS-PER",
+      "valueDesc":"State transmission loss percentage",
+      "enabled":"Y",
+      "attrib1":"3.07",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CONFIGURATION_CODE",
+      "listName":"All generic values will be accomodated here",
+      "valueCode":"SYS-OPER-CHARGE-MAX",
+      "valueDesc":"System Operational charge - Max Value per day",
+      "enabled":"Y",
+      "attrib1":"500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"CONFIGURATION_CODE",
+      "listName":"All generic values will be accomodated here",
+      "valueCode":"SYS-OPER-CHARGE-RATE",
+      "valueDesc":"System Operational charge Rate (Rs./MWh)",
+      "enabled":"Y",
+      "attrib1":"1.41",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"01",
+      "valueDesc":"Kanchipuram",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"02",
+      "valueDesc":"Tiruvallur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"03",
+      "valueDesc":"Cuddalore",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"04",
+      "valueDesc":"Villupuram",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"05",
+      "valueDesc":"Vellore",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"06",
+      "valueDesc":"Tiruvannamalai",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"07",
+      "valueDesc":"Salem",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"08",
+      "valueDesc":"Namakkal",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"09",
+      "valueDesc":"Dharmapuri",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"10",
+      "valueDesc":"Erode",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"11",
+      "valueDesc":"Coimbatore",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"12",
+      "valueDesc":"The Nilgiris",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"13",
+      "valueDesc":"Thanjavur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"14",
+      "valueDesc":"Nagapattinam",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"15",
+      "valueDesc":"Thiruvarur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"16",
+      "valueDesc":"Tiruchirappalli",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"17",
+      "valueDesc":"Karur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"18",
+      "valueDesc":"Perambalur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"19",
+      "valueDesc":"Pudukottai",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"20",
+      "valueDesc":"Madurai",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"21",
+      "valueDesc":"Theni",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"22",
+      "valueDesc":"Dindigul",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"23",
+      "valueDesc":"Ramanathapuram",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"24",
+      "valueDesc":"Virudhunagar",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"25",
+      "valueDesc":"Sivagangai",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"26",
+      "valueDesc":"Thirunelveli",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"27",
+      "valueDesc":"Thoothukkudi",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"28",
+      "valueDesc":"Kanyakumari",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"30",
+      "valueDesc":"Krishnagiri",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"31",
+      "valueDesc":"Ariyalur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"32",
+      "valueDesc":"Tiruppur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"DISTRICT_CODE",
+      "listName":"District Code",
+      "valueCode":"33",
+      "valueDesc":"Chennai",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"432",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"434",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"438",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"450",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"01",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"470",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"04",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"472",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"474",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"04",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"476",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"01",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EDC_PASS_CODE_MAP",
+      "listName":"EDC - PassCode Mapping",
+      "valueCode":"478",
+      "valueDesc":null,
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EWA_STATUS_CODE",
+      "listName":"Energy wheeling agreement Status Code",
+      "valueCode":"APPROVED",
+      "valueDesc":"Approved",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EWA_STATUS_CODE",
+      "listName":"Energy wheeling agreement Status Code",
+      "valueCode":"COMPLETED",
+      "valueDesc":"Completed",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"EWA_STATUS_CODE",
+      "listName":"Energy wheeling agreement Status Code",
+      "valueCode":"CREATED",
+      "valueDesc":"Created",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FEEDER_TYPE_CODE",
+      "listName":"FEEDER CODE",
+      "valueCode":"001",
+      "valueDesc":"EDC",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FEEDER_TYPE_CODE",
+      "listName":"FEEDER CODE",
+      "valueCode":"002",
+      "valueDesc":"WFP",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FEEDER_TYPE_CODE",
+      "listName":"FEEDER CODE",
+      "valueCode":"003",
+      "valueDesc":"10(1)",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FEEDER_TYPE_CODE",
+      "listName":"FEEDER CODE",
+      "valueCode":"004",
+      "valueDesc":"NCES",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FLOW_TYPE_CODE",
+      "listName":"Flow Type Code",
+      "valueCode":"CAPTIVE",
+      "valueDesc":"Captive",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FLOW_TYPE_CODE",
+      "listName":"Flow Type Code",
+      "valueCode":"IEX-CONSUMER",
+      "valueDesc":"IEX Consumer",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FLOW_TYPE_CODE",
+      "listName":"Flow Type Code",
+      "valueCode":"STB",
+      "valueDesc":"Sale to Board",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FLOW_TYPE_CODE",
+      "listName":"Flow Type Code",
+      "valueCode":"THIRD-PARTY",
+      "valueDesc":"Third Party",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FLOW_TYPE_CODE",
+      "listName":"Flow Type Code",
+      "valueCode":"WEG",
+      "valueDesc":"Weg",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUEL_TYPE_CODE",
+      "listName":"Fuel Type Code",
+      "valueCode":"COAL",
+      "valueDesc":"Coal",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUEL_TYPE_CODE",
+      "listName":"Fuel Type Code",
+      "valueCode":"WIND",
+      "valueDesc":"Wind",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUEL_TYPE_CODE",
+      "listName":"Fuel Type Code",      
+            "valueCode":"NATURAL GAS",
+      "valueDesc":"Natural Gas",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUEL_TYPE_CODE",
+      "listName":"Fuel Type Code",
+      "valueCode":"DIESEL",
+      "valueDesc":"Diesel",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUEL_TYPE_CODE",
+      "listName":"Fuel Type Code",
+      "valueCode":"SOLAR",
+      "valueDesc":"Solar",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"EWA",
+      "valueDesc":"Ewa",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"FEEDER",
+      "valueDesc":"Feeder",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"GENERATOR",
+      "valueDesc":"Generator",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"GENERATOR-STATEMENT",
+      "valueDesc":"Generator Statement",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"GRID-CONNECTIVITY-APPLICATION",
+      "valueDesc":"Grid Connectivity Application",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"METER-READING",
+      "valueDesc":"Meter Reading",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"METER-READING-IMPORT",
+      "valueDesc":"Meter Reading Import",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"NOC",
+      "valueDesc":"Noc",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"NOC-CONSUMER",
+      "valueDesc":"Noc Consumer",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"OAA",
+      "valueDesc":"Oaa",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"OPEN-ACCESS-APPLICATION",
+      "valueDesc":"Open Access Application",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"OPERATIONS",
+      "valueDesc":"Operations",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"ORGANISATION",
+      "valueDesc":"Organisation",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"PAYMENT",
+      "valueDesc":"Payment",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"REPORTS",
+      "valueDesc":"Reports",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"SALE-TO-BOARD",
+      "valueDesc":"Sale To Board",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"SIGNUP",
+      "valueDesc":"Signup",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"SUBSTATION",
+      "valueDesc":"Substation",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"TARIFF",
+      "valueDesc":"Tariff",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"TRADE-RELATIONSHIP",
+      "valueDesc":"Trade Relationship",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"FUNCTIONALITY_CODE",
+      "listName":"Functionality Code",
+      "valueCode":"UNIT-WISE/GENERATION",
+      "valueDesc":"Unit Wise/Generation",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1021",
+      "valueDesc":"CWEL C30",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1041-1",
+      "valueDesc":"Leitwind",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1041-2",
+      "valueDesc":"Leitner LTW77",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1041-3",
+      "valueDesc":"Leitner LTW80",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1041-4",
+      "valueDesc":"Leitner LTW80",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1041-5",
+      "valueDesc":"Leitner LTW77",
+      "enabled":"Y",
+      "attrib1":"1350",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1081-1",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1081-2",
+      "valueDesc":"E-48",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1081-3",
+      "valueDesc":"E-53",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-1",
+      "valueDesc":"Gamesa",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-2",
+      "valueDesc":"MADE AE 59",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-3",
+      "valueDesc":"G52 ",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-4",
+      "valueDesc":"Gamesa G90",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-5",
+      "valueDesc":"Gamesa G80",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-6",
+      "valueDesc":"Gamesa (2000)",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-7",
+      "valueDesc":"Gamesa (850)",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1082-8",
+      "valueDesc":"G58",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1083-1",
+      "valueDesc":"GE (1500)",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1083-2",
+      "valueDesc":"GE (1600)",
+      "enabled":"Y",
+      "attrib1":"1600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1084-1",
+      "valueDesc":"Norwin",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1084-2",
+      "valueDesc":"FL 2500-100 / W2 E-W 100 2.5 MW",
+      "enabled":"Y",
+      "attrib1":"2500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1084-3",
+      "valueDesc":"Lagerwey L-82 2 MW",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1085",
+      "valueDesc":"WT 2000 DF",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1086",
+      "valueDesc":"K82",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1087-1",
+      "valueDesc":"Pioneer P250/29",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1087-2",
+      "valueDesc":"P 750/49",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1087-3",
+      "valueDesc":"Pioneer Wincon",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1088-1",
+      "valueDesc":"Vensys-77",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1088-2",
+      "valueDesc":"Vensys-82",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1101-1",
+      "valueDesc":"RRB",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1101-2",
+      "valueDesc":"V39",
+      "enabled":"Y",
+      "attrib1":"500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1101-3",
+      "valueDesc":"Pawan Shakthi",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1102",
+      "valueDesc":"SEPC 250 T",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1103",
+      "valueDesc":"SIVA 250/50",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-1",
+      "valueDesc":"Suzlon",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-2",
+      "valueDesc":"Suzlon S82V3",
+      "enabled":"Y",
+      "attrib1":"1250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-3",
+      "valueDesc":"Suzlon S82V3",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-4",
+      "valueDesc":"Suzlon S88 V3 A ",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-5",
+      "valueDesc":"Suzlon S95",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-6",
+      "valueDesc":"Suzlon S97",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1121-7",
+      "valueDesc":"Suzlon S88 MK II",
+      "enabled":"Y",
+      "attrib1":"2250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1122-1",
+      "valueDesc":"Vestas",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1122-2",
+      "valueDesc":"Vestas",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1141-1",
+      "valueDesc":"Winwind",
+      "enabled":"Y",
+      "attrib1":"1000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1142",
+      "valueDesc":"Garuda",
+      "enabled":"Y",
+      "attrib1":"700",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1143",
+      "valueDesc":"GWL",
+      "enabled":"Y",
+      "attrib1":"255",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1161-1",
+      "valueDesc":"Regen Vensys-77",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1161-2",
+      "valueDesc":"Regen",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1162",
+      "valueDesc":"Gamesa",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1181-1",
+      "valueDesc":"Vensys-82",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1181-2",
+      "valueDesc":"Regen Vensys - 82",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1181-3",
+      "valueDesc":"Regen Vensys - 82",
+      "enabled":"Y",
+      "attrib1":"3600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1181-4",
+      "valueDesc":"Regen Vensys - 87",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1222",
+      "valueDesc":"G.E",
+      "enabled":"Y",
+      "attrib1":"1600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1233",
+      "valueDesc":"Pioneer Wincon",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1241",
+      "valueDesc":"Gamesa",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1281",
+      "valueDesc":"Vestas",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1321",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1361",
+      "valueDesc":"Regen",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1381",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1382",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1401-1",
+      "valueDesc":"E",
+      "enabled":"Y",
+      "attrib1":"225",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1401-2",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"1421",
+      "valueDesc":"Enercon",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9000",
+      "valueDesc":" AMTL",
+      "enabled":"Y",
+      "attrib1":"300",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9001",
+      "valueDesc":"NOROTANK",
+      "enabled":"Y",
+      "attrib1":"400",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9002",
+      "valueDesc":"BONOUS ",
+      "enabled":"Y",
+      "attrib1":"320",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9003",
+      "valueDesc":"NASL",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9004",
+      "valueDesc":"GAMESA G52-50 Hz",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9005",
+      "valueDesc":"GAMESA G58- IECIIA",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9006",
+      "valueDesc":"GAMESA G58 - IEC IIIB",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9007",
+      "valueDesc":"GAMESA G58 - IEC IIA",
+      "enabled":"Y",
+      "attrib1":"850",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9008",
+      "valueDesc":"GAMESA G97 - IEC IIIA HH 78 M 50 Hz",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9009",
+      "valueDesc":"GAMESA G97 GF - IEC IIIA HH 78  50 Hz",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9010",
+      "valueDesc":"GAMESA G971 50Hz",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9011",
+      "valueDesc":"GAMESA G97 50Hz",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9012",
+      "valueDesc":"G114 - IEC IIIA HH 80, 93  M 50/60Hz",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9013",
+      "valueDesc":"GAMESA G114 - IEC S",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9014",
+      "valueDesc":"GARUDA 54, EU54.1250.1-B, HH 73M",
+      "enabled":"Y",
+      "attrib1":"700",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9015",
+      "valueDesc":"GE 82.5, 50Hz",
+      "enabled":"Y",
+      "attrib1":"1600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9016",
+      "valueDesc":"GE 87, 50Hz, LM42.1P2, HH 80M",
+      "enabled":"Y",
+      "attrib1":"1600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9017",
+      "valueDesc":"GE 103, GE 50.2, HH79.7M , 50Hz",
+      "enabled":"Y",
+      "attrib1":"1700",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9018",
+      "valueDesc":"MINGYANG HH75M TC IIA",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9019",
+      "valueDesc":"MINGYANG 89 HH 80M IEC S",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9020",
+      "valueDesc":"WT DF",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9021",
+      "valueDesc":"DF/100 :0120-6149610",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9022",
+      "valueDesc":"KENERSYS K82",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9023",
+      "valueDesc":"KENERSYS K100",
+      "enabled":"Y",
+      "attrib1":"2500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9024",
+      "valueDesc":"KENERSYS K110",
+      "enabled":"Y",
+      "attrib1":"2400",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9025",
+      "valueDesc":"KENERSYS K110 P+",
+      "enabled":"Y",
+      "attrib1":"2625",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9026",
+      "valueDesc":"LEITWIND LTW77",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9027",
+      "valueDesc":"LEITWIND LT W80",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9028",
+      "valueDesc":"LEITWIND LTW80",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9029",
+      "valueDesc":"LEITWIND LTW86",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9030",
+      "valueDesc":"LEITWIND LTW101",
+      "enabled":"Y",
+      "attrib1":"3000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9031",
+      "valueDesc":"PIONEER WINCON / 29",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9032",
+      "valueDesc":"PIONEER WINCON / 49",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9033",
+      "valueDesc":"POWERWIND 56",
+      "enabled":"Y",
+      "attrib1":"900",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9034",
+      "valueDesc":"REGEN VENSYS 77",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9035",
+      "valueDesc":"REGEN VENSYS 82",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9036",
+      "valueDesc":"REGEN VENSYS 87",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9037",
+      "valueDesc":"REGEN VENSYS 89",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9038",
+      "valueDesc":"VESTAS RRB V 39",
+      "enabled":"Y",
+      "attrib1":"500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9039",
+      "valueDesc":"PAWAN SHAKTHI",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9040",
+      "valueDesc":"PAWANSHAKTHI PS (HH 80M/100M)",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9041",
+      "valueDesc":"SEPC 41.5M LATTICE TOWER",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9042",
+      "valueDesc":"SEPC 51.5M LATTICE TOWER",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9043",
+      "valueDesc":"SIVA 50",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9044",
+      "valueDesc":"GWL ",
+      "enabled":"Y",
+      "attrib1":"225",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9045",
+      "valueDesc":"ENERCON E33",
+      "enabled":"Y",
+      "attrib1":"330",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9046",
+      "valueDesc":"ENERCON E30",
+      "enabled":"Y",
+      "attrib1":"230",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9047",
+      "valueDesc":"ENERCON E40",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9048",
+      "valueDesc":"ENERCON E53",
+      "enabled":"Y",
+      "attrib1":"800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9049",
+      "valueDesc":"SUZLON S33",
+      "enabled":"Y",
+      "attrib1":"350",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9050",
+      "valueDesc":"SUZLON S52",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9051",
+      "valueDesc":"SUZLON S82 V3",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9052",
+      "valueDesc":"SUZLON S88 V3A",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9053",
+      "valueDesc":"SUZLON S95 DFIG",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9054",
+      "valueDesc":"SUZLON S64/S66/S58",
+      "enabled":"Y",
+      "attrib1":"1250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9055",
+      "valueDesc":"SUZLON S97 DFIG",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9056",
+      "valueDesc":"NEGMICON NM82",
+      "enabled":"Y",
+      "attrib1":"1650",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9057",
+      "valueDesc":"S97 - HT DFIG",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9058",
+      "valueDesc":"SUZLON S111 DFIG (50Hz)",
+      "enabled":"Y",
+      "attrib1":"2100",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9059",
+      "valueDesc":"VESTAS V82",
+      "enabled":"Y",
+      "attrib1":"1650",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9060",
+      "valueDesc":"VESTAS V100 50Hz VCS MK 7",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9061",
+      "valueDesc":"VESTAS V100 50Hz VCS MK 7.1",
+      "enabled":"Y",
+      "attrib1":"1800",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9062",
+      "valueDesc":"VESTAS V100 50Hz VCS MK 7.1",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9063",
+      "valueDesc":"VESTAS V100 50Hz VCS MK 7",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9064",
+      "valueDesc":"VESTAS V110 50Hz VCS MK 10",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9067",
+      "valueDesc":"VESTAS V110 50Hz VCS MK 10",
+      "enabled":"Y",
+      "attrib1":"2000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9068",
+      "valueDesc":"WIN WIND ",
+      "enabled":"Y",
+      "attrib1":"1000",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9069",
+      "valueDesc":"NEPC INDIA",
+      "enabled":"Y",
+      "attrib1":"225",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9070",
+      "valueDesc":"NEPC INDIA",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9071",
+      "valueDesc":"NEPC INDIA",
+      "enabled":"Y",
+      "attrib1":"400",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9072",
+      "valueDesc":"NEPC MICON",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9073",
+      "valueDesc":"VESTAS RRB",
+      "enabled":"Y",
+      "attrib1":"225",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9074",
+      "valueDesc":"VESTAS RRB",
+      "enabled":"Y",
+      "attrib1":"500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9075",
+      "valueDesc":"VESTAS RRB",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9076",
+      "valueDesc":"TTG HUSHMER",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9077",
+      "valueDesc":"CARTER",
+      "enabled":"Y",
+      "attrib1":"300",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9078",
+      "valueDesc":"WINCON",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9079",
+      "valueDesc":"WINCON",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9080",
+      "valueDesc":"SUZLON",
+      "enabled":"Y",
+      "attrib1":"1250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9081",
+      "valueDesc":"KIRLOSHAR",
+      "enabled":"Y",
+      "attrib1":"400",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9082",
+      "valueDesc":"WINDIA",
+      "enabled":"Y",
+      "attrib1":"550",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9083",
+      "valueDesc":"TACKIE",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9084",
+      "valueDesc":"ELICON",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9085",
+      "valueDesc":"NEG-MICON",
+      "enabled":"Y",
+      "attrib1":"750",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9086",
+      "valueDesc":"NEG-MICON",
+      "enabled":"Y",
+      "attrib1":"950",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9087",
+      "valueDesc":"NEG-MICON",
+      "enabled":"Y",
+      "attrib1":"1650",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9088",
+      "valueDesc":"CHETTINAD",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9089",
+      "valueDesc":"SIVA",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9090",
+      "valueDesc":"SEPC",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9091",
+      "valueDesc":"WESCARE",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9092",
+      "valueDesc":"DAS LAGERWAY",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9093",
+      "valueDesc":"BHEL",
+      "enabled":"Y",
+      "attrib1":"250",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9094",
+      "valueDesc":"WINPOWER / HAMSA",
+      "enabled":"Y",
+      "attrib1":"330",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9095",
+      "valueDesc":"NORT TANK",
+      "enabled":"Y",
+      "attrib1":"300",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"9096",
+      "valueDesc":"NORT TANK",
+      "enabled":"Y",
+      "attrib1":"550",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"Pawan",
+      "valueDesc":"Pawan",
+      "enabled":"Y",
+      "attrib1":"600",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"GENERATOR_MAKE_CODE",
+      "listName":"Generator Make Code",
+      "valueCode":"Vensys-82",
+      "valueDesc":"Vensys-82",
+      "enabled":"Y",
+      "attrib1":"1500",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"INTERVAL_TYPE_CODE",
+      "listName":"Interval Type Code",
+      "valueCode":"01",
+      "valueDesc":"Peak - Off Peak",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"INTERVAL_TYPE_CODE",
+      "listName":"Interval Type Code",
+      "valueCode":"02",
+      "valueDesc":"Slot Wise",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"INTERVAL_TYPE_CODE",
+      "listName":"Interval Type Code",
+      "valueCode":"03",
+      "valueDesc":"Block Wise",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"INTERVAL_TYPE_CODE",
+      "listName":"Interval Type Code",
+      "valueCode":"04",
+      "valueDesc":"Share Percentage",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"METER_MAKE_CODE",
+      "listName":"Meter Make",
+      "valueCode":"01",
+      "valueDesc":"HMV",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"METER_MAKE_CODE",
+      "listName":"Meter Make",
+      "valueCode":"02",
+      "valueDesc":"GALAXY",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"03",
+    "valueDesc":"SECURE",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"04",
+    "valueDesc":"L&T",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"05",
+    "valueDesc":"GENUS",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"06",
+    "valueDesc":"EDMI",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"07",
+    "valueDesc":"HPL",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"08",
+    "valueDesc":"ELSTER",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+   {  
+    "listCode":"METER_MAKE_CODE",
+    "listName":"Meter Make",
+    "valueCode":"09",
+    "valueDesc":"WALLABY",
+    "enabled":"Y",
+    "attrib1":null,
+    "attrib2":null,
+    "attrib3":null
+   },
+  
+   {  
+      "listCode":"ORG_TYPE_CODE",
+      "listName":"Organisation Type Code",
+      "valueCode":"04",
+      "valueDesc":"Others",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PAYMENT_CONTEXT_CODE",
+      "listName":"Payment Context Code",
+      "valueCode":"ENERGY-SALE",
+      "valueDesc":"Energy Sale",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PAYMENT_CONTEXT_CODE",
+      "listName":"Payment Context Code",
+      "valueCode":"GRID-CONNECTIVITY",
+      "valueDesc":"Grid Connectivity",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PAYMENT_CONTEXT_CODE",
+      "listName":"Payment Context Code",
+      "valueCode":"NOC",
+      "valueDesc":"Noc",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"01",
+      "valueDesc":"I",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"02",
+      "valueDesc":"II",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"03",
+      "valueDesc":"III",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"04",
+      "valueDesc":"IV",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"05",
+      "valueDesc":"V",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"06",
+      "valueDesc":"VI-NO-AD",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_CLASS_TYPE_CODE",
+      "listName":"Plant Class Type",
+      "valueCode":"07",
+      "valueDesc":"VI",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_TYPE_CODE",
+      "listName":"Plant Type Code",
+      "valueCode":"01",
+      "valueDesc":"Fossil Fuel",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_TYPE_CODE",
+      "listName":"Plant Type Code",
+      "valueCode":"02",
+      "valueDesc":"Non Conventional",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PLANT_TYPE_CODE",
+      "listName":"Plant Type Code",
+      "valueCode":"03",
+      "valueDesc":"Hydro Electricity",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PURPOSE_CODE",
+      "listName":"Purpose",
+      "valueCode":"01",
+      "valueDesc":"Buyer",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"PURPOSE_CODE",
+      "listName":"Purpose",
+      "valueCode":"02",
+      "valueDesc":"Seller",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"01",
+      "valueDesc":"Banking",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"02",
+      "valueDesc":"Buyer",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"03",
+      "valueDesc":"Seller",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"04",
+      "valueDesc":"Transmission Loss",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"05",
+      "valueDesc":"Distribution Loss",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SERVICE_TYPE_CODE",
+      "listName":"Service Type Code",
+      "valueCode":"06",
+      "valueDesc":"Unadjusted",
+      "enabled":"N",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SLOT_CODE",
+      "listName":"Slot codes",
+      "valueCode":"C1",
+      "valueDesc":"C1 - Peak Hour 1",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SLOT_CODE",
+      "listName":"Slot codes",
+      "valueCode":"C2",
+      "valueDesc":"C2 - PeakHour 2",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SLOT_CODE",
+      "listName":"Slot codes",
+      "valueCode":"C3",
+      "valueDesc":"C3 - PeakHour 3",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SLOT_CODE",
+      "listName":"Slot codes",
+      "valueCode":"C4",
+      "valueDesc":"C4 - NG Hour",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SLOT_CODE",
+      "listName":"Slot codes",
+      "valueCode":"C5",
+      "valueDesc":"C5 - POK Hour",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"AN",
+      "valueDesc":"Andaman and Nicobar Islands",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"AP",
+      "valueDesc":"Andhra Pradesh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"AR",
+      "valueDesc":"Arunachal Pradesh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"AS",
+      "valueDesc":"Assam",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"BR",
+      "valueDesc":"Bihar",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"CG",
+      "valueDesc":"Chandigarh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"CH",
+      "valueDesc":"Chhattisgarh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"DD",
+      "valueDesc":"Daman and Diu",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"DH",
+      "valueDesc":"Dadra and Nagar Haveli",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"DL",
+      "valueDesc":"Delhi",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"GA",
+      "valueDesc":"Goa",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"GJ",
+      "valueDesc":"Gujarat",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"HP",
+      "valueDesc":"Himachal Pradesh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"HR",
+      "valueDesc":"Haryana",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"JH",
+      "valueDesc":"Jharkhand",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"JK",
+      "valueDesc":"Jammu and Kashmir",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"KA",
+      "valueDesc":"Karnataka",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"KL",
+      "valueDesc":"Kerala",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"LD",
+      "valueDesc":"Lakshadweep",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"MH",
+      "valueDesc":"Maharashtra",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"ML",
+      "valueDesc":"Meghalaya",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"MN",
+      "valueDesc":"Manipur",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"MP",
+      "valueDesc":"Madhya Pradesh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"MZ",
+      "valueDesc":"Mizoram",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"NL",
+      "valueDesc":"Nagaland",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"OR",
+      "valueDesc":"Odisha",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"PB",
+      "valueDesc":"Punjab",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"PY",
+      "valueDesc":"Puducherry",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"RJ",
+      "valueDesc":"Rajasthan",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"SK",
+      "valueDesc":"Sikkim",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"TN",
+      "valueDesc":"Tamil Nadu",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"TR",
+      "valueDesc":"Tripura",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"TS",
+      "valueDesc":"Telangana",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"UK",
+      "valueDesc":"Uttarakhand",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"UP",
+      "valueDesc":"Uttar Pradesh",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"STATE_CODE",
+      "listName":"State Code",
+      "valueCode":"WB",
+      "valueDesc":"West Bengal",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SUBSTATION_TYPE_CODE",
+      "listName":"SUBSTATION CODE",
+      "valueCode":"001",
+      "valueDesc":"OWNED",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SUBSTATION_TYPE_CODE",
+      "listName":"SUBSTATION CODE",
+      "valueCode":"002",
+      "valueDesc":"DEDICATED",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"SYSTEM_KEY_CODE",
+      "listName":"System Key Code",
+      "valueCode":"OA",
+      "valueDesc":"OA",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"05",
+      "valueDesc":"Tenkasi",
+      "enabled":"Y",
+      "attrib1":"01",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"06",
+      "valueDesc":"Tirunelveli",
+      "enabled":"Y",
+      "attrib1":"01",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"07",
+      "valueDesc":"Ettayapuram",
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"08",
+      "valueDesc":"Kovilpatti",
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"09",
+      "valueDesc":"Ottapidaram",
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"10",
+      "valueDesc":"Srivaikundam ",
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"11",
+      "valueDesc":"Vilathikulam",
+      "enabled":"Y",
+      "attrib1":"02",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"12",
+      "valueDesc":"Andipatti",
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"13",
+      "valueDesc":"Bodinayakanur",
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"14",
+      "valueDesc":"Theni",
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"15",
+      "valueDesc":"Uthamapalayam",
+      "enabled":"Y",
+      "attrib1":"03",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"16",
+      "valueDesc":"Aravakurichi",
+      "enabled":"Y",
+      "attrib1":"04",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"17",
+      "valueDesc":"Chinna Dharapuram",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"18",
+      "valueDesc":"Dharapuram",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"19",
+      "valueDesc":"Kangayam",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"20",
+      "valueDesc":"Madathukulam",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"21",
+      "valueDesc":"Udumalpet",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"22",
+      "valueDesc":"Peraiyur",
+      "enabled":"Y",
+      "attrib1":"07",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"23",
+      "valueDesc":"Pollachi",
+      "enabled":"Y",
+      "attrib1":"08",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"24",
+      "valueDesc":"Sulur",
+      "enabled":"Y",
+      "attrib1":"08",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"25",
+      "valueDesc":"Palani",
+      "enabled":"Y",
+      "attrib1":"06",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"26",
+      "valueDesc":"Ottanchatram",
+      "enabled":"Y",
+      "attrib1":"06",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"27",
+      "valueDesc":"Tiruppur",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"28",
+      "valueDesc":"Palladam",
+      "enabled":"Y",
+      "attrib1":"05",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"29-1",
+      "valueDesc":"Kanyakumari",
+      "enabled":"Y",
+      "attrib1":"11",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"29-2",
+      "valueDesc":"Thuvalai",
+      "enabled":"Y",
+      "attrib1":"11",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TALUK_CODE",
+      "listName":"Taluk Code",
+      "valueCode":"30",
+      "valueDesc":"Agastheeswaram",
+      "enabled":"Y",
+      "attrib1":"11",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_RELATIONSHIP_SOURCE_CODE",
+      "listName":"Source of Trade Relationship",
+      "valueCode":"EWA",
+      "valueDesc":"Energy Wheeling Application",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_RELATIONSHIP_SOURCE_CODE",
+      "listName":"Source of Trade Relationship",
+      "valueCode":"OAA",
+      "valueDesc":"Open Access Application",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_RELATIONSHIP_SOURCE_CODE",
+      "listName":"Source of Trade Relationship",
+      "valueCode":"SC",
+      "valueDesc":"Standing Clearance",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_RELATIONSHIP_SOURCE_CODE",
+      "listName":"Source of Trade Relationship",
+      "valueCode":"SIGNUP",
+      "valueDesc":"Signup Screen",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_RELATIONSHIP_SOURCE_CODE",
+      "listName":"Source of Trade Relationship",
+      "valueCode":"TR",
+      "valueDesc":"Trade Relationship Screen",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_REL_STATUS_CODE",
+      "listName":"Trade Relationship Status Code",
+      "valueCode":"01",
+      "valueDesc":"Established",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"TRADE_REL_STATUS_CODE",
+      "listName":"Trade Relationship Status Code",
+      "valueCode":"02",
+      "valueDesc":"Active",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"A",
+      "valueDesc":"Admin",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"CON",
+      "valueDesc":"Consumer Login",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"CON-COMMON",
+      "valueDesc":"Consumer Login given to EDC Users",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"E",
+      "valueDesc":"External",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"EDC",
+      "valueDesc":"EDC Users",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"GEN",
+      "valueDesc":"Generator Login",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"GEN-COMMON",
+      "valueDesc":"Generator Login given to EDC Users",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"IEX",
+      "valueDesc":"IEX login",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"NCES",
+      "valueDesc":"Nodal Agency for Wind - NCES",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"PPP",
+      "valueDesc":"Nodal Agency - PPP",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"USER_TYPE_CODE",
+      "listName":"User Type Code",
+      "valueCode":"SLDC",
+      "valueDesc":"Nodal Agency - SLDC",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"01",
+      "valueDesc":"11KV",
+      "enabled":"Y",
+      "attrib1":"11",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"02",
+      "valueDesc":"22KV",
+      "enabled":"Y",
+      "attrib1":"22",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"03",
+      "valueDesc":"22-11KV",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"04",
+      "valueDesc":"23KV",
+      "enabled":"Y",
+      "attrib1":"23",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"05",
+      "valueDesc":"33KV",
+      "enabled":"Y",
+      "attrib1":"33",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"06",
+      "valueDesc":"33-11KV",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"07",
+      "valueDesc":"66KV",
+      "enabled":"Y",
+      "attrib1":"66",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"08",
+      "valueDesc":"110KV",
+      "enabled":"Y",
+      "attrib1":"110",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"09",
+      "valueDesc":"230KV",
+      "enabled":"Y",
+      "attrib1":"230",
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"10",
+      "valueDesc":"7.07KV",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"VOLTAGE_CODE",
+      "listName":"Voltage",
+      "valueCode":"11",
+      "valueDesc":"",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"WIND_PASS_CODE",
+      "listName":"Wind Pass Code",
+      "valueCode":"01",
+      "valueDesc":"ARALVOIMOZHI",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"WIND_PASS_CODE",
+      "listName":"Wind Pass Code",
+      "valueCode":"02",
+      "valueDesc":"KAMBAM",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"WIND_PASS_CODE",
+      "listName":"Wind Pass Code",
+      "valueCode":"03",
+      "valueDesc":"PALGHAT",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   },
+   {  
+      "listCode":"WIND_PASS_CODE",
+      "listName":"Wind Pass Code",
+      "valueCode":"04",
+      "valueDesc":"SHENGOTTAH",
+      "enabled":"Y",
+      "attrib1":null,
+      "attrib2":null,
+      "attrib3":null
+   }
+]

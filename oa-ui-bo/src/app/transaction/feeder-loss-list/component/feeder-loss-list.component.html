@@ -1,0 +1,163 @@
+
+<div fxLayout="row" fxLayoutWrap="wrap"></div>
+
+<div fxFlex.gt-sm="100%" fxFlex="100" >
+    <mat-card style="background-image: url(assets/images/4907157.jpg);background-repeat: no-repeat;background-size: cover;">
+        <mat-card-title>
+            SOLAR ENERGY ACCOUNTING AT INTERCONNECTION POINT-FEEDER LINE LOSS
+        </mat-card-title>
+
+        <mat-card-content style="background-image: url(assets/images/4907157.jpg);background-repeat: no-repeat;background-size: cover;">
+            
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"  >
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                      <mat-option *ngFor="let org of orgList" [value]="org.code">
+                        {{org.code}} - {{org.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Substation" [(ngModel)]='substationName'>
+                      <mat-option *ngFor="let sub of subsationById" [value]="sub.name">
+                        {{sub.name | uppercase}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month"
+                            [(ngModel)]='statementMonth' readonly>
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Statement Year" [(ngModel)]="statementYear">
+                    </mat-form-field>
+                
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary" (click)="generateResult()">SEARCH</button>
+                </mat-card-actions>
+
+                  <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="printSolarReport()">
+                        <mat-icon>cloud_download</mat-icon>
+                        Download Pdf
+                    </button>
+                   </mat-card-actions>
+
+                   <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+               
+            </div>
+    
+        </mat-card-content>
+
+        <mat-card-content >
+            <ngx-datatable class="material" [rows]="rows"  [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+             [scrollbarV]="true" style="background-image: url(assets/images/4907157.jpg);background-repeat: no-repeat;background-size: cover;">
+           
+                <ngx-datatable-column  name="EDC ID" [width]="90">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.orgId}}  
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="SUBSTATION NAME" [width]="202">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.substationName}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="FEEDER NAME" [width]="226">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.feederName}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="TOTAL SERVICES" [width]="125">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.totalServices}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="BILLED SERVICES" [width]="125">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.billedService}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="TOTAL EXPORT UNITS" [width]="143">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.totalExportUnits}}
+                    </ng-template>
+                </ngx-datatable-column>
+                
+
+                <ngx-datatable-column name="BULK METER READING" [width]="270">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <input (keydown)="numberFormat($event)" *ngIf="row.bulkMeterReading==NULL&&row.subbulkreading==NULL"  type="text" [(ngModel)]="row.bulkentry" (ngModelChange)="calculateSum(row)" >
+                      <input *ngIf="row.bulkMeterReading==NULL&&row.subbulkreading!=NULL"  type="text" [(ngModel)]="row.subbulkreading" readonly>
+                      <input *ngIf="row.bulkMeterReading && row.enableIp!='EnableSave' && row.subbulkreading==NULL"  type="text" [(ngModel)]="row.bulkMeterReading" readonly>
+                      <input *ngIf="row.bulkMeterReading && row.enableIp!='EnableSave' && row.subbulkreading!=NULL"  type="text" [(ngModel)]="row.subbulkreading" readonly>
+                      <input (keydown)="numberFormat($event)" *ngIf="row.enableIp=='EnableSave'"  type="text" [(ngModel)]="row.bulkentry" (ngModelChange)="calculateSum(row)" >
+                      <mat-icon *ngIf="row.bulkMeterReading && row.subbulkreading==NULL"  (click)="enableBulk(row)">edit</mat-icon>
+                      <mat-icon *ngIf="row.bulkMeterReading && row.subbulkreading==NULL"  (click)="reload()">refresh</mat-icon>
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                <ngx-datatable-column name="Export Difference">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      {{row.exportDifference|| "0"}}
+                    </ng-template>
+                   
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="LOSS PERCENT %">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      {{row.lossUnits || "0"}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                    <ngx-datatable-column name="FEEDEREND METER NUMBER">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          {{row.meterNo}}
+                        </ng-template>
+                   
+                </ngx-datatable-column>
+
+                <ngx-datatable-column  name="SAVE LOSS">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button *ngIf="row.bulkMeterReading==NULL&&row.subbulkreading==NULL" mat-raised-button color="primary"  class="mr-1" (click)="save(row.feederId,row.feederName,row.substationName
+                        ,row.orgId,row.orgName,row.substationId,row.totalExportUnits,row.bulkentry,row.lossUnits)">SAVE</button>
+                        <button *ngIf="row.bulkMeterReading&& row.enableIp!='EnableSave'&&row.subbulkreading==NULL" mat-raised-button color="primary" class="mr-1" (click)="save(row.feederId,row.feederName,row.substationName
+                        ,row.orgId,row.orgName,row.substationId,row.totalExportUnits,row.bulkMeterReading,row.lossUnits)">SAVE</button>
+                 <button *ngIf="row.enableIp=='EnableSave'&&row.subbulkreading==NULL" mat-raised-button color="primary"  class="mr-1" (click)="save(row.feederId,row.feederName,row.substationName
+                        ,row.orgId,row.orgName,row.substationId,row.totalExportUnits,row.bulkentry,row.lossUnits)">SAVE</button>
+
+                        <button *ngIf="row.bulkMeterReading==NULL&&row.subbulkreading!=NULL" mat-raised-button color="primary"  class="mr-1"  style="background-color:aquamarine;color: black;" >SAVED</button>
+                        <button *ngIf="row.bulkMeterReading&& row.enableIp!='EnableSave'&&row.subbulkreading!=NULL" mat-raised-button color="primary" class="mr-1"  style="background-color: aquamarine;color: black;" >SAVED</button>
+                 <button *ngIf="row.enableIp=='EnableSave'&&row.subbulkreading!=NULL" mat-raised-button color="primary"  class="mr-1"  style="background-color: aquamarine;color: black;" >SAVED</button>
+
+                    </ng-template>
+
+                </ngx-datatable-column> 
+            </ngx-datatable>
+        </mat-card-content>
+    </mat-card>
+
+</div>
+<style>
+    .select {
+    padding-left: 92%;
+}
+</style>
+             

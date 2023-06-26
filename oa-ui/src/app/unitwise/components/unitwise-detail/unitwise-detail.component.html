@@ -1,0 +1,128 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>Unit wise {{unitwiseType === 'generation'? "Generation" : "Captive Allocation"}} Details</mat-card-title>
+
+	<ng-template mat-tab-label>Generation Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Service - Company" (change)="setServiceNames($event)" [(ngModel)]='consumerDetails.number'>
+					<mat-option *ngFor="let service of consumerServices" [value]="service.number">
+						{{ service.number +" - "+service.companyId }}
+					</mat-option>
+				</mat-select>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='edcname'>
+				</mat-form-field>
+			</div>
+			<br>
+
+			<div *ngIf="unitwiseType == 'captive';else generationContent">
+				<ngx-datatable class="material" [rows]="captiveRows" [columnMode]="'force'" [headerHeight]="70" [rowHeight]="'auto'">
+					<ngx-datatable-column name="Unit Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.unitName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Captive Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.captiveName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="HTSC No">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.serviceNumber}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.edcName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Injection Voltage">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.injectionVoltage}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Drawal Voltage">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.drawalVoltage}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Quantum of Energy<br>allocated units">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.quantum'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+				</ngx-datatable>
+			</div>
+
+			<ng-template #generationContent>
+				<ngx-datatable class="material" [rows]="genRows" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="'auto'">
+					<ngx-datatable-column name="Unit Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.unitName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Gross Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.grossGeneration'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Auxilliary Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.auxGeneration'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.generation'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Net Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.netGeneration'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Captive Use">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.captiveUse'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Third Party">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.thirdParty'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Sale To Board">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+								<input matInput placeholder="" [(ngModel)]='row.saleToBoard'>
+							</mat-form-field>
+						</ng-template>
+					</ngx-datatable-column>
+				</ngx-datatable>
+			</ng-template>
+		</mat-card-content>
+	</mat-card>
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveUnitwise('')">Save</button>
+		<button mat-raised-button class="primary" (click)="listUnitwises()">Cancel/Back</button>
+	</mat-card-actions>
+</mat-card>

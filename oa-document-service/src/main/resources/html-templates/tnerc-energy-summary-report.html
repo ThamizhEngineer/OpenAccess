@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>TNERC NET Generation Report</title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p>TNERC ENERGY SUMMARY REPORT</p>
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="12">WIND GENERATION DETAILS  FOR 2019-2020</th>
+                    </tr>  
+        
+                    <tr>
+                        <th style="background: #dcdcdc">MONTH</th>
+                        <th style="background: #dcdcdc">YEAR</th>
+                        <th style="background: #dcdcdc">CAPTIVE GENERATION</th>
+                        <th style="background: #dcdcdc">QUANTUM OF ENERGY ALLOTED FROM WEG FOR CAPTIVE CONSUMPTION INCLUDING BANKED UNITS IN MU</th>
+                        <th style="background: #dcdcdc">WIND ENERGY BANKED IN MU</th>
+                        <th style="background: #dcdcdc">WIND ENERGY BANKED IN MU AFTER BANKING CHARGES</th>
+                        <th style="background: #dcdcdc">Surplus returned from HT And Recredited double banking units</th>
+                        <th style="background: #dcdcdc">Total banking</th>
+                        <th style="background: #dcdcdc">Cumulative banking</th>
+                        <th style="background: #dcdcdc">Withdrawn from banking</th>
+                        <th style="background: #dcdcdc">Cumulative withdrawal</th>
+                        <th style="background: #dcdcdc">Banking balance</th>
+                        
+                    </tr>
+                <tr class="item-row" th:each="tnercEnergySummaryReport : ${tnercEnergySummaryReport}">
+                  <td th:text="${tnercEnergySummaryReport.op1}"></td>
+                <td th:text="${tnercEnergySummaryReport.op2}"></td>
+                <td th:text="${tnercEnergySummaryReport.op3}"></td>
+                <td th:text="${tnercEnergySummaryReport.op4}"></td>
+                <td th:text="${tnercEnergySummaryReport.op6}"></td>
+                <td th:text="${tnercEnergySummaryReport.op7}"></td>
+                <td th:text="${tnercEnergySummaryReport.op8}"></td>
+                <td th:text="${tnercEnergySummaryReport.op9}"></td>
+                <td th:text="${tnercEnergySummaryReport.op10}"></td>
+                <td th:text="${tnercEnergySummaryReport.op11}"></td>
+                <td th:text="${tnercEnergySummaryReport.op12}"></td>
+                <td th:text="${tnercEnergySummaryReport.op13}"></td>
+                
+            </tr>
+         <td style="text-align: center;font-family: myFirstFont;" colspan="2">TOTAL</td>
+            <td th:text="${totalop3}"></td>
+            <td th:text="${totalop4}"></td>
+           <!-- <td th:text="${totalop5}"></td> -->
+            <td th:text="${totalop6}"></td>
+            <td th:text="${totalop7}"></td>
+            <td th:text="${totalop8}"></td>
+            <td th:text="${totalop9}"></td>
+            <td th:text="${totalop10}"></td>
+            <td th:text="${totalop11}"></td>
+            <td th:text="${totalop12}"></td>
+            <td th:text="${totalop13}"></td>
+                </table>
+
+</div>
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Iex-Noc Details </mat-card-title>
+
+    <ng-template mat-tab-label>Iex-Noc Details</ng-template>
+    <mat-card>
+        <mat-card-content>
+            <div mat-subheader>
+                <strong>IEX Consumer Details</strong>
+            </div>
+            <br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} EDC Name" [(ngModel)]="iexnoc.buyerOrgName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}}" value="{{iexnoc.buyerCompanyName}}"
+                        [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Aggrement Period Code" value="{{iexnoc.agreementPeriodCode}}"
+                        [disabled]="disableControls">
+                </mat-form-field>
+            </div>
+            <br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Status Code" [(ngModel)]="iexnoc.statusCode" [disabled]="disableControls">
+                </mat-form-field>
+
+                <!-- 
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Duration From" value="{{commonService.displayMonth(noc.fromMonth)}} - {{noc.fromYear}}" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Duration To" value="{{commonService.displayMonth(noc.toMonth)}} - {{noc.toYear}}" [disabled]="disableControls">
+                </mat-form-field> -->
+            </div>
+            <br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Iex-Noc Number" [disabled]="disableControls" [(ngModel)]="iexnoc.code">
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Sanctioned Demand(kVA)" [(ngModel)]="iexnoc.approvedCapacity" [disabled]="disableControls">
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Whether Exempted from RC" [(ngModel)]='iexnoc.exemptRc'>
+                        <mat-option *ngFor="let exemptRc of exemptRc" [value]="exemptRc.name">
+                            {{exemptRc.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Proposed Quantum(MW)" [(ngModel)]="iexnoc.proposedCapacity">
+                </mat-form-field>
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+
+
+
+            </div>
+            <br>
+
+            <hr>
+            <div mat-subheader>
+                <strong>Other Details</strong>
+            </div>
+            <br>
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 25%;" placeholder="Outstanding dues from company" [(ngModel)]='iexnoc.hasDues'>
+                            <mat-option *ngFor="let hasDues of hasDues" [value]="hasDues.name">
+                                {{hasDues.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="if Yes, Enter Detail" [(ngModel)]='iexnoc.dueDetails'>   </textarea>
+                    </mat-form-field>
+                </div>
+                <br>
+            </mat-card>
+            <hr>
+            <br>
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Details of pending court case/stay if any in brief" [(ngModel)]='iexnoc.pendingCaseDetails'>   </textarea>
+                    </mat-form-field>
+                </div>
+                <br>
+            </mat-card>
+            <hr>
+            <br>
+
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Technical Feasability Details" [(ngModel)]='iexnoc.technicalFeasibilityDetails'>   </textarea>
+                    </mat-form-field>
+                </div>
+                <br>
+            </mat-card>
+            <hr>
+            <br>
+
+            <mat-card>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary">Save</button>
+                    <button mat-raised-button color="primary" (click)="approveIexNoc()">Approve</button>
+                    <button mat-raised-button class="primary">Cancel/Back</button>
+                </mat-card-actions>
+            </mat-card>
+            <br>
+
+
+
+        </mat-card-content>
+    </mat-card>
+</mat-card>

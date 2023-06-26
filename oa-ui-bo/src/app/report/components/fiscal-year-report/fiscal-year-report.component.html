@@ -1,0 +1,213 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+
+    <mat-card>
+      <mat-card-title>
+        MASTER SOLAR REPORT
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='Orgid' (ngModelChange)="filterSubstations(Orgid)" [required]="isMandatory">
+              <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                {{edc.code}} - {{ edc.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="FLOW TYPE" [(ngModel)]='flowType'>
+              <mat-option *ngFor="let flow of flowTypeList" [value]="flow.value">
+                <span>{{ flow.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="SUBSTATION" [(ngModel)]='substation'>
+              <mat-option *ngFor="let sub of subsationById" [value]="sub.name">
+                <span>{{ sub.name | uppercase}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="REC/NON-REC" [(ngModel)]='isRec'>
+              <mat-option *ngFor="let rec of isRecList" [value]="rec.value">
+                <span>{{ rec.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+ <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="District" [(ngModel)]='District'>
+              <mat-option *ngFor="let dist of districtData" [value]="dist.districtName">
+                <span>{{ dist.districtName}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Financial Year" [(ngModel)]='Year'>
+              <mat-option *ngFor="let year of yearList" [value]="year.key">
+                <span>{{ year.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="PLANT STATUS" [(ngModel)]='status'>
+              <mat-option *ngFor="let sts of statusList" [value]="sts.value">
+                <span>{{ sts.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+          </mat-card-actions>
+
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="printReport()">
+              <mat-icon>cloud_download</mat-icon>
+              Download Pdf
+            </button>
+          </mat-card-actions>
+
+          <mat-card-actions>
+            <button mat-raised-button class="xl" color="accent" (click)="exportAsXLSX()">
+              <mat-icon>cloud_download</mat-icon>
+              Download As XL
+            </button>
+          </mat-card-actions>
+        </div>
+
+        <br />
+        <br />
+        <div>
+
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="100"
+            [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+
+            <ngx-datatable-column name="SI.NO" [width]="50" >
+              <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{rows.indexOf(row) + 1}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="EDC ID" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op1}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="EDC NAME" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op2}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="SERVICE NO" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op3}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="GENERATOR NAME" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op4}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="COMMISSION DATE" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op5}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="CAPACITY" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op7}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="DISTRICT" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op9}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="FLOW TYPE" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op10}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="REC/NON-REC" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op11}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="TARIFF" *ngIf="flowType=='STB'" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op15}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="CT RATIO" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op17}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="PT RATIO" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op18}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="MF" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op19}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="MODEM NUMBER" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op20}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="METER NO" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op21}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="SUBSTATION NAME" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op23}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="FEEDER NAME" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op24}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="FEEDER LINE LENGTH" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op26}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="TYPE OF SS" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op27}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="PLANT STATUS" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op28}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="REMARKS" >
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.op29}}
+              </ng-template>
+            </ngx-datatable-column>
+
+
+          </ngx-datatable>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

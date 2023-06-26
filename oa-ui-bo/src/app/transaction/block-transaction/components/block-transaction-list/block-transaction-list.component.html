@@ -1,0 +1,83 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				Block Transaction List
+			</mat-card-title>
+
+			<mat-card-content>
+		<!--		<button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='addDelTxn()'><mat-icon hidden>add</mat-icon></button> -->
+
+				<br/> 
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+				    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Service Number" [(ngModel)]="GenServiceNumber"   [required]="isMandatory">
+					</mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Reading Month" [(ngModel)]='Month'>
+							<mat-option *ngFor="let month of months" [value]="month.value">
+								{{ month.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Reading Year" [(ngModel)]="Year">
+					</mat-form-field>
+
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+
+				</div>
+			</mat-card-content>
+			
+
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+					
+					<ngx-datatable-column name="Gen Service Number" ng-class="test">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.mCompServiceNumber}}  
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Month">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.month}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Year">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.year}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.status}}
+						</ng-template>
+					</ngx-datatable-column>
+				 
+					<ngx-datatable-column  name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<p hidden>{{row.remarks}}</p><p hidden>{{row.transactionType}}</p><p hidden>{{row.status}}</p>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editBlcTxn(row.mCompServiceNumber,row.month,row.year,row.transactionType,row.remarks,row.status)">Action</button>
+						</ng-template>
+					</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+

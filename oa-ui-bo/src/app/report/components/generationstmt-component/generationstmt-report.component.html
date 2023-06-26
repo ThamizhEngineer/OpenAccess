@@ -1,0 +1,130 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        GENERATION STATEMENT REPORT
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="EDC NAME" [disabled]="disableEdc"
+              [(ngModel)]='Orgid' [required]="isMandatory">
+              <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                {{edc.code}} - {{ edc.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="MONTH" [(ngModel)]='Readmonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                <span>{{ month.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>    
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="YEAR" [(ngModel)]='Readyear'>
+              <mat-option *ngFor="let year of years" [value]="year">
+                <span>{{ year}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="FUEL" [(ngModel)]='fuelType'>
+              <mat-option *ngFor="let fuel of fuelTypeList" [value]="fuel.key">
+                <span>{{ fuel.name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+          </mat-card-actions>
+
+          <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="printReport()">
+              <mat-icon>cloud_download</mat-icon>
+              Download Pdf
+            </button>
+          </mat-card-actions>
+
+          <mat-card-actions>
+            <button mat-raised-button class="xl" color="accent" (click)="exportAsXLSX()">
+              <mat-icon>cloud_download</mat-icon>
+              Download As XL
+            </button>
+          </mat-card-actions>
+        </div>
+       </mat-card-content>
+      </mat-card>
+        <br />
+        <br />
+        <div style="float: center;width: 100%">
+          <table id="table" style="float: center; border:1;width: 100%;">     
+              <tr>
+                  <th class="col" style="text-align: center;" >S.NO</th>
+                  <th class="col" style="text-align: center;" >EDC ID</th>
+                  <th class="col" style="text-align: center;" >EDC NAME</th>
+                  <th class="col"  style="text-align: center;" >THIRDPARTY COUNT</th>
+                  <th class="col" style="text-align: center;" >THIRDPARTY</th>
+                  <th class="col" style="text-align: center;" >CAPTIVE COUNT</th>   
+                  <th class="col" style="text-align: center; " >CAPTIVE</th>
+                  <th class="col"  style="text-align: center;" >STB COUNT</th>
+                  <th class="col" style="text-align: center;" >STB</th>
+                  <th class="col" style="text-align: center;" >TOTAL COUNT</th>
+                  <th class="col" style="text-align: center;" >TOTAL CAPACITY</th> 
+                  <th class="col" style="text-align: center;" >THIRDPARTY IMPORT</th>
+                  <th class="col" style="text-align: center;" >THIRDPARTY EXPORT</th>
+                  <th class="col" style="text-align: center;" >THIRDPARTY NET</th>           
+                  <th class="col" style="text-align: center;" >CAPTIVE IMPORT</th>    
+                  <th class="col" style="text-align: center;" >CAPTIVE EXPORT</th>
+                  <th class="col" style="text-align: center;" >CAPACITY NET</th> 
+                  <th class="col" style="text-align: center;" >STB IMPORT</th>        
+                  <th class="col" style="text-align: center;" >STB EXPORT</th>   
+                  <th class="col" style="text-align: center;" >STB NET</th>             
+              </tr>
+  
+              <tr *ngFor="let report of rows;let i=index;">  
+                  <td style="text-align: center;width: 20px;">{{i+1}}</td> 
+                  <td style="text-align: center;">{{report.op1}}</td>  
+                  <td style="text-align: center;">{{report.op2}}</td>  
+                  <td style="text-align: center;">{{report.op3}}</td>  
+                  <td style="text-align: center;">{{report.op4}}</td>  
+                  <td style="text-align: center;">{{report.op5}}</td> 
+                  <td style="text-align: center;">{{report.op6}}</td>  
+                  <td style="text-align: center;">{{report.op7}}</td> 
+                  <td style="text-align: center;">{{report.op8}}</td>  
+                  <td style="text-align: center;">{{report.op9}}</td> 
+                  <td style="text-align: center;">{{report.op10}}</td>  
+                  <td style="text-align: center;">{{report.op11}}</td>
+                  <td style="text-align: center;">{{report.op12}}</td>  
+                  <td style="text-align: center;">{{report.op13}}</td> 
+                  <td style="text-align: center;">{{report.op14}}</td> 
+                  <td style="text-align: center;">{{report.op15}}</td>         
+                  <td style="text-align: center;">{{report.op16}}</td>  
+                  <td style="text-align: center;">{{report.op17}}</td> 
+                  <td style="text-align: center;">{{report.op18}}</td> 
+                  <td style="text-align: center;">{{report.op19}}</td> 
+              </tr>   
+          </table>
+          <br>
+          <br>
+          <br>
+      </div>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        .col{
+          /* background:  #dcdcdc; */
+          background: aquamarine;
+        } 
+        </style> 
+  </div>
+</div>

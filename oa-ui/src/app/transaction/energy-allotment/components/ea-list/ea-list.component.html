@@ -1,0 +1,140 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+                <mat-card>
+                        <mat-card-title> <strong>Energy Allotment</strong> </mat-card-title>
+                        <mat-card-content>
+                                <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)="validateEa()">
+                                        <mat-icon>add</mat-icon>
+                                </button>
+
+                                <div fxLayout="row" fxLayoutAlign="start center">
+
+                                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" *ngIf="!genUser">
+                                                <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                                        [disabled]="disableEdc" placeholder="Edc Name"
+                                                        [(ngModel)]='searchOrgId'>
+                                                        <mat-option *ngFor="let org of orgList" [value]="org.id">
+                                                                {{org.code}} - {{org.name}}
+                                                        </mat-option>
+                                                </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" *ngIf="!genUser">
+                                                <input matInput
+                                                        placeholder="{{this.commonUtils.getProp('seller')}}  Company Name"
+                                                        [(ngModel)]="searchSellerCompanyName">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" *ngIf="!genUser">
+                                                <input matInput placeholder="Company Service Number"
+                                                        [(ngModel)]="sellerCompanyServiceNumber"
+                                                        [disabled]="disableServiceNumber">
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                                <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                                        placeholder="Statement Month" [(ngModel)]='searchMonth'
+                                                        readonly>
+                                                        <mat-option *ngFor="let month of months" [value]="month.value">
+                                                                {{ month.name }}
+                                                        </mat-option>
+                                                </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                                <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                                                        placeholder="Statement Year" [(ngModel)]='searchYear'
+                                                        readonly>
+                                                        <mat-option *ngFor="let year of years" [value]="year">
+                                                                {{ year }}
+                                                        </mat-option>
+                                                </mat-select> 
+                                        </mat-form-field>
+
+
+                                        <hr>
+
+                                        <mat-card-actions>
+                                                <button mat-raised-button color="primary" class="primary"
+                                                        (click)="fetchss()">Search</button>
+                                        </mat-card-actions>
+                                </div>
+                                
+                        </mat-card-content>
+                        <mat-card-content>
+                        <div *ngIf="genUser">
+                        <small  *ngIf="CaptiveUser" class="mat-text-warn" style="font-size:15px">{{message}}<br></small>
+                         <small *ngIf="Alluser" class="forcolour" style="font: size 40px">{{newmessage}}</small>  
+                        
+                </div>
+        </mat-card-content>
+                        <mat-card-content>
+                                
+                               
+                                <ngx-datatable class="material" [columnMode]="ColumnMode.force" [headerHeight]="50"
+                                        [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+                                        [rows]="rows">
+                                        <mat-toolbar color="primary-color" *ngIf="genUser">My full table</mat-toolbar>
+                                        <ngx-datatable-column  *ngIf="!genUser">
+                                                        <ng-template let-row="row" let-value="value"
+                                                                ngx-datatable-cell-template>
+                                                                No data
+                                                        </ng-template>
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="Service Number" [width]="120" [frozenLeft]="true" *ngIf="!genUser">
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.sellerCompanyServiceNumber}}
+                                                </ng-template>
+
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column name="EDC" [width]="150" *ngIf="!genUser">
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.sellerEndOrgName}}
+                                                </ng-template>
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column name="Company Name" [width]="350" *ngIf="!genUser">
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.sellerCompanyName}}
+                                                </ng-template>
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column name="Month/Year" [width]="150">
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.month}}/{{row.year}}
+                                                </ng-template>
+
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column name="Injection Voltage" [width]="150">
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.injectingVoltageName}}
+                                                </ng-template>
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="Net Generation" [width]="150"  >
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        {{row.netGeneration}}
+                                                </ng-template>
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="##" [width]="150" >
+                                                <ng-template let-row="row" let-value="value"
+                                                        ngx-datatable-cell-template>
+                                                        <button mat-raised-button color="primary" class="mr-1"
+                                                                (click)="editEa(row['id'])">{{row.statusCode=='APPROVED'?'COMPLETED':row.statusCode}}</button>
+                                                </ng-template>
+                                        </ngx-datatable-column>
+                                </ngx-datatable>
+                        </mat-card-content>
+                </mat-card>
+
+        </div>
+
+</div>

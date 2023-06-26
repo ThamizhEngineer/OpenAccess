@@ -1,0 +1,197 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Trade Relationship</mat-card-title>
+
+    <ng-template mat-tab-label> Details</ng-template>
+    <mat-card>
+        <mat-card-content>
+
+
+            <div mat-subheader><strong>Buyer Company</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Buyer Edc Name" [(ngModel)]='tradeRelationship.buyerOrgId'
+                        [required]="isMandatory" (ngModelChange)="onBuyerOrgChange()">
+                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Buyer Company Name" [(ngModel)]='tradeRelationship.buyerCompServiceId'
+                        [required]="isMandatory" (ngModelChange)="onConsumerChange()">
+
+                        <mat-option *ngFor="let buyerCompanyService of buyerCompanyServices" [value]="buyerCompanyService.serviceId">
+                            {{ buyerCompanyService.serviceNumber}} - {{buyerCompanyService.companyName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Buyer Sanctioned Capacity" [(ngModel)]="tradeRelationship.sanctionedCapacity" disabled="true">
+                </mat-form-field>
+                <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+
+
+            </div>
+
+            <div mat-subheader><strong>Seller Company</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Seller Edc Name" [(ngModel)]='tradeRelationship.sellerOrgId'
+                        [required]="isMandatory" (ngModelChange)="onSellerOrgChange()">
+                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Seller Company Name" [(ngModel)]='tradeRelationship.sellerCompServiceId'
+                        [required]="isMandatory" (ngModelChange)="onSellerConsumerChange()">
+
+                        <mat-option *ngFor="let sellerCompanyService of sellerCompanyServices" [value]="sellerCompanyService.serviceId">
+                            {{ sellerCompanyService.serviceNumber}} - {{sellerCompanyService.companyName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Seller Sanctioned Capacity" [(ngModel)]="tradeRelationship.sellerSanctionedCapacity" disabled="true">
+                </mat-form-field>
+                <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+
+
+            </div>
+
+            <div mat-subheader><strong>Details</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="tradeRelationship.fromDate" [matDatepicker]="fromDate" placeholder="From Date" [disabled]="disableControls">
+                    <mat-datepicker-toggle mdSuffix [for]="fromDate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="tradeRelationship.fromDate" [matDatepicker]="fromDate" placeholder="From Date" [disabled]="disableControls">
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+
+                    <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="tradeRelationship.toDate" [matDatepicker]="toDate" placeholder="To Date" [disabled]="disableControls">
+                    <mat-datepicker-toggle mdSuffix [for]="toDate"></mat-datepicker-toggle>
+                    <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="tradeRelationship.toDate" [matDatepicker]="toDate" placeholder="To Date" [disabled]="disableControls">
+                    <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+
+                    <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
+
+
+
+
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" (change)="onIntervalTypeChange()" [(ngModel)]='tradeRelationship.intervalTypeCode'>
+
+                        <mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+                            {{intervalTypeCode.valueDesc}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field  class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Quantum" [(ngModel)]="tradeRelationship.quantum" disabled="true" >
+                </mat-form-field>
+                <mat-form-field *ngIf="tradeRelationship.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Share Percentage" [(ngModel)]='tradeRelationship.sharePercent' (ngModelChange)="onAdd()" >
+                </mat-form-field>
+                <div *ngIf="tradeRelationship.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+                
+
+
+            </div>
+
+            <div *ngIf="tradeRelationship.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="Peak Units" [(ngModel)]='tradeRelationship.peakUnits' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="Off Peak Units" [(ngModel)]='tradeRelationship.offPeakUnits' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                                                <div class="ml-xs mr-xs" style="width: 100%;"></div>
+                                            </div>
+                                            <div *ngIf="tradeRelationship.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="C1 - PeakHour 1" [(ngModel)]='tradeRelationship.c1' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="C2 - PeakHour 2" [(ngModel)]='tradeRelationship.c2' (ngModelChange)="onAdd()" >
+                                                </mat-form-field>
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="C3 - PeakHour 3" [(ngModel)]='tradeRelationship.c3' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="C4 - PeakHour 4" [(ngModel)]='tradeRelationship.c4' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                
+                                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                    <input matInput placeholder="C5 - PeakHour 5" [(ngModel)]='tradeRelationship.c5' (ngModelChange)="onAdd()">
+                                                </mat-form-field>
+                                            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Status" [(ngModel)]="tradeRelationship.statusCode">
+                        <mat-option *ngFor="let status of statues" [value]="status.name">
+                            {{status.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Reference Number" [(ngModel)]="tradeRelationship.referenceNumber">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Remarks" [(ngModel)]="tradeRelationship.remarks">
+                </mat-form-field>
+
+
+                <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+    <hr>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveTradeRelationship('')">Save</button>
+        <button mat-raised-button color="primary" (click)="deleteTradeRelationship('')">Delete</button>
+        <!-- <button *ngIf="tradeRelationship.statusCode != 'Established'" mat-raised-button color="primary" [disabled]=(disableControls)
+            (click)="saveTradeRelationship('')">Save</button> -->
+
+        <button mat-raised-button class="primary" (click)="listTradeRelationship()">Cancel/Back</button>
+    </mat-card-actions>
+</mat-card>

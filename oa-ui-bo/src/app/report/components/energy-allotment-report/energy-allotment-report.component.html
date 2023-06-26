@@ -1,0 +1,61 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+         Energy Allotment Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Generator EDC" [(ngModel)]='selectedSellerOrg'>
+                  <mat-option *ngFor="let org of orgList" [value]="org.id">
+                    {{org.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <input matInput placeholder="Generator Service Number" [(ngModel)]="selectedSellerCapacity">
+            </mat-form-field>
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive/selltoboard" [(ngModel)]="selectedIsCaptive">
+
+								<mat-option *ngFor="let iscaptives of isCaptives" [value]="iscaptives.key">
+									{{iscaptives.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+            <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Consumer EDC" [(ngModel)]='selectedBuyerOrg'>
+                      <mat-option *ngFor="let org of orgList" [value]="org.id">
+                        {{org.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="WEG Group Classification" [(ngModel)]='selectedMakeCode'>
+    
+                      <mat-option *ngFor="let PowerPlantType of powerPlantClassTypes" [value]="PowerPlantType.valueCode">
+                        {{PowerPlantType.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+
+
+  
+            <mat-card-actions>				
+            <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+            </mat-card-actions>
+  
+      </div>
+          <br/>
+          <br/>
+          
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

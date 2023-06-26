@@ -1,0 +1,86 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+    <mat-card>
+      <mat-card-title >
+       <h1 class="header" *ngIf="type=='Total'" > MONTHLY PROGRESS REPORT FOR TOTAL SERVICE   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='TOTALCAPTIVE'" > MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR CAPTIVE   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1>
+       <h1 class="header" *ngIf="type=='TOTALTHIRD-PARTY'" > MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR THIRD-PARTY   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1>
+       <h1 class="header" *ngIf="type=='TOTALSTB'" > MONTHLY PROGRESS REPORT FROM TOTAL SERVICE FOR STB   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1>
+       <h1 class="header" *ngIf="type=='AMR'" > MONTHLY PROGRESS REPORT FOR AMR   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='AMRCAPTIVE'" > MONTHLY PROGRESS REPORT FROM AMR FOR CAPTIVE   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> ,
+       <h1 class="header" *ngIf="type=='AMRTHIRD-PARTY'" > MONTHLY PROGRESS REPORT FROM AMR FOR THIRD-PARTY   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='AMRSTB'" > MONTHLY PROGRESS REPORT FROM AMR FOR STB   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='NotReading'" > MONTHLY PROGRESS REPORT FOR MACHINE NOT RUNNING   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='NOTRUNNINGCAPTIVE'" > MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR CAPTIVE   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='NOTRUNNINGSTB'" > MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR STB   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1>
+       <h1 class="header" *ngIf="type=='NOTRUNNINGTHIRD-PARTY'" > MONTHLY PROGRESS REPORT FROM MACHINE NOT RUNNING FOR THIRD-PARTY  -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='MANUAL'" > MONTHLY PROGRESS REPORT FOR MANUAL READING  -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='MANUALCAPTIVE'" > MONTHLY PROGRESS REPORT FROM MANUAL READING FOR CAPTIVE   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='MANUALTHIRD-PARTY'" > MONTHLY PROGRESS REPORT FROM MANUAL READING FOR THIRD-PARTY  -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <h1 class="header" *ngIf="type=='MANUALSTB'" > MONTHLY PROGRESS REPORT FROM MANUAL READING FOR STB   -<span>{{months}}</span><span>/</span><span>{{years}}</span></h1> 
+       <div class="btn"  style="text-align: right;">
+        <button  mat-raised-button color="accent"  class="mr-1"  (click)="printReport()">
+          <mat-icon>cloud_download</mat-icon>
+          Download Pdf
+        </button>
+        <button  mat-raised-button color="accent"  class="mr-1" (click)="exportAsXLSX()">
+          <mat-icon>cloud_download</mat-icon>
+               Download As XL
+        </button>
+          <button  mat-raised-button color="primary"  class="mr-1" (click)="Cancel()">BACK</button>
+         </div>
+         </mat-card-title>
+
+              <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                mat-card-title{
+                  margin: auto;
+                }
+                h1.header {
+                 font-size: 23px;
+                 text-align: center;
+                }
+                th {
+                    height: 30px;
+                  }
+
+                </style>
+
+                <br>
+                <br>
+                
+            <div style="float: center;width: 70%; margin-left: auto;">
+                <table id="table" style="float: center; border:1;width: 70%;">     
+                    <tr>
+                        <th style="background: #dcdcdc;text-align: center;">S.NO</th>
+                        <th style="background: #dcdcdc;text-align: center;">EDC ID</th>
+                        <th style="background: #dcdcdc;text-align: center;">SERVICE NO</th>
+                        <th style="background: #dcdcdc;text-align: center;">COMPANY NAME</th>
+                        <th style="background: #dcdcdc;text-align: center;">FLOW TYPE</th>
+                        <th style="background: #dcdcdc;text-align: center;">METER NUMBER</th>
+                        <th *ngIf="type=='MANUAL'|| type=='MANUALCAPTIVE'||type=='MANUALTHIRD-PARTY'||type=='MANUALSTB'"  style="background: #dcdcdc;text-align: center;">CREATED DATE</th>
+                    </tr>
+        
+                    <tr *ngFor="let report of meterdetail;let i=index;">  
+                        <td style="text-align: center;">{{i+1}}</td> 
+                        <td style="text-align: center;">{{report.op1}}</td>  
+                        <td style="text-align: center;">{{report.op3}}</td>  
+                        <td style="text-align: center;">{{report.op4}}</td>  
+                        <td style="text-align: center;">{{report.op5}}</td> 
+                        <td style="text-align: center;">{{report.op6}}</td>  
+                        <td *ngIf="type=='MANUAL'|| type=='MANUALCAPTIVE'||type=='MANUALTHIRD-PARTY'||type=='MANUALSTB'"  style="text-align: center;">{{report.op7}}</td>  
+                    </tr>   
+        
+                </table>
+
+                <br>
+                <br>
+            </div>
+              </mat-card>
+          
+  </div>
+  </div>

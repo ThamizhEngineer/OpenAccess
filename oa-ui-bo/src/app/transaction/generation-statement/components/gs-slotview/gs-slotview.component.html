@@ -1,0 +1,107 @@
+          <mat-card-title > <strong>Slot-wise summary</strong></mat-card-title> 
+          <mat-card-content>
+             <div fxLayout="col" width="100%" fxLayoutAlign="start center" >
+              <table >
+               <thead > 
+                  <tr > 
+                    <td></td>
+                    <td colspan="5" align="center"><strong>Import</strong></td> 
+                    <td colspan="5" align="center"><strong>Export</strong></td> 
+                  </tr>
+                  <tr > 
+                    <td></td>
+                    <td *ngFor="let slotSummary of gs.slotSummaries"><strong> {{ slotSummary.slotName }}</strong></td> 
+                    <td *ngFor="let slotSummary of gs.slotSummaries"><strong> {{ slotSummary.slotName }}</strong></td> 
+                  </tr>
+               </thead>
+              <tbody>
+                  <tr>
+                      <td ><strong> Initial Reading </strong></td>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.initial }}</td> 
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.exportSummary.initial }}</td> 
+                  </tr>
+                  <tr>
+                      <td ><strong> Final Reading </strong></td>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.final }}</td> 
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.exportSummary.final }}</td> 
+                  </tr>
+                  <tr>
+                      <td ><strong> Difference </strong></td>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.difference }}</td> 
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.exportSummary.difference }}</td> 
+                  </tr>
+                  <tr>
+                      <td ><strong> Units </strong></td>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.finalUnits }}</td> 
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.exportSummary.finalUnits }}</td> 
+                  </tr>
+              </tbody>
+          
+            </table>
+            <!--
+            <table  >
+               <thead > 
+                  <tr > 
+                    <td colspan="5" align="center"><strong>Import</strong></td> 
+                  </tr>
+                  <tr > 
+                    <td *ngFor="let slotSummary of gs.slotSummaries"><strong> {{ slotSummary.slotName }}</strong></td> 
+                  </tr>
+               </thead>
+              <tbody>
+                  <tr>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.initial }}</td> 
+                  </tr>
+                  <tr>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.final }}</td> 
+                  </tr>
+                  <tr>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.difference }}</td> 
+                  </tr>
+                  <tr>
+                      <td *ngFor="let slotSummary of gs.slotSummaries">{{ slotSummary.summary.importSummary.finalUnits }}</td> 
+                  </tr>
+              </tbody>
+          
+            </table>
+            -->
+             </div>
+        
+        <!--
+
+            <ngx-datatable 
+              class="material"
+              [rows]="gs.slotSummaries"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              (page)='onPage($event)'>
+              <ngx-datatable-column name="" style="text-decoration: bold">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.unitDesc}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Initial">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.initial}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Final">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.final}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Difference">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.difference}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Generation">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.generation}}
+                </ng-template>
+              </ngx-datatable-column> 
+            </ngx-datatable>
+            -->
+          </mat-card-content>

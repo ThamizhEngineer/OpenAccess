@@ -1,0 +1,97 @@
+{
+    "id": "6",
+    "firstName": "Dinesh (prod)",
+    "lastName": "dinesh",
+    "userName": "dinesh",
+    "password": null,
+    "userTypeCode": "A",
+    "isSuperUser": "Y",
+    "systemKeyCode": "OA",
+    "systemRefKey": null,
+    "edcCode": null,
+    "companyId": null,
+    "contactNumber": null,
+    "emailId": null,
+    "orgId": null,
+    "companyServiceId": null,
+    "token": "0425f5c9-a76c-4cd3-90ea-98d4d6529905",
+    "duration": null,
+    "tokenValidityDt": "2021-12-20 05:46:43",
+    "lastLoggedDt": "2021-06-20 04:46:43",
+    "masterConfirmed": null,
+    "confirmedDate": null,
+    "accessList": [
+        {
+            "id": "131",
+            "functionality": "METER-READING-IMPORT",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,EDC,A",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "2023",
+            "functionality": "unutilised-energy-report",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,A,EDC",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "43",
+            "functionality": "METER-READING-IMPORT",
+            "feature": "PROCESS",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,EDC,A",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "2024",
+            "functionality": "meter-change-report",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,A,EDC",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "2022",
+            "functionality": "ENERGY-AUDIT-REPORT",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,A,AUDT",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "2020",
+            "functionality": "sale-to-board-ledger",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,A,EDC",
+            "orgTypeCode": null,
+            "authUsers": []
+        },
+        {
+            "id": "2021",
+            "functionality": "ENERGY-LEDGER-REPORT",
+            "feature": "LIST",
+            "description": null,
+            "systemKeyCode": "OA",
+            "userTypeCode": "I,A,AUDT",
+            "orgTypeCode": null,
+            "authUsers": []
+        }
+    ],
+    "userTypeName": "Admin user",
+    "loginStopMessage": null
+}

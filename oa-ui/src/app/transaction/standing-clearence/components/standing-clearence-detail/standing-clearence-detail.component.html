@@ -1,0 +1,195 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} standing clearence consumer Details </mat-card-title>
+
+    <ng-template mat-tab-label> standing clearence Details</ng-template>
+    <mat-card>
+        <mat-card-content>
+            <div mat-subheader>
+                <strong>Issuing Authority Details</strong>
+            </div>
+            <br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Name of the SLDC issuing NOC" [(ngModel)]="standingClearence.sldcName">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Region" [(ngModel)]="standingClearence.region">
+                </mat-form-field>
+
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+                <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+            </div>
+            <br>
+
+        <mat-card-title>{{this.commonUtils.getProp('buyer')}} Details</mat-card-title>
+
+     <!--       <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='standingClearence.orgId' [required]="isMandatory"
+                        (ngModelChange)="onBuyerEdcChange()">
+                        <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Substation Name" [matAutocomplete]="td1Auto" [(ngModel)]='SSNAME'
+					  #modelDir="ngModel" (ngModelChange)="this.filteredSubstations = filterSubstations(SSNAME);">
+					<mat-autocomplete #td1Auto="matAutocomplete">
+					  <mat-option *ngFor="let ss of filteredSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'subStation');this.fetchFeeders();">
+						<span>{{ ss.code }} - {{ ss.name }}</span>
+					  </mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Feeder Name" [matAutocomplete]="td2Auto" [(ngModel)]='FEEDER'
+					  #modelDir="ngModel" (ngModelChange)="this.filteredFeeders = filterFeeders(FEEDER);">
+					<mat-autocomplete #td2Auto="matAutocomplete">
+					  <mat-option *ngFor="let fr of filteredFeeders" [value]="fr.name" (onSelectionChange)="acChangeFunc($event, fr, 'feeder')">
+						<span>{{ fr.code }} - {{ fr.name }}</span>
+					  </mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+
+
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='standingClearence.buyerCompServiceId'
+                        [required]="isMandatory" (ngModelChange)="onBuyerServiceChange()">
+                        <mat-option *ngFor="let companyService of buyerCompanyServices" [value]="companyService.id">
+                            {{ companyService.companyName }} - {{ companyService.number }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <br/> -->
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Edc Name" [(ngModel)]="standingClearence.orgName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Service Number"   value = "{{standingClearence.buyerCompanyName}} - {{standingClearence.buyerCompanyServiceNumber}}" [disabled]="disableControls">
+                    </mat-form-field>
+    
+                    
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Energy Sale Intent Number" [disabled]="disableControls" [(ngModel)]="standingClearence.esIntentCode">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="standing clearence Number" [disabled]="disableControls" [(ngModel)]="standingClearence.code">
+                </mat-form-field>
+
+            </div><br>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Substation Name" [(ngModel)]="standingClearence.substationName" [disabled]="disableControls">
+                    </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput placeholder="Feeder" [(ngModel)]="standingClearence.feederName" [disabled]="disableControls">
+            </mat-form-field>  
+
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+           </div><br/>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Max. MW ceiling allowed for Drawal(in MW)" [(ngModel)]="standingClearence.maxDrawalCeiling">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="standingClearence.fromDate" [matDatepicker]="fromDate" placeholder="Validity-From Date">
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="standingClearence.toDate" [matDatepicker]="toDate" placeholder="Validity-To Date">
+                    <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                    <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="standingClearence.approvalDate" [matDatepicker]="dateofApproval" placeholder="Date of Approval">
+                    <mat-datepicker-toggle matSuffix [for]="dateofApproval"></mat-datepicker-toggle>
+                    <mat-datepicker #dateofApproval></mat-datepicker>
+                </mat-form-field> 
+            </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Transmission losses" [(ngModel)]="standingClearence.isTransmissionLoss"  (change)="onTransmissionLoss()">
+                        <mat-option *ngFor="let isTransmissionLoss of isTransmissionLossess" [value]="isTransmissionLoss.name">
+                            {{isTransmissionLoss.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="standingClearence.isTransmissionLoss == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="35%">
+                    <input matInput placeholder="State Transmission Losses" [(ngModel)]="standingClearence.stateTransLoss">
+                </mat-form-field> 
+                <div *ngIf="standingClearence.isTransmissionLoss != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                   <div class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+            </div>
+                
+                <div fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Transmission Charges" [(ngModel)]="standingClearence.isTransmissionCharges" (change)="onTransmissionCharges()">
+                        <mat-option *ngFor="let isTransmissionCharges of isTransmissionCharg" [value]="isTransmissionCharges.name">
+                            {{isTransmissionCharges.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> 
+
+                <mat-form-field *ngIf="standingClearence.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="State Transmission Charges" [(ngModel)]="standingClearence.stateTransCharges">
+                </mat-form-field> 
+
+                <mat-form-field *ngIf="standingClearence.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="System Operation Charges" [(ngModel)]="standingClearence.systemOprCharges">
+                </mat-form-field> 
+
+                <mat-form-field *ngIf="standingClearence.isTransmissionCharges == 'Y'" class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Scheduling Charges" [(ngModel)]="standingClearence.schedulingCharges">
+                </mat-form-field> 
+                
+                <div *ngIf="standingClearence.isTransmissionCharges != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                <div *ngIf="standingClearence.isTransmissionCharges != 'Y'" class="ml-xs mr-xs" style="width: 100%;"></div>
+                <div *ngIf="standingClearence.isTransmissionCharges != 'Y'"  class="ml-xs mr-xs" style="width: 100%;"></div>
+            </div>
+                
+          
+    
+
+    <mat-card>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" *ngIf="standingClearence.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveStandingClearence('')">Save</button>
+            <button mat-raised-button color="primary" *ngIf="standingClearence.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveStandingClearence()">Approve</button>
+            <button mat-raised-button color="primary" *ngIf="standingClearence.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="completeStandingClearence()">Complete</button>
+
+            <button mat-raised-button class="primary" (click)="listStandingClearence()">Cancel/Back</button>
+        </mat-card-actions>
+    </mat-card>
+    <br>
+
+
+
+    </mat-card-content>
+</mat-card>
+</mat-card>

@@ -1,0 +1,149 @@
+<mat-toolbar color="blue-grey">
+  <mat-toolbar-row> 
+  </mat-toolbar-row>
+  <mat-toolbar-row></mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start" class="mat-card-top">
+    <div fxFlex.gt-sm="80" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>3rd Party Sale</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Process Involved</h4></mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">1. POWER-SALE</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">2. IPA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">3. NOC-Generator</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">4. EWA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">5. POWER-SALE consumer Addition</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">6. NOC-Consumer</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">7. CONSENT</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">8. OAA</mat-list-item>
+
+                            <mat-list-item>&nbsp;</mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions class="pb-1" fxLayoutAlign="center start">
+                        <button mat-raised-button color="accent" (click)="saleDetail()">Apply</button>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <button mat-raised-button color="accent">View</button>
+                    </mat-card-actions>
+
+                </mat-card>
+            </div>
+            <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>Fossil Captive Sale</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Process Involved</h4></mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">1. POWER-SALE</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">2. NOC-Consumer</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">3. CONSENT</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">4. EWA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">5. OAA</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions class="pb-1" fxLayoutAlign="center start">
+                        <button mat-raised-button color="accent" matTooltip="Apply new POWER-SALE" (click)="saleDetail()">Apply</button>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <button mat-raised-button color="accent" matTooltip="View list of applied POWER-SALE" (click)="pslist()">View</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+            <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>NCES Captive Sale</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Process Involved</h4></mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">1. POWER-SALE</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">2. IPA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">3. NOC-Generator</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">4. EWA</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions class="pb-1" fxLayoutAlign="center start">
+                        <button mat-raised-button color="accent" (click)="saleDetail()">Apply</button>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <button mat-raised-button color="accent">View</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>Sale-to-Board</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Process Involved</h4></mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">1. POWER-SALE</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">2. NOC Generator</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">3. EPA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">4. OAA</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions class="pb-1" fxLayoutAlign="center start">
+                        <button mat-raised-button color="accent" (click)="saleDetail()">Apply</button>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <button mat-raised-button color="accent">View</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>IEX Generator</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Process Involved</h4></mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">1. POWER-SALE</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">2. IPA</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">3. NOC-Generator</mat-list-item>
+                            <mat-list-item fxLayoutAlign="left">4. STANDING-CLEARENCE</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+							<mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+                            <mat-list-item>&nbsp;</mat-list-item>
+
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions class="pb-1" fxLayoutAlign="center start">
+                        <button mat-raised-button color="accent" (click)="iexDetail()">Apply</button>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <mat-list-item>&nbsp;</mat-list-item>
+                        <button mat-raised-button color="accent">View</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

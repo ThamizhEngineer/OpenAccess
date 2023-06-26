@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>SOLAR FEEDER LINE LOSS</title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p>SOLAR ENERGY ACCOUNTING AT INTERCONNECTION POINT-FEEDER LINE LOSS</p>
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="12"> SOLAR ENERGY ACCOUNTING AT INTERCONNECTION POINT-FEEDER LINE LOSS <span style="padding-left: 50px;">Month and Year: </span> <span th:text="${month}"></span>
+                        <span>/</span><span th:text="${year}"></span></th>
+                    </tr>  
+        
+                    <tr>								
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">EDC ID</th>
+                        <th style="background: #dcdcdc">SUBSATION NAME</th>
+                        <th style="background: #dcdcdc">FEEDER NAME</th>
+                        <th style="background: #dcdcdc">TOTAL SERVICES</th>                    
+                        <th style="background: #dcdcdc">BILLED SERVICES</th>   
+                        <th style="background: #dcdcdc">TOTAL EXPORT UNITS</th> 
+                        <th style="background: #dcdcdc">BULK METER READING</th>    
+                        <th style="background: #dcdcdc">EXPORT DIFFERENCE</th>      
+                        <th style="background: #dcdcdc">LOSS PERCENT</th>   
+                        <th style="background: #dcdcdc">FEEDEREND METER NO</th>  
+                    </tr>
+                <tr class="item-row" th:each="solarfeederlineloss,item : ${solarfeederlineloss}">
+                <td th:text="${item.index+1}"></td>
+                <td th:text="${solarfeederlineloss.orgId}"></td>
+                <td th:text="${solarfeederlineloss.substationName}"></td>               
+                <td th:text="${solarfeederlineloss.feederName}"></td>
+                <td th:text="${solarfeederlineloss.totalServices}"></td>
+                <td th:text="${solarfeederlineloss.billedService}"></td>
+                <td th:text="${solarfeederlineloss.totalExportUnits}"></td>
+                <td th:if="${solarfeederlineloss.subbulkreading}==null" th:text="${solarfeederlineloss.bulkMeterReading}"></td>
+                <td th:if="${solarfeederlineloss.subbulkreading}!=null" th:text="${solarfeederlineloss.subbulkreading}"></td>
+                <td th:text="${solarfeederlineloss.exportDifference}"></td>
+                <td th:text="${solarfeederlineloss.lossUnits}"></td>
+                <td th:text="${solarfeederlineloss.meterNo}"></td>
+                
+            </tr>
+        
+                </table>
+
+</div>
+<div>
+<br />
+</div>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<mat-card>
+  <mat-card-content>
+    <ngx-datatable class="material" tabindex="index" [rows]="gc.transformers" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.name}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Capacity">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.mvaRating}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="SecondaryVoltage">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.secondaryVoltageCode}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Cooling Type">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.coolingType}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="editTransformer(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteTransformer(row.$$index)"><mat-icon>delete</mat-icon></button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <mat-card>
+      <mat-card-title>
+        <Strong>{{transformerRowIndex>-1?'Update':'Add'}} Transformer</Strong>
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Name of the transformer Unit" [(ngModel)]='transformer.name'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="MVA Rating(MVA)" [(ngModel)]='transformer.mvaRating'>
+          </mat-form-field>
+          <mat-form-field style="width: 100%;">
+            <mat-select placeholder="Primary Voltage" [(ngModel)]='transformer.primaryVoltageCode'>
+              <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode" (onSelectionChange)="onPrimaryVoltageSelect(voltage)">
+                {{voltage.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="width: 100%;">
+            <mat-select placeholder="Secondary Voltage" [(ngModel)]='transformer.secondaryVoltageCode'>
+              <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode" (onSelectionChange)="onSecondaryVoltageSelect(voltage)">
+                {{voltage.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width: 100%;">
+
+            <mat-select placeholder="Cooling Type" [(ngModel)]='transformer.coolingType'>
+              <mat-option *ngFor="let ctype of coolingType" [value]="ctype.name">
+                {{ctype.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- (onSelectionChange)="callFlag = true;onSecondaryVoltageSelect(voltage)" -->
+          <!--  <mat-form-field  class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Cooling Type" [(ngModel)]='transformer.coolingType' >
+          </mat-form-field> -->
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="mb-1" style="width: 100%;">
+            <label>Winding Configuration</label> <br/>
+            <mat-radio-group [(ngModel)]='transformer.windingConfig'>
+              <mat-radio-button value="Primary">Primary</mat-radio-button>
+              <mat-radio-button value="Secondary">Secondary</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Breaker Rating(MVA)" [(ngModel)]='transformer.breakerRating'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Normal Tap Setting(Position)" [(ngModel)]='transformer.tapSetting'>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Tap Number - Max(Position)" [(ngModel)]='transformer.tapNumberMax'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Tap Number - Min(Position)" [(ngModel)]='transformer.tapNumberMin'>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Tap Ratio in %" [(ngModel)]='transformer.tapRatio'>
+          </mat-form-field>
+
+          <mat-form-field style="width: 100%;">
+            <mat-select placeholder="Tap Step" [(ngModel)]='transformer.tapStep'>
+              <mat-option *ngFor="let tap of TapStep" [value]="tap.name">
+                {{tap.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Tap Voltage - Max(Volts)" [(ngModel)]='transformer.tapVoltageMax'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Tap Voltage - Min(Volts)" [(ngModel)]='transformer.tapVoltageMin'>
+          </mat-form-field>
+          <div class="ml-xs mr-xs" style="width: 100%;"></div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Phase Displacement(Deg)" [(ngModel)]='transformer.phaseDisplacement'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="% Impedence" [(ngModel)]='transformer.impedencePercentage'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Leakage Reactance" [(ngModel)]='transformer.leakReact'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Resistance(Ohms)" [(ngModel)]='transformer.resistance'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Reactance(ohms)" [(ngModel)]='transformer.react'>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="transformerRowIndex>-1?updateTransformer():addTransformer()">{{transformerRowIndex>-1?'Update':'Add'}}</button>
+        <button mat-raised-button (click)="initTransformers()">Reset</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-card-content>
+</mat-card>

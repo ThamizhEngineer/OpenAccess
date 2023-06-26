@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>Generation Statement</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            font: 12px/1.4 Georgia, serif;
+
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 70px;
+            background-color: #ffffff;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 10px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+
+        #left {
+            float: left;
+            text-align: left;
+            /* padding-right: 10px; */
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        #right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+
+            <p>TAMIL NADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</p>
+            <p>OFFICE OF THE SUPERINTENDING ENGINEER/
+              <span th:text="${EdcName}"></span>
+
+            </p>
+            <p style="font: 13px/1.4 Georgia;font-weight: bold">UNIMPORTED WEG SERVICES REPORT</p>
+
+        </header>
+
+    </div>
+
+
+    <div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>Sl.No</th>
+                <th>Section Name</th>
+                <th>Generator Name</th>
+                <th>Generator Service Number</th>
+                <th>Meter Number</th>
+
+            </tr>
+            <tr class="item-row" th:each="unimportedWegList : ${unimportedWegList}">
+                <td style="text-align: center;" th:text="${unimportedWegList.op1}"></td>
+                <td th:text="${unimportedWegList.op5}"></td>
+                <td th:text="${unimportedWegList.op2}"></td>
+                <td th:text="${unimportedWegList.op3}"></td>
+                <td th:text="${unimportedWegList.op6}"></td>
+
+            </tr>
+
+        </table>
+
+
+</div>
+
+
+
+   
+    <div class="footer">
+        <!-- <p style="font: 11px/1.4 Georgia, serif;text-align: left">To,</p>
+        <p style="font: 11px/1.4 Georgia, serif;text-align: left">- M/S.
+            <span th:text="${dispCompanyName}"></span>
+        </p>
+        <p th:if="${isCaptive=='WHEELING'}" style="font: 11px/1.4 Georgia, serif;text-align: left">-S.E/EDCS(Concerned)</p>
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right">-</p>
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right">for SUPERINTENDING ENGINEER/EDC/
+            <span th:text="${dispOrgName}"></span>
+        </p> -->
+    </div>
+    <div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

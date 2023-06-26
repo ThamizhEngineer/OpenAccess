@@ -1,0 +1,72 @@
+<!-- <mat-card class="mat-card-top">
+<br/>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Grid Connectivity Agreement" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Energy Purchase Agreement" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Energy Wheeling Agreement" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Open Access Agreement" [disabled]="stepDisable">
+		</mat-form-field> 
+
+		
+			
+	</div><br/>
+</mat-card>
+<br/> -->
+<mat-card>
+<div fxLayout="row" fxLayoutWrap="wrap">
+	
+		<div fxFlex.gt-sm="100%" fxFlex="100">
+	
+				
+			
+					
+					<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+					 [scrollbarV]="true">
+					 <ngx-datatable-column name="EDC Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerOrgName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Service Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerCompanyServiceNumber}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statusCode}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Agreement Type">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.agreementTypeName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Agreement Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.code}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="EsIntent Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.esIntentCode}}
+						</ng-template>
+					</ngx-datatable-column>	
+					</ngx-datatable>
+	
+					<button  mat-raised-button *ngIf="companyNameChange.statusCode!='APPROVED'" color="primary" (click)="cancelAgreements()">Cancel Existing Agreements</button>
+	
+		</div>
+		
+	</div>
+</mat-card>

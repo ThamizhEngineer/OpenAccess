@@ -1,0 +1,317 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>ENERGY ADJUSTED REPORT</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width:25cm;
+            size:38cm
+            
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 5;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+ <div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+
+            <p style="font-family: myFirstFont; text-align: center;">TAMIL NADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</p>
+            <p style="font-family: myFirstFont;text-align: center;">OFFICE OF THE SUPERINTENDING ENGINEER/TANGEDCO</p>
+            <p style="font: 12px/1.4 Georgia;font-variant: small-caps;text-align: center;">Energy Adjusted Report - <span th:text="${EnergyAdjOrderList[0].fuelName}"></span></p>
+                        <p style="text-align: center"><span th:text="${EnergyAdjOrderList[0].readingMonth}"></span>,		
+          		  <span th:text="${EnergyAdjOrderList[0].readingYear}"></span></p>
+        </header>
+    </div>
+
+    <h3 style="text-align: center"> </h3>
+
+    <div style="float: center;width: 100%">
+
+        <table style="float: center;width: 100%">
+
+            <tr>
+            	<th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="text-align: center;font-family: myFirstFont;" colspan="12">ALLOTED</th>
+                <th style="text-align: center;font-family: myFirstFont;" colspan="6">ADJUSTED</th>
+                <th style="text-align: center;font-family: myFirstFont;" colspan="12">SURPLUS BANKING</th>
+
+
+            </tr>
+            <tr>
+            	<th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="text-align: center;background: #dcdcdc" colspan="6">Gross</th>
+                <th style="text-align: center;" colspan="6">Net</th>
+                <th style="text-align: center;background: #dcdcdc" colspan="6">Net</th>
+                <th style="text-align: center;" colspan="6">Net</th>
+                <th style="text-align: center;background: #dcdcdc" colspan="6">Gross</th>
+            </tr>
+
+            <tr>
+            	<th>SNO</th>
+                <th>Service No</th>
+                <th>Consumer No</th>
+                <th>Loss%</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>TOTAL</th>
+                <th style="background: #dcdcdc">C1</th>
+                <th style="background: #dcdcdc">C2</th>
+                <th style="background: #dcdcdc">C3</th>
+                <th style="background: #dcdcdc">C4</th>
+                <th style="background: #dcdcdc">C5</th>
+                <th style="background: #dcdcdc">TOTAL</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>TOTAL</th>
+                <th style="background: #dcdcdc">C1</th>
+                <th style="background: #dcdcdc">C2</th>
+                <th style="background: #dcdcdc">C3</th>
+                <th style="background: #dcdcdc">C4</th>
+                <th style="background: #dcdcdc">C5</th>
+                <th style="background: #dcdcdc">TOTAL</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>TOTAL</th>
+            </tr>
+
+            <tr class="item-row" th:each="EnergyAdjOrderList,item : ${EnergyAdjOrderList}">
+            	<td th:text="${item.index+1}"></td>
+                <td th:text="${EnergyAdjOrderList.sellerServiceNumber}"></td>
+                <td th:text="${EnergyAdjOrderList.buyerServiceNumber}"></td>
+                <td th:text="${EnergyAdjOrderList.lossPercent}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedC1}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedC2}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedC3}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedC4}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedC5}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.totalallo}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.allotedNetC1}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedNetC2}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedNetC3}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedNetC4}"></td>
+                <td th:text="${EnergyAdjOrderList.allotedNetC5}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.totalallonet}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.adjustedC1}"></td>
+                <td th:text="${EnergyAdjOrderList.adjustedC2}"></td>
+                <td th:text="${EnergyAdjOrderList.adjustedC3}"></td>
+                <td th:text="${EnergyAdjOrderList.adjustedC4}"></td>
+                <td th:text="${EnergyAdjOrderList.adjustedC5}"></td>
+                
+                
+                <td th:text="${EnergyAdjOrderList.totaladj}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.htBankingC1}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingC2}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingC3}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingC4}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingC5}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.totalhtBanking}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.htBankingWithLossC1}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingWithLossC2}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingWithLossC3}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingWithLossC4}"></td>
+                <td th:text="${EnergyAdjOrderList.htBankingWithLossC5}"></td>
+                
+                <td th:text="${EnergyAdjOrderList.totalhtBankingwithloss}"></td>
+                
+            </tr>
+            
+           <tr>
+            <td style="text-align: center;font-family: myFirstFont;" colspan="3">TOTAL</td>
+            <td th:text="${EnergyAdjOrder.totalLossPercentage}"></td>
+            <td th:text="${EnergyAdjOrder.totalalloctedgrossC1}"></td>
+            <td th:text="${EnergyAdjOrder.totalalloctedgrossC2}"></td>
+            <td th:text="${EnergyAdjOrder.totalalloctedgrossC3}"></td>
+            <td th:text="${EnergyAdjOrder.totalalloctedgrossC4}"></td>
+            <td th:text="${EnergyAdjOrder.totalalloctedgrossC5}"></td>
+            <td th:text="${EnergyAdjOrder.totalupalloctedgross}"></td>
+            
+           <td th:text="${EnergyAdjOrder.totalalloctednetC1}"></td>
+           <td th:text="${EnergyAdjOrder.totalalloctednetC2}"></td>
+           <td th:text="${EnergyAdjOrder.totalalloctednetC3}"></td>
+           <td th:text="${EnergyAdjOrder.totalalloctednetC4}"></td>
+           <td th:text="${EnergyAdjOrder.totalalloctednetC5}"></td>
+           <td th:text="${EnergyAdjOrder.totalupalloctednet}"></td>
+            
+            <td th:text="${EnergyAdjOrder.totaladjustedC1}"></td>
+            <td th:text="${EnergyAdjOrder.totaladjustedC2}"></td>
+            <td th:text="${EnergyAdjOrder.totaladjustedC3}"></td>
+            <td th:text="${EnergyAdjOrder.totaladjustedC4}"></td>
+            <td th:text="${EnergyAdjOrder.totaladjustedC5}"></td>
+            <td th:text="${EnergyAdjOrder.Totalupadj}"></td>	
+            
+            <td th:text="${EnergyAdjOrder.totalhtBankingC1}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingC2}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingC3}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingC4}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingC5}"></td>
+            <td th:text="${EnergyAdjOrder.TotaluphtBanking}"></td>
+            
+            <td th:text="${EnergyAdjOrder.totalhtBankingWithLossC1}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingWithLossC2}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingWithLossC3}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingWithLossC4}"></td>
+            <td th:text="${EnergyAdjOrder.totalhtBankingWithLossC5}"></td>
+            <td th:text="${EnergyAdjOrder.TotaluphtBankingWithLoss}"></td>
+            
+             
+                </tr>
+        </table>
+
+
+    </div>
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

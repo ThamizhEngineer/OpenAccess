@@ -1,0 +1,418 @@
+<style>
+  .col {
+    float: left;
+    width: 50%;
+    background-color: #a9d08e;
+  }
+  strong.sl {
+    padding-left: 19px;
+}
+  td.a{
+    padding-left: 43px;
+}
+.foralign{
+
+  align-content: center;
+}
+
+span.rr {
+    padding-left: 13px;
+}
+strong.r {
+    padding-left: 14px;
+}
+  .rowsub {
+    border-top: 1px solid black;
+}
+.col-sm-8 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+  .rowh {
+    border-bottom: 1px solid black;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  mat-card.mat-card {
+    border: 1px solid black;
+  }
+  .rowss {
+    margin-top: -10px;
+  }
+  .coltt {
+    margin-top: -11px;
+  }
+  .rowg {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .row1 {
+    border-bottom: 1px solid black;
+  }
+  table.table.table-bordered {
+    border: 1px solid black;
+  }
+  .cola {
+    float: left;
+    width: 49.8%;
+    border-right: 1px solid black;
+    background-color: #a9d08e;
+  }
+  .colsubj {
+    float: left;
+    border-right: 1px solid black;
+    background-color: #a9d08e;
+  }
+  .rowsub {
+    border-bottom: 1px solid black;
+  }
+  th {
+    /* padding-right: 195px; */
+    /* border-bottom: 1px solid black; */
+    border-right: 1px solid black;
+  }
+  .mat-list .mat-list-item .mat-list-item-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    height: 32px;
+    padding: 0 11px;
+    position: relative;
+  }
+  .col-sm-4 {
+    float: left;
+  }
+  .tr {
+    border-bottom: 1px solid black;
+  }
+  mat-list.mat-list {
+    border-bottom: 1px solid black;
+  }
+  .rown {
+    padding-top: 0px;
+  }
+  table,
+  td,
+  th {
+    border-top: 1px solid;
+    padding-top: 10px;
+    border-right: 1px solid black;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  tr.aa {
+    margin-right: 38px;
+    margin-left: 13px;
+    float: left;
+  }
+  tr.data {
+    float: left;
+}
+  tr.bb {
+    padding-right: 260px;
+    margin-right: 94px;
+  }
+  .row {
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+  li {
+    list-style-type: none;
+  }
+  .b{
+    list-style-type:none;
+  }
+  td.noline {
+    list-style: none;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.spinner {
+
+    left: 50%;
+    position: absolute;
+    top: 50%;
+
+
+    opacity: 0.5;
+}
+th.t {
+  padding-left: 280px;
+    padding-right: 202px;
+}
+td.lineb {
+    /* text-align: left; */
+    text-align: right;
+}
+
+.col-lg-3 {
+  padding-right: 141px;
+}
+
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div style="margin-left: 5%;margin-top: 3%;">
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary"  class="primary" (click)="ViewInvoice()">View Invoice</button>
+    <button mat-raised-button color="primary" class="primary" *ngIf="this.CanSendEmail" (click)="sendEmail()" [disabled]="this.viewed">SEND EMAIL</button>
+        <button mat-raised-button color="primary" class="primary" *ngIf="this.confirmedonce" (click)="confirm()"[disabled]="this.viewed">CONFIRM</button>
+        <mat-spinner *ngIf="this.progress"> </mat-spinner>
+
+  <button mat-raised-button color="primary" class="primary" (click)="transcoinvoicelist()">CANCEL/BACK</button>
+  <button mat-raised-button color="accent" (click)="printReport()">
+        <mat-icon>cloud_download</mat-icon>
+        Download Pdf
+    </button>
+
+</mat-card-actions>
+</div>
+
+<div *ngIf="this.view" class="container">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100%" fxFlex="80">
+      <mat-card>
+        <mat-card-title style="margin-bottom: -35px;">
+          TANTRANSCO INVOICE
+        </mat-card-title>
+
+        <div class="row1">
+          <img style="padding: 20px;" src="assets/images/tneb-logo.png" alt="" class="center"/>
+        </div>
+        <div class="row" style="background:#ffd966;text-align: center;">
+          <label> <b>TAMILNADU TRANSMISSION CORPORATION LIMITED</b> </label> <br><br>
+          <label><b>{{this.Detail?.mOrgId}}&nbsp;&nbsp;Operation Circle ({{this.Detail?.mOrgName}}&nbsp;&nbsp;EDC)</b>
+          </label>
+        </div>
+        <div class="rown">
+          <div class="col">
+            <mat-list>
+              <mat-list-item><strong> Invoice No:&nbsp;&nbsp;&nbsp;{{this.Detail?.id}}</strong></mat-list-item>
+              <mat-list-item> <strong> Date of Invoice :&nbsp;&nbsp;&nbsp;{{this.Detail?.invApprovedDate}}</strong></mat-list-item>
+              <mat-list-item><strong>Due Date of Invoice :&nbsp;&nbsp;&nbsp;{{this.Detail?.invForwardDate}}</strong></mat-list-item>
+            </mat-list>
+          </div>
+          <div class="col">
+            <mat-list>
+              <mat-list-item><strong> Date Of Commissioning :&nbsp;&nbsp;&nbsp;{{this.Detail?.commDt}}</strong> </mat-list-item>
+              <mat-list-item><strong> Type of OA : &nbsp;&nbsp;&nbsp;LTOA </strong></mat-list-item>
+              <mat-list-item><strong>Virtual Acc Number: &nbsp;&nbsp;&nbsp;{{this.Detail?.viritualAccno}} </strong></mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row"  style=" background-color: #a9d08e;">
+            <div class="col-lg-3" style="float: left;border-right: 1px solid black;width:42%;">
+              <br>
+            <tr class="lined" ><strong class="r">To:&nbsp;&nbsp;</strong>{{this.Detail?.cusName}},</tr>
+            <tr style="padding-left: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;{{this.Detail?.cusAddress}}</tr>
+            <br><br>
+            <tr class="lined" ><strong class="r">Genrator No:&nbsp;&nbsp;</strong><span style="padding-left: 91px;"></span>{{this.Detail?.mCompServNo}}</tr>
+            <tr class="lined" ><strong class="r">Registered e-mail address:&nbsp;&nbsp;</strong>{{this.Detail?.cusEmail}}</tr>
+          <tr></tr>
+            <tr class="lined"><strong class="r">State:</strong><span style="padding-left: 140px;">Tamil Nadu</span></tr>
+            <tr></tr>
+            <tr class="lined" ><strong class="r">State Territory Code:</strong><span style="padding-left: 49px;">33</span></tr>
+            <tr></tr>
+            <tr class="lined" ><strong class="r">Customer PAN:</strong><span style="padding-left: 81px;">{{this.Detail?.cusPan}}</span></tr>
+            <tr></tr>
+            <tr class="lined" ><strong class="r">Customer GSTIN:</strong><span style="padding-left:66px;">{{this.Detail?.cusGst}}</span></tr>
+            <td class="new" style="border-right:none;border-top:none;"></td>
+            </div>
+            <div class="column2" class="col-lg-3v">
+            <tr class="lineds" ><strong class="r">Place of Supply:</strong><span style="padding-left: 40px;">{{this.Detail?.supName}}</span></tr>
+        
+           
+            <tr></tr>
+            <tr class="lineds"><strong class="r">Name of the Substation:</strong><span style="padding-left: 30px;">{{this.Detail?.mSubstationName}}</span></tr>
+            <tr></tr>
+            <tr class="lineds" ><strong class="r">EE/Operation:</strong><span style="padding-left: 50px;">{{this.Detail?.eeOperation}}</span></tr>
+            <br>
+            <br>
+            <br>
+            <tr class="lineds"><strong class="r">State Territory:</strong><span style="padding-left: 50px;">Tamil Nadu</span></tr>
+            <tr></tr>
+            <tr class="lineds" ><strong class="r">State Territory Code:</strong><span style="padding-left: 15px;">33</span></tr>
+            <tr></tr>
+            <tr class="lineds"><strong class="r">PAN:</strong><span style="padding-left: 110px;">AADCT4780A</span></tr>
+            <tr></tr>
+            <tr class="lineds" ><strong class="r">GSTIN:</strong><span style="padding-left: 100px;">33AADCT4780AFZA</span></tr>
+            <tr></tr>
+            <br>
+          <br>
+            </div>
+            </div>
+        <div class="container">
+          <div class="rowsub" style="background-color: #a9d08e;">
+            <div class="col-sm-4">
+              <tr class="aa">
+                <li><strong>SUBJECT :</strong></li>
+              </tr>
+            </div>
+            <div class="col-sm-8">
+              <tr class="bb">
+                <label>Open Access Charges for the Month of &nbsp;&nbsp;<span>{{this.Detail?.lineMonth}}</span></label>
+              </tr>
+            </div>
+            <br>
+          </div>
+          <div class="row" style="background-color: #a9d08e;">
+            <div class="col-sm-4">
+              <tr class="aa">
+                <li><strong>REFER :</strong></li>
+              </tr>
+            </div>
+            <div class="col-sm-8">
+              <tr class="bb">
+                <label>Agreement Dated&nbsp;&nbsp;{{this.Detail?.agmtDt}}; Its Amendment dt&nbsp;&nbsp;{{this.Detail?.amenDt}}; Period of Agreement Years</label>
+              </tr>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row"  style="background-color: #a9d08e;">
+
+            <table>
+              <thead>
+                <tr  class="d-flex">
+                  <th class="n"><strong class="sl">SI.NO</strong></th>
+                  <th class="t" >Particulars</th>
+                  <th class="h" >SGST %</th>
+                  <th class="z" >IGST %</th>
+                  <th class="i" >Amount Before Tax</th>
+                  <th class="h" style="text-align:center;">HSN/SAC CODE</th>
+                  <th class="z" style="text-align:center;">UNIT MW/Day</th>
+                  <th class="i" style="padding-right: 35px;">RATE</th>
+                  <th class="o">AMOUNT in(RS.)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="a">1</td>
+                  <td>Transmission Charges</td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;">{{this.transmissioncharges?.itemBeforeTaxAmt}}</td>
+                  <td style="text-align:center;">996911</td>
+                  <td style="text-align:center;">1</td>
+                  <td style="text-align:center;">{{this.transmissioncharges?.itemRate}}</td>
+                  <td class="lineb">{{this.transmissioncharges?.itemTotalAmt}}.00</td>
+                </tr>
+                <tr>
+                  <td class="a">2</td>
+                  <td>Scheduling Charges</td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;">{{this.ScheduleingChrages?.itemBeforeTaxAmt}}</td>
+                  <td style="text-align:center;">996911</td>
+                  <td style="text-align:center;">1</td>
+                  <td style="text-align:center;">{{this.ScheduleingChrages?.itemRate}}</td>
+                  <td class="lineb">{{this.ScheduleingChrages?.itemTotalAmt}}.00</td>
+                </tr>
+                <tr>
+                  <td class="a">3</td>
+                  <td>System Operation Charges</td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;">{{this.systemoperation?.itemBeforeTaxAmt}}</td>
+                  <td style="text-align:center;">996911</td>
+                  <td style="text-align:center;">1</td>
+                  <td style="text-align:center;">{{this.systemoperation?.itemRate}}</td>
+                  <td class="lineb">{{this.systemoperation?.itemTotalAmt}}.00</td>
+                </tr>
+                <tr>
+                  <td class="a" >4</td>
+                  <td>RKvah Penalty</td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;"></td>
+                  <td style="text-align:center;">{{this.reactiveEnergyCharges?.itemBeforeTaxAmt}}</td>
+                  <td style="text-align:center;">996911</td>
+                  <td style="text-align:center;">1</td>
+                  <td style="text-align:center;">{{this.reactiveEnergyCharges?.itemRate}}</td>
+                  <td class="lineb">{{this.reactiveEnergyCharges?.itemTotalAmt}}</td>
+                </tr>
+                <tr>
+                  <td class="a" >5</td>
+                  <td>O&M Charges for the Month</td>
+                  <td style="text-align:center;">9</td>
+                  <td style="text-align:center;">9</td>
+                  <td style="text-align:center;">{{this.oandmChargesDetail?.itemBeforeTaxAmt}}</td>
+                  <td style="text-align:center;">996911</td>
+                  <td style="text-align:center;">1</td>
+                  <td style="text-align:center;">{{this.oandmChargesDetail?.itemRate}}</td>
+                  <td class="lineb">{{this.oandmChargesDetail?.itemTotalAmt}}</td>
+                </tr>
+                <!-- <tr>
+                  <td class="a">6</td>
+                  <td>CGST @9%</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="a">7</td>
+                  <td>SGST @9%</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr> -->
+                <tr style="border-bottom: 1px solid black;">
+
+                  <td  class="foralign" colspan="2"><strong>Total Invoice Value</strong></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="lineb" ><strong>{{this.total}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="coltt" style="background-color: #a9d08e;">
+              <mat-list>
+                <mat-list-item style="margin-left: 100px;"> <strong>Total in Words :&nbsp;&nbsp;{{this.totalinwords}}&nbsp;Only</strong></mat-list-item>
+                <mat-list-item></mat-list-item>
+                <mat-list-item style="margin-left: 1148px;"> For & on behalf of TamilNadu Transmission Corporation
+                  Limited.</mat-list-item>
+                <mat-list-item style="margin-left: 1148px;">Deputy Financial Controller/<span>{{this.Detail?.mOrgId}}&nbsp;&nbsp;</span>EDC/</mat-list-item>
+                <mat-list-item style="margin-left: 1148px;"><span>{{this.Detail?.mOrgName}}&nbsp;&nbsp;</span>Operation Circle</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="rowss" style=" background-color: #f4b084;">
+            <mat-list>
+              <mat-list-item> <strong>The Payment Shall Be made Through RTGS/NEFT in favour of M/s. Tamil Nadu
+                  Transmission Corporation Limited.</strong></mat-list-item>
+              <mat-list-item><strong> Name of the Bank:&nbsp;&nbsp;{{this.Detail?.bankName}}</strong></mat-list-item>
+              <mat-list-item><strong> Bank Address:&nbsp;&nbsp;{{this.Detail?.bankBranch}}</strong></mat-list-item>
+              <mat-list-item><strong> Bank IFSC Code:&nbsp;&nbsp;{{this.Detail?.bankIfscCode}}</strong></mat-list-item>
+              <mat-list-item><strong> Bank Account Number:&nbsp;&nbsp;{{this.Detail?.bankAccNo}}</strong></mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+</div>

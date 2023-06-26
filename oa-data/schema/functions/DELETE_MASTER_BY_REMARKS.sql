@@ -1,0 +1,20 @@
+CREATE OR REPLACE FUNCTION OPENACCESS."DELETE_MASTER_BY_REMARKS" 
+(
+  V_REMARKS IN VARCHAR2 
+) RETURN VARCHAR2 AS 
+
+v_master_cursor sys_refcursor ;
+service_num varchar2(100);
+v_result VARCHAR(200):='SUCCESS';
+
+BEGIN
+
+    OPEN v_master_cursor for SELECT SERVICE_NO FROM SERVICEMASVIEW WHERE VOLTAGE=V_REMARKS;
+    LOOP 
+    FETCH v_master_cursor INTO service_num;
+	EXIT WHEN v_master_cursor%NOTFOUND;
+    v_result := DELETE_MASTER_WITH_SER_NUMBER(service_num);
+	END LOOP;
+
+  RETURN v_result;
+END DELETE_MASTER_BY_REMARKS;

@@ -1,0 +1,446 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+         <!-- ---------------------------------------------------------------------------------------------- -->
+         <mat-card-actions align="end">
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessUpdateFlag"
+                [disabled] = "this.disableAllButtons"  (click)="saveEs('')">Save</button>
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessApproveFlag &&savedOnce=='Y'"
+                [disabled] = "this.disableAllButtons" (click)="openConfirmDilog('')">Confirm</button>
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED'"  [disabled] = "this.disableAllButtons" (click)="bulkAllocation()">BulkAllocation</button>
+            <button mat-raised-button color="warn" *ngIf="statusCode=='CREATED'"  [disabled] = "this.disableAllButtons" (click)="resetEss()">ResetAll</button>
+            <button mat-raised-button class="primary"  [disabled] = "this.disableAllButtons" (click)="listEss()">Back</button>
+        </mat-card-actions>
+            <!-- Accordin------------------------------------------------------------------------- -->
+
+            <mat-accordion>
+                <mat-expansion-panel (opened)="postalAllocationOpenState = true" (closed)="postalAllocationOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Allotment Summary
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{postalAllocationOpenState ? '' : 'Service Number : '+es.sellerCompanyServiceNumber}} &nbsp;&nbsp; {{postalAllocationOpenState ? '' :  'Month : '+es.month}} &nbsp;&nbsp; {{postalAllocationOpenState ? '' :  'Year : '+es.year}} &nbsp;&nbsp; <b>{{postalAllocationOpenState ? '' :  'SlotAdjustment : '+es.allowLowerSlotAdmt}}</b> 
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Company Name" [disabled]="true"
+                                [(ngModel)]='es.sellerCompanyName' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Generator Service Number" [disabled]="true"
+                                [(ngModel)]='es.sellerCompanyServiceNumber' readonly>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true"
+                                placeholder="Statement Month" [(ngModel)]='es.month' readonly>
+                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                    {{ month.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Year" [disabled]="true" [(ngModel)]='es.year'>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true"
+                                placeholder="Voltages" [(ngModel)]='es.injectingVoltageCode'>
+                                <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode">
+                                    {{voltage.valueDesc}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='es.sellerEndOrgName'>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Allow Higher to Lower Slot Adjustment" [(ngModel)]='es.allowLowerSlotAdmt' *ngIf="!isFossilFuel">
+                                <mat-option *ngFor="let isAllowLowerSlotAdj of isAllowLowerSlotAdj" [value]="isAllowLowerSlotAdj.key">
+                                    {{isAllowLowerSlotAdj.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Allow Higher to Lower Slot Adjustment" [disabled]="true" [(ngModel)]='es.allowLowerSlotAdmt' *ngIf="isFossilFuel">
+                                 <mat-option value="{{es.allowLowerSlotAdmt}}" selected>{{es.allowLowerSlotAdmt}}</mat-option>
+                             </mat-select>  
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+                <!-- ------------------- -->
+        
+                <mat-expansion-panel *ngIf="!isFossilFuel" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Charges from Generation Statement
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <ng-container *ngFor="let charge of gs.generationStatementCharges">
+                                {{chargeAbbr[charge.chargeCode]+' : '+charge.totalCharges}} &nbsp;&nbsp; 
+                            </ng-container>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ngx-datatable class="material" [rows]="gs.generationStatementCharges" [columnMode]="'force'"
+                        [headerHeight]="50" [footerHeight]="50" [rowHeight]="40">
+                        <ngx-datatable-column name="Charge Code">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <strong>{{row.chargeCode}}</strong>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Charge Description">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.chargeDesc}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Total Charges">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.totalCharges}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </mat-expansion-panel>
+                
+           <!-- ------------------- -->
+
+                <mat-expansion-panel (opened)="availableOpenState = true" (closed)="availableOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Available Units
+                        </mat-panel-title>
+                        <mat-panel-description>
+                                 {{availableOpenState ? '' : 'C1 : '+availableGsUnitsForPanel.c1}} &nbsp;&nbsp; {{availableOpenState ? '' :  'C2 : '+availableGsUnitsForPanel.c2}} &nbsp;&nbsp; {{availableOpenState ? '' :  'C3 : '+availableGsUnitsForPanel.c3}}  &nbsp;&nbsp;   {{availableOpenState ? '' :  'C4 : '+availableGsUnitsForPanel.c4}}  &nbsp;&nbsp; {{availableOpenState ? '' :  'C5 : '+availableGsUnitsForPanel.c5}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ngx-datatable class="material" [rows]="this.fetchAvailableUnitSummary()" [columnMode]="'force'" [headerHeight]="50"
+                    [scrollbarH]="true" [rowHeight]="'auto'">
+                        <ngx-datatable-column name="Source" width="15">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.heading}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="C1 " width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.c1}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="C2 " width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.c2}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="C3 " width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.c3}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="C4 " width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.c4}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="C5 " width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.c5}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Total" width="5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.total}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                     </ngx-datatable>
+                </mat-expansion-panel>   
+                <!-----------------------------  -->
+
+                <mat-expansion-panel (opened)="allocatedOpenState = true" (closed)="allocatedOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Allocated Units
+                        </mat-panel-title>
+                        <mat-panel-description>
+                                {{allocatedOpenState ? '' : 'C1 : '+allocatedGsunitsForPanel.c1}} &nbsp;&nbsp; {{allocatedOpenState ? '' : 'C2 : '+allocatedGsunitsForPanel.c2}} &nbsp;&nbsp; {{allocatedOpenState ? '' : 'C3 : '+allocatedGsunitsForPanel.c3}} &nbsp;&nbsp; {{allocatedOpenState ? '' : 'C4 : '+allocatedGsunitsForPanel.c4}} &nbsp;&nbsp;  {{allocatedOpenState ? '' : 'C5 : '+allocatedGsunitsForPanel.c5}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <ngx-datatable class="material" [rows]="this.fetchAllocatedUnitSummary()" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true"
+                    [rowHeight]="'auto'">
+                    <ngx-datatable-column name="Source" width="15">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.heading}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="C1 " width="5">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.c1}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="C2 " width="5">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.c2}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="C3 " width="5">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.c3}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="C4 " width="5" >
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.c4}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                   
+                    <ngx-datatable-column name="C5 " width="5">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.c5}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Total" width="5">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.total}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+    
+                <br>
+
+                </mat-expansion-panel>
+
+            </mat-accordion>
+            <!-- ----------------------------------------------------------------------------------------- -->
+            <br>
+
+            <mat-card-title>
+                <strong>Allocate Consumers</strong>
+            </mat-card-title>
+            <mat-card-subtitle><mat-error *ngIf="this.errorMessage">{{errorMessage}}</mat-error>	</mat-card-subtitle>
+            
+         <!-- --------------------------------------------------------------------------------------------- -->
+         <mat-tab-group mat-align-tabs="center">
+
+                <mat-tab label="Units">
+                        <!-- <ngx-datatable class="material"
+                        [rows]="es.energySaleUsageSummaries" [columnMode]="'force'"
+                        [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true" [scrollbarV]="true"
+                        [rowHeight]="50">  -->
+                        <ngx-datatable class="material striped" [rows]="es.esUsageSummaries" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="80"
+                        [scrollbarV]="true">
+                        <ngx-datatable-column  name="S.NO"  [flexGrow]="1">
+                            <ng-template   let-row="row"  ngx-datatable-cell-template>
+                                {{row.$$index  + 1}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Consumer Details" [flexGrow]="4">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                
+                               <b> <i [innerHTML]="row['buyerCompanyServiceNumber']"></i></b> <br/> {{row.buyerCompanyName}}<br/>{{row.buyerEndOrgName}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <!-- <ngx-datatable-column name="Service - EDC">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.buyerCompanyServiceNumber}} - {{row.buyerEndOrgName}}
+                            </ng-template>
+                        </ngx-datatable-column> -->
+                        <!-- <ngx-datatable-column name="Approved">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.quantum}}
+                            </ng-template>
+                        </ngx-datatable-column> -->
+                        <ngx-datatable-column name="Allocated" [flexGrow]="1">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.total}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                         <!-- strangely, giving ngx-database-coumn name as C1 was causing issue.
+                                    after typing a letter, textbox will loose focus. change it to 'Slot 1' somehow fixed it
+                                    may be its because c1 is a variable name in component -->
+                            <ngx-datatable-column name="Slot 1" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="C1" [(ngModel)]='row.c1' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c1="ngModel"  (ngModelChange)="checkAllocations(row)">
+                                        <mat-hint></mat-hint>
+                                        <mat-error *ngIf="val_c1.invalid && (val_c1.dirty || val_c1.touched) && val_c1.errors.pattern">
+                                         C1 Must be number.</mat-error>
+                                </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Slot 2" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="C2" [(ngModel)]='row.c2' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c2="ngModel" (ngModelChange)="checkAllocations(row)">
+                                                <mat-hint></mat-hint>
+                                                <mat-error *ngIf="val_c2.invalid && (val_c2.dirty || val_c2.touched) && val_c2.errors.pattern">
+                                                 C2 Must be number.</mat-error>
+                                        </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Slot 3" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="C3" [(ngModel)]='row.c3' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c3="ngModel" (ngModelChange)="checkAllocations(row)">
+                                                <mat-hint></mat-hint>
+                                                <mat-error *ngIf="val_c3.invalid && (val_c3.dirty || val_c3.touched) && val_c3.errors.pattern">
+                                                 C3 Must be number.</mat-error>
+                                        </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Slot 4" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="C4" [(ngModel)]='row.c4' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c4="ngModel" (ngModelChange)="checkAllocations(row)">
+                                                <mat-hint></mat-hint>
+                                                <mat-error *ngIf="val_c4.invalid && (val_c4.dirty || val_c4.touched) && val_c4.errors.pattern">
+                                                 C4 Must be number.</mat-error>
+                                        </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Slot 5" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                <input matInput placeholder="C5" [(ngModel)]='row.c5' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c5="ngModel" (ngModelChange)="checkAllocations(row)">
+                                                <mat-hint></mat-hint>
+                                                <mat-error *ngIf="val_c5.invalid && (val_c5.dirty || val_c5.touched) && val_c5.errors.pattern">
+                                                 C5 Must be number.</mat-error>
+                                        </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>    
+                    </mat-tab>
+  
+                    <mat-tab  *ngIf="!isFossilFuel" label="Charges">
+              
+                    <!-- <ngx-datatable class="material"
+                    [rows]="es.energySaleUsageSummaries" [columnMode]="'force'"
+                    [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true" [scrollbarV]="true"
+                    [rowHeight]="50"> -->
+                    <mat-card-content>
+
+                    <ngx-datatable class="material striped" [rows]="es.esUsageSummaries" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="80"
+                    [scrollbarV]="true">
+                    <ngx-datatable-column  name="S.NO" [flexGrow]="0.5">
+                        <ng-template   let-row="row"  ngx-datatable-cell-template>
+                            {{row.$$index  + 1}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Consumer Details" [flexGrow]="4">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            
+                           <b> <i [innerHTML]="row['buyerCompanyServiceNumber']"></i></b> <br/> {{row.buyerCompanyName}}<br/>{{row.buyerEndOrgName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                        <ngx-datatable-column name="M.R.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="M.R.C" [(ngModel)]='row.c001TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c001="ngModel" (ngModelChange)="onMRCValidate()">
+                                    <mat-hint></mat-hint>
+                                    <mat-error *ngIf="val_c001.invalid && (val_c001.dirty || val_c001.touched) && val_c001.errors.pattern">
+                                     error</mat-error>
+                            </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="O.M.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                    <input matInput placeholder="O.M.C" [(ngModel)]='row.c002TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c002="ngModel" (ngModelChange)="onCompleteDisable()">
+                                    <mat-hint></mat-hint>
+                                    <mat-error *ngIf="val_c002.invalid && (val_c002.dirty || val_c002.touched) && val_c002.errors.pattern">
+                                     error</mat-error>
+                            </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="T.R.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="T.R.C" [(ngModel)]='row.c003TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c003="ngModel" (ngModelChange)="onCompleteDisable()">
+                                            <mat-hint></mat-hint>
+                                            <mat-error *ngIf="val_c003.invalid && (val_c003.dirty || val_c003.touched) && val_c003.errors.pattern">
+                                             error</mat-error>
+                                    </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="S.O.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="S.O.C" [(ngModel)]='row.c004TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c004="ngModel" (ngModelChange)="onCompleteDisable()">
+                                            <mat-hint></mat-hint>
+                                            <mat-error *ngIf="val_c004.invalid && (val_c004.dirty || val_c004.touched) && val_c004.errors.pattern">
+                                             error</mat-error>
+                                    </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="R.K.P" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="R.K.P" [(ngModel)]='row.c005TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c005="ngModel" (ngModelChange)="onCompleteDisable()">
+                                            <mat-hint></mat-hint>
+                                            <mat-error *ngIf="val_c005.invalid && (val_c005.dirty || val_c005.touched) && val_c005.errors.pattern">
+                                             error</mat-error>
+                                    </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="N.E.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="N.E.C" [(ngModel)]='row.c006TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c006="ngModel">
+                                            <mat-hint></mat-hint>
+                                            <mat-error *ngIf="val_c006.invalid && (val_c006.dirty || val_c006.touched) && val_c006.errors.pattern">
+                                             error</mat-error>
+                                    </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="S.H.C" [flexGrow]="1.5">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                        <input matInput placeholder="S.H.C" [(ngModel)]='row.c007TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c007="ngModel">
+                                        <mat-hint></mat-hint>
+                                        <mat-error *ngIf="val_c007.invalid && (val_c007.dirty || val_c007.touched) && val_c007.errors.pattern">
+                                         error</mat-error>
+                                </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="O.C" [flexGrow]="1.5">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                            <input matInput placeholder="O.C" [(ngModel)]='row.c008TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c008="ngModel">
+                                            <mat-hint></mat-hint>
+                                            <mat-error *ngIf="val_c008.invalid && (val_c008.dirty || val_c008.touched) && val_c008.errors.pattern">
+                                             error</mat-error>
+                                    </mat-form-field>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="P.O.C" [flexGrow]="1.5">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                                <input matInput placeholder="P.C" [(ngModel)]='row.c009TotalCharge' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_c009="ngModel">
+                                                <mat-hint></mat-hint>
+                                                <mat-error *ngIf="val_c009.invalid && (val_c009.dirty || val_c009.touched) && val_c009.errors.pattern">
+                                                 error</mat-error>
+                                        </mat-form-field>
+                                </ng-template>
+                            </ngx-datatable-column>
+                    </ngx-datatable>
+                </mat-card-content>
+
+            </mat-tab>
+          </mat-tab-group>
+          <br/>
+          <mat-progress-bar *ngIf="this.disableAllButtons==true" color="warn"  mode="indeterminate">{{processingMessage}}</mat-progress-bar>
+
+          <mat-card-actions align="end">
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessUpdateFlag"
+                [disabled] = "this.disableAllButtons"  (click)="saveEs('')">Save</button>
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessApproveFlag &&savedOnce=='Y'"
+                [disabled] = "this.disableAllButtons" (click)="finalEs()">Confirm</button>
+            <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED'"  [disabled] = "this.disableAllButtons" (click)="bulkAllocation()">BulkAllocation</button>
+            <button mat-raised-button color="warn" *ngIf="statusCode=='CREATED'"  [disabled] = "this.disableAllButtons" (click)="resetEss()">ResetAll</button>
+            <button mat-raised-button class="primary"  [disabled] = "this.disableAllButtons" (click)="listEss()">Back</button>
+        </mat-card-actions>
+
+        </mat-card>
+    </div>
+</div>
+

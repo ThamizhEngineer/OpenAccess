@@ -1,0 +1,70 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+    
+        <mat-card-title>{{addScreen?'Add':'Update'}} Company Name Change</mat-card-title>
+    
+        <ng-template mat-tab-label> Company Name Change Details</ng-template>
+        <mat-card-content>
+                <mat-card-title>{{this.commonUtils.getProp('seller')}}  Information</mat-card-title> 
+                <div fxLayout="row" fxLayoutAlign="start center" >
+           
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [(ngModel)]='companyNameChange.orgId' [required]="isMandatory"
+                        (ngModelChange)="onEdcChange()">
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                            {{ edc.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='companyNameChange.serviceId'
+                        [required]="isMandatory" (ngModelChange)="onServiceChange()">
+                        <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+                            {{ companyService.companyName }} - {{ companyService.number }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+              <div class="ml-xs mr-xs" style="width: 100%;" ></div>
+                 
+                </div><br/>
+                <div mat-subheader>Company Details</div>
+                <!--	<div fxLayout="row" fxLayoutAlign="start center"> -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Company Name" [(ngModel)]='companyNameChange.companyName' disabled="true">
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Service Number" [(ngModel)]='companyNameChange.serviceNumber' disabled="true">
+                  </mat-form-field>
+
+                </div>
+
+                <div mat-subheader>Company Name Change</div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Old Company Name" [(ngModel)]='companyNameChange.companyName' disabled="true">
+                          </mat-form-field>
+
+                          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                              <input matInput placeholder="New Company Name" [(ngModel)]='companyNameChange.newCompanyName'>
+                           </mat-form-field>
+                        </div>
+              </mat-card-content>              
+        <hr>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" *ngIf="companyNameChange.statusCode!='APPROVED'"(click)="saveCompanyNameChange('')">Save</button>
+            <button mat-raised-button color="primary" *ngIf="companyNameChange.statusCode!='APPROVED' && companyNameChange.statusCode=='CREATED' " (click)="approveCompanyNameChange('')">Approve</button>
+                <button mat-raised-button class="primary" (click)="listCompanyNameChange()">Cancel/Back</button>
+    
+            
+        </mat-card-actions>
+    </mat-card>
+
+    </div> 
+</div>        

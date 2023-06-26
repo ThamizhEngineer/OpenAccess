@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+
+            <div mat-subheader>Company Name Change</div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Old Company Name" [(ngModel)]='companyNameChange.companyName' disabled="true">
+                                </mat-form-field>
+
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                        <input matInput placeholder="New Company Name"  [(ngModel)]='companyNameChange.newCompanyName'>
+                                 </mat-form-field>
+                            </div>
+
+        </mat-card>
+
+    </div>
+</div>

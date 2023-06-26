@@ -1,0 +1,180 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title> <strong>Feeder Line Loss</strong> </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"
+                            placeholder="Edc Name" [(ngModel)]='searchOrgId' (change)="onEdcNameChange($event.value)">
+                            <mat-option *ngFor="let org of orgList" [value]="org.id">
+                                {{org.code}} - {{org.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disabless"
+                            placeholder="Substation Name" [(ngModel)]='searchssId'
+                            (change)="onsubstationNameChange($event.value)">
+
+                            <mat-option *ngFor="let ss of substationlist | searchfilter : value" [value]="ss.id">
+                                {{ss.name}}
+                            </mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+ 
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disablefeeder"
+                            placeholder="Feeder Name" [(ngModel)]='searchfeederId'
+                            (change)="onfeederNameChange($event.value)">
+
+                            <mat-option *ngFor="let ff of Feederlist" [value]="ff.id">
+                                {{ff.name}}
+                            </mat-option>
+
+                        </mat-select>
+                        <small *ngIf="error" class="mat-text-warn"> {{message}} </small>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month"
+                            [(ngModel)]='statementMonth' readonly>
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Statement Year" [(ngModel)]="statementYear">
+                    </mat-form-field>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary"
+                            (click)="fetchResult()">Search</button>
+                    </mat-card-actions>
+                </div>
+
+                <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+                    <ngx-datatable-column name="Feeder Name">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.feederName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Feeder Voltage">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.feederVoltage}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Service Number">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.serviceNumber}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Plant End Meter No">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.companyMeterNo}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Service Name">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.companyName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Export Units">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.exportUnits}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Feeder Length">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.feederLineLength}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!--  <ngx-datatable-column name="Feederend Exportunit">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.feederEnd}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Lineloss %">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.lineLossPercentage}}
+                        </ng-template>
+                    </ngx-datatable-column> -->
+                    <!-- <ngx-datatable-column name="Actions">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <button mat-raised-button color="primary" class="mr-1" (click)="editGs(row['id'])">Open</button>
+                        </ng-template>
+                    </ngx-datatable-column> -->
+                    <!-- <ngx-datatable-footer #tFooter (onFooterPage)="handleF($event)">
+                        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                           <span class="pl-3 text-primary">SHOWING:</span>&nbsp;&nbsp;<span class="text-muted text-sm"> {{curPage > 1 ? (curPage * pageSize) - pageSize : curPage}} - {{(pageSize * curPage) < rowCount ? pageSize * curPage : rowCount}} of {{rowCount}}</span>
+                           <datatable-pager (onFooterPage)="handleF($event)" (change)="table.onFooterPage($event)" [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="rowCount">
+                        </datatable-pager>
+                        </ng-template>
+                     </ngx-datatable-footer> -->
+                     
+                </ngx-datatable>
+                
+                <div>
+                    <div fxLayout="row">
+                        <div class="div_pad" fxFlex="50%">
+                            <span fxFlex="35%" style="font-weight: 600;">Plant End Total Export </span><span
+                                fxFlex="10%" style="margin-left: 10px;
+                            margin-right: 10px;">:</span><span fxFlex="35%">{{totalexportunits}}</span>
+                        </div>
+                        <div class="div_pad" fxFlex="50%" fxLayoutAlign="end center">
+                            <span fxFlex="30%"></span>
+                            <span fxFlex="35%" style="font-weight: 600;">Feeder End Meter No</span><span fxFlex="10%"
+                                style="margin-left: 10px;
+                           margin-right: 10px;">:</span><span fxFlex="35%">{{feedermeterno}}</span>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div class="div_pad" fxFlex="50%">
+                            <span fxFlex="35%" style="font-weight: 600;">Bulk Meter Export</span><span fxFlex="10%"
+                                style="margin-left: 10px;
+                        margin-right: 10px;">:</span><span *ngIf="hidetotal"
+                                fxFlex="10%">{{totalfeederexportunits}}</span>
+                            <input class="inpt" *ngIf="showEditmode" [(ngModel)]="totalfeederexportunits">
+                            <button *ngIf="totalfeederexportunits && !show_save_btn && show_edit_btn1 || error_msg==true" mat-button
+                                color="primary" class="save_btn" (click)="edit_bulkmeter()">Edit</button>
+                            <button *ngIf="show_save_btn" mat-button color="primary" class="save_btn"
+                                (click)="save_bulkmeter()">Save</button>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div class="div_pad" fxFlex="50%">
+                            <span fxFlex="35%" style="font-weight: 600;">Export Difference </span><span fxFlex="10%"
+                                style="margin-left: 10px;
+                    margin-right: 10px;">:</span><span fxFlex="35%">{{ExportunitDifference}}</span>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div class="div_pad" fxFlex="50%">
+                            <span fxFlex="35%" style="font-weight: 600;">Lineloss %</span><span fxFlex="10%" style="margin-left: 10px;
+                    margin-right: 10px;">:</span><span fxFlex="35%">{{lospercentage}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <small *ngIf="save_msg_show" style="margin-left: 40%;color: red;">{{save_msg}}</small>
+                    <!-- <mat-card-actions class="gs-btn" *ngIf="lospercentage"> -->
+                    <!-- <button mat-raised-button color="primary" class="primary" (click)="GenerateStatement()">Generate
+                            Statement</button> -->
+                    <!-- </mat-card-actions> -->
+                    <mat-card-actions class="gs-btn" *ngIf="lospercentage">
+                        <button *ngIf="success==true" mat-raised-button color="primary" class="primary"
+                            (click)="Save()">Save</button>
+                    </mat-card-actions>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

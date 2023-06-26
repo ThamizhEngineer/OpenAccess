@@ -1,0 +1,110 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title> <strong>Energy Allotment</strong> </mat-card-title>
+			<mat-card-content>
+				<button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)="newEs()"><mat-icon>add</mat-icon></button>
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchOrgId'>
+							<mat-option *ngFor="let org of orgList" [value]="org.id">
+								{{org.code}} - {{org.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="{{this.commonUtils.getProp('seller')}}  Company Name" [(ngModel)]="searchSellerCompanyName">
+					</mat-form-field>
+
+					<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="{{this.commonUtils.getProp('seller')}}  Company Service Number" [(ngModel)]="sellerCompanyServiceNumber" [disabled]="disableCompanyName">
+					</mat-form-field>   -->
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Company Service Number" [(ngModel)]="sellerCompanyServiceNumber" [disabled]="disableCompanyName">
+					</mat-form-field>  
+
+			
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="STB/CAPTIVE/THIRD-PARTY" [(ngModel)]='flowTypeCode'>
+							<mat-option *ngFor="let flowType of flowTypeCodes" [value]="flowType.key">
+								{{ flowType.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='searchMonth' readonly>
+							<mat-option *ngFor="let month of months" [value]="month.value">
+								{{ month.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Year" [(ngModel)]="searchYear">
+					</mat-form-field>
+
+					<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="FuelType" [(ngModel)]="dispFuelTypeCode">
+					</mat-form-field> -->
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="FuelType" [(ngModel)]='fuelTypeName'>
+						  <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.fuelCode">
+							{{fuelTypes.fuelName}}
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field>
+
+					<hr>
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+				</div>
+				<br/>
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+					<ngx-datatable-column name="Edc Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerEndOrgName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Company Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerCompanyName}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Service Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.sellerCompanyServiceNumber}}
+						</ng-template>
+
+					</ngx-datatable-column>
+					<ngx-datatable-column name="FuelType">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.fuelTypeName}}
+							</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Statement Duration">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{commonService.displayMonth(row.month)}} - {{row.year}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editEs(row['id'])">{{row.statusCode=='APPROVED'?'COMPLETED':row.statusCode}}</button>
+						</ng-template>
+					</ngx-datatable-column>
+				</ngx-datatable>
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

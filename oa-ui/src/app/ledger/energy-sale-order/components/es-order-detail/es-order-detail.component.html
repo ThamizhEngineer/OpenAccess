@@ -1,0 +1,347 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+
+      <mat-card-title><strong> View Energy Allotment Order</strong></mat-card-title>
+      <mat-card-title></mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="EDC Name" [(ngModel)]='esorder.sellerEndOrgName' disabled="true">
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Company Name" [(ngModel)]='esorder.sellerCompanyName' disabled="true">
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Service Number" [(ngModel)]='esorder.sellerCompanyServiceNumber' disabled="true">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='esorder.month' disabled="true">
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Year" [(ngModel)]='esorder.year' disabled="true">
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Voltage" [(ngModel)]='esorder.injectingVoltageCode' disabled="true">
+
+              <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode">
+                {{voltage.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Allocation Completed Date" [value]="esorder.createdDate | date: 'dd/MM/yyyy'" disabled="true">
+          </mat-form-field>
+
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [(ngModel)]="esorder.modifiedDate" [matDatepicker]="modifiedDate" placeholder="AllocationGenerationDate">
+            <mat-datepicker-toggle matSuffix [for]="modifiedDate"></mat-datepicker-toggle>
+            <mat-datepicker #modifiedDate></mat-datepicker>
+        </mat-form-field>        -->
+
+
+        </div>
+      </mat-card-content>
+
+      <mat-card-title><strong>Allocated Summary</strong></mat-card-title>
+      <ngx-datatable class="material" [rows]="esorderForPrint" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true" [rowHeight]="'auto'">
+        <ngx-datatable-column name=" Source " width="15">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.heading}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C1" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalGc1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C2" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalGc2}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C3" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalGc3}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C4" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalGc4}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C5" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalGc5}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Total" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.total}}
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+      <br/>
+      <div *ngIf="esorder.fuelGroupe=='RE'">   
+        <mat-card-title ><strong>Balance</strong></mat-card-title>
+
+        <ngx-datatable  class="material" [rows]="bankingArray" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true" [rowHeight]="'auto'">
+            <ngx-datatable-column name=" Excess Units " width="15">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.heading}}
+                <br/>
+                {{row.headinglap}}
+                <br/>
+                {{row.headingsurp}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="C1" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- {{row.c1 | number :'1.2-2'}} -->
+                {{row.c1}}
+                <br/>
+                {{row.lapc1}}
+                <br/>
+                {{row.surpc1}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="C2" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.c2}}
+                <br/>
+                {{row.lapc2}}
+                <br/>
+                {{row.surpc2}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="C3" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.c3}}
+                <br/>
+                {{row.lapc3}}
+                <br/>
+                {{row.surpc3}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="C4" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.c4}}
+                <br/>
+                {{row.lapc4}}
+                <br/>
+                {{row.surpc4}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="C5" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.c5}}
+                <br/>
+                {{row.lapc5}}
+                <br/>
+                {{row.surpc5}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.total}}
+                <br/>
+                {{row.laptotal}}
+                <br/>
+                {{row.surptotal}}
+              </ng-template>
+            </ngx-datatable-column>
+    
+          </ngx-datatable>
+      <br/>
+      </div>
+      <mat-card-title> <strong>Allocated Consumers</strong></mat-card-title>
+      <ngx-datatable class="material" [rows]="esorder.energySaleOrderLines" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true"
+        [rowHeight]="'auto'">
+        <ngx-datatable-column  name="S.NO" width="15">
+          <ng-template   let-row="row"  ngx-datatable-cell-template>
+              {{row.$$index  + 1}}
+          </ng-template>
+      </ngx-datatable-column>
+        <ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}}  Company Name" width="15">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.buyerCompanyName}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Service - EDC" width="15">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.buyerCompanyServiceNumber}} - {{row.buyerEndOrgName}}
+          </ng-template>
+        </ngx-datatable-column>
+        <!-- <ngx-datatable-column name="Approved" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.buyerCompanyCode}}
+                </ng-template>
+              </ngx-datatable-column>  -->
+        <ngx-datatable-column name="Allocated" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.totalUnitsSold}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C1" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C2" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c2}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C3" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c3}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C4" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c4}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C5" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c5}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Unit Cost" width="5">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.unitCost}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Total Amount Payable" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.totalAmountPayable}}
+              </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Total Amount Chargable" width="5">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.totalAmountChargable}}
+              </ng-template>
+            </ngx-datatable-column>
+          <ngx-datatable-column name="Net Amount Payable" width="5">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.netAmountPayable}}
+                </ng-template>
+            </ngx-datatable-column>
+      </ngx-datatable>
+
+
+      <hr>
+
+      <div *ngIf="esorder.fuelGroupe=='RE'">  
+        <mat-card-title ><strong> Energy Allotment Order Charges </strong></mat-card-title>
+        <!-- <mat-card-content>
+          <ngx-datatable class="material" [rows]="esorder.energyCharge" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+            [rowHeight]="40">
+            <ngx-datatable-column name="Company Name">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.companyServiceNumber}} - {{row.companyName}}
+                </ng-template>
+              </ngx-datatable-column>
+            <ngx-datatable-column name="Charge Code">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.chargeCode}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Charge Description">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.chargeDesc}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.totalCharges}}
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </mat-card-content> -->
+
+        <mat-card-content >
+          <ngx-datatable class="material" [rows]="esOrderChargeListForPrint" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" 
+            [rowHeight]="40"> 
+            <ngx-datatable-column  name="S.NO" width="15">
+              <ng-template   let-row="row"  ngx-datatable-cell-template>
+                  {{row.$$index  + 1}}
+              </ng-template>
+          </ngx-datatable-column>
+            <ngx-datatable-column name="Company Name">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.companyServiceNumber}} - {{row.companyName}}
+                </ng-template>
+              </ngx-datatable-column>
+            <ngx-datatable-column name="Meter Reading Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C001TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="O&M Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C002TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Transmission Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C003TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="System Operation Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C004TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="RKvah Penalty">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C005TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Negative Energy Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C006TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Scheduling Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C007TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Other Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C008TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Parallel Operation Charges">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.C009TotalCharge}}
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </mat-card-content>
+      </div>
+     <hr>
+      <mat-card-actions>
+        <!-- <button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveEs('')" >Save</button>
+        <button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveEs(nextEaStatus)" >{{nextAction}}</button>
+        <button mat-raised-button class="primary" (click)="saveEa('Disapproved')" *ngIf="nextEaStatus=='Approved'" >Disapprove</button> -->
+        <button mat-raised-button color="primary" class="primary" (click)="printEsOrder()">Print</button>
+
+        <button mat-raised-button class="primary" (click)="listEso()">Back</button>
+        <small *ngIf="message" class="mat-text-warn">{{message}}</small>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

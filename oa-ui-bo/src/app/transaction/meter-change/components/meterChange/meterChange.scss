@@ -1,0 +1,78 @@
+
+.meterChange {
+    padding: 25px;
+}
+
+.readingTable {
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.genTable{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.mfTable {
+    margin-left: 58%;
+    width: 18%;
+    height: 10%;
+    border: 1px solid black;
+}
+
+.totalTables {
+    display: flex;
+    gap: 60px;
+    margin-left: 60px;
+    margin-top: 20px;
+}
+
+.totalImportTable {
+    margin-left: -60px;
+    width: 20%;
+}
+
+.totalExportTable {
+    width: 20%;
+    margin-left: 84px;
+}
+
+.unitsTable{
+    width: 20%;
+    margin-left: 65px;
+}
+
+.kvahTable {
+    width: 17%;
+    height: 10%;
+    padding-top: 3%;
+    margin-left: 10px;
+}
+
+td {
+    width: 0%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+table input td-input {
+    border: none;
+}
+
+.td-input {
+    border: 0;
+    outline: 0;
+    text-align: center;
+    width: 95px;
+}
+.mfClass {
+    font-size: 12pt;
+    height: 20px;
+    width: 13%;
+    text-align: center;
+    margin-left: 0%;
+    margin-top: 1px;
+}

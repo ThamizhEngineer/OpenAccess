@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>
+    Energy Adjusted Charges Report
+    </title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p><u>Energy Adjusted Charges Report</u>
+           </p>
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Seller</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="2">Buyer</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="9">Charges</th>
+                    </tr>  
+        
+                    <tr>
+                        <th style="background: #dcdcdc">SI.NO</th>
+                        <th style="background: #dcdcdc">Month</th>
+                        <th style="background: #dcdcdc">Year</th>
+                        <th style="background: #dcdcdc">Edc Name</th>
+                        <th style="background: #dcdcdc">Service No</th>
+                        <th style="background: #dcdcdc">Generator Name</th>
+                        <th style="background: #dcdcdc">Fuel Type</th>
+                        <th style="background: #dcdcdc">Flow Type</th>
+                        <th style="background: #dcdcdc">REC</th>
+                        <th style="background: #dcdcdc">M.F</th>
+                        <th style="background: #dcdcdc">Tariff</th>
+                        <th style="background: #dcdcdc">SC No</th>
+                        <th style="background: #dcdcdc">Name</th>
+                        <th style="background: #dcdcdc">O And M Charges</th>
+                       <th style="background: #dcdcdc">Transmission Charges</th>
+                        <th style="background: #dcdcdc">System Operation Charges</th>
+                        <th style="background: #dcdcdc">RKVAH Penalty</th>
+                        <th style="background: #dcdcdc">Negative Energy Charges</th>
+                        <th style="background: #dcdcdc">Scheduling Charges</th>
+                        <th style="background: #dcdcdc">Meter Reading Charges</th>
+                        <th style="background: #dcdcdc">Other Charges</th>
+                        <th style="background: #dcdcdc">Total Charges</th>                      
+                    </tr>
+                <tr class="item-row" th:each="cons : ${cons}">
+                  <td th:text="${cons.op1}"></td>
+                <td th:text="${cons.op2}"></td>
+                <td th:text="${cons.op3}"></td>
+                <td th:text="${cons.op4}"></td>
+                <td th:text="${cons.op5}"></td>
+                <td th:text="${cons.op6}"></td>
+                <td th:text="${cons.op7}"></td>
+                <td th:text="${cons.op8}"></td>
+                <td th:text="${cons.op9}"></td>
+                <td th:text="${cons.op10}"></td>
+                <td th:text="${cons.op11}"></td>
+                <td th:text="${cons.op12}"></td>
+                   <td th:text="${cons.op13}"></td>
+                <td th:text="${cons.op14}"></td>
+                <td th:text="${cons.op15}"></td>
+                <td th:text="${cons.op16}"></td>
+                <td th:text="${cons.op17}"></td>
+                <td th:text="${cons.op18}"></td>
+                <td th:text="${cons.op19}"></td>
+                <td th:text="${cons.op20}"></td>
+                <td th:text="${cons.op21}"></td>
+                <td th:text="${cons.op22}"></td>              
+            </tr>
+        
+                </table>
+
+</div>
+
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

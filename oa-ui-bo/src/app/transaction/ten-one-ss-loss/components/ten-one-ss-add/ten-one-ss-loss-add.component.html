@@ -1,0 +1,96 @@
+<mat-toolbar color="primary">
+
+	<span>Add SubStation Loss</span>
+	<span fxFlex></span>
+</mat-toolbar>
+<br/>
+<br/>
+<div fxLayout="row"   fxLayoutAlign="start center">
+	
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name"[(ngModel)]='substationLoss.orgId'>
+			<mat-option *ngFor="let org of orgList" [value]="org.id">
+				{{org.code}} - {{org.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+		<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Statement Month" [(ngModel)]='month'>
+			<mat-option *ngFor="let month of months" [value]="month.value">
+				{{ month.name }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%"> 
+		<input matInput placeholder="Year"  [(ngModel)]='year'>
+	</mat-form-field>
+
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" class="primary" (click)="start()">Start</button>
+	</mat-card-actions>
+</div>
+<mat-card class="mat-card-top">
+
+	<!-- <mat-card-title>{{addScreen?'Add':'Update'}} Meter Reading Import </mat-card-title> -->
+	
+
+	
+	<mat-card>
+	
+
+	
+			
+				<mat-card-content>
+					<div fxLayout="row"*ngFor="let importSubstation of importSubstationLossList"  fxLayoutAlign="start center">					
+					 
+				
+					 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="SubStation Name" [(ngModel)]='importSubstation.substationName' [disabled]="true">
+					</mat-form-field>
+			
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Bulk Meter Reading" [(ngModel)]='importSubstation.bulkMeterReading' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_bulkMeterReading="ngModel">
+							<mat-hint>Must be numeric</mat-hint>
+						
+							<mat-error *ngIf="val_bulkMeterReading.invalid && (val_bulkMeterReading.dirty || val_bulkMeterReading.touched) && val_bulkMeterReading.errors.pattern">
+								Bulk Meter Reading Must be number.</mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Total Reading of All Wegs" [(ngModel)]='importSubstation.totalAllWegs' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_totalAllWegs="ngModel">
+							<mat-hint>Must be numeric</mat-hint>
+						
+							<mat-error *ngIf="val_totalAllWegs.invalid && (val_totalAllWegs.dirty || val_totalAllWegs.touched) && val_totalAllWegs.errors.pattern">
+							 Total All Wegs Must be number.</mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Loss Percentage %" [(ngModel)]='importSubstation.lossPercent' required pattern="[0-9]+(\.[0-9]{1,4}?)?" #val_lossPercent="ngModel">
+							<mat-hint>Must be numeric</mat-hint>
+						
+							<mat-error *ngIf="val_lossPercent.invalid && (val_lossPercent.dirty || val_lossPercent.touched) && val_lossPercent.errors.pattern">
+							Loss Percent Must be number.</mat-error>
+						</mat-form-field>
+						
+					
+					</div>
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary"  [disabled]="disableSave" *ngIf="importSubstationLossList.length>1"(click)="import()">Import</button>
+						<button mat-raised-button color="primary" class="primary" *ngIf="importSubstationLossList.length>1"(click)="navigateToListPage()">Cancel</button>
+					</mat-card-actions>
+					</mat-card-content>
+					</mat-card>
+					</mat-card>
+					
+<!-- <div fxLayout="row" fxLayoutAlign="start center">
+		<button mat-raised-button color="primary" class="mr-1" (click)="addEs(row)">Import</button>
+		<button mat-raised-button color="primary" class="mr-1" (click)="addEs(row)">Cancel</button>		
+</div> -->
+
+	
+	
+	 

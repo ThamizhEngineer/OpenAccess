@@ -1,0 +1,75 @@
+<mat-card class="mat-card-top">
+ <mat-card-title>Delete Transaction Detail</mat-card-title>
+
+
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]='disableEdc' [(ngModel)]='DeleteTransaction.orgId'
+					 [required]="isMandatory" (ngModelChange)="onEdcChange()" >
+						<mat-option *ngFor="let edc of orgList" [value]="edc.id">
+							{{ edc.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Gen Service Number" [matAutocomplete]="tdAuto" [(ngModel)]='DeleteTransaction.genServiceNumber'
+					 #modelDir="ngModel" [required]="isMandatory" (ngModelChange)="this.filteredCompanyServiceList = filterSellerCompanyServiceList(DeleteTransaction.genServiceNumber);onServiceChange()">
+					<mat-autocomplete #tdAuto="matAutocomplete">
+						<mat-option *ngFor="let companyService of filteredCompanyServiceList" [value]="companyService.number">
+							<span> {{companyService.number }} - {{companyService.companyName }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+			
+		</div>
+
+		<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='DeleteTransaction.readingMonth'> <!----[(ngModel)]='geoOtherCharges.month' -->
+						<mat-option *ngFor="let month of months" [value]="month.value">
+							{{ month.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Year" [(ngModel)]="DeleteTransaction.readingYear">
+				</mat-form-field>
+		</div>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field style="width: 100%;">
+				<mat-select class="ml-xs mr-xs" placeholder="Reason For Deletion" [(ngModel)]='DeleteTransaction.valueCode'>
+				  <mat-option *ngFor="let reasons of Reasons" [value]="reasons.valueCode">
+					{{reasons.valueDesc}}
+				  </mat-option>
+				</mat-select>
+			  </mat-form-field>
+	  </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Transaction Type" [(ngModel)]='DeleteTransaction.transactionTypeCode'>
+				<mat-option *ngFor="let transType of transTypes" [value]="transType.key">
+					{{transType.name}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	  </div>
+
+		
+	</mat-card-content>
+	</mat-card>
+	<hr>
+	<mat-card-actions>
+			<button mat-raised-button color="primary" [disabled] = "disableSave" (click)="addDelTxn('')">Save</button>
+			<!-- <button mat-raised-button color="primary"  *ngIf="consent.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveConsent()">Approve</button> 
+		   <button mat-raised-button color="primary" *ngIf="consent.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeConsent()">Approve</button> -->	
+            <button mat-raised-button class="primary" (click)="listDelTxn()">Cancel/Back</button>
+
+		
+	</mat-card-actions>
+</mat-card>

@@ -1,0 +1,43 @@
+<div class="session mat-indigo login-sidebar">
+  <div class="session-content">
+    <div class="session-wrapper">
+      <mat-card class="login-box">
+        <mat-card-content>
+            <div class="text-xs-center pb-1">
+
+			<img src="assets/images/tneb-tangedco-logo_360.png" alt=""/>
+              
+              <p class="mat-text-muted">Please login with your username and password to continue.</p>
+              <small *ngIf="message" class="mat-text-warn">{{message}}</small>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-around">
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input matInput placeholder="Username" [(ngModel)]='user.userName' >
+                </mat-form-field>
+              </div>
+              <div class="pb-1">
+                <mat-form-field style="width: 100%">
+                  <input (keyup.enter)="login()" matInput type="password" placeholder="Password" [(ngModel)]='user.password' >
+                </mat-form-field>
+              </div>
+ 
+              <button mat-raised-button color="primary" type="submit" [disabled]="logging" (click)="login()" >{{logging?'Loging...': 'Log In'}}</button>
+              <!-- <a style="margin-top:100px;margin-left: 80px;color:MediumSeaGreen;font-size:16px;" href="assets/data/oa-generator-guidelines.pdf" > Open Access Guidelines</a> -->
+
+            </div>
+
+
+        </mat-card-content>
+
+      <mat-card-content>
+          <div>
+              <a mat-raised-button color="warn" style="width: 100%;" href="assets/data/oa-generator-guidelines.pdf">Open Access Guidelines</a>
+            </div>
+            <button type="submit" class="button">Refer the above guidelines</button>
+        </mat-card-content>
+       
+      </mat-card>
+    </div>
+  </div>
+</div>

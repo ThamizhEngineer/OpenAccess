@@ -1,0 +1,97 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>Banking Balance</mat-card-title>
+
+	<ng-template mat-tab-label>Batch Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]='disableEdc' [(ngModel)]='bankingBalance.sellerOrgId' [required]="isMandatory"
+							(ngModelChange)="onEdcChange()">
+							<mat-option *ngFor="let edc of orgList" [value]="edc.id">
+									{{ edc.name }}
+							</mat-option>
+					</mat-select>
+			</mat-form-field>
+
+			<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Service number" [(ngModel)]='bankingBalance.sellerCompanyServiceId'
+							[required]="isMandatory" (ngModelChange)="onServiceChange()">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+									{{ companyService.companyName }} - {{ companyService.number }}
+							</mat-option>
+					</mat-select>
+			</mat-form-field> -->
+
+			<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Service Number" [matAutocomplete]="tdAuto" name="bankingBalance.sellerCompanyServiceId"  [(ngModel)]='bankingBalance.sellerCompanyServiceId'  #modelDir="ngModel"
+				[required]="isMandatory" (ngModelChange)="onServiceChange()">
+				  <mat-autocomplete #tdAuto="matAutocomplete">
+						 <mat-option *ngFor="let companyService of companyServices" [value]="companyService.id">
+						   <span> {{ companyService.number }} - {{ companyService.companyName }}</span>
+						 </mat-option>
+				  </mat-autocomplete>
+			 </mat-form-field>  -->
+			 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Service Number" [matAutocomplete]="tdAuto" [(ngModel)]='bankingBalance.sellerCompanyServiceNumber'  #modelDir="ngModel"
+				[required]="isMandatory" (ngModelChange)="this.filteredCompanyServiceList = filterSellerCompanyServiceList(bankingBalance.sellerCompanyServiceNumber);onServiceChange()">
+				  <mat-autocomplete #tdAuto="matAutocomplete">
+						 <mat-option *ngFor="let companyService of filteredCompanyServiceList" [value]="companyService.number">
+						   <span> {{ companyService.number }} - {{ companyService.companyName }}</span>
+						 </mat-option>
+				  </mat-autocomplete>
+			 </mat-form-field> 
+
+		
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [disabled]='disableEdc' [(ngModel)]='bankingBalance.month' readonly>
+					<mat-option *ngFor="let month of months" [value]="month.value">
+						{{ month.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Year" [disabled]='disableEdc' [(ngModel)]="bankingBalance.year">
+			</mat-form-field>
+			</div>
+
+			 <div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="C1" [(ngModel)]="bankingBalance.c1">
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="C2" [(ngModel)]="bankingBalance.c2">
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="C3" [(ngModel)]="bankingBalance.c3">
+				</mat-form-field>		
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="C4" [(ngModel)]="bankingBalance.c4">
+				</mat-form-field>
+
+			</div> 
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="C5" [(ngModel)]="bankingBalance.c5">
+				</mat-form-field>
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>		
+						
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>	
+				<div class="ml-xs mr-xs" style="width: 100%;"></div>	
+			</div> 
+
+			<mat-card>
+				<mat-card-actions>
+					<button mat-raised-button color="primary"  (click)="importBankingBalance('')">Save</button>
+					<button mat-raised-button class="primary" (click)="listBankingBalance()">Cancel/Back</button>
+				</mat-card-actions>
+			</mat-card>

@@ -1,0 +1,117 @@
+<ngx-datatable class="material" [rows]="rows"  [rowHeight]="'auto'" [headerHeight]="50" [footerHeight]="50" [externalPaging]="true"
+        [count]="totalElements"
+        [offset]="pageNumber"
+        [limit]="pageSize"
+        (page)='setPage($event)'>
+    <ngx-datatable-column *ngIf="showPowerSale" name="EDC">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genEndOrgName}}
+        </ng-template>
+    </ngx-datatable-column>
+    
+    
+    <ngx-datatable-column *ngIf="showPowerSale" name="Seller(Gen) Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompName}}
+        </ng-template>
+    </ngx-datatable-column>
+
+	<ngx-datatable-column *ngIf="showPowerSale" name="Seller(Gen)Service No">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompServNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+	<ngx-datatable-column *ngIf="showPowerSale" name="From Date">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.fromDt | date: 'dd-MM-yyyy'}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+	<ngx-datatable-column *ngIf="showPowerSale" name="To Date">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.toDt | date: 'dd-MM-yyyy'}}
+        </ng-template>
+    </ngx-datatable-column>
+    
+    
+    <ngx-datatable-column *ngIf="showNoc" name="EDC">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.consumerEndOrgName}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="showNoc" name="Buyer(Con) Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.consumerCompName}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+	<ngx-datatable-column *ngIf="showNoc" name="Buyer(Con)Service No">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.consumerCompServNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+    <ngx-datatable-column *ngIf="showConsent" name="EDC">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.consumerEndOrgName}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="showConsent" name="Buyer(Con) Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.consumerCompName}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+	<ngx-datatable-column *ngIf="showConsent" name="Buyer(Con)Service No">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompServNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="showEwa" name="EDC">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genEndOrgName}}
+        </ng-template>
+    </ngx-datatable-column>
+    
+    
+    <ngx-datatable-column *ngIf="showEwa" name="Seller(Gen) Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompName}}
+        </ng-template>
+    </ngx-datatable-column>
+
+	<ngx-datatable-column *ngIf="showEwa" name="Seller(Gen)Service No">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompServNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+	
+	<ngx-datatable-column *ngIf="showEwa" name="Generator">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.genCompServNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+
+   
+    <ngx-datatable-column *ngIf="showPowerSale" name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button color="primary" class="mr-1" (click)="openPage(row['powerSaleId'],row['processTypeCode'])">Open</button>
+        </ng-template>
+    </ngx-datatable-column>
+  
+
+    <ngx-datatable-column *ngIf="!showPowerSale" name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button color="primary" class="mr-1" (click)="openPage(row['id'],row['processTypeCode'])">Open</button>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column  *ngIf="!showEwa"name="Status">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button color="primary" matTooltip="Displays the Overall status" (click)="listPsStatus(row['powerSaleId'])">Status</button>
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>

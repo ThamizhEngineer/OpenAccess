@@ -1,0 +1,143 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        Existing Trade Relationship
+      </mat-card-title>
+      <mat-card-content>
+        <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newTradeRelationship()'><mat-icon>add</mat-icon></button>
+
+        <br/>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Seller Company Code" [(ngModel)]="searchSellerCompanyCode" >
+                          </mat-form-field> 
+            
+                          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Seller Company Name"  [(ngModel)]="searchSellerCompanyName" >
+                          </mat-form-field> 
+
+                          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Seller Company Service Number"  [(ngModel)]="searchSellerCompanyServiceNumber" >
+                          </mat-form-field>  -->
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Buyer Edc Name" [(ngModel)]='searchBuyerEndOrgId' [required]="isMandatory"
+              (ngModelChange)="onBuyerEdcChange()">
+              <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                {{ edc.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Buyer Service number" [(ngModel)]='searchbuyerCompanyServiceId'
+              [required]="isMandatory">
+              <mat-option *ngFor="let companyService of companyServices" [value]="companyService.buyerCompServiceId">
+                {{ companyService.buyerCompanyName}} - {{ companyService.buyerCompServiceNumber }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+                         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Buyer Company Code" [(ngModel)]="searchbuyerCompanyCode" >
+              </mat-form-field>
+
+          							<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<mat-select  class="ml-xs mr-xs" style="width: 100%;"  placeholder="Seller Edc Name" 
+								[(ngModel)]='searchSellerEndOrgId'  [required]="isMandatory"  (ngModelChange)="onBuyerEdcChange()">
+								<mat-option *ngFor="let edc of edcList" [value]="edc.id"   >
+									{{ edc.name }}
+								</mat-option>
+								</mat-select>
+							</mat-form-field>
+				
+								<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<mat-select  class="ml-xs mr-xs" style="width: 100%;"  placeholder="Seller Service number" 
+								[(ngModel)]='searchSellerCompanyServiceId'  [required]="isMandatory" >
+								<mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompServiceId"   >
+								 {{ companyService.sellerCompanyName}} - {{ companyService.buyerCompServiceNumber }}
+								</mat-option>
+							</mat-select>
+               </mat-form-field>
+             
+               <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Seller Company Code" [(ngModel)]="searchSellerCompanyCode" >
+              </mat-form-field>
+
+              <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input (keyup.enter)="fetchResults()" matInput placeholder="Quantum" [(ngModel)]="searchquantum" >
+              </mat-form-field>
+
+
+
+
+
+          <hr>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+          </mat-card-actions>
+
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-content>
+
+        <!--<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'"  [headerHeight]="60" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)'>-->
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+
+          <ngx-datatable-column name="Seller company Code" ng-class="test">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerCompanyCode}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Seller company Name">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerCompanyName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Seller Service Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.sellerCompServiceNumber}}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Buyer company Code" ng-class="test">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.buyerCompanyCode}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Buyer company Name">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.buyerCompanyName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Buyer Service Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.buyerCompServiceNumber}}
+            </ng-template>
+          </ngx-datatable-column>
+
+
+
+
+          <ngx-datatable-column name="Actions">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <button mat-raised-button color="primary" class="mr-1" (click)="editTradeRelationship(row['id'])">Open</button>
+            </ng-template>
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

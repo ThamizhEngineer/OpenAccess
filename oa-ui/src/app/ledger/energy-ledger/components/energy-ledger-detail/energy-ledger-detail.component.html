@@ -1,0 +1,115 @@
+<mat-card class="mat-card-top">
+
+  <mat-card-title>{{addScreen?'Add':'View'}} Energy Ledger</mat-card-title>
+
+  <mat-card>
+    <mat-card-content>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Edc Name" [(ngModel)]="energyLedger.orgName" [disabled]="disableControls">
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Company Name" [(ngModel)]="energyLedger.companyName" [disabled]="disableControls">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Company Service Number" [(ngModel)]="energyLedger.companyServiceNumber" [disabled]="disableControls">
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput [(ngModel)]="energyLedger.ledgerDate" [matDatepicker]="ledgerDate" placeholder="Ledger Date" [disabled]="disableControls">
+          <mat-datepicker-toggle matSuffix [for]="ledgerDate"></mat-datepicker-toggle>
+          <mat-datepicker #ledgerDate></mat-datepicker>
+        </mat-form-field>
+
+
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Statement Month" [(ngModel)]='energyLedger.month' [disabled]="disableControls">
+            <mat-option *ngFor="let month of months" [value]="month.value">
+              {{ month.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Year" [(ngModel)]='energyLedger.year' [disabled]="disableControls">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput [(ngModel)]="energyLedger.fromDate" [matDatepicker]="fromDate" placeholder="From Date" [disabled]="disableControls">
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput [(ngModel)]="energyLedger.toDate" [matDatepicker]="toDate" placeholder="To Date" [disabled]="disableControls">
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+
+
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Energy In" [(ngModel)]='energyLedger.energyIn' [disabled]="disableControls">
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Energy Out" [(ngModel)]='energyLedger.energyOut' [disabled]="disableControls">
+        </mat-form-field>
+        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+      </div>
+      <br>
+
+      <ngx-datatable class="material" [rows]="energyLedgerForPrint" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true"
+        [rowHeight]="'auto'">
+
+        <ngx-datatable-column name="C1 - Peak Hour 1" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C2 - PeakHour 2" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c2}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C3 - PeakHour 3" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c3}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C4 - PeakHour 4" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c4}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="C5 - PeakHour 5" width="5">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.c5}}
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Nullify" [(ngModel)]='energyLedger.nullify' [disabled]="disableControls">
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <input matInput placeholder="Remarks" [(ngModel)]='energyLedger.remarks' [disabled]="disableControls">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <hr>
+  <mat-card-actions>
+    <!-- <button mat-raised-button color="primary"  (click)="saveEnergyLedger('')">Save</button> -->
+    <button mat-raised-button class="primary" (click)="listEnergyLedger()">Cancel/Back</button>
+  </mat-card-actions>
+</mat-card>

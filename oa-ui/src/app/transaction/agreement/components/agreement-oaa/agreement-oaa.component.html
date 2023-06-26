@@ -1,0 +1,48 @@
+<mat-card-title> <strong>Oaa Approved Agreement</strong> </mat-card-title>
+<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+    [limit]="10">
+    <ngx-datatable-column name="EDC Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.buyerOrgName}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Service Number">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.buyerCompServiceNumber}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Buyer Company Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.buyerCompanyName}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Seller Company Name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.sellerCompanyName}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Agreement Period Code">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.agreementPeriodCode}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="From Date">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.fromDate}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="To Date">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row.toDate}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button mat-raised-button color="primary" class="mr-1" (click)="completeOaa(row['id'],row['buyerOrgName'],row['buyerCompServiceNumber'],row['buyerCompanyName'],row['sellerCompanyName'],row['agreementPeriodCode'],row['fromDate'],row['fromDate'])">Complete</button>
+        </ng-template>
+    </ngx-datatable-column>
+
+</ngx-datatable>

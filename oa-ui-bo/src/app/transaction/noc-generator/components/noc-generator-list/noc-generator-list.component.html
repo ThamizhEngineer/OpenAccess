@@ -1,0 +1,106 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				NOC Generator
+			</mat-card-title>
+
+			<mat-card-content>
+				<button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newNoc()'><mat-icon>add</mat-icon></button>
+
+				<br/>
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select  class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="{{this.commonUtils.getProp('seller')}}  Edc Name" 
+						[(ngModel)]='searchOrgId'  [required]="isMandatory">
+						<mat-option *ngFor="let edc of edcList" [value]="edc.id"   >
+						  {{edc.id}} - {{ edc.name }}
+						</mat-option>
+					  </mat-select>
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="{{this.commonUtils.getProp('seller')}} Service number" [(ngModel)]='searchSellerCompanyServiceId'
+						 [required]="isMandatory">
+							<mat-option *ngFor="let companyService of companyServices" [value]="companyService.sellerCompanyServiceId">
+								{{ companyService.sellerCompanyServiceNumber }}-{{ companyService.sellerCompanyName}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input  matInput placeholder="Noc Generator" [(ngModel)]="searchNocGeneratorCode">
+					</mat-form-field>
+				
+						
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input  matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+					</mat-form-field>
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+	
+				</div>
+
+				
+
+				
+			</mat-card-content>
+
+
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+
+				 <ngx-datatable-column name="Edc Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.orgName}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="{{this.commonUtils.getProp('seller')}} Service number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{ row.sellerCompanyServiceNumber }}-{{ row.sellerCompanyName}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statusCode}}
+						</ng-template>
+					</ngx-datatable-column>
+					
+				<ngx-datatable-column name="Noc Generator Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.code}}
+					</ng-template>
+				</ngx-datatable-column>
+
+					<ngx-datatable-column name="Energy Sale Intent Number">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.esIntentCode}}
+						</ng-template>
+					</ngx-datatable-column>
+
+		
+
+
+
+					<ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editNoc(row['id'])">Open</button>
+						</ng-template>
+					</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

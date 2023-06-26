@@ -1,0 +1,625 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card class="mat-card-top">
+
+      <mat-card-title>{{addScreen?'Add':'Update'}} GridConnectivity Application</mat-card-title>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>Plant Details</ng-template>
+            <mat-card>
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Application Number" [(ngModel)]='gc.applnNumber' (ngModelChange)="onChange($event)" [disabled]="true">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Company Name" [(ngModel)]='gc.companyName' (ngModelChange)="onChange($event)" [disabled]="true">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Generating Plant Type" [(ngModel)]='gc.generatingTypeName' (ngModelChange)="onChange($event)"
+                      [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Already availing HT Supply #" [(ngModel)]='gc.HtSupplyNumber' (ngModelChange)="onChange($event)">
+                    <mat-option *ngFor="let service of serviceNames " [value]="service.key">
+                      {{ service.name}}
+                    </mat-option>
+                  </mat-select> -->
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Temporary Ht Supply No #" [(ngModel)]='gc.tempHtSupplyNumber' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="SubStation" [(ngModel)]='gc.ssName' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let ss of substationList" [value]="ss.id">
+                      {{ss.code}} - {{ss.name}}
+                    </mat-option>
+                  </mat-select> -->
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="EDC" [matAutocomplete]="tdAutoEdc" [(ngModel)]='gc.orgName' #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(gc.orgName)">
+                    <mat-autocomplete #tdAutoEdc="matAutocomplete">
+                      <mat-option *ngFor="let org of filteredOrgList" (onSelectionChange)="onOrgSelect(org)" [value]="org.name">
+                        <span>{{ org.name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="SubStation" [matAutocomplete]="tdAutoSubstation" [(ngModel)]='gc.ssName' #modelDir="ngModel"
+                      (ngModelChange)="this.filteredSubstationList = filterSubstations(gc.ssName)">
+                    <mat-autocomplete #tdAutoSubstation="matAutocomplete">
+                      <mat-option *ngFor="let subStation of filteredSubstationList" (onSelectionChange)="onSubstationSelect(subStation)" [value]="subStation.name">
+                        <span>{{ subStation.name }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed Commission Date" [(ngModel)]='gc.proposedCommissionDate' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput [(ngModel)]="gc.proposedCommissionDate" [matDatepicker]="fromDate" (ngModelChange)="onChange($event)"
+                      placeholder="Proposed Commission Date">
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+
+                    <mat-datepicker #fromDate></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" placeholder="Voltage" [(ngModel)]='gc.ssVoltageCode' (ngModelChange)="onChange($event)">
+                      <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode" (onSelectionChange)="onVoltageSelect(voltage)">
+                        {{voltage.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- 
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Voltage" [matAutocomplete]="tdAutoVoltage" [(ngModel)]='gc.ssVoltageName' #modelDir="ngModel"
+                      (ngModelChange)="this.filteredVoltageList = filterVoltages(gc.ssVoltageName)">
+                    <mat-autocomplete #tdAutoVoltage="matAutocomplete">
+                      <mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="onChange($event)">
+                        <span>{{ voltage.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field> 
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Phase" [(ngModel)]='gc.classVoltagePhase' (ngModelChange)="onChange($event)">
+                  </mat-form-field> 
+                
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Frequency(Hz)" [(ngModel)]='gc.classVoltageFrequency' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                </div>-->
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Phase" [(ngModel)]="gc.classVoltagePhase" required pattern="[0-9]+" #val_code="ngModel"  name="dis_code">
+                    <mat-hint>Must be numeric</mat-hint>
+                    <mat-error *ngIf="val_code.invalid && (val_code.dirty || val_code.touched) && val_code.errors.required">Phase is required.</mat-error>
+                    <mat-error *ngIf="val_code.invalid && (val_code.dirty || val_code.touched) && val_code.errors.pattern">Phase Must be number.</mat-error>
+                  </mat-form-field> -->
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Phase" [(ngModel)]='gc.classVoltagePhase' required pattern="[0-9]+" #val_voltagePhase="ngModel"
+                      name="dis_voltagePhase">
+                    <mat-hint>Must be numeric</mat-hint>
+                    <!-- <mat-error *ngIf="val_voltagePhase.invalid && (val_voltagePhase.dirty || val_voltagePhase.touched) && val_code.errors.required">ES Intent number is required.</mat-error> -->
+                    <mat-error *ngIf="val_voltagePhase.invalid && (val_voltagePhase.dirty || val_voltagePhase.touched) && val_voltagePhase.errors.pattern">
+                    Phase Must be number.</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Frequency(Hz)" [(ngModel)]="gc.classVoltageFrequency" required pattern="[0-9]+" #val_frequency="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_frequency">
+                    <mat-hint>Must be numeric</mat-hint>
+                    <!--             <mat-error *ngIf="val_frequency.invalid && (val_frequency.dirty || val_frequency.touched) && val_frequency.errors.required"> Frequency is required.</mat-error> -->
+                    <mat-error *ngIf="val_frequency.invalid && (val_frequency.dirty || val_frequency.touched) && val_frequency.errors.pattern">
+                    Frequency Must be number.</mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Already Availed HTSupply" [(ngModel)]='gc.availedHtSupply' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+
+                  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Already Availed HTSupply" [(ngModel)]='gc.availedHtSupply'>
+
+                      <mat-option *ngFor="let alreadyAvailedHtSupply of availingHTSupply" [value]="alreadyAvailedHtSupply.key">
+                        {{ alreadyAvailedHtSupply.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Availed HT Supply Number" [(ngModel)]="gc.availedHtSupplyNo" required pattern="[a-zA-Z0-9 ]+"
+                      #val_htno="ngModel" (ngModelChange)="onChange($event)" name="dis_htno">
+                    <mat-hint>Must be Alpha numeric</mat-hint>
+                    <mat-error *ngIf="val_htno.invalid && (val_htno.dirty || val_htno.touched) && val_htno.errors.pattern">HT supply No Should not Have Special Characters</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Availed Sanctioned Demand" [(ngModel)]="gc.availedSanctionedDemand" required pattern="[0-9]+"
+                      #val_demand="ngModel" (ngModelChange)="onChange($event)" name="dis_demand">
+                    <mat-hint>Must be numeric</mat-hint>
+                    <mat-error *ngIf="val_demand.invalid && (val_demand.dirty || val_demand.touched) && val_demand.errors.pattern"> Availed Sanctioned Demand Must be number.</mat-error>
+                  </mat-form-field>
+
+                  <!--  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Availed HT Supply Number" [(ngModel)]='gc.availedHtSupplyNo' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Availed Sanctioned Demand" [(ngModel)]='gc.availedSanctionedDemand' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+
+
+                </div>
+                <div *ngIf="isWind== false" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Fuel Type" [(ngModel)]='gc.fuelTypeName' (ngModelChange)="onChange($event)" [disabled]="true">
+                  </mat-form-field>
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <label>Fuel Linkage Arranged?</label>
+                    <br/>
+                    <mat-radio-group [(ngModel)]='gc.fuelLinkageArranged' (ngModelChange)="onChange($event)" placeholder="Fuel Linkage Arranged?">
+                      <mat-radio-button value="Yes">Yes</mat-radio-button>
+                      <mat-radio-button value="No">No</mat-radio-button>
+                      <mat-radio-button value="NA">Not Applicable</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <textarea matInput placeholder="Fuel linkage details" [(ngModel)]='gc.fuelLinkageDetails' (ngModelChange)="onChange($event)"></textarea>
+                  </mat-form-field>
+
+                </div>
+                <div>
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <label>Is it a Parallel Operation?</label>
+                    <br/>
+                    <mat-radio-group [(ngModel)]='gc.parallelOperation' (ngModelChange)="onParallelChargeSelect($event)" placeholder="Is it a Parallel Operation?">
+                      <mat-radio-button value="Y">Yes</mat-radio-button>
+                      <mat-radio-button value="N">No</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+
+                </div>
+              </mat-card-content>
+              <hr/>
+              <mat-card-title>Postal Address</mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Address Line" [(ngModel)]="gc.line1" required pattern="[#.0-9a-zA-Z\s,-@()]+" #val_line="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_line">
+                    <mat-hint>Must be text</mat-hint>
+                    <mat-error *ngIf="val_line.invalid && (val_line.dirty || val_line.touched) && val_line.errors.pattern">Address line should not entered Clearly</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Village" [(ngModel)]="gc.village" required pattern="[a-zA-Z ]+" #val_village="ngModel" (ngModelChange)="onChange($event)"
+                      name="dis_village">
+                    <mat-hint>Must be string</mat-hint>
+                    <mat-error *ngIf="val_village.invalid && (val_village.dirty || val_village.touched) && val_village.errors.pattern">village should contain text alone</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Town" [(ngModel)]="gc.town" required pattern="[a-zA-Z ]+" #val_town="ngModel" (ngModelChange)="onChange($event)"
+                      name="dis_town">
+                    <mat-hint>Must be string</mat-hint>
+                    <mat-error *ngIf="val_town.invalid && (val_town.dirty || val_town.touched) && val_town.errors.pattern"> Town should contain text alone</mat-error>
+                  </mat-form-field>
+
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Address Line" [(ngModel)]='gc.line1' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Village" [(ngModel)]='gc.village' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Town" [(ngModel)]='gc.town' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="City" [(ngModel)]="gc.village" required pattern="[a-zA-Z ]+" #val_city="ngModel" (ngModelChange)="onChange($event)"
+                      name="dis_city">
+                    <mat-hint>Must be string</mat-hint>
+                    <mat-error *ngIf="val_city.invalid && (val_city.dirty || val_city.touched) && val_city.errors.pattern">City should contain text alone</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Pincode" [(ngModel)]="gc.pinCode" required pattern="[0-9]+" #val_pincode="ngModel" name="pin_code">
+                    <mat-hint>Must be Number</mat-hint>
+                    <!--    <mat-error *ngIf="val_code.invalid && (val_code.dirty || val_code.touched) && val_code.errors.required">Pincode  is required</mat-error> -->
+                    <mat-error *ngIf="val_pincode.invalid && (val_pincode.dirty || val_pincode.touched) && val_pincode.errors.pattern"> Pincode must be number </mat-error>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="City" [(ngModel)]='gc.city' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Pincode" [(ngModel)]='gc.pinCode' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                  <!-- <div class="ml-xs mr-xs" style="width: 100%;"></div> -->
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 32%;" placeholder="Taluk" [(ngModel)]='gc.taluk' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let taluk of taluk" [value]="taluk.valueCode">
+                      {{taluk.valueDesc}}
+                    </mat-option>
+                  </mat-select> -->
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+                    <input matInput placeholder="Taluk" [matAutocomplete]="tdAutoTaluk" [(ngModel)]='gc.taluk' #modelDir="ngModel" (ngModelChange)="this.filteredTalukList = filterTaluk(gc.taluk)">
+                    <mat-autocomplete #tdAutoTaluk="matAutocomplete">
+                      <mat-option *ngFor="let taluk of filteredTalukList" [value]="taluk.valueDesc" (onSelectionChange)="onTalukSelect(taluk);onChange($event)">
+                        <span>{{ taluk.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+
+
+
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 32%;" placeholder="District" [(ngModel)]='gc.district' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let district of district" [value]=" district.valueCode">
+                      {{district.valueDesc}}
+                    </mat-option>
+                  </mat-select> -->
+
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+                    <input matInput placeholder="District" [matAutocomplete]="tdAutoDistrict" [(ngModel)]='gc.district' #modelDir="ngModel" (ngModelChange)="this.filteredDistrictList = filterDistrict(gc.district);">
+                    <mat-autocomplete #tdAutoDistrict="matAutocomplete">
+                      <mat-option *ngFor="let district of filteredDistrictList" [value]="district.valueDesc" (onSelectionChange)="onDistrictSelect(district);onChange($event)">
+                        <span>{{ district.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 32%;" placeholder="State" [(ngModel)]='gc.state' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let state of states" [value]="state.valueCode">
+                      {{state.valueDesc}}
+                    </mat-option>
+                  </mat-select> -->
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+                    <input matInput placeholder="State" [matAutocomplete]="tdAutoState" [(ngModel)]='gc.state' #modelDir="ngModel" (ngModelChange)="this.filteredStateList = filterState(gc.state)">
+                    <mat-autocomplete #tdAutoState="matAutocomplete">
+                      <mat-option *ngFor="let state of filteredStateList" [value]="state.valueDesc" (onSelectionChange)="onStateSelect(state);onChange($event)">
+                        <span>{{ state.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+              <hr/>
+              <mat-card-title>Physical Location</mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Sf No Line" [(ngModel)]='gc.plSfNo' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Village" [(ngModel)]='gc.plVillage' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Town" [(ngModel)]='gc.plTown' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <!-- <mat-select class="ml-xs mr-xs" style="width: 32%;" placeholder="Taluk" [(ngModel)]='gc.plTalukName' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let taluk of taluk" [value]="taluk.valueCode">
+                      {{taluk.valueDesc}}
+                    </mat-option>
+                  </mat-select> -->
+
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Taluk" [matAutocomplete]="tdAutoPlTaluk" [(ngModel)]='gc.plTalukName' #modelDir="ngModel" (ngModelChange)="this.filteredPlTalukList = filterPlTaluk(gc.plTalukName)">
+                    <mat-autocomplete #tdAutoPlTaluk="matAutocomplete">
+                      <mat-option *ngFor="let taluk of filteredPlTalukList" [value]="taluk.valueDesc" (onSelectionChange)="onPlTalukSelect(taluk);onChange($event)">
+                        <span>{{ taluk.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Pincode" [(ngModel)]="gc.plPinCode" required pattern="[0-9]+" #val_plcode="ngModel" (ngModelChange)="onChange($event)"
+                      name="dis_plcode">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_plcode.invalid && (val_plcode.dirty || val_plcode.touched) && val_plcode.errors.pattern"> Pincode must be number </mat-error>
+                  </mat-form-field>
+
+                  <!--  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Pincode" [(ngModel)]='gc.plPinCode' (ngModelChange)="onChange($event)">
+                  </mat-form-field> 
+
+                   <mat-select class="ml-xs mr-xs" style="width: 32%;" placeholder="District" [(ngModel)]='gc.plDistrictName' (ngModelChange)="onChange($event)">
+
+                    <mat-option *ngFor="let district of district" [value]=" district.valueCode">
+                      {{district.valueDesc}}
+                    </mat-option>
+                  </mat-select> -->
+
+                  <mat-form-field class="ml-xs mr-xs" style="width:100%;">
+                    <input matInput placeholder="District" [matAutocomplete]="tdAutoPlDistrict" [(ngModel)]='gc.plDistrictName' #modelDir="ngModel"
+                      (ngModelChange)="this.filteredPlDistrictList = filterPlDistrict(gc.plDistrictName)">
+                    <mat-autocomplete #tdAutoPlDistrict="matAutocomplete">
+                      <mat-option *ngFor="let district of filteredPlDistrictList" [value]="district.valueDesc" (onSelectionChange)="onPlDistrictSelect(district);onChange($event)">
+                        <span>{{ district.valueDesc}}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                </div>
+                <div *ngIf="isWind== true" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Wind Pass" [(ngModel)]='gc.plWindPassName' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Wind Zone Area" [(ngModel)]='gc.plWindZoneArea' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+                </div>
+              </mat-card-content>
+              <hr/>
+              <mat-card-title>Statuary Clearance Obtained</mat-card-title>
+              <mat-card-content>
+
+                <mat-checkbox [(ngModel)]="gc.scoTamilNadu" name="cb" fxFlex.gt-sm="30%">
+                  Tamilnadu Pollution Control Board Clearnace
+                </mat-checkbox>
+                <br/>
+                <mat-checkbox [(ngModel)]="gc.scoMinistry" name="cb" fxFlex.gt-sm="30%">
+                  Ministry of Environment & Finance
+                </mat-checkbox>
+                <br/>
+                <mat-checkbox [(ngModel)]="gc.scoCivil" name="cb" fxFlex.gt-sm="30%">
+                  Civil Aviation Ministry
+                </mat-checkbox>
+              </mat-card-content>
+              <hr/>
+              <mat-card-title *ngIf="gc.generatingTypeName == 'Y'">Co-Generating plant</mat-card-title>
+              <mat-card-content *ngIf="gc.generatingTypeName == 'Y'">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Industry Type" [(ngModel)]='gc.cgIndustryType' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Village" [(ngModel)]='gc.cgSupportFuel' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <label>Is Parallel Run</label> -->
+                    <br/>
+                    <mat-checkbox [(ngModel)]="gc.cgIsParallelRun" fxFlex.gt-sm="30%">Is Parallel Run</mat-checkbox>
+
+                    <!-- <mat-radio-group [(ngModel)]='gc.cgIsParallelRun' (ngModelChange)="onChange($event)">
+                      <mat-radio-button value="Yes">Yes</mat-radio-button>
+                      <mat-radio-button value="No">No</mat-radio-button>
+                    </mat-radio-group> -->
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <label>Is Stand by</label> -->
+                    <br/>
+                    <mat-checkbox [(ngModel)]="gc.cgIsStandBy" fxFlex.gt-sm="30%">Is Stand by</mat-checkbox>
+                    <!-- <mat-radio-group [(ngModel)]='gc.cgIsStandBy' (ngModelChange)="onChange($event)">
+                      <mat-radio-button value="Yes">Yes</mat-radio-button>
+                      <mat-radio-button value="No">No</mat-radio-button>
+                    </mat-radio-group> -->
+                  </div>
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <label>CO-Gen Cycle</label> -->
+                    <br/>
+                    <mat-checkbox [(ngModel)]="gc.cgCycle" fxFlex.gt-sm="30%">CO-Gen Cycle</mat-checkbox>
+                    <!-- <mat-radio-group [(ngModel)]='gc.cgCycle' (ngModelChange)="onChange($event)">
+                      <mat-radio-button value="Topping">Topping</mat-radio-button>
+                      <mat-radio-button value="Bottom">Bottom</mat-radio-button>
+                    </mat-radio-group> -->
+
+                  </div>
+                  <div class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <label>CO-Gen Proof</label> -->
+                    <br/>
+                    <mat-checkbox [(ngModel)]="gc.cgHasProof" fxFlex.gt-sm="30%">CO-Gen Proof</mat-checkbox>
+                    <!-- <mat-radio-group [(ngModel)]='gc.cgHasProof' (ngModelChange)="onChange($event)">
+                      <mat-radio-button value="Yes">Yes</mat-radio-button>
+                      <mat-radio-button value="No">No</mat-radio-button>
+                    </mat-radio-group> -->
+                  </div>
+                </div>
+              </mat-card-content>
+
+              <hr/>
+              <mat-card-title>Quantum Details</mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Capacity in MW" [(ngModel)]='gc.plantCapacity' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Annual Expected Quantum in MU" [(ngModel)]='gc.annualExpectedQuantum' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Expected CUF" [(ngModel)]='gc.expectedCuf' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Capacity in MW" [(ngModel)]="gc.plantCapacity" required pattern="[0-9]+" #val_plantcapacity="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_plantcapacity">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_plantcapacity.invalid && (val_plantcapacity.dirty || val_plantcapacity.touched) && val_plantcapacity.errors.pattern">
+                    Capacity must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Annual Expected Quantum in MU" [(ngModel)]="gc.annualExpectedQuantum" required pattern="[0-9]+"
+                      #val_expected="ngModel" (ngModelChange)="onChange($event)" name="dis_expected">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_expected.invalid && (val_expected.dirty || val_expected.touched) && val_expected.errors.pattern"> Annual Expected Quantum must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed to 3rd Party(MW)" [(ngModel)]="gc.expectedCuf" required pattern="[0-9]+" #val_thirdparty="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_thirdparty">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_thirdparty.invalid && (val_thirdparty.dirty || val_thirdparty.touched) && val_thirdparty.errors.pattern">
+                    Proposed to 3rd Party must be number </mat-error>
+                  </mat-form-field>
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Auxilliary Consumption within site(MU)" [(ngModel)]='gc.auxiliaryConsumption' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Industrial Consumption within site(MU)" [(ngModel)]='gc.industrialConsumption' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Per Unit Cost in Rs/Paise" [(ngModel)]='gc.perUnitCost' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Auxilliary Consumption within site(MU)" [(ngModel)]="gc.auxiliaryConsumption" required pattern="[0-9]+"
+                      #val_auxiliary="ngModel" (ngModelChange)="onChange($event)" name="dis_auxiliary">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_auxiliary.invalid && (val_auxiliary.dirty || val_auxiliary.touched) && val_auxiliary.errors.pattern">Auxilliary Consumption within site must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Industrial Consumption within site(MU)" [(ngModel)]="gc.industrialConsumption" required pattern="[0-9]+"
+                      #val_industrial="ngModel" (ngModelChange)="onChange($event)" name="dis_industrial">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_industrial.invalid && (val_industrial.dirty || val_industrial.touched) && val_industrial.errors.pattern">
+                    Industrial Consumption within site must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Per Unit Cost in Rs/Paise" [(ngModel)]="gc.perUnitCost" required pattern="[0-9]+" #val_unitcost="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_code">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_unitcost.invalid && (val_unitcost.dirty || val_unitcost.touched) && val_unitcost.errors.pattern"> Per Unit Cost must be number </mat-error>
+                  </mat-form-field>
+                </div>
+                <div *ngIf="isWind== false" fxLayout="row" fxLayoutAlign="start center">
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Firm Power(MW)" [(ngModel)]='gc.firmPower' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Infirm Power(MW)" [(ngModel)]='gc.infirmPower' (ngModelChange)="onChange($event)">
+                  </mat-form-field> -->
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Firm Power(MW)" [(ngModel)]="gc.firmPower" required pattern="[0-9]+" #val_firm="ngModel" (ngModelChange)="onChange($event)"
+                      name="dis_firm">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_firm.invalid && (val_firm.dirty || val_firm.touched) && val_firm.errors.pattern"> Firm Power must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Infirm Power(MW)" [(ngModel)]="gc.infirmPower" required pattern="[0-9]+" #val_Infirm="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_Infirm">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_Infirm.invalid && (val_Infirm.dirty || val_Infirm.touched) && val_Infirm.errors.pattern"> Infirm Power must be number </mat-error>
+                  </mat-form-field>
+
+                  <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Power to Board(MW)" [(ngModel)]='gc.proposedPowerSTB' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed to Captive(MW)" [(ngModel)]='gc.proposedPowerCaptive' (ngModelChange)="onChange($event)">
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed to 3rd Party(MW)" [(ngModel)]='gc.proposedPower3PT' (ngModelChange)="onChange($event)">
+                   </mat-form-field> -->
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Power to Board(MW)" [(ngModel)]="gc.proposedPowerSTB" required pattern="[0-9]+" #val_stb="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_stb">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_stb.invalid && (val_stb.dirty || val_stb.touched) && val_stb.errors.pattern">Power to Board must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed to Captive(MW)" [(ngModel)]="gc.proposedPowerCaptive" required pattern="[0-9]+" #val_captive="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_captive">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_captive.invalid && (val_captive.dirty || val_captive.touched) && val_captive.errors.pattern"> Proposed to Captive must be number </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Proposed to 3rd Party(MW)" [(ngModel)]="gc.proposedPower3PT" required pattern="[0-9]+" #val_power="ngModel"
+                      (ngModelChange)="onChange($event)" name="dis_power">
+                    <mat-hint>Must be Number</mat-hint>
+                    <mat-error *ngIf="val_power.invalid && (val_power.dirty || val_power.touched) && val_power.errors.pattern"> Proposed to 3rd Party must be number </mat-error>
+                  </mat-form-field>
+
+
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>Generator Units</ng-template>
+            <gc-gen-units [generatorModelTypes]="generatorModelTypes"></gc-gen-units>
+          </mat-tab>
+          <mat-tab *ngIf="isWind == false">
+            <ng-template mat-tab-label>Transformers</ng-template>
+            <gc-transformers [voltages]="voltages"></gc-transformers>
+          </mat-tab>
+          <mat-tab [disabled]="hideCaptive">
+            <ng-template mat-tab-label>Investment Details</ng-template>
+            <gc-investment-detail></gc-investment-detail>
+          </mat-tab>
+          <mat-tab [disabled]="hideCaptive">
+            <ng-template mat-tab-label>Quantum Allocation</ng-template>
+            <gc-quantum-allocation [voltages]="voltages" [orgList]="orgList"></gc-quantum-allocation>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>Infrastructure</ng-template>
+            <gc-infra [orgList]="orgList"></gc-infra>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>CheckList</ng-template>
+            <gc-checklist [checkListCodes]="checkListCodes"></gc-checklist>
+          </mat-tab>
+          <mat-tab [disabled]="accessCreateFlag">
+            <ng-template mat-tab-label>Application Status</ng-template>
+            <gc-status></gc-status>
+          </mat-tab>
+          <mat-tab [disabled]="hideApprove">
+            <ng-template mat-tab-label>Service Provisioning</ng-template>
+            <gc-service-provisioning [meterMake]="meterMake"></gc-service-provisioning>
+          </mat-tab>
+          <mat-tab [disabled]="hideApprove">
+            <ng-template mat-tab-label>Tariff</ng-template>
+            <gc-tariff></gc-tariff>
+          </mat-tab>
+
+        </mat-tab-group>
+      </mat-card-content>
+      <hr>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" *ngIf="gc.statusCode!='COMPLETED' && this.accessUpdateFlag" (click)="saveGc('')">Save</button>
+        <button mat-raised-button color="primary" *ngIf="gc.statusCode!='COMPLETED' && this.accessCompleteFlag" (click)="completeGc()">Complete</button>
+        <!-- <button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveGc(nextGcStatus)">{{nextAction}}</button> -->
+        <button mat-raised-button class="primary" (click)="listGcs()">Cancel/Back</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<mat-card-content>
+  <ngx-datatable class="material" tabindex="index" [rows]="company.meters" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+    [rowHeight]="'auto'">
+    <ngx-datatable-column name="ServiceNumber">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['serviceNumber']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Meter Make">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['meterMakeName']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Meter Number">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['meterNumber']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Is ABT Meter">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['isAbtMeter']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Actions">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button mat-icon-button mat-button-sm (click)="editMeter(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+        <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteMeter(row.$$index)"><mat-icon>delete</mat-icon></button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+  <mat-card>
+    <mat-card-title>
+      <Strong>{{meterRowIndex>-1?'Update':'Add'}} Meter</Strong>
+    </mat-card-title>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="start center">
+           <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <mat-select style="width: 100%;" placeholder="ServiceNumber" [(ngModel)]='meter.serviceId'>
+          <mat-option *ngFor="let service of services" [value]="service.id">
+            {{service.number}}
+          </mat-option>
+        </mat-select>
+          </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input matInput placeholder="Meter Number" [(ngModel)]='meter.meterNumber'>
+        </mat-form-field>
+
+         <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <mat-select style="width: 100%;" placeholder="Meter Make" [(ngModel)]='meter.meterMakeCode'>
+          <mat-option *ngFor="let make of metermakes" [value]="make.valueCode">
+            {{make.valueDesc}}
+          </mat-option>
+        </mat-select>
+         </mat-form-field>
+         <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is ABT Meter" [(ngModel)]="meter.isAbtMeter">
+            <mat-option *ngFor="let val of abtMeterValues" [value]="val.name">
+              {{val.name}}
+            </mat-option>
+          </mat-select>
+           </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center">
+     
+
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <mat-select style="width: 100%;" placeholder="Accuracy Class" name="meter.accuracyClassCode" [(ngModel)]='meter.accuracyClassCode'>
+          <mat-option *ngFor="let accuracyclass of accuracyclasscodes" [value]="accuracyclass.valueCode">
+            {{ accuracyclass.valueDesc}}
+          </mat-option>
+        </mat-select>
+            </mat-form-field>
+            
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input matInput placeholder="Multiplication Factor" name="meter.multiplicationFactor" [(ngModel)]='meter.multiplicationFactor'>
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input matInput placeholder="Modem Number" name="meter.modemNumber" [(ngModel)]='meter.modemNumber'>
+        </mat-form-field>
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input matInput placeholder="CT1" name="meter.ct1" [(ngModel)]='meter.meterCt1'>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center">
+     
+
+        
+         
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="CT2" name="meter.ct2" [(ngModel)]='meter.meterCt2'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="CT3" name="meter.ct3" [(ngModel)]='meter.meterCt3'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="PT1" name="meter.pt1" [(ngModel)]='meter.meterPt1'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="PT2" name="meter.pt2" [(ngModel)]='meter.meterPt2'>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center">
+     
+
+          
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input matInput placeholder="PT3" name="meter.pt3" [(ngModel)]='meter.meterPt3'>
+            </mat-form-field>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+            <div class="ml-xs mr-xs" style="width: 100%;"></div>
+          </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="meterRowIndex>-1?updateMeter():addMeter()">{{meterRowIndex>-1?'Update':'Add'}}</button>
+      <button mat-raised-button (click)="initMeters()">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card-content>

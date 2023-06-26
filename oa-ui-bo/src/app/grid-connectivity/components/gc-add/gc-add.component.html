@@ -1,0 +1,80 @@
+<mat-card class="mat-card-top">
+  <mat-card-title>Create Grid Connectivity</mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <input matInput placeholder="Application Number" [(ngModel)]='gc.applnNumber'>
+      </mat-form-field>
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <input matInput placeholder="Generator Plant Name" [(ngModel)]='gc.plantName'>
+      </mat-form-field>
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <input matInput placeholder="Company Name" [(ngModel)]='gc.companyName'>
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel" [(ngModel)]='gc.fuelTypeCode'>
+          <mat-option *ngFor="let fuelType of fuelTypeList" [value]="fuelType.key">
+            <span>{{ fuelType.name}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <input matInput placeholder="Fuel" [matAutocomplete]="tdAutoFuelType" [(ngModel)]='gc.fuelTypeName' #modelDir="ngModel" (ngModelChange)="this.fuelTypeList = filterFuelType(gc.fuelTypeName)">
+        <mat-autocomplete #tdAutoFuelType="matAutocomplete">
+          <mat-option *ngFor="let fuelType of fuelTypeList" [value]="fuelType.name">
+            <span>{{ fuelType.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      <!-- <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Generating Plan Type" [(ngModel)]='gc.plantTypeName'>
+          <mat-option *ngFor="let plantType of genPlanTypes" [value]="plantType.name">
+            <span>{{ plantType.name}}</span>
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field> -->
+
+      <!-- 
+      <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <input matInput placeholder="Generating Plan Type" [matAutocomplete]="tdAutoPlantType" [(ngModel)]='gc.plantTypeName' #modelDir="ngModel"
+          (ngModelChange)="this.genPlanTypes = filterPlantType(gc.plantTypeName)">
+        <mat-autocomplete #tdAutoPlantType="matAutocomplete">
+          <mat-option *ngFor="let plantType of genPlanTypes" [value]="plantType.name">
+            <span>{{ plantType.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Generating Plant Type" [(ngModel)]='gc.generatingTypeName' (ngModelChange)="onGeneratingTypeSelect($event)">
+          <mat-option *ngFor="let generatingType of generatingTypeNames" [value]="generatingType.name" >
+            <span>{{ generatingType.name}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <input matInput placeholder="Plant Type" [matAutocomplete]="tdAutoGeneratingType" [(ngModel)]='gc.generatingTypeName' #modelDir="ngModel"
+          (ngModelChange)="this.generatingTypeNames = filterGeneratingType(gc.generatingTypeName)">
+        <mat-autocomplete #tdAutoGeneratingType="matAutocomplete">
+          <mat-option *ngFor="let generatingType of generatingTypeNames" [value]="generatingType.name">
+            <span>{{ generatingType.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+
+      <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Company Name" [matAutocomplete]="reactiveAuto" [formControl]="companyNameCtrl">
+          </mat-form-field> -->
+
+
+    </div>
+  </mat-card-content>
+  <hr>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" class="mr-1" (click)="addGc()">Add</button>
+  </mat-card-actions>
+</mat-card>

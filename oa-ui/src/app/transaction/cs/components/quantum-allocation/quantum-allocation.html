@@ -1,0 +1,180 @@
+<!-- <mat-card class="mat-card-top">
+	<div mat-subheader>Existing Service Allocation</div>
+	<ngx-datatable class="material" tabindex="index" [rows]="cs.captiveQuantumAllocation" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+		[rowHeight]="'auto'">
+		<ngx-datatable-column name="Captive Company Name">
+			<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.captiveCompanyName}}
+			</ng-template>
+		</ngx-datatable-column>
+		<ngx-datatable-column name="Distribution Circle">
+			<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.buyerOrgId}} 
+			</ng-template>
+		</ngx-datatable-column>
+		<ngx-datatable-column name="HT Service No">
+			<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.buyerCompServiceNumber}}
+			</ng-template>
+		</ngx-datatable-column>           
+		<ngx-datatable-column name="Quantum Allocation in MW">
+			<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.quantum}}
+			</ng-template>
+		</ngx-datatable-column>
+		<ngx-datatable-column name="Injection Voltage">
+			<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.injectionVoltageName}}
+			</ng-template>
+		</ngx-datatable-column> 
+		<ngx-datatable-column name="Drawal Voltage">
+		 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				{{row.drawalVoltageName }}
+			</ng-template>
+		</ngx-datatable-column>
+	</ngx-datatable>
+	<br/>
+	
+	<div mat-subheader>Add Captive user with Quantum details</div>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Distribution Circle" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Buyer Service Number" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Allocation Quantum" [disabled]="stepDisable">
+		</mat-form-field> 
+			
+	</div><br/>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Injection Voltage" [disabled]="stepDisable">
+		</mat-form-field> 
+		
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput placeholder="Drawal Voltage" [disabled]="stepDisable">
+		</mat-form-field> 
+	
+		<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			
+	</div><br/>
+</mat-card>
+<br/> -->
+
+<mat-card class="mat-card-flat">
+    <mat-card-title>
+        <Strong>Quantum Allocation for Captive User</Strong>
+    </mat-card-title>
+    <mat-card-content> 
+        <ngx-datatable class="material" tabindex="index" [rows]="cs.csQuantumAllocations" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+            [rowHeight]="'auto'">
+
+
+            <ngx-datatable-column name="Distribution Circle">
+
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.buyerOrgId}} 
+                </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="HT Service No">
+
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.buyerCompServiceNumber}}
+                </ng-template>
+            </ngx-datatable-column>
+
+           <ngx-datatable-column name="Captive CompanyName">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.captiveCompanyName}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Quantum Allocation in MW">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.quantum}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="Injection Voltage">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.injectionVoltageName}}
+                </ng-template>
+            </ngx-datatable-column>  -->
+
+            <ngx-datatable-column name="Drawal Voltage">
+             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.drawalVoltageName }}
+                </ng-template>
+            </ngx-datatable-column>
+
+
+
+
+
+            <ngx-datatable-column name="Actions">
+
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <button mat-raised-button mat-icon-button mat-button-sm (click)="editCaptiveQuantumAllocation(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                    <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteCaptiveQuantumAllocation(row.$$index)"><mat-icon>delete</mat-icon></button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+
+        <mat-card *ngIf="cs.statusCode!='COMPLETED'">
+            <mat-card-title>
+                <Strong>{{quantumAllocationRowIndex>-1?'Update':'Add'}} Captive user with Quantum details</Strong>
+            </mat-card-title>
+         <mat-card-content>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" (change)="fetchBuyerCompanyServices(quantumAllocation.buyerOrgId)" placeholder="Distribution Circle/EDC name" [(ngModel)]='quantumAllocation.buyerOrgId'>
+
+                        <mat-option *ngFor="let org of orgList " [value]="org.code">
+                            {{org.code}} - {{org.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="HT Service No" [(ngModel)]='quantumAllocation.buyerCompServiceId' (ngModelChange)="onConsumerChange()">
+
+                        <mat-option *ngFor="let buyerCompanyService of buyerCompanyServices" [value]="buyerCompanyService.id">
+                            {{ buyerCompanyService.number}} - {{buyerCompanyService.companyName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Captive Company Name" [(ngModel)]='quantumAllocation.captiveCompanyName'>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Quantum of Allocation in MW" [(ngModel)]='quantumAllocation.quantum'>
+                </mat-form-field>
+                
+                
+           <!-- <mat-form-field style="width: 100%;">
+                    <mat-select placeholder="Injection Voltage" [(ngModel)]='quantumAllocation.injectionVoltageName'>
+                        <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueDesc" (onSelectionChange)="onInjectionVoltageSelect(voltage)">
+                            {{voltage.valueDesc}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>  -->
+
+                <mat-form-field style="width: 100%;">
+                    <mat-select placeholder="Drawal Voltage" [(ngModel)]='quantumAllocation.drawalVoltageName'>
+                        <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueDesc" (onSelectionChange)="onDrawalVoltageSelect(voltage)">
+                            {{voltage.valueDesc}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="quantumAllocationRowIndex>-1?updateCaptiveQuantumAllocation():addCaptiveQuantumAllocation()">{{quantumAllocationRowIndex>-1?'Update':'Add'}}</button>
+                <button mat-raised-button (click)="initCaptiveQuantumAllocation()">Reset</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-card-content> 

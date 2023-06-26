@@ -1,0 +1,39 @@
+          <mat-card-title > <strong>Block-wise summary</strong></mat-card-title> 
+          <mat-card-content > 
+            <!--<div fxFlex="100">-->
+            <ngx-datatable 
+              class="material"
+              [rows]="gs.blockSummaries"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [scrollbarV]="true">
+              <ngx-datatable-column name="Time Block" style="text-decoration: bold">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <strong>{{row.slotName}}</strong>
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Export kWh">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.difference}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import kWh">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  0
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Export kVARh">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  {{row.difference}}
+                </ng-template>
+              </ngx-datatable-column> 
+              <ngx-datatable-column name="Import kVARh">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  0
+                </ng-template>
+              </ngx-datatable-column> 
+            
+            </ngx-datatable>
+            <!--</div>-->
+          </mat-card-content>

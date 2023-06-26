@@ -1,0 +1,23 @@
+[
+  { "state": "home", "functionality": "DASH", "feature": "DASH", "name": "Dashboard", "type": "link", "icon": "","directLink": "Y" },
+  { "state": "my-powerplant", "functionality": "PPGENERATOR", "feature": "LIST", "name": "Generator Information", "type": "link","icon": "","directLink": "Y" },
+  {"state": "meter-reading", "functionality": "METER-READING", "feature": "LIST", "name": "View Meter Readings", "type": "link","directLink": "Y" },
+  {"state": "gs",  "functionality": "GENERATOR-STATEMENT", "feature": "LIST", "name": "Generation Statement","type": "link","directLink": "Y"},
+  {"state": "generator-his", "functionality": "GENERATORHIS", "feature": "LIST",  "name": "Generator History","type": "link", "directLink": "Y" },
+  {"state": "ea",  "functionality": "ENERGY-SALE", "feature": "LIST", "name": "Energy Allotment","type": "link","directLink": "Y"},
+  {"state": "es-order",  "functionality": "ENERGY-SALE-ORDER", "feature": "LIST", "name": "Energy Allotment Order","type": "link","directLink": "Y"},
+  {"state":"transcoinvoices", "functionality":"TANTRANSCO-INVOICE(GEN)","feature":"LIST","name":"TANTRANSCO INVOICE","type":"link","directLink":"Y"},
+  {
+    "state": "reports",
+    "functionality": "REPORTS",
+    "feature": "MENU-LINK",
+    "name": "Reports",
+    "type": "sub",
+    "icon": "",
+    "children": [
+      {"state": "energy-adjusted-order",  "functionality": "ENERGY-ADJUSTED-ORDER", "feature": "LIST", "name": "Energy adjusted order report","type": "link"},
+      {"state": "energy-charge-report",  "functionality": "ENERGY-CHARGE-ORDER", "feature": "LIST", "name": "Energy charge report","type": "link"}
+    ]
+  } 
+     
+]

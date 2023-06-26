@@ -1,0 +1,87 @@
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+		        <div fxFlex.gt-sm="100%" fxFlex="100">
+<mat-card>
+      <mat-card-title >
+        Existing {{this.commonUtils.getProp('buyer')}}  Companies        
+      </mat-card-title> 
+			<mat-card-content>
+            <!-- <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newCompany()'><mat-icon>add</mat-icon></button> -->
+						<br/>
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+							
+										<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+											<input (keyup.enter)="fetchResults()" matInput placeholder="{{this.commonUtils.getProp('buyer')}} Company Code" [(ngModel)]="searchCompanyCode" >
+										</mat-form-field> 
+			
+										<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+											<input (keyup.enter)="fetchResults()" matInput placeholder="{{this.commonUtils.getProp('buyer')}} Company Name"  [(ngModel)]="searchCompanyName" >
+										</mat-form-field> 
+								
+										
+										<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+										<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Enabled" [(ngModel)]="searchEnabled"  >
+											<mat-option *ngFor="let isEnable of isEnabled" [value]="isEnable.key"  >
+												{{isEnable.name}}
+											</mat-option>  
+										</mat-select>
+										</mat-form-field> 
+			
+			
+			
+									 
+										
+										<hr>
+			
+										<mat-card-actions>				
+											<button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+										</mat-card-actions> 
+			
+									</div>
+								 
+
+
+				    <ngx-datatable 
+				      class="material"
+				      [rows]="rows"
+				      [columnMode]="'force'"
+				      [headerHeight]="50"
+  						[footerHeight]="50"
+				      [rowHeight]="50"
+              [scrollbarV]="true">
+				      <ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Company Code" ng-class="test">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['code']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Company Name">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['name']}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+							<ngx-datatable-column name="Is Captive">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['isCaptive']}}
+				        </ng-template>
+				      </ngx-datatable-column>
+				      <ngx-datatable-column name="Enabled">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row['enabled']}}
+				        </ng-template>
+				      </ngx-datatable-column>
+				      <ngx-datatable-column name="Actions">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      						<button mat-button-sm mat-raised-button color="primary" class="mr-1" (click)="editCompany(row['id'])">Open</button>
+				        </ng-template>
+				      </ngx-datatable-column> 
+
+				    </ngx-datatable>
+      </mat-card-content>
+	</mat-card>
+		
+  </div>
+  
+</div>

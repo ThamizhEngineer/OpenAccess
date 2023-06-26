@@ -1,0 +1,668 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>Generation Statement</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            padding-top: 0;
+            font: 12px/1.4 Georgia, serif;
+
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+       .header img {
+            float: left;
+            width: 200px;
+            height:70px;
+         
+        }  
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 10px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+
+        #left {
+            float: left;
+            text-align: left;
+            /* padding-right: 10px; */
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        #right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+        }
+        
+		/* Create two equal columns that floats next to each other */
+		.column {
+          padding-left: 2px;
+		}
+		
+		/* Clear floats after the columns */
+		.row { 
+		  width: 100%;
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		@page {
+
+			/* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+			margin-top: 0.5cm;
+
+			margin-right: 0.5cm;
+			margin-bottom: 0.5cm;
+			height: 21cm;
+			width: 29.7;
+			size: A4 portrait;
+		}
+    </style>
+
+</head>
+
+<body>
+    <div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+          <br/>
+<div class="header" >
+<header class="solid" style="text-align: center;  margin: 0px">
+		
+         <!--   <img src="/opt/oa/data/files/images/logo.png" alt="logo" /> -->
+            
+
+            <p style="text-align: center;  margin: 0px">TAMIL NADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</p>
+            <p>OFFICE OF THE SUPERINTENDING ENGINEER/
+                <span style="text-align: center;  margin: 0px" th:text="${dispOrgName}"></span>
+            </p>
+             <h3 style="text-align: center;  margin: 0px">Statement Showing the Energy Generated for <strong>[[${statementMonth}]],[[${statementYear}]]</strong></h3>
+            
+        </header>
+
+    </div>
+    
+    <!-- <textarea id="header">Generation Statement</textarea> -->
+
+    <div>
+        <table style="float: left;width: 50%">
+            <tr>
+                <td class="meta-head">Company Name</td>
+                <td th:text="${dispCompanyName}"></td>
+
+            </tr>
+            <tr>
+                <td class="meta-head">Service Number/isRec</td>
+                <td th:text="${dispCompanyServiceNumber}+'/'+ ${isRec}"></td>
+            </tr>
+            <!-- <tr>
+                <td class="meta-head">EDC Name</td>
+                <td th:text="${dispOrgName}"></td>
+            </tr> -->
+
+
+            <tr>
+                <td class="meta-head">Initial Statement Date</td>
+                <td th:text="${initStatementDate}"></td>
+
+
+            </tr>
+            <tr>
+                <td class="meta-head">Final Statement Date</td>
+                <td th:text="${finalStatementDate}"></td>
+            </tr>
+            <tr>
+                <td class="meta-head">Machine Capacity (kw)</td>
+                <td th:text="${machineCapacity}"></td>
+            </tr>
+            <!-- <tr>
+                <td class="meta-head">Injecting Voltage</td>
+                <td th:text="${injectingVoltageName}"></td>
+            </tr> -->
+        </table>
+        <table style="float: right;width: 50%">
+            <tr>
+                <td class="meta-head">Generation Date</td>
+                <td th:text="${statementGenerationDate}"></td>
+            </tr>
+
+            <tr>
+                <td class="meta-head">Multiplication Factor</td>
+                <td th:text="${mf}"></td>
+            </tr>
+
+            <tr>
+                <td class="meta-head">Net Generation (units)</td>
+                <td th:text="${netGeneration}"></td>
+            </tr>
+            <tr>
+                <td class="meta-head">Category/TypeofSS</td>
+                <td th:text="''+ ${category} +' / ' + ${typeOfSS}"></td>
+            </tr>
+            <tr th:if="${typeOfSS=='SECTION 10(1)SS'}">
+                <td class="meta-head">Injecting Voltage/Loss percent(%)</td>
+                <td th:text="''+ ${injectingVoltageName} +' / ' + ${ssLossPercent}"></td>
+            </tr>
+            <tr th:if="${typeOfSS!='SECTION 10(1)SS'}">
+                <td class="meta-head">Injecting Voltage</td>
+                <td th:text="${injectingVoltageName}"></td>
+            </tr>
+        </table>
+    </div>
+	<div class="row" th:if="${isNewMeter=='N'}">
+	  <div class="column" style="float: left;"  th:if="${dispFuelTypeGroup =='RE'}" >
+	    <h3 style="text-align: center; margin: 0px">Import Units</h3>
+	    <table   style="width: 100%">
+            <tr>
+                <th> </th>
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+               	<th>kwh(Unit)</th>
+				
+            </tr>
+            <tr class="item-row" th:each="generationStatementSlots : ${generationStatementSlots}">
+                <td style="font-weight: bold" th:text="${generationStatementSlots.slotCode}"></td>
+                <td th:text="${generationStatementSlots.impInitial}"></td>
+                <td th:text="${generationStatementSlots.impFinal}"></td>
+                <td th:text="${generationStatementSlots.impDifference}"></td>
+                <td th:text="${generationStatementSlots.impUnits}"></td>
+ 				
+ 					
+            </tr>
+
+        </table>
+	  </div>
+	  <div class="column" style="float: left;"    >
+	     <h3 style="text-align: center; margin: 0px">Export Units</h3>
+	     <table style="width: 100%">
+            <tr>
+                <th th:if="${dispFuelTypeGroup =='FF'}" > </th> 
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+                <th>kwh(Unit)</th>
+				<th>Net</th>
+            </tr>
+            <tr class="item-row" th:each="generationStatementSlots : ${generationStatementSlots}">
+                <td th:text="${generationStatementSlots.slotCode}" th:if="${dispFuelTypeGroup =='FF'}" ></td> 
+                <td th:text="${generationStatementSlots.expInitial}"></td>
+                <td th:text="${generationStatementSlots.expFinal}"></td>
+                <td th:text="${generationStatementSlots.expDifference}"></td>
+                <td th:text="${generationStatementSlots.expUnits}"></td>
+ 				 <td th:text="${generationStatementSlots.netUnits}"></td>
+            </tr>
+
+        </table>
+	  </div>
+	</div>
+	<div class="row" th:if="${isNewMeter=='Y'}">
+	  <div class="column" style="float: left;"  th:if="${dispFuelTypeGroup =='RE'}" >
+	    <h3 style="text-align: center; margin: 0px">Old Meter Import Units&nbsp;&nbsp;&nbsp;Meter No&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${OldmeterReadings.meterno}"></span></h3>
+	    <table   style="width: 100%">
+            <tr>
+                <th> </th>
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+               	<th>kwh(Unit)</th>
+				
+            </tr>
+            <tr class="item-row">
+                <td>C1</td>
+                <td th:text="${OldmeterReadings.ImpInitC1}"></td>
+                <td th:text="${OldmeterReadings.ImpFinC1}"></td>
+                <td th:text="${OldmeterReadings.DiffImpC1}"></td>
+                <td th:text="${OldmeterReadings.NetImpC1}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C2</td>
+                <td th:text="${OldmeterReadings.ImpInitC2}"></td>
+                <td th:text="${OldmeterReadings.ImpFinC2}"></td>
+                <td th:text="${OldmeterReadings.DiffImpC2}"></td>
+                <td th:text="${OldmeterReadings.NetImpC2}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C3</td>
+                <td th:text="${OldmeterReadings.ImpInitC3}"></td>
+                <td th:text="${OldmeterReadings.ImpFinC3}"></td>
+                <td th:text="${OldmeterReadings.DiffImpC3}"></td>
+                <td th:text="${OldmeterReadings.NetImpC3}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C4</td>
+                <td th:text="${OldmeterReadings.ImpInitC4}"></td>
+                <td th:text="${OldmeterReadings.ImpFinC4}"></td>
+                <td th:text="${OldmeterReadings.DiffImpC4}"></td>
+                <td th:text="${OldmeterReadings.NetImpC4}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C5</td>
+                <td th:text="${OldmeterReadings.ImpInitC5}"></td>
+                <td th:text="${OldmeterReadings.ImpFinC5}"></td>
+                <td th:text="${OldmeterReadings.DiffImpC5}"></td>
+                <td th:text="${OldmeterReadings.NetImpC5}"></td>
+ 	      </tr>
+
+        </table>
+	  </div>
+	  <div class="column" style="float: left;">
+	     <h3 style="text-align: center; margin: 0px">Old Meter Export Units</h3>
+	     <table style="width: 100%">
+            <tr>
+                <th th:if="${dispFuelTypeGroup =='FF'}" > </th> 
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+                <th>kwh(Unit)</th>
+				<th>Net</th>
+            </tr>
+            <tr class="item-row">
+                
+                <td th:text="${OldmeterReadings.ExpInitC1}"></td>
+                <td th:text="${OldmeterReadings.ExpFinC1}"></td>
+                <td th:text="${OldmeterReadings.DiffExpC1}"></td>
+                <td th:text="${OldmeterReadings.NetExpC1}"></td>
+                <td th:text="${OldmeterReadings.Net_C1}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${OldmeterReadings.ExpInitC2}"></td>
+                <td th:text="${OldmeterReadings.ExpFinC2}"></td>
+                <td th:text="${OldmeterReadings.DiffExpC2}"></td>
+                <td th:text="${OldmeterReadings.NetExpC2}"></td>
+                <td th:text="${OldmeterReadings.Net_C2}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+               
+                <td th:text="${OldmeterReadings.ExpInitC3}"></td>
+                <td th:text="${OldmeterReadings.ExpFinC3}"></td>
+                <td th:text="${OldmeterReadings.DiffExpC3}"></td>
+                <td th:text="${OldmeterReadings.NetExpC3}"></td>
+                <td th:text="${OldmeterReadings.Net_C3}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${OldmeterReadings.ExpInitC4}"></td>
+                <td th:text="${OldmeterReadings.ExpFinC4}"></td>
+                <td th:text="${OldmeterReadings.DiffExpC4}"></td>
+                <td th:text="${OldmeterReadings.NetExpC4}"></td>
+                <td th:text="${OldmeterReadings.Net_C4}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${OldmeterReadings.ExpInitC5}"></td>
+                <td th:text="${OldmeterReadings.ExpFinC5}"></td>
+                <td th:text="${OldmeterReadings.DiffExpC5}"></td>
+                <td th:text="${OldmeterReadings.NetExpC5}"></td>
+                <td th:text="${OldmeterReadings.Net_C5}"></td>
+ 	      </tr>
+        </table>
+	  </div>
+	  
+	  
+	
+<div class="column" style="float: left;"  th:if="${dispFuelTypeGroup =='RE'}" >
+	    <h3 style="text-align: center; margin: 0px">New Meter Import Units&nbsp;&nbsp;&nbsp;Meter No&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${NeWmeterReadings.meterno}"></span></h3>
+	    <table   style="width: 100%">
+            <tr>
+                <th> </th>
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+               	<th>kwh(Unit)</th>
+				
+            </tr>
+            <tr class="item-row">
+                <td>C1</td>
+                <td th:text="${NeWmeterReadings.ImpInitC1}"></td>
+                <td th:text="${NeWmeterReadings.ImpFinC1}"></td>
+                <td th:text="${NeWmeterReadings.DiffImpC1}"></td>
+                <td th:text="${NeWmeterReadings.NetImpC1}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C2</td>
+                <td th:text="${NeWmeterReadings.ImpInitC2}"></td>
+                <td th:text="${NeWmeterReadings.ImpFinC2}"></td>
+                <td th:text="${NeWmeterReadings.DiffImpC2}"></td>
+                <td th:text="${NeWmeterReadings.NetImpC2}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C3</td>
+                <td th:text="${NeWmeterReadings.ImpInitC3}"></td>
+                <td th:text="${NeWmeterReadings.ImpFinC3}"></td>
+                <td th:text="${NeWmeterReadings.DiffImpC3}"></td>
+                <td th:text="${NeWmeterReadings.NetImpC3}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C4</td>
+                <td th:text="${NeWmeterReadings.ImpInitC4}"></td>
+                <td th:text="${NeWmeterReadings.ImpFinC4}"></td>
+                <td th:text="${NeWmeterReadings.DiffImpC4}"></td>
+                <td th:text="${NeWmeterReadings.NetImpC4}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                <td>C5</td>
+                <td th:text="${NeWmeterReadings.ImpInitC5}"></td>
+                <td th:text="${NeWmeterReadings.ImpFinC5}"></td>
+                <td th:text="${NeWmeterReadings.DiffImpC5}"></td>
+                <td th:text="${NeWmeterReadings.NetImpC5}"></td>
+ 	      </tr>
+
+        </table>
+	  </div>
+	  <div class="column" style="float: left;">
+	     <h3 style="text-align: center; margin: 0px">New Meter Export Units</h3>
+	     <table style="width: 100%">
+            <tr>
+                <th th:if="${dispFuelTypeGroup =='FF'}" > </th> 
+                <th>Initial Reading</th>
+                <th>Final Reading</th>
+                <th>Difference</th>
+                <th>kwh(Unit)</th>
+				<th>Net</th>
+            </tr>
+            <tr class="item-row">
+                
+                <td th:text="${NeWmeterReadings.ExpInitC1}"></td>
+                <td th:text="${NeWmeterReadings.ExpFinC1}"></td>
+                <td th:text="${NeWmeterReadings.DiffExpC1}"></td>
+                <td th:text="${NeWmeterReadings.NetExpC1}"></td>
+                <td th:text="${NeWmeterReadings.Net_C1}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${NeWmeterReadings.ExpInitC2}"></td>
+                <td th:text="${NeWmeterReadings.ExpFinC2}"></td>
+                <td th:text="${NeWmeterReadings.DiffExpC2}"></td>
+                <td th:text="${NeWmeterReadings.NetExpC2}"></td>
+                <td th:text="${NeWmeterReadings.Net_C2}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+               
+                <td th:text="${NeWmeterReadings.ExpInitC3}"></td>
+                <td th:text="${NeWmeterReadings.ExpFinC3}"></td>
+                <td th:text="${NeWmeterReadings.DiffExpC3}"></td>
+                <td th:text="${NeWmeterReadings.NetExpC3}"></td>
+                <td th:text="${NeWmeterReadings.Net_C3}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${NeWmeterReadings.ExpInitC4}"></td>
+                <td th:text="${NeWmeterReadings.ExpFinC4}"></td>
+                <td th:text="${NeWmeterReadings.DiffExpC4}"></td>
+                <td th:text="${NeWmeterReadings.NetExpC4}"></td>
+                <td th:text="${NeWmeterReadings.Net_C4}"></td>
+ 	      </tr>
+ 	      <tr class="item-row">
+                
+                <td th:text="${NeWmeterReadings.ExpInitC5}"></td>
+                <td th:text="${NeWmeterReadings.ExpFinC5}"></td>
+                <td th:text="${NeWmeterReadings.DiffExpC5}"></td>
+                <td th:text="${NeWmeterReadings.NetExpC5}"></td>
+                <td th:text="${NeWmeterReadings.Net_C5}"></td>
+ 	      </tr>
+        </table>
+	  </div>
+	  
+	  
+	</div>
+	
+	
+	
+	
+    <div>
+	
+        
+
+       
+    </div>
+    <h3 th:if="${(category=='IS-CAPTIVE' && dispFuelTypeGroup =='RE'  )}" style="text-align: center;  margin: 0px">Banking Units</h3>
+
+    <div th:if="${(category=='IS-CAPTIVE' && dispFuelTypeGroup =='RE'  )}">
+        <p style="font: 12px/1.4 Georgia, serif;text-align: center;background-color: #eee">C1 :
+            <span class="a" th:text="${c1}"></span>C2 :
+            <span class="a" th:text="${c2}"></span>C3 :
+            <span class="a" th:text="${c3}"></span>C4 :
+            <span class="a" th:text="${c4}"></span>C5 :
+            <span class="a" th:text="${c5}"></span>
+        </p>
+    </div>
+      <h3  style="text-align: center;  margin: 0px">Net Units</h3>
+           <div>
+        <p style="font: 12px/1.4 Georgia, serif;text-align: center;background-color: #eee">C1 :
+            <span class="a" th:text="${netc1}"></span>C2 :
+            <span class="a" th:text="${netc2}"></span>C3 :
+            <span class="a" th:text="${netc3}"></span>C4 :
+            <span class="a" th:text="${netc4}"></span>C5 :
+            <span class="a" th:text="${netc5}"></span>
+        </p>
+    </div>
+    <h3 style="text-align: center;  margin: 0px">Generation Summaries</h3>
+    
+
+    <div >
+
+        <table style="float: left;width: 100%">
+
+            <tr>
+                <th> </th>
+                <th>Initial</th>
+                <th>Final</th>
+                <th>Difference</th>
+                <th>Units</th>
+			
+
+
+            </tr>
+            <tr class="item-row"  th:if="${dispFuelTypeGroup =='RE'}" >
+                <th class="items-head">rKvah</th>
+                <td th:text="${gs.rKvahInitial}"></td>
+                <td th:text="${gs.rKvahFinal}"></td>
+                <td th:text="${gs.rKvahDifference}"></td>
+                <td th:text="${gs.rKvahUnits}"></td>
+
+            </tr>
+            <tr class="item-row"  th:if="${dispFuelTypeGroup =='RE'}" >
+                <th class="items-head">Kvah</th>
+                <td th:text="${gs.kVahInitial}"></td>
+                <td th:text="${gs.kVahFinal}"></td>
+                <td th:text="${gs.kVahDifference}"></td>
+                <td th:text="${gs.kVahUnits}"></td>
+
+            </tr>
+            <tr class="item-row" th:if="${dispFuelTypeGroup =='RE'}" >
+                <th class="items-head">Total Import</th>
+                <td class="items-head"> </td>
+                <td class="items-head"> </td>
+                <td class="items-head"> </td>
+                <td th:text="${gs.totalImportGeneration}"></td>
+
+            </tr>
+            <tr class="item-row" >
+                <th class="items-head">Total Export</th>
+                <td class="items-head"> </td>
+                <td class="items-head"> </td>
+                <td class="items-head"> </td>
+                <td th:text="${gs.totalExportGeneration}"></td>
+
+            </tr>
+            <tr class="item-row" th:if="${(category=='STB' && dispFuelTypeGroup =='RE'  )}">
+                <th class="items-head">Tariff</th>
+                <td th:text="${plantClassTypeDesc}"></td>
+                <td class="items-head"> </td>
+                <td th:text="${tariffRate}"></td>
+                <td th:text="'Rs.' + ${tariffNetAmount}"></td>
+
+            </tr>
+
+        </table>
+    </div>
+    
+     
+
+
+    <h3 th:if="${dispFuelTypeGroup !='FF'}" style="text-align: center">Applicable Charges (Rs)</h3>
+
+    <div>
+
+        <table style="float: left;width: 100%">
+            <tr th:if="${dispFuelTypeGroup !='FF'}">
+                <th>Charge Code</th>
+                
+                <th>Charge Description</th>
+                <th>Total Charges</th>
+
+
+
+            </tr>
+            <tr class="item-row" th:if="${dispFuelTypeGroup !='FF'}" th:each="generationStatementCharges : ${generationStatementCharges}">
+                <td th:text="${generationStatementCharges.chargeCode}"></td>
+             <!--     <td th:if="${generationStatementCharges.chargeDesc !='Import Energy Charges'}" th:text="${generationStatementCharges.chargeDesc}" ></td>
+             <td ><td th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}"  th:text="${generationStatementCharges.chargeDesc}"></td>
+                <td th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}"  th:text="${generationStatementCharges.chargeDesc}"></td>
+                <td th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}"  th:text="${generationStatementCharges.chargeDesc}"></td></td> -->
+               <td> <span th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}" style="border-right: solid black 1px;" >[[${generationStatementCharges.chargeDesc}]]&nbsp;&nbsp;&nbsp; </span>
+                    <span th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}">&nbsp;&nbsp;&nbsp;Iec-&nbsp;&nbsp;[[${generationStatementCharges.iecRate}]]&nbsp;&nbsp;</span>
+                    <span th:if="${generationStatementCharges.chargeDesc =='Import Energy Charges'}" style="border-right: solid black 1px;"  >&nbsp;&nbsp;&nbsp;Tax-&nbsp;&nbsp;[[${generationStatementCharges.etaxRate}]]&nbsp;&nbsp;</span>
+                                   
+                    <span th:if="${generationStatementCharges.chargeDesc !='Import Energy Charges'}" th:text="${generationStatementCharges.chargeDesc}"></span></td>
+                <td th:text="${generationStatementCharges.totalCharges}"></td>
+
+
+            </tr>
+            
+            <tr class="item-row" th:if="${category=='STB'}">
+            <td class="items-head"></td>
+            <td style="font: 14px/1.4 Georgia, serif"> Net Applicant Charges </td>
+             <td style="font: 14px/1.4 Georgia, serif" th:text="'Rs.' +  ${netPayable}"></td>
+              <td></td>
+            
+            
+            </tr>
+
+        </table>
+    </div>
+    
+    <h4 style="text-align: left;  margin: 0px; color:blue" th:if="${stmtRemarks!=''}"><span style="text-align: left;  margin: 0px" th:text="${stmtRemarks}"></span> </h4>
+
+    <div class="footer">
+        <p style="font: 11px/1.4 Georgia, serif;text-align: left">To,</p>
+        <p style="font: 11px/1.4 Georgia, serif;text-align: left">- M/S.
+            <span th:text="${dispCompanyName}"></span>
+        </p>
+
+        <p th:if="${category=='IS-CAPTIVE'}" style="font: 11px/1.4 Georgia, serif;text-align: left">-S.E/EDCS(Concerned)
+        </p>
+
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right">-</p>
+
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right;padding-top:0%">for SUPERINTENDING ENGINEER/EDC/
+            <span th:text="${dispOrgName}"></span>
+        </p>
+    </div>
+    <div>
+</div>
+</body>
+
+</html>

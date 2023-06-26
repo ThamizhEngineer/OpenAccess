@@ -1,0 +1,207 @@
+<!-- <div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card>
+            <mat-card-title> <strong>Agreement</strong> </mat-card-title>
+            <mat-card-content>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div class="ml-xs mr-xs" style="width: 10%;"> </div>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement" [(ngModel)]="selectedAgreement">
+                            <mat-option *ngFor="let agreement of agreementType" [value]="agreement.name">
+                                {{ agreement.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="ml-xs mr-xs" style="width: 7%;"> </div>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="primary" (click)="getAgreements()">List</button>
+                    </mat-card-actions>
+                    <div class="ml-xs mr-xs" style="width: 100%;"> </div>
+
+
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-content>
+                <ng-template [ngIf]="viewType=='Consent'">
+                    <agreement-consent></agreement-consent>
+                </ng-template>
+                <ng-template [ngIf]="viewType=='Noc'">
+                    <agreement-noc></agreement-noc>
+                </ng-template>
+                <ng-template [ngIf]="viewType=='Oaa'">
+                    <agreement-oaa></agreement-oaa>
+                </ng-template>
+                <ng-template [ngIf]="viewType=='Ewa'">
+                    <agreement-ewa></agreement-ewa>
+                </ng-template>
+                <ng-template [ngIf]="viewType=='Epa'">
+                    <agreement-epa></agreement-epa>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div> -->
+
+<mat-card>
+	<mat-card-title>
+		Existing Agreements
+	</mat-card-title>
+	<mat-card-content>
+		<!-- <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newEwa()'><mat-icon>add</mat-icon></button> -->
+
+<!-- 		
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="EDC Name" [matAutocomplete]="tdAuto" [(ngModel)]='searchEDCName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredOrgList = filterOrgList(searchEDCName);this.fetchBuyerCompanyServices();">
+				<mat-autocomplete #tdAuto="matAutocomplete">
+				  <mat-option *ngFor="let org of filteredOrgList" [value]="org.name" (onSelectionChange)="acChangeFunc($event, org, 'searchEDC')">
+					<span>{{ org.name }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			  </mat-form-field>
+			  
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Buyer Name" [matAutocomplete]="td1Auto" [(ngModel)]='searchBuyerName'
+				  #modelDir="ngModel" (ngModelChange)="this.filteredBuyerList = filterBuyerList(searchBuyerName);">
+				<mat-autocomplete #td1Auto="matAutocomplete">
+				  <mat-option *ngFor="let buyer of filteredBuyerList" [value]="buyer.companyName" (onSelectionChange)="acChangeFunc($event, buyer, 'searchBuyer')">
+					<span>{{ buyer.companyName }} - {{ buyer.bankingServiceNumber }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Voltage" [matAutocomplete]="td2Auto" [(ngModel)]='searchVoltageName' ngModel #modelDir="ngModel" (ngModelChange)="this.filteredVoltageList = filterVoltageList(searchVoltageName);">
+				<mat-autocomplete #td2Auto="matAutocomplete">
+				  <mat-option *ngFor="let voltage of filteredVoltageList" [value]="voltage.valueDesc" (onSelectionChange)="acChangeFunc($event, voltage, 'searchVoltage')">
+					<span>{{voltage.valueCode}} - {{ voltage.valueDesc }}</span>
+				  </mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="From Date" [(ngModel)]='searchFromDate'>
+			</mat-form-field>
+			
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="To Date" [(ngModel)]='searchToDate'>
+			</mat-form-field>
+			
+			<mat-card-actions>				
+				<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+			</mat-card-actions>
+		</div>
+		 -->
+
+		 <div fxLayout="row" fxLayoutAlign="start center">
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select  class="ml-xs mr-xs" style="width: 100%;"  [disabled]="disableEdc"  placeholder="{{this.commonUtils.getProp('seller')}} Edc Name" 
+					[(ngModel)]='searchSellerOrgId'  [required]="isMandatory"  (ngModelChange)="onEdcChange()">
+					<mat-option *ngFor="let edc of edcList" [value]="edc.id"   >
+						{{edc.id}} - {{ edc.name }}
+					</mat-option>
+					</mat-select>
+				</mat-form-field>
+	
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select  class="ml-xs mr-xs" style="width: 100%;"  placeholder="{{this.commonUtils.getProp('seller')}} Service number" 
+					[(ngModel)]='searchSellerCompanyServiceId'  [required]="isMandatory" >
+					<mat-option *ngFor="let companyService of sellerCompanyServices" [value]="companyService.sellerCompanyServiceId"   >
+					 {{ companyService.sellerCompanyName}} - {{ companyService.sellerCompanyServiceNumber }}
+					</mat-option>
+				</mat-select>
+				 </mat-form-field>
+
+				 
+		
+		
+
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Status" [(ngModel)]="searchStatus">
+					<mat-option *ngFor="let status of statuses" [value]="status.key">
+						{{status.key}}
+					</mat-option>
+				</mat-select>					
+				</mat-form-field>
+
+
+		
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="Agreement Number" [(ngModel)]="searchAgreementCode">
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input  matInput placeholder="Energy Sale Intent Number" [(ngModel)]="searchEsIntentCode">
+				</mat-form-field>
+		<hr>
+
+									<mat-card-actions>				
+											<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+									</mat-card-actions>
+							</div>
+		<br/>
+		
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+		[scrollbarV]="true">
+
+		
+			<ngx-datatable-column name="EDC Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerOrgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<!-- <ngx-datatable-column name="Service Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerCompanyServiceNumber}}
+				</ng-template>
+			</ngx-datatable-column> -->
+			<ngx-datatable-column name="Status">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.statusCode}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Agreement Type">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.agreementTypeName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Agreement Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.code}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="EsIntent Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.esIntentCode}}
+				</ng-template>
+			</ngx-datatable-column>
+			<!-- <ngx-datatable-column name="Duration From">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{commonService.displayMonth(row.fromMonth) +"-" +row.fromYear}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Duration To">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{commonService.displayMonth(row.toMonth) +"-" +row.toYear}}
+					</ng-template>
+				</ngx-datatable-column> -->
+			
+
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button color="primary" class="mr-1" (click)="editAgreement(row['id'])">Open</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+	</mat-card-content>
+</mat-card>

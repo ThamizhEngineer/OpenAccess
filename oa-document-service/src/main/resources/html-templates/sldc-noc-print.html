@@ -1,0 +1,634 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>Generator Noc</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            font: 12px/1.4 Georgia, serif;
+
+        }
+        p.tex {
+			text-align:right;
+		}
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 70px;
+            background-color: #ffffff;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 10px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 10%
+        }
+        
+        td.meta-head-sno {
+            text-align: left;
+            background: #eee;
+            width: 1%
+        }
+          span.hr {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+
+        #left {
+            float: left;
+            text-align: left;
+            /* padding-right: 10px; */
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        #right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+        }
+         span.hr {
+            text-align: center;
+            font: bold 17px Helvetica, Sans-Serif;
+        }
+        span.sd {
+			padding-bottom:30px;
+			margin-bottom:20px;
+			margin-top:70px;
+		}
+    </style>
+
+</head>
+
+<body>
+    <div style="float: right;">
+        <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p>
+    </div>
+    <br />
+    <div class="header">
+        <header class="solid">
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+            <span class="hr">TAMILNADU GENERATION AND DISTRIBUTION CORPORATION LIMITED </span>
+           <p style="text-align: center" th:text="${edc}"></p>
+            <p style="text-align: center">Generator NOC Report <strong>[[${appliedDt}]]</strong></p>
+        </header>
+
+    </div>
+
+    <table style="float: left;width: 100%;border: none;">
+        <tr>
+            <td>NOC Code : [[${nocCode}]] </td>
+            <td>Application No / Category: [[${appliedNo}]]  <br /> <div style="float: right;">[[${appCategory}]]</div>   </td>
+            <td>Applied On: [[${appliedDt}]] </td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <div style="margin-left:40%">
+        <br />
+    </div>
+    <!-- <textarea id="header">Energy Allotment Order</textarea> -->
+
+    <div>
+
+
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <td class="meta-head-sno">Sl.No</td>
+                <td class="meta-head">Description</td>
+                <td class="meta-head">Details</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Name of the Generator</td>
+                <td th:text="${companyName}"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Htsc Number</td>
+                <td th:text="${compServNo}"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Address of Plant location</td>
+                <td th:text="${plantAdr}"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Communication Address</td>
+                <td th:text="${commsAdr}"></td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td>Installed Capacity of the plant in MW</td>
+                <td><span th:text="${installCapPlant}"></span><span>&nbsp;MW</span></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Internal Consumption (i) Auxilary Consumption</td>
+                <td th:text="${intlAuxilary}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>(ii) In House Consumption</td>
+                <td th:text="${intInhouseConsump}"></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Ex-Bus availability</td>
+                <td th:text="${exBusAval}"></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Approved Power Evacuation Capacity</td>
+                <td th:text="${approvPwrEvacCap}"></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Type of Fuel Used / Type of Powerplant (CPP/Biomass/Co-gen/ Any other type)</td>
+                <td th:text="${fuelType}"></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Name of the connecting feeder with voltag level</td>
+                <td th:text="${feederWithVoltLevel}"></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Name of the connecting substation with voltag ratio</td>
+                <td th:text="${substationWithVoltLevel}"></td>
+            </tr>
+
+
+
+            <tr>
+                <td>12-a</td>
+                <td>Date of grid conectivity approval</td>
+                <td th:text="${gridApprovalDt}"></td>
+            </tr>
+            <tr>
+                <td>12-b</td>
+                <td>Date of commercial operation decleration (COD)</td>
+                <td th:text="${codDt}"></td>
+            </tr>
+             <tr th:if="${isAbtAndAmr=='Y'}">
+                <td>13-a</td>
+                <td>Whether ABT meter with AMR facility is provided in the plant</td>
+                <td>Yes</td>
+            </tr>
+            <tr th:if="${isAbtAndAmr=='N'}">
+                <td>13-a</td>
+                <td>Whether ABT meter with AMR facility is provided in the plant</td>
+                <td>No</td>
+            </tr>
+            <tr th:if="${isAbtAndAmr==' '}">
+                <td>13-a</td>
+                <td>Whether ABT meter with AMR facility is provided in the plant</td>
+                <td>-</td>
+            </tr>
+            <tr th:if="${isMeterDownloadAndInstall=='Y'}">
+                <td>13-b</td>
+                <td>Whether data downloading facility is available in the meter installed</td>
+                <td>Yes</td>
+            </tr>
+            <tr th:if="${isMeterDownloadAndInstall=='N'}">
+                <td>13-b</td>
+                <td>Whether data downloading facility is available in the meter installed</td>
+                <td>No</td>
+            </tr>
+            <tr th:if="${isMeterDownloadAndInstall==' '}">
+                <td>13-b</td>
+                <td>Whether data downloading facility is available in the meter installed</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>13-c</td>
+                <td>Make of the ABT meter</td>
+                <td th:text="${abyMeterName}"></td>
+            </tr>
+            <tr>
+                <td>13-d</td>
+                <td>Meter MF</td>
+                <td th:text="${meterMfName}"></td>
+            </tr>
+            <tr>
+                <td>13-e</td>
+                <td>CT ratio And class of accuracy</td>
+                <td th:text="${ctRatioAndClassAcc}"></td>
+            </tr>
+            <tr>
+                <td>13-f</td>
+                <td>PT ratio And class of accuracy</td>
+                <td th:text="${ptRatioAndClassAcc}"></td>
+            </tr>
+    
+            <tr>
+                <td>14</td>
+                <td>Whether online data monitoring facility with SLDC is provided by the generator</td>
+                <td th:text="${isDataMonitoringWithSldc=='Y'? 'Yes':'Nil'}"></td>
+            </tr>
+            <tr th:if="${isCommitToTangedco=='Y'}">
+                <td></td>
+                <td>Any commitment to TANGEDCO through traders</td>
+                <td>Yes</td>
+            </tr>
+            <tr th:if="${isCommitToTangedco=='N'}">
+                <td></td>
+                <td>Any commitment to TANGEDCO through traders</td>
+                <td>No</td>
+            </tr>
+            <tr th:if="${isCommitToTangedco==''}">
+                <td></td>
+                <td>Any commitment to TANGEDCO through traders</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Power Sale commitments for the generator</td>
+                <td th:text="${approvPwrEvacCap}"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div style="margin-left:40%">
+        <h3>&nbsp;</h3>
+    </div>
+
+
+    <div>
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>I-a</th>
+                <th colspan="5">Inter-State sale through IEX transactions</th>
+            </tr>
+
+            <tr>
+                <td>Existing/Applied</td>
+                <td>Flow Type</td>
+                <td>Seller</td>
+                <td>FromPeriod</td>
+                <td>ToPeriod</td>
+                <td>Quantum</td>
+            </tr>
+
+            <tr class="item-row" th:each="intraSdlc : ${intraSdlcList}">
+                <td></td>
+                <td th:text="${intraSdlc.flowType}"></td>
+                <td th:text="${intraSdlc.compName}"></td>
+                <td th:text="${intraSdlc.fromPeriod}"></td>
+                <td th:text="${intraSdlc.toPeriod}"></td>
+                <td th:text="${intraSdlc.quantum}"></td>
+            </tr>
+        </table>
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>I-b</th>
+                <th colspan="5">Inter-State sale through Bilateral transactions</th>
+            </tr>
+
+            <tr>
+                <td>Existing/Applied</td>
+                <td>Flow Type</td>
+                <td>sale</td>
+                <td>FromPeriod</td>
+                <td>ToPeriod</td>
+                <td>Quantum</td>
+            </tr>
+
+            <tr class="item-row" th:each="interSdlc : ${interSdlcList}">
+                <td></td>
+                <td th:text="${interSdlc.flowType}"></td>
+                <td th:text="${interSdlc.compName}"></td>
+                <td th:text="${interSdlc.fromPeriod}"></td>
+                <td th:text="${interSdlc.toPeriod}"></td>
+                <td th:text="${interSdlc.quantum}"></td>
+            </tr>
+        </table>
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>II</th>
+                <th colspan="5">To TANGEDCO through PPA (with contact period) in MW</th>
+            </tr>
+
+            <tr>
+                <td>Existing/Applied</td>
+                <td>Flow Type</td>
+                <td>sale</td>
+                <td>FromPeriod</td>
+                <td>ToPeriod</td>
+                <td>Quantum</td>
+            </tr>
+
+            <tr class="item-row" th:each="tangedcoPpa : ${ExistingtangedcoRec}">
+                 <td th:if="${tangedcoPpa.category2=='TANGEDCO'}">Existing</td>
+                <td th:text="${tangedcoPpa.category2}"></td>
+                <td th:text="${tangedcoPpa.customerName}"></td>
+                <td th:text="${tangedcoPpa.periodStartDate}"></td>
+                <td th:text="${tangedcoPpa.periodEndDate}"></td>
+                <td th:text="${tangedcoPpa.quantum}"></td>
+            </tr>
+            <tr class="item-row" th:each="tangedcoPpa : ${PropsedTangedco}">
+                <td th:text="${tangedcoPpa.isExisting=='N'? 'Applied':'Nil'}"></td>
+                <td th:text="${tangedcoPpa.flowType}"></td>
+                <td th:text="${tangedcoPpa.customerName}"></td>
+                <td th:text="${tangedcoPpa.fromPeriod}"></td>
+                <td th:text="${tangedcoPpa.toPeriod}"></td>
+                <td th:text="${tangedcoPpa.quantum}"></td>
+            
+        </table>
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>III-a</th>
+                <th colspan="5">Intra State Bilateral Third Party</th>
+            </tr>
+
+            <tr>
+                <td>Existing/Applied</td>
+                <td>Flow Type</td>
+                <td>sale</td>
+                <td>FromPeriod</td>
+                <td>ToPeriod</td>
+                <td>Quantum</td>
+            </tr>
+
+            <tr class="item-row" th:each="thirdParty : ${ThirdPartyData}">
+                <td th:if="${thirdParty.category2=='Third Party'}">Existing</td>
+                <td th:text="${thirdParty.category2}"></td>
+                <td th:text="${thirdParty.customerName}"></td>
+                <td th:text="${thirdParty.periodStartDate}"></td>
+                <td th:text="${thirdParty.periodEndDate}"></td>
+                <td th:text="${thirdParty.quantum}"></td>
+            </tr>
+            <tr class="item-row" th:each="thirdParty : ${ThirdProposedData}">
+                <td th:text="${thirdParty.isExisting=='N'? 'Applied':'Nil'}"></td>
+                <td th:text="${thirdParty.flowType}"></td>
+                <td th:text="${thirdParty.customerName}"></td>
+                <td th:text="${thirdParty.fromPeriod}"></td>
+                <td th:text="${thirdParty.toPeriod}"></td>
+                <td th:text="${thirdParty.quantum}"></td>
+            </tr>
+        </table>
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>III-b</th>
+                <th colspan="3">No of third party user</th>
+            </tr>
+ 			<tr>
+                <td></td>
+                <td>Existing in MW</td>
+                <td>Proposed(Applied/Reduction)in MW</td>
+                <td>Total in MW</td>
+            </tr>
+
+            <tr class="item-row">
+                <td></td>
+               <td ><span th:text="${ThirdPartyCount}"></span><span>&nbsp;&nbsp;Users&nbsp;/&nbsp;</span>
+               <span th:text="${ExistingThirdQtm}"></span><span>&nbsp;MW</span></td>
+                <td ><span>Addition:</span><span th:text="${ThirdProposedCount}"></span><span>&nbsp;Users&nbsp;/&nbsp;Quantum:</span>
+                <span th:text="${PropsedThirdqtm}"></span><span>&nbsp;MW</span></td>
+             	 <td ><span th:text="${ThirdTotalCount}"></span><span>&nbsp;&nbsp;Users&nbsp;/&nbsp;</span>
+             	 <span th:text="${TotalThirdQtm}"></span><span>&nbsp;MW</span></td>
+            </tr>
+        </table>
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>IV-a</th>
+                <th colspan="3">Intra-State open Access Quantum to captive users in MW And Period</th>
+            </tr>
+
+           <tr>
+                <td></td>
+                <td>Existing in MW</td>
+                <td>Proposed(Applied/Reduction)in MW</td>
+                <td>Total in MW</td>
+            </tr>
+
+            <tr class="item-row" th:each="intraState : ${intraStateLines}">
+                <td></td>
+                <td th:text="${intraState.isExisting}"></td>
+                <td th:text="${intraState.proposed}"></td>
+                <td th:text="${intraState.total}"></td>
+            </tr>
+        </table>
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>IV-b</th>
+                <th colspan="3">No of Captive users</th>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>Existing in MW</td>
+                <td>Proposed(Applied/Reduction)in MW</td>
+                <td>Total in MW</td>
+            </tr>
+
+            <tr class="item-row">
+                <td></td>
+                <td ><span th:text="${ExistingCount}"></span><span>&nbsp;&nbsp;Users&nbsp;/&nbsp;</span>
+                <span th:text="${ExistingQtm}"></span><span>&nbsp;MW</span></td>
+                <td ><span>Addition:</span><span th:text="${ProposedCount}"></span>
+                <span>&nbsp;Users&nbsp;/&nbsp;Quantum:</span><span th:text="${Propsedqtm}"></span><span>&nbsp;MW</span></td>
+              	<td ><span th:text="${TotalCount}"></span><span>&nbsp;&nbsp;Users&nbsp;/&nbsp;</span>
+              	<span th:text="${TotalQtm}"></span><span>&nbsp;MW</span></td>
+            </tr>
+        </table>
+
+
+
+        <div style="margin-left:40%">
+            <h3>&nbsp;</h3>
+        </div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>Sl.No</th>
+                <th>Description</th>
+                <th>Details</th>
+            </tr>
+
+            <tr class="item-row">
+                <td>IV-c</td>
+                <td>Whether the Eligibility for CGP status is verified</td>
+                <td th:text="${isCgpStatusVerified}"></td>               
+            </tr>  
+            
+            <tr class="item-row">
+                <td>V</td>
+                <td>Any other commitment in MW with Details</td>
+                <td th:text="${eligibleQuantumInWv}"></td>               
+            </tr>  
+
+            <tr class="item-row">
+                <td>Remarks</td>
+                <td colspan="2">
+               		 	<tr th:text="${techRemark}"> </tr>
+                		<tr th:text="${legalRemark}"> </tr>
+                		<tr th:text="${commRemark}"> </tr> 
+               	 </td>          
+            </tr> 
+        </table>
+        	
+
+    </div>
+    		<p> </p>
+        	<p> </p>
+        	<p> </p>
+        	<p> </p>
+    		<p> 
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+            	<p colspan="3" class="tex"> SUPERINTENDING ENGINEER </p> 
+          
+             	<p colspan="3" class="tex" th:text=${edc}></p>
+            </p>
+
+    <div class="footer">
+
+    </div>
+    <div>
+    </div>
+</body>
+
+</html>

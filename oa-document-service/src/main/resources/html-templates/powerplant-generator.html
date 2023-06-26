@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Generator Details</title>
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div>
+
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+            <tr>
+                <td rowspan="2" style="width:100px; ">
+                    <div style="background:url('/opt/oa/data/files/images/logo.png');width:auto;height:90px;  background-size:cover;background-repeat:   no-repeat;background-position: center">
+                        &nbsp;</div>
+                </td>
+
+                <td style="width:470px;cellpadding:1px; text-align: center; ">
+                    <strong style="font-size:18px;">TANGEDCO</strong>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="1" style="font-size:14px;">
+                    <div>
+                        <center style="font-size:14px;font-weight: bold">Open Access Energy Adjusment and Accounting</center>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr style="background-color:#efefef">
+                <td colspan="2" style="font-size:14px;font-weight: bold;">
+                    <div>
+                        <center> Generator Master Details </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr style="background-color:#efefef">
+                <td colspan="2" style="font-size:14px;">
+                    <div>
+                        <center> Service Details </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr>
+                <th style="background-color:#efefef">EDC Name</th>
+                <td th:text="${service.orgName}"></td>
+                <th style="background-color:#efefef">Generator Service Number</th>
+                <td th:text="${service.number}"></td>
+                <th style="background-color:#efefef">Captive/STB</th>
+                <td th:text="${captiveStatus}"></td>
+
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">Company Name</th>
+                <td th:text="${company.name}"></td>
+                <th style="background-color:#efefef">Total Capacity(kW)</th>
+                <td th:text="${totalCapacity}"></td>
+                <th style="background-color:#efefef">Voltage</th>
+                <td th:text="${service.voltageName}"></td>
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">Substation Name</th>
+                <td th:text="${subStationName}"></td>
+                <th style="background-color:#efefef">Feeder Name</th>
+                <td th:text="${service.feederName}"></td>
+                <th style="background-color:#efefef">Rec/Non-Rec</th>
+                <td></td>
+
+
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">Date Of Commision</th>
+                <td th:text="${#dates.format(commissionDate, 'dd-MMM-yyyy')}"></td>
+                <th style="background-color:#efefef">Plant Status</th>
+                <td>Live</td>
+                <th style="background-color:#efefef">Status Date</th>
+                <td>02-Nov-2018</td>
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">Email ID</th>
+                <td colspan="5"></td>
+
+            </tr>
+        </table>
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr style="background-color:#efefef">
+                <td colspan="2" style="font-size:14px;">
+                    <div>
+                        <center> Meter Details </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr>
+                <th style="background-color:#efefef">Generator Service No</th>
+                <td th:text="${service.number}"></td>
+                <th style="background-color:#efefef">Meter Number</th>
+                <td th:text="${meter.meterNumber}"></td>
+
+                <th style="background-color:#efefef">Meter Make</th>
+                <td th:text="${meter.meterMakeName}"></td>
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">Is Abt Meter</th>
+                <td th:text="${meter.isAbtMeter}"></td>
+                <th style="background-color:#efefef">Multiplication Factor</th>
+                <td th:text="${meter.multiplicationFactor}"></td>
+                <th style="background-color:#efefef">Modem Number</th>
+                <td th:text="${meter.modemNumber}"></td>
+            </tr>
+            <tr>
+                <th style="background-color:#efefef">CT Ratio</th>
+                <td th:text="${meter.ctRatio}"></td>
+                <th style="background-color:#efefef">PT Ratio</th>
+                <td th:text="${meter.ptRatio}"></td>
+                <th style="background-color:#efefef"></th>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr style="background-color:#efefef">
+                <td colspan="2" style="font-size:14px;">
+                    <div>
+                        <center> Weg Generator Details </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+            <tr style="background-color:#efefef">
+                <th>S. No</th>
+                <th>Generator Make</th>
+                <th>Generator Model</th>
+                <th>Generator Capacity(kW)</th>
+                <th>No of Units</th>
+
+            </tr>
+            <tr class="item-row" th:each="generatorList,iterationStatus : ${generatorList}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${generatorList.makeName}"></td>
+                <td th:text="${generatorList.make}"></td>
+                <td th:text="${generatorList.capacity}"></td>
+                <td th:text="${generatorList.noOfUnits}"></td>
+
+            </tr>
+
+        </table>
+
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+
+            <tr style="background-color:#efefef">
+                <td colspan="2" style="font-size:14px;">
+                    <div>
+                        <center> OA Consumer Details </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="1" cellpadding="6" style="border:1px solid #CCC;border-collapse:collapse;width:650px;margin-top:15px;text-align: left;font-size:0.925rem;">
+            <tr style="background-color:#efefef">
+                <th>S. No</th>
+                <th>EDC</th>
+                <th>Service No</th>
+                <th>Company Name</th>
+                <th>Quantum(mW)</th>
+                <th>From Date</th>
+                <th>To Date</th>
+
+            </tr>
+            <tr class="item-row" th:each="tradeRelationships,iterationStatus : ${tradeRelationships}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${tradeRelationships.buyerOrgName}"></td>
+                <td th:text="${tradeRelationships.buyerCompServiceNumber}"></td>
+                <td th:text="${tradeRelationships.buyerCompanyName}"></td>
+                <td th:text="${tradeRelationships.quantum}"></td>
+                <td th:text="${#dates.format(tradeRelationships.fromDate, 'dd-MMM-yyyy')}"></td>
+                <td th:text="${#dates.format(tradeRelationships.toDate, 'dd-MMM-yyyy')}"></td>
+
+
+
+
+            </tr>
+
+        </table>
+    </div>
+    <div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

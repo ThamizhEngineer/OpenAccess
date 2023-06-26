@@ -1,0 +1,108 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        Existing Energy Ledger
+      </mat-card-title>
+      <mat-card-content>
+        <!-- <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newEnergyLedger()'><mat-icon>add</mat-icon></button>
+                        
+                        <br/> -->
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchOrgId'>
+              <mat-option *ngFor="let org of orgList" [value]="org.id">
+                {{org.code}} - {{org.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Company Name" [(ngModel)]="searchCompanyName">
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Service Number" [(ngModel)]="searchSellerCompanyServiceNumber">
+          </mat-form-field>
+
+          <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [(ngModel)]="searchLedgerDate" [matDatepicker]="ledgerDatepicker" placeholder="Ledger Date" >
+            <mat-datepicker-toggle matSuffix [for]="ledgerDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #ledgerDatepicker></mat-datepicker>
+          </mat-form-field> -->
+
+         <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Statement Month" [(ngModel)]='searchMonth' readonly>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput type="number" placeholder="Year" [(ngModel)]="searchYear">
+          </mat-form-field>  
+
+
+
+          <hr>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+          </mat-card-actions>
+
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-content>
+
+        <!--<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'"  [headerHeight]="60" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)'>-->
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+
+          <ngx-datatable-column name="Edc Name" ng-class="test">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.orgName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Company Name">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.companyName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Service Number">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.companyServiceNumber}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Ledger Date">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['ledgerDate']| date: 'dd/MM/yyyy'}}
+            </ng-template>
+          </ngx-datatable-column>
+
+        <ngx-datatable-column name="Month">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{commonService.displayMonth(row.month)}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Year">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row.year}}
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="Actions">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <button mat-raised-button color="primary" class="mr-1" (click)="editEnergyLedger(row['id'])">Open</button>
+            </ng-template>
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

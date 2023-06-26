@@ -1,0 +1,397 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+	<title>Transco invoice</title>
+
+
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			/* margin: 0; */
+			margin: 0;
+			padding: 0;
+			font: 10px/1.4 Georgia, serif;
+			width: 100%;
+			height: 100%;
+
+		}
+
+		@page {
+
+			/* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+			margin-top: 0.5cm;
+			margin-left: 0.5cm;
+			margin-right: 0.5cm;
+			margin-bottom: 0.5cm;
+			height: 21cm;
+			width: 29.7;
+			size: A4 portrait;
+		}
+
+
+		/* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+		textarea {
+			border: 0;
+			font: 11px Georgia, Serif;
+			overflow: hidden;
+			resize: none;
+		}
+
+
+
+		.common {
+			width: 100%;
+			height: auto;
+			border: 1px solid black;
+		}
+
+		.line {
+
+			border: none;
+
+
+		}
+
+		.right {
+
+			border: none;
+		}
+
+		li {
+			list-style-type: none;
+		}
+
+
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		.line {
+
+			border: none;
+
+		}
+
+		.colspan {
+			float: left;
+		}
+
+		td.h1 {
+			border: none;
+		}
+
+		td.lined {
+			border: none;
+		}
+
+		strong {
+			quotes: PADDING-LEFT;
+			padding-left: 3px;
+		}
+
+		.col-lg-3 {
+			border-right: 1px solid black;
+		}
+
+		.col-lg-3 {
+			float: left;
+			width: 50%;
+		}
+
+		.row {
+			width: 601%;
+		}
+
+
+		.rt {
+			border-bottom: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		.col-lg-3v {
+			background-color: #a9d08e;
+		}
+
+		.col-lg-3 {
+			background-color: #a9d08e;
+		}
+
+		.item-row {
+			font-family: Cambria;
+			font-size: 12
+		}
+
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 10%;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<img src="/opt/oa/data/files/tneb-logo.png" class="center"></img>
+	</div>
+
+	<div class="common">
+		<table class="container" style="float: center; border:1;width:100%;height:100%;table-layout: fixed;">
+			<tr>
+
+				<th style="text-align: center;font-family: 'Times New Roman', Times, serif;font-size:large;border-right:4px solid black; "
+					colspan="6">TAMILNADU TRANSMISSION CORPORATION LIMITED</th>
+
+			</tr>
+
+			<tr>
+				<th style="text-align: center;font-size: large;font-family: 'Times New Roman', Times, serif;font-size:large; border-right:4px solid black;"
+					colspan="6">(A subsidary of TNEB Limited)</th>
+
+			</tr>
+
+			<tr>
+				<th style="text-align: center;font-size: large;font-family: 'Times New Roman', Times, serif;font-size:large; border-right:4px solid black;"
+					colspan="6"><span
+						th:text="${transcoInvoice.mOrgName}"></span>&nbsp;&nbsp;EDC</th>
+
+			</tr>
+			<tr>
+				<th style="text-align: center;font-size: large;font-family: 'Times New Roman', Times, serif;font-size:large; border-right:4px solid black;"
+					colspan="6">Tax Invoice for TANTRANSCO Open Access Charges for the month of &nbsp;<span
+						th:text="${transcoInvoice.lineMonth}"></span>/<span
+						th:text="${transcoInvoice.lineYear}"></span></th>
+
+			</tr>
+
+
+
+			<tbody style="font-size: 15px;">
+
+				<tr>
+					<td class="line" colspan="2"><strong>Invoice No:</strong><span
+							th:text="${transcoInvoice.id}"></span><span style="padding-left: 70px;"></span></td>
+					<td class="line" colspan="2"><strong>Date of Commissioning&nbsp;&nbsp;</strong><span
+							th:text="${transcoInvoice.CommDt}"></span></td>
+					<td class="line" colspan="2" style="border-right:2px solid black;"><strong>Supply
+							Type&nbsp;&nbsp;</strong><span th:text="${transcoInvoice.transactiontype}"></span></td>
+
+				</tr>
+				<tr>
+					<td class="line" colspan="2"><strong>Date of Invoice:&nbsp;&nbsp;</strong><span
+							th:text="${transcoInvoice.invApprovedDate}"></span><span style="padding-left: 40px;"></span>
+					</td>
+					<td class="line" colspan="2"><strong>Type of OA:</strong><span><strong>LTOA</strong></span></td>
+					<td class="line" colspan="2" style="border-right:3px solid black;"><strong>Reverse
+							Charge:&nbsp;&nbsp;</strong><span th:text="${transcoInvoice.reversecharge}"></span></td>
+				</tr>
+				<tr>
+					<td class="line" colspan="2"><strong>Due Date of Invoice:</strong><span></span></td>
+					<td class="line" colspan="2"><strong>Machine Capacity:</strong><span
+							th:text="${transcoInvoice.capacity}"></span></td>
+					<td class="line" colspan="2" style="border-right:2px solid black;"><strong>Agreement
+							Date:</strong><span th:text="${transcoInvoice.agmtDt}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black;border-top:1px solid black" colspan="3">
+						&nbsp;To:&nbsp;&nbsp;<span style="font-size: 15px;" th:text="${transcoInvoice.cusName}"></span>,<span
+							th:text="${transcoInvoice.cusAddress}"> </span>
+					</td>
+					<td class="right" style="border-right:4px solid black;border-top:1px solid black" colspan="3">
+						&nbsp;Place of Supply:&nbsp;&nbsp;TAMIL NADU TRANSMISSION CORPORATION LIMITED 144,New TANTRANSCO Building,Mount Road,Chennai-600002.</td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black; font-size: 15px;" colspan="3"></td>
+					<td class="right" style="border-right:5px solid black" colspan="3"></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3"> </td>
+					<td class="right" style="border-right:5px solid black" colspan="3">&nbsp;Name of the
+						Substation:&nbsp;&nbsp;<span style="font-size: 15px;"
+							th:text="${transcoInvoice.mSubstationName}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;Service
+						No:&nbsp;&nbsp;<span th:text="${transcoInvoice.mCompServNo}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3">
+						&nbsp;EE/Operation:&nbsp;&nbsp;<span th:text="${transcoInvoice.eeOperation}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3"> </td>
+					<td class="right" style="border-right:5px solid black" colspan="3"> </td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;Registered e-mail
+						address:&nbsp;&nbsp;<span th:text="${transcoInvoice.cusEmail}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3"> </td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;State:&nbsp;&nbsp;<span
+							th:text="${transcoInvoice.cusState}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3">&nbsp;State :&nbsp;&nbsp;<span
+							th:text="${transcoInvoice.supState}"></span></td>
+
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;State Territory
+						Code:&nbsp;&nbsp;<span th:text="${transcoInvoice.cusStateCode}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3">&nbsp;State Territory
+						Code:&nbsp;&nbsp;<span th:text="${transcoInvoice.supStateCode}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;Customer
+						PAN:&nbsp;&nbsp;<span th:text="${transcoInvoice.cusPan}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3">&nbsp;PAN:&nbsp;&nbsp;<span
+							th:text="${transcoInvoice.supPan}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3">&nbsp;Customer
+						GSTIN:&nbsp;&nbsp;<span th:text="${transcoInvoice.cusGst}"></span></td>
+					<td class="right" style="border-right:5px solid black" colspan="3">&nbsp;GSTIN:&nbsp;&nbsp;<span
+							th:text="${transcoInvoice.supGst}"></span></td>
+				</tr>
+				<tr>
+					<td class="right" style="border-right:1px solid black" colspan="3"> </td>
+					<td class="right" style="border-right:5px solid black" colspan="3"> </td>
+				</tr>
+
+
+
+				<tr>
+
+					
+					<td colspan="2">Expiry of Agreement:</td>
+					<td colspan="2">Period of Agreement:</td>
+					<td colspan="1">Amendment Date:</td>
+					<td colspan="1" style="border-right:3px solid black">SAC Code:&nbsp;996911</td>
+
+
+
+				</tr>
+				<!--  <tr>
+  
+         <td colspan="1">Refer: </td>
+  
+         <td colspan="5" style="padding-left: 100px;font-size: 15px;height:40px;border-right:4px solid black"> Agreement dated <span></span>; its
+          amendment dt.<span></span>; Period of Agreement:&nbsp;&nbsp;<span th:text="${transcoInvoice.agmtDt}"></span>&nbsp;Years</td>
+         </tr> -->
+				<tr style="font-size: medium;border-right:4px solid black;text-align: center;">
+
+					<th>Sl.No.</th>
+
+					<th colspan="4">Particulars</th>
+
+				<!--	<th>HSN/SAC CODE</th>
+
+					<th>Units/MW/Day</th>
+
+					<th>Rate</th>  -->
+
+					<th style="border-right:4px solid black;" colspan="1">Amount(in Rs.)</th>
+
+				</tr>
+
+				<tr class="item-row" th:each="invoiceCharges,item : ${invoiceCharges}" style="font-size: 15px;text-align: center;">
+					<th th:text="${item.index+1}"></th>
+					<th th:text="${invoiceCharges.itemDesc}" colspan="4"></th>
+					<!-- <th style="text-align: center;"></th>
+					<th style="text-align: center;" th:text="${invoiceCharges.itemunitcount}"></th>
+					<th style="text-align: center;" th:text="${invoiceCharges.itemRate}"></th> -->
+					<th style="border-right:4px solid black;text-align: right;"
+						th:text="${invoiceCharges.itemBeforeTaxAmt}" colspan="1"></th>
+
+				</tr>
+				<tr style="font-size: 15px;">
+
+
+					<td colspan="5">
+						<h3>Total Invoice Value </h3>
+					</td>
+
+					<td style="border-right:4px solid black;text-align: right;" colspan="1">
+						<h3 th:text="${transcoInvoice.totalInvAmt}"></h3>
+					</td>
+				</tr>
+
+				<tr style="padding-top:100px;">
+					<td colspan="6" style="text-align: right; border-right:4px solid black;">
+
+						<p style="text-align: left;padding-left: 30px;font-size: 15px;"><strong> Total in
+								words:&nbsp;&nbsp;Rupees&nbsp;&nbsp;<span th:text="${Totalinwords}"></span>&nbsp;Only </strong></p>
+
+					<!--	<p style="padding-right: 20px;font-size: medium;"> For AND on behalf of Tamil Nadu Transmission
+							Corporation Ltd.</p> -->
+
+						<p style="padding-right: 50px;font-size: medium;">Deputy Financial Controller/&nbsp;<span
+								th:text="${transcoInvoice.mOrgName}"></span>&nbsp;EDC</p>
+
+						<!--<p style="padding-right: 80px;font-size: medium;"><span
+								th:text="${transcoInvoice.mOrgName}">&nbsp;&nbsp;</span>&nbsp;Operation Circle</p>-->
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td colspan="6"><span
+							style="float:right ; border-top:50px;border-right:2px solid black;border-right:2px solid black;"><img
+								src="/opt/oa/data/files/qrcode.jpg" alt="QrCode is not yet generated"></img></span>
+
+
+
+						<p style="font-size: medium;">The payment shall be made through RTGS/NEFT in favour of M/s.Tamil
+							Nadu
+							Transmission Corporation Limited </p>
+
+						<p style="font-size: medium;"> Name of the Bank :&nbsp;&nbsp;<span
+								th:text="${transcoInvoice.bankName}"></span></p>
+
+
+						<p style="font-size: medium;">Bank IFSC :&nbsp;&nbsp;<span
+								th:text="${transcoInvoice.bankIfscCode}"></span></p>
+
+						<p style="font-size: medium;">Viritual Account Number:&nbsp;&nbsp;<span
+								th:text="${transcoInvoice.viritualAccno}"></span></p>
+
+                           <p style="font-size: medium;">*GST is applicable for O and M Charges only and not applicable for all other charges!</p>
+		                    <p style="font-size: medium;">*This Bill is subject to the Audit, Outcome of the Court Cases,etc.,if any, before the appropriate forum.</p>
+
+
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table> 
+			</div>
+ </body>
+
+</html>

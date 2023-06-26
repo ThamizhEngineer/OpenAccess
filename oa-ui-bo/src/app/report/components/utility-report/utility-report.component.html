@@ -1,0 +1,111 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+         Utility Report  
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='selOrgId' [required]="isMandatory">
+                      <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                              {{edc.code}} - {{ edc.name }}
+                      </mat-option>
+              </mat-select>
+      </mat-form-field>         
+
+                    <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='searchYear'>
+                <mat-option *ngFor="let yr of Year" [value]="yr.id">
+                  {{yr.year}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+           
+            <mat-form-field  class="ml-xs mr-xs"  fxFlex.gt-sm="100%"> 
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="UtilityType" [(ngModel)]='typeofChanges'>
+                <mat-option *ngFor="let TypeofChange of typeofChange" [value]="TypeofChange.key">
+                  {{TypeofChange.name}}
+                </mat-option> </mat-select>
+              </mat-form-field>
+            
+            <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">				
+              <button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+              </mat-card-actions>
+  
+        
+      </div>
+          <br/>
+          <br/>
+             <br/>
+          <br/>
+          <div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+        
+          <ngx-datatable-column name="SNO" [width]="10">
+            <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+               {{rows.indexOf(row)+1}} 
+           
+            </ng-template>
+          </ngx-datatable-column> 
+          <ngx-datatable-column name="CIRCLENAME" [width]="20">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+               {{row.op9}}
+  
+            </ng-template> 
+           </ngx-datatable-column> 
+           
+           <ngx-datatable-column name="GENERATOR NO" [width]="50">
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op1}}
+              </ng-template>
+           </ngx-datatable-column> 
+  
+           <ngx-datatable-column name="PREVIOUS NAME" [width]="110" >
+            <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op2}}
+            </ng-template>
+         </ngx-datatable-column> 
+  
+           <ngx-datatable-column name="AGREEMENT DATE" [width]="30">
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template  >
+  
+                {{row.op3 }}
+              </ng-template>
+           </ngx-datatable-column>
+        
+           <ngx-datatable-column name="FROM DATE"  [width]="25" >
+              <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op4}}
+              </ng-template>
+           </ngx-datatable-column>
+           
+           <ngx-datatable-column name="TO DATE" [width]="25">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op5}}
+            </ng-template> 
+           </ngx-datatable-column> 
+  
+           <ngx-datatable-column name="PRESENT NAME" [width]="25">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op10}}
+            </ng-template> 
+           </ngx-datatable-column> 
+                    
+        </ngx-datatable>
+               
+      </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

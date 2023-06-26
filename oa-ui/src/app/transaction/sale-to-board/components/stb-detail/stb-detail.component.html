@@ -1,0 +1,233 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <mat-card class="mat-card-top">
+
+            <mat-card-title><strong>Sale To Board Invoice</strong></mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='stb.sellerEndOrgName'>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+
+                        <input matInput placeholder="Company Name" [disabled]="true" [(ngModel)]='stb.sellerCompanyName' readonly>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Generator Service Number" [disabled]="true" [(ngModel)]='stb.sellerCompanyServiceNumber' readonly>
+                    </mat-form-field>
+
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Statement Month" [(ngModel)]='stb.month'
+                            readonly>
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{ month.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Year" [disabled]="true" [(ngModel)]='stb.year'>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Voltages" [(ngModel)]='stb.injectingVoltageCode'>
+                            <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode">
+                                {{voltage.valueDesc}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+            </mat-card-content>
+
+
+            <mat-card-title> <strong>Allocation Details</strong></mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="C1" [(ngModel)]='esUsageSummary.c1' disabled="true">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="C2" [(ngModel)]='esUsageSummary.c2' disabled="true">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="C3" [(ngModel)]='esUsageSummary.c3' disabled="true">
+                    </mat-form-field>
+
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="C4" [(ngModel)]='esUsageSummary.c4' disabled="true">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="C5" [(ngModel)]='esUsageSummary.c5' disabled="true">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                        <input matInput placeholder="Total Units" [(ngModel)]='esUsageSummary.total' disabled="true">
+                    </mat-form-field>
+
+                </div>
+           
+              
+                <mat-card-title><strong>Charges </strong></mat-card-title>
+           
+                  <ngx-datatable class="material" [rows]="stb.energySaleCharges" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                    [rowHeight]="40">
+                    <ngx-datatable-column name="Charge Code">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <strong>{{row.chargeCode}}</strong>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Charge Description">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.chargeName}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Total Charges">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.totalCharge}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </mat-card-content>
+            <mat-card-content>
+                  <mat-card-title> <strong>Invoice Details</strong></mat-card-title>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                  <input matInput placeholder="Unit Cost" [(ngModel)]='esUsageSummary.unitCost' disabled="true">
+                              </mat-form-field>
+                              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                  <input matInput placeholder="Total Amount Payable" [(ngModel)]='esUsageSummary.totalAmountPayable' disabled="true">
+                              </mat-form-field>
+                              <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                  <input matInput placeholder="Total Amount Chargable" [(ngModel)]='esUsageSummary.totalAmountChargable' disabled="true">
+                              </mat-form-field>
+                      
+                                 <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                                     <input matInput placeholder="Net Amount Payable" [(ngModel)]='esUsageSummary.netAmountPayable' disabled="true">
+                                 </mat-form-field>
+                               
+                  </div>
+            </mat-card-content>
+
+     
+
+
+            <mat-card-title> <strong>Payment Details</strong></mat-card-title>
+            <ngx-datatable class="material" [rows]="payments" [columnMode]="'force'" [headerHeight]="50" [scrollbarH]="true" [rowHeight]="'auto'">
+                <ngx-datatable-column name="Payment Date" width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.paymentDate | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Bank Name" width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.bankName}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Branch Name" width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.branchName}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Mode Of Payment" width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.modeOfPayment}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Amount" width="5">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.amount}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Actions" width="5">
+
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button mat-raised-button mat-icon-button mat-button-sm (click)="editPayment(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                        <button mat-raised-button mat-icon-button mat-button-sm (click)="deletePayment(row.$$index)"><mat-icon>delete</mat-icon></button>                                 </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+            <mat-card-title>
+                <Strong>{{paymentRowIndex>-1?'Update':'Add'}} Payment Details</Strong>
+            </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput [(ngModel)]="payment.paymentDate" [matDatepicker]="paymentDate" placeholder="Payment Date">
+                        <mat-datepicker-toggle matSuffix [for]="paymentDate"></mat-datepicker-toggle>
+
+                        <mat-datepicker #paymentDate></mat-datepicker>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Invoice Date" [(ngModel)]='payment.invoiceDate'>
+                        </mat-form-field> -->
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Bank name" [(ngModel)]='payment.bankName'>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Branch name" [(ngModel)]='payment.branchName'>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Mode of Payment" [(ngModel)]='payment.modeOfPayment'>
+                            <mat-option *ngFor="let mode of modes" [value]="mode.key">
+                                {{ mode.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Amount (Rs)" [(ngModel)]='payment.amount'>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Instrument Number" [(ngModel)]='payment.instrumentNumber'>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                    <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Payment Date" [(ngModel)]='payment.paymentDate'>
+                </mat-form-field> -->
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Remarks" [(ngModel)]='payment.remarks'>
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Invoice Number" [(ngModel)]='payment.invoiceNumber'>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput [(ngModel)]="payment.invoiceDate" [matDatepicker]="invoiceDate" placeholder="Invoice Date">
+                        <mat-datepicker-toggle matSuffix [for]="invoiceDate"></mat-datepicker-toggle>
+
+                        <mat-datepicker #invoiceDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="paymentRowIndex>-1?updatePayment():addPayment()">{{paymentRowIndex>-1?'Update':'Add'}}</button>
+                <button mat-raised-button (click)="initPayment()">Reset</button>
+            </mat-card-actions>
+            <hr>
+            <mat-card-actions>
+                <!-- <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveEs('')">Save</button> -->
+                <button mat-raised-button color="primary" (click)="saveStb('')">Save</button>
+                <!-- <button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveEs(nextEaStatus)" >{{nextAction}}</button>
+<button mat-raised-button class="primary" (click)="saveEa('Disapproved')" *ngIf="nextEaStatus=='Approved'" >Disapprove</button> -->
+                <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED' && this.accessApproveFlag" (click)="finalEs('')">Approve</button>
+
+                <button mat-raised-button color="primary" *ngIf="statusCode=='CREATED'" (click)="bulkAllocation()">Bulk Allocation</button>
+                <button mat-raised-button class="primary" (click)="listStb()">Back</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+
+    <mat-card>
+      <mat-card-title>
+        Weg With Buyer Report
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Generator EDC" [(ngModel)]='searchorgId'>
+              <mat-option *ngFor="let org of orgList" [value]="org.id">
+                {{org.id}} - {{org.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput placeholder="Machine Capacity" [(ngModel)]="searchcapacity">
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Machine Make" [(ngModel)]='searchmakeCode'>
+              <mat-option *ngFor="let generatorModelType of generatorModelTypes" [value]="generatorModelType.valueCode">
+                {{generatorModelType.valueDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+          </mat-card-actions>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+          </mat-card-actions>
+
+        </div>
+        <br/>
+        <br/>
+        <div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true">
+            <ngx-datatable-column name="Generator EDC">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.orgName}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Generator Service No">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.serviceNumber}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Machine Capacity(kW)">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.capacity}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="DOC">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.commissionDate | date: 'dd/MM/yyyy'}}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Tariff">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.rate}}
+              </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

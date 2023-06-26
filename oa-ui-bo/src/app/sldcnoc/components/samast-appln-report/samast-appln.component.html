@@ -1,0 +1,162 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Samast Appln Report
+           </mat-card-title>
+           <mat-card-content>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="25%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Appnl Date" [(ngModel)]='appnlDt'>
+              <mat-option *ngFor="let ext of extSamast" [value]="ext.op5">
+                {{ext.op5 | date: 'dd/MM/yyyy'}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="25%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Appnl No" [(ngModel)]='appnlNo'>
+              <mat-option *ngFor="let ext of extSamast" [value]="ext.op4">
+                {{ext.op4}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchReport()" >Genarate Report</button>
+                  </mat-card-actions>
+                <!-- <mat-card-actions>
+                    <button mat-raised-button color="primary" class="primary" (click)="reset()">Reset</button>
+        
+                  </mat-card-actions> -->
+
+                <!-- <mat-card-actions>				
+                  <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              </mat-card-actions> -->
+
+                <!-- <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions> -->
+              </div>
+        
+              <br/>
+              <br/>
+              <div >
+                <!-- <img *ngIf="isLoading" style="width: 24px;" src="../../../../assets/images/loading.gif"> -->
+              <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" 
+              [headerHeight]="100" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+
+              <!-- <ngx-datatable class="material" [row]="rows"  [rowHeight]="'auto'" [headerHeight]="50" [footerHeight]="50" [externalPaging]="false"> -->
+      
+              <ngx-datatable-column name="SI.NO" [width]="20"  [frozenLeft]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{rows.indexOf(row) + 1}}
+                </ng-template>
+              </ngx-datatable-column> 
+
+              <ngx-datatable-column name="ID"  [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.op1}} 
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="APPL NO"  [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.op2}} 
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="APPL REF NO" [frozenLeft]="false" >
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op3}}
+                </ng-template>
+             </ngx-datatable-column>
+             
+               <ngx-datatable-column name="APPL DATE" [frozenLeft]="false" >
+                  <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op4 | date: 'dd/MM/yyyy'}}
+                  </ng-template>
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="SELLER SLDC NOC ID" [frozenLeft]="false" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op5}}
+                </ng-template>
+               </ngx-datatable-column> 
+               
+               <ngx-datatable-column name="SELLER NOC START DT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op6 | date: 'dd/MM/yyyy'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="SELLER NOC END DT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op7 | date: 'dd/MM/yyyy'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               <ngx-datatable-column name="SELLER NOC QUANTITY" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op8}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="SELLER NOC STATUS" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op9}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="BUYER SLDC NOC ID" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op10}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="BUYER NOC START DT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op11 | date: 'dd/MM/yyyy'}}
+                </ng-template> 
+               </ngx-datatable-column>
+               
+               <ngx-datatable-column name="BUYER NOC END DT" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op12 | date: 'dd/MM/yyyy'}}
+                </ng-template> 
+               </ngx-datatable-column>
+
+               <ngx-datatable-column name="BUYER NOC QUANTITY" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op13}}
+                </ng-template> 
+               </ngx-datatable-column>
+
+               <ngx-datatable-column name="BUYER NOC STATUS" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op14}}
+                </ng-template> 
+               </ngx-datatable-column>
+               <!-- <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template >
+                  <div style="padding: 100px 100px 100px 100px;">
+                    <hr style="width: 50%;" >
+                    <div><br/>
+                      TOTAL METER READING: <b>{{this.totalMeterReading}}</b> &#8192; TOTAL THIRD PARTY: <b>{{this.totalThirdParty}}</b> &#8192; TOTAL CAPTIVE: <b>{{this.totalCaptive}}</b> &#8192; 
+                      <br/><br/> TOTAL ALLOTMENT: <b>{{this.totalTotalAllot}}</b> &#8192; TOTAL MANUAL READING: <b>{{this.totalManualReading}}</b> &#8192; TOTAL METER CHANGE: <b>{{this.totalMeterChange}}</b></div>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer> -->
+
+              </ngx-datatable>  
+          </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

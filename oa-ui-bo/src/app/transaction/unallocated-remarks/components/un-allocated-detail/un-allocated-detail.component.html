@@ -1,0 +1,47 @@
+<mat-card class="mat-card-top">
+    <mat-card-title>Un Allocated Remarks Update</mat-card-title>
+   
+   
+       <mat-card>
+           <mat-card-content>
+   
+               <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Service Number" [(ngModel)]="Unallocated.dispServiceNumber" readonly>
+                   </mat-form-field>
+                 </div>
+   
+           <div fxLayout="row" fxLayoutAlign="start center">
+                   <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                       <input  matInput placeholder="Month" [(ngModel)]="Unallocated.stmtMonth"  readonly>
+                   </mat-form-field>
+   
+                   <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                       <input matInput placeholder="Year" [(ngModel)]="Unallocated.stmtYear" readonly>
+                   </mat-form-field>
+           </div>
+           <div fxLayout="row" fxLayoutAlign="start center">
+               <mat-form-field style="width: 100%;"  fxFlex.gt-sm="100%">
+                <input matInput placeholder="CompanyName" [(ngModel)]="Unallocated.dispCompanyName" readonly>
+                 </mat-form-field>
+         </div>
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput placeholder="OrgName" [(ngModel)]="Unallocated.dispOrgName" readonly>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <input matInput placeholder="Remarks for UnAllocation" [(ngModel)]="Unallocated.auditRemarks" [readonly]="readonly">
+            </mat-form-field>
+          </div>
+           
+       </mat-card-content>
+       </mat-card>
+       <hr>
+       <mat-card-actions>
+               <button mat-raised-button color="primary"  (click)="UpdateRemarks()">Save</button>
+               <!-- <button mat-raised-button color="primary"  *ngIf="consent.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveConsent()">Approve</button> 
+              <button mat-raised-button color="primary" *ngIf="consent.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeConsent()">Approve</button> -->	
+               <button mat-raised-button class="primary" (click)="unallocatedlist()">Cancel/Back</button>
+      </mat-card-actions>

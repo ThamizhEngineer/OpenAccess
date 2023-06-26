@@ -1,0 +1,205 @@
+<style>
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+
+</style>
+
+
+
+<div>
+
+  <mat-card>
+
+    <mat-card-title>IMPORT SELLER DETAILS</mat-card-title>
+
+    <mat-card-content>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name*" [(ngModel)]="importsellers.mOrgId" (change)="filterSubstation()">
+            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                    {{edc.code}} - {{ edc.name }}
+            </mat-option>
+    </mat-select> 
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code*" [(ngModel)]="importsellers.fuelCode">
+            <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.key">
+              {{fuelTypes.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service No*" [(ngModel)]="importsellers.generatorServiceNoNew">
+        </mat-form-field>
+
+     
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type*"
+          [(ngModel)]="importsellers.flowTypeCode">
+          <mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+            {{ flowType.name }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+
+      </div>
+      <br>
+      <br>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input matInput placeholder="Company Name" [(ngModel)]="importsellers.companyName" >
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="number" matInput placeholder="No of Gen Units*" [(ngModel)]="importsellers.noOfGenUnits">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="number" matInput placeholder="Gen Units Capacity*" [(ngModel)]="importsellers.genUnitCapacity">  
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="text" matInput placeholder="Total Capacity (KW)">
+          {{importsellers.noOfGenUnits*importsellers.genUnitCapacity || "0"}}
+        </mat-form-field>
+
+      </div>
+      <br>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input matInput placeholder="PT Ratio" [(ngModel)]="importsellers.ptRatio">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input matInput placeholder="CT Ratio" [(ngModel)]="importsellers.ctRatio">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="number" matInput placeholder="MF*" [(ngModel)]="importsellers.mf" >
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input matInput placeholder="Village" [(ngModel)]="importsellers.village" >
+        </mat-form-field>
+
+      </div>
+      <br>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;"> 
+           <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Substation Name*" [(ngModel)]="importsellers.ssNameInOa"> 
+            <mat-option *ngFor="let substation of data" [value]="substation.name">
+              {{substation.name}}
+            </mat-option>
+           </mat-select>  
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="text" matInput placeholder="Meter Number*" [(ngModel)]="importsellers.meterNumber">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input type="text" matInput placeholder="SF No" [(ngModel)]="importsellers.sfNo">
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Meter Make" [(ngModel)]="importsellers.meterMake">
+            <mat-option *ngFor="let metermake of meterMake" [value]="metermake.valueDesc">
+              {{metermake.valueDesc}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+
+      </div>
+      <br>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <input matInput [(ngModel)]="importsellers.commisionDate" [matDatepicker]="commissionDate" placeholder="Commission Date*">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="commissionDate"></mat-datepicker-toggle>
+          <mat-datepicker #commissionDate></mat-datepicker>
+        </mat-form-field>
+       
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is DLMS" [(ngModel)]="importsellers.isDlms">
+            <mat-option *ngFor="let decn of decisions" [value]="decn.key">
+              {{decn.name}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is ABT" [(ngModel)]="importsellers.isAbt">
+            <mat-option *ngFor="let decn of decisions" [value]="decn.key">
+              {{decn.name}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">       
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is REC*" [(ngModel)]="importsellers.isRec">
+            <mat-option *ngFor="let decn of decisions" [value]="decn.key">
+              {{decn.name}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+      </div>
+      <br>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Accuracy Class*"
+          [(ngModel)]="importsellers.accuracyClass">
+          <mat-option *ngFor="let acc of accuracy" [value]="acc.key">
+            {{ acc.name }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ml-xs mr-xs" style="width: 25%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Injection Voltage*"
+          [(ngModel)]="importsellers.injectionVoltage">
+          <mat-option *ngFor="let volt of voltage" [value]="volt.key">
+            {{ volt.name }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+
+       
+
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-content >
+
+      <br><br>
+      <mat-card-actions align="end" >
+        <button mat-raised-button color="primary" class="primary" (click)="save()">SAVE</button>
+      </mat-card-actions>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

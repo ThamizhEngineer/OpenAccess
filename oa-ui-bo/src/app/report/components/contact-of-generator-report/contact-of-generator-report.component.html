@@ -1,0 +1,157 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+         Generator Contact-Info Report
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            
+  
+              <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" (change)="onSelect($event)" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='selOrgName'>
+                    <mat-option *ngFor="let org of orgList" [value]="org.id">
+                      {{org.id}} - {{org.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code" [(ngModel)]='fuelTypeCode'>
+                    <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                      {{fuelTypes.valueDesc}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="Section Name" [(ngModel)]='sectionName' >
+                    <mat-option *ngFor="let section of sections" [value]="section.id">
+                      {{section.sectionName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+  
+            <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+                <mat-option *ngFor="let month of months" [value]="month.value">
+                  {{month.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+              <input matInput placeholder="Year" [(ngModel)]="searchYear">
+            </mat-form-field> -->
+            
+            <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">				
+              <button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+              </mat-card-actions>
+
+              <!-- <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              <button mat-raised-button color="accent" (click)="searchReport()"></button>
+            </mat-card-actions>      -->
+            
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+               <mat-icon>cloud_download</mat-icon>
+               Download As XL</button>
+             </mat-card-actions>
+            <div class="ml-xs mr-xs"  fxFlex.gt-sm="100%"></div>
+        
+
+      </div>
+          <br/>
+          <br/>
+  
+     
+          <br/>
+          <br/>
+          <div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+          [scrollbarV]="true">
+  
+          <ngx-datatable-column name="Sl.No"  [width]="10" [frozenLeft]="true">
+            <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+               <!-- {{rows.indexOf(row)+1}}  -->
+                {{row.op1}} 
+            </ng-template>
+          </ngx-datatable-column> 
+
+          <ngx-datatable-column name="EDC Code" [width]="30" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op2}}
+            </ng-template>
+         </ngx-datatable-column>
+         
+           <ngx-datatable-column name="Generator Service No" [frozenLeft]="true" >
+              <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op3}}
+              </ng-template>
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="Name of Generator" [width]="110" >
+            <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                {{row.op4}}
+            </ng-template>
+           </ngx-datatable-column> 
+           
+           <ngx-datatable-column name="Authorised Contact Person">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op5}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="Designation">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op6}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-column name="Contact Email">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                {{row.op7}}
+            </ng-template> 
+           </ngx-datatable-column> 
+           <ngx-datatable-column name="Contact Phone No">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op8}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="RegOff Address">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op9}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="Plant Address">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op10}}
+            </ng-template> 
+           </ngx-datatable-column> 
+
+           <ngx-datatable-column name="Status Of Generator" >
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op11}}
+            </ng-template> 
+           </ngx-datatable-column>  
+         <ngx-datatable-column name="GST No" >
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op12}}
+          </ng-template> 
+         </ngx-datatable-column>  
+      </ngx-datatable>
+          
+        <!-- <mat-card-actions>				
+          <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+          </mat-card-actions> -->
+      </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

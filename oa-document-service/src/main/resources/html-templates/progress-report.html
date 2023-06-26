@@ -1,0 +1,224 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>PROGRESS REPORT</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+
+            <p style="font-family: myFirstFont;">TAMIL NADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</p>
+            <p style="font-family: myFirstFont;">OFFICE OF THE SUPERINTENDING ENGINEER/TANGEDCO</p>
+            <p style="font: 12px/1.4 Georgia;font-variant: small-caps;">Progress Report</p>
+            <p style="text-align: center"><span th:text="${progressReport[0].month}"></span>,		
+          		  <span th:text="${progressReport[0].year}"></span></p>
+        </header>
+    </div>
+
+    <h3 style="text-align: center"> </h3>
+
+    <div style="float: center;width: 100%">
+
+        <table style="float: center;width: 100%">
+
+            <tr>
+                <th style="text-align: center;background: #dcdcdc" colspan="1">FUEL TYPE</th> 
+                <th style="text-align: center;" colspan="1">TOTAL SERVICE</th> 
+                <th style="text-align: center;background: #dcdcdc" colspan="4">VALID SERVICE</th>
+                <th style="text-align: center;" colspan="4">INVALID SERVICE</th>
+                <th style="text-align: center;background: #dcdcdc" colspan="2">METER READING</th>
+                <th style="text-align: center;" colspan="4">GENERATION STATMENT</th>
+                <th style="text-align: center;background: #dcdcdc" colspan="2">ALLOTMENT</th>
+                
+                
+            </tr>
+
+            <tr>
+                <th style="background: #dcdcdc">NAME</th>
+                <th>TOTAL</th>
+                <th style="background: #dcdcdc">TOTAL VALID</th>
+                <th style="background: #dcdcdc">CAPTIVE</th>
+                <th style="background: #dcdcdc">STB</th>
+                <th style="background: #dcdcdc">3rd PARTY</th>
+                <th>TOTAL</th>
+                <th>CAPTIVE</th>
+                <th>STB</th>
+                <th>3rd PARTY</th>
+                <th style="background: #dcdcdc">DOWNLOAD</th>
+                <th style="background: #dcdcdc">MANUAL</th>               
+                <th>TOTAL</th>
+                <th>CAPTIVE</th>
+                <th>STB</th>
+                <th>3rd PARTY</th>
+                <th style="background: #dcdcdc">CREATED</th>
+                <th style="background: #dcdcdc">COMPLETED</th>
+                
+            </tr>
+
+            <tr class="item-row" th:each="report : ${progressReport}">
+                <td th:text="${report.fuelTypeName}"></td>
+                <td th:text="${report.totalServices}"></td>
+                <td th:text="${report.totalValidServices}"></td>
+                <td th:text="${report.validCaptiveServices}"></td>
+                <td th:text="${report.validStbServices}"></td>
+                <td th:text="${report.validWegThirdPartyServices}"></td>
+               <td th:text="${report.totalInvalidServices}"></td>
+               <td th:text="${report.invalidCaptiveServices}"></td>
+               <td th:text="${report.invalidStbServices}"></td>
+               <td th:text="${report.invalidWegThirdPartyServices}"></td>
+               <td th:text="${report.meterReadingsDownloaded}"></td>
+               <td th:text="${report.manualMrReading}"></td>
+               <td th:text="${report.totalStatements}"></td>
+               <td th:text="${report.captiveStatements}"></td>
+               <td th:text="${report.stbStatements}"></td>
+               <td th:text="${report.wegThirdPartyStatements}"></td>
+               <td th:text="${report.allotmentsCreated}"></td>
+               <td th:text="${report.allotmentsCompleted}"></td>
+
+            </tr>
+
+        </table>
+
+
+    </div>
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

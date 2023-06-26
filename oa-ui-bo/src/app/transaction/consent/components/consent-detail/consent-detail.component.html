@@ -1,0 +1,251 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Consent Application</mat-card-title>
+
+	<ng-template mat-tab-label>NOC Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+			<div mat-subheader>{{this.commonUtils.getProp('buyer')}} Information</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='consent.buyerOrgName'>
+				</mat-form-field> 
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Buyer Name" [disabled]="true" [(ngModel)]='consent.buyerCompanyName'>
+				</mat-form-field>  -->
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} EDC Name"   [(ngModel)]="consent.buyerOrgName" [disabled]="true">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Service Number"   value = "{{consent.buyerCompanyName}} - {{consent.buyerCompServiceNumber}}" [disabled]="true">
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Drawal Voltage" [disabled]="true" [(ngModel)]='consent.drawalVoltageDesc'>
+				</mat-form-field> 
+			
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Sanctioned Demand(MW)" [disabled]="true" [(ngModel)]='consent.approvedCapacity'>
+				</mat-form-field> 
+				
+			</div><br/>
+			
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Drawal Voltage" [disabled]="true" [(ngModel)]='consent.drawalVoltageDesc '>
+				</mat-form-field>  -->
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Energy Sale Intent Number" [disabled]="true"  [(ngModel)]="consent.esIntentCode">
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<input matInput placeholder="Consent Number" [disabled]="true"  [(ngModel)]="consent.code">
+				</mat-form-field>
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+					<!--<input matInput placeholder="Substation Name" [disabled]="true"  [(ngModel)]="consent.injectionSubstationName"> -->
+					<input matInput placeholder="Substation Name" [disabled]="true"  [(ngModel)]="consent.drawalSubstationName">
+				</mat-form-field>
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Substation Name" [matAutocomplete]="td1Auto" [(ngModel)]='SSNAME'
+					  #modelDir="ngModel" (ngModelChange)="this.filteredSubstations = filterSubstations(SSNAME);">
+					<mat-autocomplete #td1Auto="matAutocomplete">
+					  <mat-option *ngFor="let ss of filteredSubstations" [value]="ss.name" (onSelectionChange)="acChangeFunc($event, ss, 'subStation');this.fetchFeeders();">
+						<span>{{ ss.code }} - {{ ss.name }}</span>
+					  </mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+				<!--	<input matInput placeholder="Feeder Name" [disabled]="true"  [(ngModel)]="consent.injectionFeederName"> -->
+				         <input matInput placeholder="Feeder Name" [disabled]="true"  [(ngModel)]="consent.drawalFeederName"> 
+				</mat-form-field>
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Feeder Name" [matAutocomplete]="td2Auto" [(ngModel)]='FEEDER'
+					  #modelDir="ngModel" (ngModelChange)="this.filteredFeeders = filterFeeders(FEEDER);">
+					<mat-autocomplete #td2Auto="matAutocomplete">
+					  <mat-option *ngFor="let fr of filteredFeeders" [value]="fr.name" (onSelectionChange)="acChangeFunc($event, fr, 'feeder')">
+						<span>{{ fr.code }} - {{ fr.name }}</span>
+					  </mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+			</div><br/>
+			
+			<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Whether Exempted from RC" [disabled]="true" [(ngModel)]='consent.exemptRc'>
+					<mat-option *ngFor="let exemptRc of exemptRc" [value]="exemptRc.name">
+						{{exemptRc.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+		    </div><br/>
+			
+			<div mat-subheader>{{this.commonUtils.getProp('seller')}} Information</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="{{this.commonUtils.getProp('seller')}} EDC Name"   [(ngModel)]="consent.sellerOrgName" [disabled]="true">
+                        </mat-form-field>
+        
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="{{this.commonUtils.getProp('seller')}} Service Number"   value = "{{consent.sellerCompanyName}} - {{consent.sellerCompServiceNumber}}" [disabled]="true">
+                        </mat-form-field>
+				<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='consent.sellerOrgName'>
+				</mat-form-field> 
+
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Seller Name" [disabled]="true" [(ngModel)]='consent.sellerCompanyName'>
+				</mat-form-field>  -->
+			
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Injected Voltage" [(ngModel)]='consent.injectionVoltageDesc' [disabled]="true">
+				</mat-form-field> 
+				
+				<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			</div><br/>
+			
+			<div mat-subheader>Open Access Period</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Agreement Period" [disabled]="true" [(ngModel)]='consent.agreementPeriodCode'>
+				</mat-form-field> 
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Aggrement date" [disabled]="true" [(ngModel)]='consent.agreementDate'>
+				</mat-form-field> 
+<!-- 				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access Period" [disabled]="true" [(ngModel)]='consent.sellerCompanyName'>
+				</mat-form-field>  -->
+			
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access From" [disabled]="true"  value = "{{commonService.displayMonth(consent.fromMonth)}} - {{consent.fromYear}}">
+				</mat-form-field> 
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Open Access To" [disabled]="true" value = "{{commonService.displayMonth(consent.toMonth)}} - {{consent.toYear}}">
+				</mat-form-field>
+			</div><br/>
+			
+	<!--		<div mat-subheader>ABT Details</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<label fxFlex.gt-sm="15%">&nbsp;  Is ABT Installed?</label>
+				<mat-radio-group class="ml-xs mr-xs" fxFlex.gt-sm="15%" [(ngModel)]='consent.isAbtInstalled'>
+					<mat-radio-button value="Y">Yes</mat-radio-button>
+					<mat-radio-button value="N">No</mat-radio-button>
+				</mat-radio-group>
+
+				<label fxFlex.gt-sm="40%">If yes whether the meter has communication facilities for real time data transfer to near by DCC</label>
+				<mat-radio-group class="ml-xs mr-xs" fxFlex.gt-sm="10%" [(ngModel)]='consent.hasRealTimeCon'>
+					<mat-radio-button value="Y">Yes</mat-radio-button>
+					<mat-radio-button value="N">No</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<br/>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<textarea rows="4" matInput placeholder="Reason for not installing ABT Meter" [(ngModel)]='consent.noAbtReason'></textarea>
+				</mat-form-field>
+			</div> -->
+			<br>
+
+            <hr>
+            <div mat-subheader><strong>Other Details</strong></div><br>
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 25%;" placeholder="Outstanding dues from company" [disabled]="true" [(ngModel)]='consent.hasDues'>
+                            <mat-option *ngFor="let hasDues of hasDues" [value]="hasDues.name">
+                                {{hasDues.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="if Yes,Details Are" [disabled]="true" [(ngModel)]='consent.dueDetails'>   </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Details of pending court case/stay if any in brief" [disabled]="true" [(ngModel)]='consent.pendingCaseDetails'>  </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Technical Feasability Details" [disabled]="true" [(ngModel)]='consent.technicalFeasibilityDetails'>   </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+			  
+			
+			<div mat-subheader>Already Availed Open Access</div>
+			<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+			 [rowHeight]="'auto'">
+				<ngx-datatable-column name="Consumer Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<!--  {{row.sellerCompServiceNumber}} -->
+						{{row.buyerCompServiceNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Consumer CompanyName">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						 <!--  {{row.sellerCompanyName}} -->
+						 {{row.buyerCompanyName}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Already Availed Quantum">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.approvedTotalUnits}}
+					</ng-template>
+				</ngx-datatable-column>
+		 <!--		<ngx-datatable-column name="capacity">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.sellerCapacity}}
+					</ng-template> 
+				</ngx-datatable-column>   --> 
+				<ngx-datatable-column name="From">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.fromDate | date: 'dd/MM/yyyy'}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="To">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.toDate | date: 'dd/MM/yyyy'}}
+					</ng-template>
+				</ngx-datatable-column>
+			</ngx-datatable>
+			
+		</mat-card-content>
+	</mat-card>
+	<hr>
+	<mat-card-actions>
+			<button mat-raised-button color="primary" *ngIf="consent.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveConsent('')">Save</button>
+			<!-- <button mat-raised-button color="primary"  *ngIf="consent.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveConsent()">Approve</button> -->
+			<button mat-raised-button color="primary" *ngIf="consent.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeConsent()">Approve</button>
+			
+		<button mat-raised-button class="primary" (click)="listConsents()">Cancel/Back</button>
+
+		
+	</mat-card-actions>
+</mat-card>

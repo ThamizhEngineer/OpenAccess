@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/home/khizer/work/open-access/oa-document-service/src/main/resources/mail/logo/tneblogo.png"
+    />
+    <title>Generation Statement</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 11px/1.4 Georgia, serif;
+        }
+
+        #page-wrap {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table td,
+        table th {
+            border: 0px solid black;
+            padding: 5px;
+        }
+
+        p {
+            text-align: center;
+            font: bold 15px Helvetica, Sans-Serif;
+        }
+
+        #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        }
+
+        .customer {
+            width: 100%
+        }
+
+        #meta {
+            margin-top: 1px;
+             font:  8px Helvetica, Sans-Serif;
+        }
+
+        .leftalign {
+            float: left;
+            width: 43%;
+        }
+
+        .rightalign {
+            float: right;
+            width: 48%;
+        }
+
+        #meta td {
+            text-align: right;
+        }
+
+        #meta td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        #meta td textarea {
+            width: 100%;
+            height: 10px;
+            text-align: right;
+        }
+
+        #meta1 {
+            margin: 30px 0 0 0;
+            border: 1px solid black;
+        }
+
+        #meta1 td {
+            text-align: right;
+        }
+
+        #meta1 td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        #meta1 td textarea {
+            width: 100%;
+            height: 10px;
+            text-align: right;
+        }
+
+        .left-table {
+            width: 100%;
+            float: left
+        }
+
+        .right-table {
+            width: 48%;
+            float: right
+        }
+
+        .center-table {
+            width: 80%;
+            float: center
+        }
+
+        #items {
+            margin: 30px 0 0 0;
+         border: 0px;
+            font:  8px Helvetica, Sans-Serif;
+        }
+
+          #items th {
+            background: #eee;
+        }
+
+        #items td.meta-head1 {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+
+        #terms {
+            clear: both;
+            text-align: center;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 70px;
+            background: rgb(255, 255, 255);
+        }
+
+        #terms textarea {
+            width: 100%;
+            margin-top: 5%;
+            text-align: center;
+        }
+	
+
+
+
+    </style>
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div id="page-wrap">
+   
+        <textarea id="header">Energy Allotment Report</textarea>
+
+  <table id="items" class="left-table" >
+                <tr>
+                    <th >Generator Service Number</th>
+                    <td > 039204341863</td>
+                    <th >Month</th>
+                    <td> May</td>
+                    <th >Year</th>
+                    <td > 2018</td>
+              
+                </tr>
+               
+
+            </table>
+       
+       
+        <div class="customer">
+
+            <table id="items" class="left-table">
+                <tr>
+                    <th>Consumer Company Name </th>
+                    <th>Consumer Service Number</th>
+                    <th>Consumer End EDC</th>
+                    <th>C1</th>
+                    <th>C2</th>
+                    <th>C3</th>
+                    <th>C4</th>
+                    
+                    <th>C5</th>
+                    <th>Total</th>
+                     <th>Injection Voltage</th>
+                      <th>Trans Charges</th>
+                       <th>OM Charges</th>
+                           <th>Negative Charges</th>
+                       <th>Scheduling Charges</th>
+
+                </tr>
+                <tr class="item-row" th:each="energyAllocation : ${energyAllocationList}">
+                    <td th:text="${energyAllocation.companyName}"></td>
+                 <td th:text="${energyAllocation.companyServiceNumber}"></td>
+                  <td th:text="${energyAllocation.edcName}"></td>
+                   <td th:text="${energyAllocation.c1}"></td>
+                    <td th:text="${energyAllocation.c2}"></td>
+                     <td th:text="${energyAllocation.c3}"></td>
+                      <td th:text="${energyAllocation.c4}"></td>
+                       <td th:text="${energyAllocation.c5}"></td>
+                       
+                        <td th:text="${energyAllocation.total}"></td>
+                         <td th:text="${energyAllocation.injectionVoltageName}"></td>
+                          <td th:text="${energyAllocation.tranCharges}"></td>
+                           <td th:text="${energyAllocation.omCharges}"></td>
+                            <td th:text="${energyAllocation.negativeCharges}"></td>
+                             <td th:text="${energyAllocation.schedulingCharges}"></td>
+
+                </tr>
+
+            </table>
+
+           
+
+
+    </div>
+    </div>
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<mat-card>
+	<mat-card-content>
+		<mat-card-title>InfraStructure Details</mat-card-title>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<!-- <mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Connected to SS" [(ngModel)]="gc.finalSsId">
+				<mat-option *ngFor="let ss of substations" [value]="ss.key">
+				  {{ ss.name }} - ({{ss.key}})
+				</mat-option>
+				</mat-select> -->
+
+
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="EDC Name" [matAutocomplete]="tdAutoEDC" [(ngModel)]='gc.finalOrgName' #modelDir="ngModel"
+					 (ngModelChange)="this.filteredOrgList = filterOrgs(gc.finalOrgName)">
+					<mat-autocomplete #tdAutoEDC="matAutocomplete">
+						<mat-option *ngFor="let org of filteredOrgList" (onSelectionChange)="onOrgSelect(org)" [value]="org.name">
+							<span> {{ org.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+	
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="SubStation" [matAutocomplete]="tdAutoSubstation" [(ngModel)]='gc.finalSsName' #modelDir="ngModel"
+				 (ngModelChange)="this.filteredSubstationList = filterSubstations(gc.finalSsName)">
+				<mat-autocomplete #tdAutoSubstation="matAutocomplete">
+					<mat-option *ngFor="let subStation of filteredSubstationList" (onSelectionChange)="onSubstationSelect(subStation)" [value]="subStation.name">
+						<span>{{subStation.code}} - {{ subStation.name }}</span>
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+
+
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+
+				<mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Substation Type" [(ngModel)]="gc.finalSsTypeName">
+					<mat-option *ngFor="let subStation of ssTypes" [value]="subStation.name">
+						{{ subStation.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Feeder" [matAutocomplete]="tdAutoFeeder" [(ngModel)]='gc.finalFeederName' #modelDir="ngModel"
+				 (ngModelChange)="this.filteredFeederList = filterFeeders(finalFeederName)">
+				<mat-autocomplete #tdAutoFeeder="matAutocomplete">
+					<mat-option *ngFor="let feeder of filteredFeederList" (onSelectionChange)="onFeederSelect(feeder)" [value]="feeder.name">
+						<span>{{ feeder.name }}</span>
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+
+				<mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Feeder Type" [(ngModel)]="gc.finalFeederTypeName">
+					<mat-option *ngFor="let feeder of feeders" [value]="feeder.name">
+						<span>{{ feeder.name }}</span>
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+
+			<!-- <mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Types to SS" [(ngModel)]="gc.finalSsTypeName">
+				<mat-option *ngFor="let ss of ssTypes" [value]="ss.key">
+				  {{ ss.name }} - ({{ss.key}})
+				</mat-option>
+				</mat-select> -->
+
+		</div>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Feeder Name" [matAutocomplete]="reactiveAuto" [formControl]="EDCNameCtrl">
+			</mat-form-field> -->
+			<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+				<input matInput placeholder="Feeder" [matAutocomplete]="tdAutoFeederType" [(ngModel)]='gc.finalFeederTypeName'
+					#modelDir="ngModel" (ngModelChange)="this.feeders= filterFeederType(gc.finalFeederTypeName)">
+				<mat-autocomplete #tdAutoFeederType="matAutocomplete">
+					<mat-option *ngFor="let feeder of feeders" [value]="feeder.name">
+						<span>{{ feeder.name }}</span>
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+			<div class="ml-xs mr-xs" style="width: 100%;"></div>
+			<div class="ml-xs mr-xs" style="width: 100%;"></div> -->
+			<!-- <mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Types to Feeder" [(ngModel)]="gc.finalFeederTypeName">
+				<mat-option *ngFor="let f of feeders" [value]="f.key">
+				  {{ f.name }} - ({{f.key}})
+				</mat-option>
+			  </mat-select> -->
+		</div>
+		<br/>
+
+	</mat-card-content>
+</mat-card>

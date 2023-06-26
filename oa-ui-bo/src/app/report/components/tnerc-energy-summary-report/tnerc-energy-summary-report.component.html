@@ -1,0 +1,102 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            TNERC-ENERGY-SUMMERY-REPORT
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="25%">
+                  <input matInput type="number" placeholder="Financial Year" [(ngModel)]="year">
+                </mat-form-field> -->
+                <mat-form-field class="ml-xs mr-xs" >
+                    <mat-select class="ml-xs mr-xs"  placeholder="Financial Year" [(ngModel)]='year'>
+                        <mat-option *ngFor="let year of Year" [value]="year.key">
+                            {{ year.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+      
+                <mat-card-actions>				
+                <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                <button mat-raised-button color="accent" (click)="printReport()">
+                    <mat-icon>cloud_download</mat-icon>
+                    Download Pdf
+                </button>
+                </mat-card-actions>
+              </div>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="13">WIND GENERATION DETAILS  FOR 2019-2020</th>
+                    </tr>        
+                    <tr>
+                        <th style="background: #dcdcdc">SL.NO</th>
+                        <th style="background: #dcdcdc">MONTH</th>
+                        <th style="background: #dcdcdc">YEAR</th>
+                        <th style="background: #dcdcdc">CAPTIVE GENERATION</th>
+                        <th style="background: #dcdcdc">QUANTUM OF ENERGY ALLOTED FROM WEG FOR CAPTIVE CONSUMPTION INCLUDING BANKED UNITS IN MU</th>
+                        <th style="background: #dcdcdc">WIND ENERGY BANKED IN MU</th>
+                        <th style="background: #dcdcdc">WIND ENERGY BANKED IN MU AFTER BANKING CHARGES</th>
+                        <th style="background: #dcdcdc">Surplus returned from HT & Recredited double banking units</th>
+                        <th style="background: #dcdcdc">Total banking</th>
+                        <th style="background: #dcdcdc">Cumulative banking</th>
+                        <th style="background: #dcdcdc">Withdrawn from banking</th>
+                        <th style="background: #dcdcdc">Cumulative withdrawal</th>
+                        <th style="background: #dcdcdc">Banking balance</th>
+
+                        
+                    </tr>
+        
+                    <tr *ngFor="let report of tnerc;let i=index;">  
+                        <td>{{i+1}}</td> 
+                        <td>{{report.op1}}</td>  
+                        <td>{{report.op2}}</td>  
+                        <td>{{report.op3}}</td>  
+                        <td>{{report.op4}}</td>  
+                        <!-- <td>{{report.op5}}</td>  -->
+                        <td>{{report.op6}}</td> 
+                        <td>{{report.op7}}</td>   
+                        <td>{{report.op8}}</td>
+                        <td>{{report.op9}}</td> 
+                        <td>{{report.op10}}</td>
+                        <td>{{report.op11}}</td>
+                        <td>{{report.op12}}</td>
+                        <td>{{report.op13}}</td>
+                    </tr>  
+                    
+                    <tr >
+                        <td colspan="3"  style="text-align: center;"> <b>TOTAL</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop3}}</b> &#8192; </td>
+                        <td style="text-align: left;"> <b>{{this.totalop4}}</b> &#8192;</td>
+                       
+                        <td  style="text-align: left;"> <b>{{this.totalop6}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop7}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop8}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop9}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop10}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop11}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop12}}</b> &#8192; </td>
+                        <td  style="text-align: left;"> <b>{{this.totalop13}}</b> &#8192; </td>
+                    
+                    </tr> 
+           
+        
+                </table>
+               
+        
+        
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

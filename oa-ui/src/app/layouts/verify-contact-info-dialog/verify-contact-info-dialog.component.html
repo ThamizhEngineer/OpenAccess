@@ -1,0 +1,127 @@
+<mat-card>
+  <mat-card-title>
+  Please Validate these information
+  </mat-card-title>
+  <mat-card-content>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Company Type: </h5>
+        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <select style="margin-left: -86px;"    placeholder="Company Type" [(ngModel)]='serviceVO.companyTypeCode' (change)="valueChange()" >
+                  <option *ngFor="let cType of companyTypes" value="{{cType.key}}" >
+                   {{ cType.name }}
+                  </option>
+                </select>
+
+            </mat-form-field>
+        </div>
+        <div >
+          <h5 style="margin-left: -170px;">CIN: </h5>
+          <h5 style="margin-left: -170px;">Identification </h5>
+          <h5 style="margin-left: -170px;">PAN: </h5>
+        </div>
+        <!-- <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%">Identification </h5> -->
+        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input style="margin-left: -53px;" [disabled]="hideCin" matInput placeholder="CIN" [(ngModel)]='serviceVO.cin' (change)="valueChange()" > <br><br>
+            <input style="margin-left: -53px;" [disabled]="hideLlpin" matInput placeholder="LLPIN" [(ngModel)]='serviceVO.llpin' (change)="valueChange()" ><br><br>
+            <input style="margin-left: -53px;"  matInput placeholder="PAN" [(ngModel)]='serviceVO.pan' (change)="valueChange()" >
+        </mat-form-field>
+        </div>
+        <!-- <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> GST:</h5> -->
+        <div >
+          <h5 style="margin-left: -80px;">TAN: </h5>
+          <h5 style="margin-left: -80px;">GST: </h5>
+          </div>
+        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input style="margin-left: 10px;" matInput placeholder="TAN" [(ngModel)]='serviceVO.tan' (change)="valueChange()"> <br><br>
+            <input style="margin-left: 18px;" matInput placeholder="GST Number" [(ngModel)]='serviceVO.gst' (change)="valueChange()" >
+        </mat-form-field>
+        </div>
+    </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Authorised Contact Person: </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+              <input style="margin-left: 31px;" matInput placeholder="Authorised Contact Person" [(ngModel)]='serviceVO.contactFullName' (change)="valueChange()" >
+          </mat-form-field>
+      </div>
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Designation </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input style="margin-left: -38px;" matInput placeholder="Designation" [(ngModel)]='serviceVO.contactDesignation' (change)="valueChange()" >
+      </mat-form-field>
+      </div>
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Registered Office Address </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <textarea matInput placeholder="Registered Office Address"  cdkAutosizeMinCols='30' cols='30' cdkAutosizeMinRows="7" rows="7"   [(ngModel)]='serviceVO.regOfficeAddr' (change)="valueChange()" ></textarea>
+      </mat-form-field>
+      </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Contact Phone Number </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input style="margin-left: 48px;" matInput placeholder="Contact Phone Number" [(ngModel)]='serviceVO.contactPhoneNo' (change)="valueChange()" >
+      </mat-form-field>
+      </div>
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%" style="padding-right: 47px;"> Contact Email </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <input style="margin-left: -68px;" matInput placeholder="Contact Email" [(ngModel)]='serviceVO.contactEmail' (change)="valueChange()" >
+      </mat-form-field>
+      </div>
+      <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Plant Address </h5>
+      <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+      <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+          <textarea matInput placeholder="Plant Address" cdkAutosizeMinCols='30' cols='30' cdkAutosizeMinRows="7" rows="7"  [(ngModel)]='serviceVO.plantAddr' (change)="valueChange()" ></textarea>
+      </mat-form-field>
+      </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Bank Account Number </h5>
+    <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Bank Account Number" [(ngModel)]='serviceVO.bankAccountNo' (change)="valueChange()" >
+        </mat-form-field>
+        </div>
+
+    <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Bank IFSC Code </h5>
+    <div class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+        <input style="margin-left: -42px;" matInput placeholder="Bank IFSC Code" [(ngModel)]='serviceVO.bankIfscCode' (change)="valueChange()" >
+    </mat-form-field>
+    </div>
+
+
+
+    <h5 class="ml-xs mr-xs" fxFlex.gt-sm="100%"> Bank Name </h5>
+    <div class="ml-xs mr-xs" fxFlex.gt-sm="100%" style="padding-right: 62px;">
+      <mat-form-field class="ml-xs mr-xs" style="width: 32%;">
+        <select class="ml-xs mr-xs" style="width: 100%;" placeholder="Bank Name" [(ngModel)]='serviceVO.bankName'>
+          <option *ngFor="let ban of bankList" value="{{ban.bankName}}"  >
+            {{ban.bankName}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+</div>
+  <small *ngIf="message" class="mat-text-warn">{{message}}</small>
+
+      <hr>
+
+      <mat-card-actions>
+          <button type="button" color="primary" mat-raised-button [disabled]="isSubmitDisabled" (click)="verifyContactInfo()">Validate</button>
+          <button type="button" color="amber" mat-raised-button (click)="sessClose()">Logout</button>
+      </mat-card-actions>
+
+
+  </mat-card-content>
+
+  </mat-card>

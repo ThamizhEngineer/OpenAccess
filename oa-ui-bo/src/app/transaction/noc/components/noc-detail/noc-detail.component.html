@@ -1,0 +1,257 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Noc Details </mat-card-title>
+
+    <ng-template mat-tab-label>Noc Details</ng-template>
+    <mat-card>
+        <mat-card-content>
+            <div mat-subheader><strong>{{this.commonUtils.getProp('buyer')}} Details</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} EDC Name" [(ngModel)]="noc.buyerOrgName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Service Number" value="{{noc.buyerCompanyName}} - {{noc.buyerCompanyServiceNumber}}"
+                        [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Drawal Voltage" [(ngModel)]='noc.buyerVoltageCode' [disabled]="disableControls">
+                        <mat-option *ngFor="let Voltage of Voltages" [value]="Voltage.valueCode">
+                            {{Voltage.valueDesc}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [disabled]="disableControls" [(ngModel)]="noc.agreementPeriodCode">
+                        <mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+                            {{code.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+
+
+            </div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Substation Name" [(ngModel)]="noc.buyerSubstationName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder" [(ngModel)]="noc.buyerFeederName" [disabled]="disableControls">
+                </mat-form-field>
+
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Duration From" value="{{commonService.displayMonth(noc.fromMonth)}} - {{noc.fromYear}}" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Duration To" value="{{commonService.displayMonth(noc.toMonth)}} - {{noc.toYear}}" [disabled]="disableControls">
+                </mat-form-field>
+
+
+
+
+            </div>
+            <br>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Energy Sale Intent Number" [disabled]="disableControls" [(ngModel)]="noc.esIntentCode">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Noc Number" [disabled]="disableControls" [(ngModel)]="noc.code">
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Sanctioned Demand(kVA)" [(ngModel)]="noc.buyerSanctionedCapacity" [disabled]="disableControls">
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Whether Exempted from RC" [(ngModel)]='noc.exemptRc'>
+                        <mat-option *ngFor="let exemptRc of exemptRc" [value]="exemptRc.name">
+                            {{exemptRc.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+
+            </div><br>
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Proposed Quantum(MW)" [(ngModel)]="noc.approvedCapacity">
+                        </mat-form-field>
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="25%"></div>
+
+
+
+            </div><br>
+
+
+
+
+            <!-- <div  [hidden]='true'> -->
+            <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						 <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Type Code" [(ngModel)]="noc.typeCode">
+							<mat-option *ngFor="let typeCode of typeCode" [value]="typeCode.name">
+								{{typeCode.name}}
+							</mat-option>
+						</mat-select> 
+                        </mat-form-field> -->
+            <!-- </div> -->
+
+
+            <div mat-subheader><strong>{{this.commonUtils.getProp('seller')}} Details</strong></div><br>
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('seller')}} EDC Name" [(ngModel)]="noc.sellerOrgName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="{{this.commonUtils.getProp('seller')}} Service Number" value="{{noc.sellerCompanyName}} - {{noc.sellerCompanyServiceNumber}}"
+                        [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Injected Voltage" [(ngModel)]='noc.sellerVoltageCode' [disabled]="disableControls">
+                        <mat-option *ngFor="let Voltage of Voltages" [value]="Voltage.valueCode">
+                            {{Voltage.valueDesc}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Available Capacity(MW)" [(ngModel)]="noc.sellerSanctionedCapacity" [disabled]="disableControls">
+                </mat-form-field>
+
+
+
+            </div>
+            <br>
+
+            <hr>
+            <div mat-subheader><strong>Other Details</strong></div><br>
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <mat-select class="ml-xs mr-xs" style="width: 25%;" placeholder="Outstanding dues from company" [(ngModel)]='noc.hasDues'>
+                            <mat-option *ngFor="let hasDues of hasDues" [value]="hasDues.name">
+                                {{hasDues.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="if Yes, Enter Detail" [(ngModel)]='noc.dueDetails'>   </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Details of pending court case/stay if any in brief" [(ngModel)]='noc.pendingCaseDetails'>   </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+
+
+            <mat-card>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <textarea matInput placeholder="Technical Feasability Details" [(ngModel)]='noc.technicalFeasibilityDetails'>   </textarea>
+                    </mat-form-field>
+                </div><br>
+            </mat-card>
+            <hr>
+            <br>
+            <!-- <div mat-subheader><strong>Generator Details</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Generator HTSC" [(ngModel)]="noc">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Generator Name" [(ngModel)]="noc">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Supply Proposed to be received from CGP/3rd party(in MV)" [(ngModel)]="noc">
+                </mat-form-field>
+            </div>
+            <br> -->
+            <div mat-subheader>Already Availed Open Access</div>
+            <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="'auto'">
+                <ngx-datatable-column name="Consumer Service Number">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      <!--  {{row.sellerCompServiceNumber}} -->
+                      {{row.buyerCompServiceNumber}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Consumer CompanyName">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      <!--  {{row.sellerCompanyName}} -->
+                      {{row.buyerCompanyName}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Already Availed Quantum">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.approvedTotalUnits}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <!--		<ngx-datatable-column name="Period">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.agreementPeriodCode}}
+					</ng-template>  
+				</ngx-datatable-column> -->
+                <ngx-datatable-column name="From Date">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.fromDate | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="To Date">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.toDate | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+
+            <mat-card>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" *ngIf="noc.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveNoc('')">Save</button>
+                    <!-- <button mat-raised-button color="primary" *ngIf="noc.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveNoc()">Approve</button> -->
+                    <button mat-raised-button color="primary" *ngIf="noc.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeNoc()">Approve</button>
+
+                    <button mat-raised-button class="primary" (click)="listNoc()">Cancel/Back</button>
+                </mat-card-actions>
+            </mat-card>
+            <br>
+
+
+
+        </mat-card-content>
+    </mat-card>
+</mat-card>

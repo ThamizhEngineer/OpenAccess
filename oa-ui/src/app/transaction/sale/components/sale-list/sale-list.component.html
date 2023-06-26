@@ -1,0 +1,37 @@
+<mat-toolbar color="grey"  class="mat-card-index" fxLayoutAlign="center start">
+	<h1>{{applicationType.text}}</h1>
+	<mat-toolbar-row><month-picker class="ml-xs mr-xs" style="width: 100%;" [(config)]="mpConfig" [(model)]="mpModel" (mpOnModelChange)="this.mpOnChange($event)"></month-picker></mat-toolbar-row>
+	<mat-toolbar-row></mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start" class="mat-card-top">
+    <div fxFlex.gt-sm="90" fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" *ngFor="let s of config">
+                <mat-card class="pricing-plan">
+                    <mat-card-title><h2>{{s.name}}</h2></mat-card-title>
+                    <mat-card-content fxLayoutAlign="left">
+                        <mat-list dense>
+                            <mat-list-item fxLayoutAlign="left"><h4>Categories</h4></mat-list-item>
+							<mat-list-item fxLayoutAlign="left" class="list-detail" *ngFor="let c of s.categories" (click)="detailView(c, s)">
+                                <!-- <div class="category" fxLayoutAlign="left start">{{c.statusCode}}</div> -->
+                                <div class="category" fxLayoutAlign="left start">{{(c.statusCode=='CREATED'?"APPLIED":c.statusCode)}}</div>
+
+								<mat-chip-list fxLayoutAlign="right">
+									<mat-chip color="danger">{{c.recCount}}</mat-chip>
+								</mat-chip-list>
+							</mat-list-item>
+							
+                            <mat-list-item fxLayoutAlign="left" class="list-detail" (click)="detailView({'statusCode': ''}, s)">
+								<div class="category" fxLayoutAlign="left">ALL</div>
+								<mat-chip-list fxLayoutAlign="right">
+									<mat-chip color="danger">{{s.count}}</mat-chip>
+								</mat-chip-list>
+							</mat-list-item>
+                        </mat-list>
+                    </mat-card-content>                    
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

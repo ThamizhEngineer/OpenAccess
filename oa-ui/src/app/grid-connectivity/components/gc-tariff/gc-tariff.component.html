@@ -1,0 +1,71 @@
+<mat-card>
+	<mat-card-content>
+		<mat-card-title>Other Details</mat-card-title>
+		<div fxLayout="row" fxLayoutAlign="start center"> <br/>
+			<!-- <mat-checkbox [(ngModel)]="gc.finalIsStb" fxFlex.gt-sm="30%">Sale to Board</mat-checkbox> -->
+			<div class="mb-1" style="width: 100%;">
+			<label>Sale to Board</label> <br/>
+            <mat-radio-group [(ngModel)]='gc.finalIsStb'>
+              <mat-radio-button value="Y">Yes</mat-radio-button>
+              <mat-radio-button value="N">No</mat-radio-button>
+			</mat-radio-group>
+		</div>
+			<div class="mb-1" style="width: 100%;">
+			<label>Wheeling</label> <br/>
+            <mat-radio-group [(ngModel)]='gc.finalIsWheeling'>
+              <mat-radio-button value="Y">Yes</mat-radio-button>
+              <mat-radio-button value="N">No</mat-radio-button>
+			</mat-radio-group>
+		</div>
+			<!-- <mat-checkbox [(ngModel)]="gc.finalIsWheeling" fxFlex.gt-sm="30%">Wheeling</mat-checkbox> -->
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+		</div>
+		<br/>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<div fxFlex.gt-sm="100%">If Sale to Board</div>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Power Purchase Rate" [(ngModel)]="gc.finalPpRate">
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" >
+				<input matInput placeholder="Tariff Order" [(ngModel)]="gc.finalStbTariffOrder">
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Tender Number" [(ngModel)]="gc.finalStbTenderNumber">
+			</mat-form-field>
+
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Tender Date" [(ngModel)]="gc.finalStbTenderDate">
+			</mat-form-field> -->
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput [(ngModel)]="gc.finalStbTenderDate" [matDatepicker]="tenderDate" placeholder="Tender Date">
+				<mat-datepicker-toggle matSuffix [for]="tenderDate"></mat-datepicker-toggle>
+				<mat-datepicker #tenderDate></mat-datepicker>
+			</mat-form-field>  
+		</div><br/>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<div fxFlex.gt-sm="100%">If Wheeling</div>
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="From" [(ngModel)]="gc.finalWheelingFromDate">
+			</mat-form-field> -->
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput [(ngModel)]="gc.finalWheelingFromDate" [matDatepicker]="fromDate" placeholder="From">
+				<mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+				<mat-datepicker #fromDate></mat-datepicker>
+			</mat-form-field> 
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput [(ngModel)]="gc.finalWheelingToDate" [matDatepicker]="toDate" placeholder="To">
+				<mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+				<mat-datepicker #toDate></mat-datepicker>
+			</mat-form-field> 
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="To" [(ngModel)]="gc.finalWheelingToDate">
+			</mat-form-field> -->
+			<div fxFlex.gt-sm="100%">&nbsp;</div>
+			<div fxFlex.gt-sm="100%">&nbsp;</div>
+		</div>
+		<br/>
+
+	</mat-card-content>
+</mat-card>

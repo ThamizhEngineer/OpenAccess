@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION OPENACCESS."DELETE_T_METER_READING" 
+(
+  V_BATCH_ID IN VARCHAR2 
+) RETURN VARCHAR2 AS 
+
+v_mr_cursor sys_refcursor ;
+v_mr_header T_METER_READING_HDR%ROWTYPE;
+mr_id varchar2(50);
+
+
+BEGIN
+	OPEN v_mr_cursor for select id from T_METER_READING_HDR where IMP_BATCH_ID=V_BATCH_ID;
+    LOOP 
+    FETCH v_mr_cursor INTO mr_id;
+	EXIT WHEN v_mr_cursor%NOTFOUND;
+    delete T_METER_READING_SLOT where T_METER_READING_HDR_ID=mr_id;
+	END LOOP;
+    delete T_METER_READING_HDR where IMP_BATCH_ID=V_BATCH_ID;
+
+
+  RETURN 'success';
+END DELETE_T_METER_READING;
+

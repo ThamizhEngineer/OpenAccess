@@ -1,0 +1,321 @@
+<mat-card class="mat-card-top">
+
+    <mat-card-title>{{addScreen?'Add':'Update'}} Noc Generator Details </mat-card-title>
+
+    <ng-template mat-tab-label>Noc Details</ng-template>
+    <mat-card>
+        <mat-card-content>
+            <div mat-subheader><strong>{{this.commonUtils.getProp('seller')}}  Details</strong></div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Edc Name" [(ngModel)]="nocGenerator.orgName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                        <input matInput placeholder="Service Number"   value = "{{nocGenerator.sellerCompanyName}} - {{nocGenerator.sellerCompanyServiceNumber}}" [disabled]="disableControls">
+                    </mat-form-field>
+    
+                    
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Energy Sale Intent Number" [disabled]="disableControls" [(ngModel)]="nocGenerator.esIntentCode">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Noc Generator Number" [disabled]="disableControls" [(ngModel)]="nocGenerator.code">
+                </mat-form-field>
+
+              
+
+
+            </div><br>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Substation Name" [(ngModel)]="nocGenerator.substationName" [disabled]="disableControls">
+                        </mat-form-field>
+
+
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Feeder" [(ngModel)]="nocGenerator.feederName" [disabled]="disableControls">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+        
+                        <input matInput placeholder="Injecting Voltage" [(ngModel)]='nocGenerator.sellerInjectingVoltageName' [disabled]="disableControls">
+                         </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Installed Capacity(MW)" [(ngModel)]="nocGenerator.capacity" >
+                </mat-form-field>
+
+                
+
+               
+
+
+            </div>
+            <br>
+
+
+
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Approved Power Capacity(MW)" [(ngModel)]="nocGenerator.approvedPowerCapacity" >
+                        </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Auxiliary Consumption(MU)" [(ngModel)]="nocGenerator.auxiliaryConsumption">
+                        </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="In House Consumption(MU)" [(ngModel)]="nocGenerator.inHouseConsumption">
+                </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                    <input matInput placeholder="Ex Bus(MU)" [(ngModel)]="nocGenerator.exBus">
+                </mat-form-field>
+
+               
+
+            </div><br>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Online Data Monitoring" [(ngModel)]="nocGenerator.isOnlineDataMonitoring">
+                                <mat-option *ngFor="let isOnlineData of isOnlineDatas" [value]="isOnlineData.name">
+                                    {{isOnlineData.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is TANGEDCO" [(ngModel)]="nocGenerator.isTangedco">
+                                <mat-option *ngFor="let isTangedco of isTangedcos" [value]="isTangedco.name">
+                                    {{isTangedco.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div  class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div  class="ml-xs mr-xs" style="width: 100%;"></div>
+                        <div  class="ml-xs mr-xs" style="width: 100%;"></div>
+                    </div>
+           
+
+                <mat-card-title  *ngIf="nocGenerator.isTangedco == 'Y'">
+
+                    <Strong>TANGEDCO Details </Strong>
+                </mat-card-title>
+
+                <mat-card-content  *ngIf="nocGenerator.isTangedco == 'Y'">
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                        <br>
+
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="TANGEDCO Ref No" [(ngModel)]="nocGenerator.tangedcoRefNumber">
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="TANGEDCO Quantum(MW)" [(ngModel)]="nocGenerator.tangedcoApprovedQuantum">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput [(ngModel)]="nocGenerator.tangedcoDated" [matDatepicker]="dated" placeholder="TANGEDCO Dated">
+                            <mat-datepicker-toggle matSuffix [for]="dated"></mat-datepicker-toggle>
+                            <mat-datepicker #dated></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput [(ngModel)]="nocGenerator.tangedcoTillDate" [matDatepicker]="tillDate" placeholder="TANGEDCO Till Date">
+                            <mat-datepicker-toggle matSuffix [for]="tillDate"></mat-datepicker-toggle>
+                            <mat-datepicker #tillDate></mat-datepicker>
+
+                        </mat-form-field>
+
+
+                    </div><br>
+                </mat-card-content>
+         
+
+
+           
+
+                <mat-card-title>
+
+                    <Strong>Wheeling Commitment </Strong>
+                </mat-card-title>
+
+                <mat-card-content>
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Captive Quantum(MW)" [(ngModel)]="nocGenerator.captiveQuantum">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Third Party Quantum(MW)" [(ngModel)]="nocGenerator.thirdPartyQuantum">
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Trader Quantum(MW)" [(ngModel)]="nocGenerator.traderQuantum">
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                            <input matInput placeholder="Other Quantum(MW)" [(ngModel)]="nocGenerator.otherQuantum">
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+           
+                <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                        <input matInput placeholder="Maximum surplus quantum(MW)" [(ngModel)]="nocGenerator.maximumSurplusQuantum">
+                    </mat-form-field>
+                    <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="25%">
+                        <input matInput placeholder="Total Power sale commitments" [(ngModel)]="nocGenerator.totalPowerSaleCommitments">
+                    </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card *ngIf="nocGenerator.flowTypeCode!='THIRD-PARTY'">
+            <mat-card-content>
+                <mat-card-title>Intented Buyer List</mat-card-title>
+
+                <ngx-datatable class="material" [rows]="nocGenerator.nocGeneratorLines" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="'auto'">
+                    <ngx-datatable-column name="EDC Name">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.buyerOrgId}} - {{row.buyerOrgName}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Service Number">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.buyerCompanyName}} -  {{row.buyerCompServiceNumber}}
+                        </ng-template>
+                    </ngx-datatable-column>
+            
+                        <ngx-datatable-column name="Drawal Peak">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.drawalPeakUnits}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                        
+                    <ngx-datatable-column name="Drawal Off Peak ">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.drawalOffPeakUnits}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Approved Units">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.approvedUnits}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Remarks">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.remarks}}
+                        </ng-template>
+                    </ngx-datatable-column>
+               
+                    <ngx-datatable-column name="Actions">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            <button mat-raised-button mat-icon-button mat-button-sm (click)="editNocGeneratorLine(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+                            <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteNocGeneratorLine(row.$$index)"><mat-icon>delete</mat-icon></button>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+
+                <mat-card-title>
+                    <Strong>{{nocGeneratorLineRowIndex>-1?'Update':'Add'}} Intented Buyers</Strong>
+                </mat-card-title>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="EDC Name"  [(ngModel)]='nocGeneratorLine.buyerOrgName'>
+                        </mat-form-field> 
+                        
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Buyer Name"  [(ngModel)]='nocGeneratorLine.buyerCompanyName'>
+                        </mat-form-field>  -->
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Edc Name" [(ngModel)]='nocGeneratorLine.buyerOrgId' [required]="isMandatory"
+                                (ngModelChange)="onBuyerEdcChange()">
+                                <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{ edc.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Service number" [(ngModel)]='nocGeneratorLine.buyerCompServiceId'
+                                [required]="isMandatory" (ngModelChange)="onBuyerServiceChange()">
+                                <mat-option *ngFor="let companyService of buyerCompanyServices" [value]="companyService.id">
+                                    {{ companyService.companyName }} - {{ companyService.number }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Capacity(kVA)"  [disabled]="true" [(ngModel)]='nocGeneratorLine.buyerCapacity'>
+                        </mat-form-field> 
+                        
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Voltage" [disabled]="true"  [(ngModel)]='nocGeneratorLine.drawalVoltageDesc'>
+                        </mat-form-field> 
+                        <div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+        
+                        
+                        
+                    </div><br/>
+                    
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        
+                            
+                            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Drawal (Peak)" [(ngModel)]='nocGeneratorLine.drawalPeakUnits'>
+                                </mat-form-field> 
+                                
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Drawal (Off Peak)" [(ngModel)]='nocGeneratorLine.drawalOffPeakUnits'>
+                                </mat-form-field> 
+                                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                    <input matInput placeholder="Approved Units" [disabled]="true" [(ngModel)]='nocGeneratorLine.approvedUnits'>
+                                </mat-form-field> 
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                            <input matInput placeholder="Loss" [(ngModel)]='nocGeneratorLine.loss'>
+                        </mat-form-field> 
+        
+        
+                        <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                                <input matInput placeholder="Remarks" [(ngModel)]='nocGeneratorLine.remarks'>
+                            </mat-form-field> 
+                         
+                        
+                    </div><br/>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button (click)="nocGeneratorLineRowIndex>-1?updateNocGeneratorLine():addNocGeneratorLine()">{{nocGeneratorLineRowIndex>-1?'Update':'Add'}}</button>
+                    <button mat-raised-button (click)="initNocGeneratorLines()">Reset</button>
+                </mat-card-actions>
+               
+            </mat-card-content>
+            
+        </mat-card>
+
+            <mat-card>
+                <mat-card-actions>
+                        <button mat-raised-button color="primary" *ngIf="nocGenerator.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveNocGenerator('')">Save</button>
+                        <button mat-raised-button color="primary"  *ngIf="nocGenerator.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveNocGenerator()">Approve</button>
+                        <button mat-raised-button color="primary" *ngIf="nocGenerator.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="completeNocGenerator()">Complete</button>
+                        
+                    <button mat-raised-button class="primary" (click)="listNocGenerator()">Cancel/Back</button>
+                </mat-card-actions>
+            </mat-card>
+            <br>
+
+
+
+        </mat-card-content>
+    </mat-card>
+</mat-card>

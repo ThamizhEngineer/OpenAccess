@@ -1,0 +1,248 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Power Purchase Application</mat-card-title>
+
+	<ng-template mat-tab-label>Epa Details</ng-template>
+		<mat-card-content>
+			<div mat-subheader>{{this.commonUtils.getProp('seller')}} Information</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput placeholder="{{this.commonUtils.getProp('seller')}} EDC Name" disabled="true" [(ngModel)]='epa.sellerOrgName'>
+						</mat-form-field> 
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="{{this.commonUtils.getProp('seller')}} Company Name" disabled="true" [(ngModel)]='epa.sellerCompanyName'>
+				</mat-form-field> 
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Fuel Type" [disabled]="true"  [(ngModel)]='epa.fuelTypeName'>
+				</mat-form-field> 
+
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true" placeholder="Is Captive" [(ngModel)]="epa.sellerIsCaptive">
+
+						<mat-option *ngFor="let isCaptive of isCaptives" [value]="isCaptive.name">
+							{{isCaptive.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+			
+
+			</div>
+			<div fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" disabled="true" [(ngModel)]='epa.agreementPeriodCode'>
+								<mat-option *ngFor="let code of agmtPeriodCodes" [value]="code.name">
+									{{code.name}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field> 
+			
+				  <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Substation" disabled="true"  [(ngModel)]='epa.substationId' (ngModelChange)="fetchFeeders(epa.substationId)">
+						<mat-option *ngFor="let ss of substationList" [value]="ss.id">
+							{{ss.code}} - {{ss.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Feeder" disabled="true"  [(ngModel)]='epa.feederId'>
+						<mat-option *ngFor="let feeder of feederList" [value]="feeder.id">
+							{{feeder.code}} - {{feeder.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			
+				<mat-form-field style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" placeholder="Voltage" disabled="true" [(ngModel)]='epa.voltageCode' >
+                      <mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode" >
+                        {{voltage.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+			
+				
+				
+				
+			</div><br/>
+			
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput [matDatepicker]="fromDate" [(ngModel)]="epa.fromDate" disabled="true" placeholder="From date" >
+					<mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+					<mat-datepicker #fromDate [touchUi]="touch" [disabled]="datepickerDisabled"></mat-datepicker>
+				</mat-form-field> 
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput [matDatepicker]="toDate" [(ngModel)]="epa.toDate" disabled="true" placeholder="To date" >
+					<mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+					<mat-datepicker #toDate [touchUi]="touch" [disabled]="datepickerDisabled"></mat-datepicker>
+				</mat-form-field>  
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="District" disabled="true"  [(ngModel)]='epa.districtName'>
+					</mat-form-field>
+			
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Total Gen Capacity" disabled="true" [(ngModel)]='epa.totalGenCapacity'>
+				</mat-form-field> 
+				
+				
+				
+			</div><br/>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Proposed Total Units" disabled="true"  [(ngModel)]='epa.proposedTotalUnits'>
+				</mat-form-field>	
+			
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Approved Total Units" disabled="true" [(ngModel)]='epa.approvedTotalUnits'>
+				</mat-form-field>	
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Ppa Number" disabled="true"  [(ngModel)]='epa.code'>
+					</mat-form-field> 
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="EsIntent Number" disabled="true"  [(ngModel)]='epa.esIntentCode'>
+					</mat-form-field>
+			
+				
+			</div><br/>
+			<mat-card-content >
+				<div fxLayout="row" fxLayoutAlign="start center">
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+								<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} EDC Name" disabled="true" [(ngModel)]='epa.buyerOrgName'>
+							</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Company Name" value="{{epa.buyerCompanyName}}-{{epa.buyerCompanyServiceNumber}}" disabled="true">
+					</mat-form-field>
+			
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Interval type" [(ngModel)]='epa.intervalTypeCode'>
+
+								<mat-option *ngFor="let intervalTypeCode of intervalTypeCodes" [value]="intervalTypeCode.valueCode">
+									{{intervalTypeCode.valueDesc}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<!-- <span class="ml-xs mr-xs" style="width: 30%;"><mat-checkbox [(ngModel)]='epaLine.isCaptive'  >Is Captive</mat-checkbox></span> -->
+						<!-- <mat-form-field *ngIf="epaLine.isCaptive" class="ml-xs mr-xs" style="width: 100%;">
+																	<input matInput placeholder="Share Percentage" [(ngModel)]='epaLine.sharePercent'>
+																</mat-form-field> -->
+					
+						<mat-form-field *ngIf="epa.intervalTypeCode=='04'" class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Share Percentage" [(ngModel)]='epa.sharePercent'>
+						</mat-form-field>
+						<div *ngIf="epa.intervalTypeCode!='04'" class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+						
+			   
+
+				</div>
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+				 
+
+
+
+				</div>
+
+				<div *ngIf="epa.intervalTypeCode=='01'" fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Peak Units" [(ngModel)]='epa.peakUnits'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Off Peak Units" [(ngModel)]='epa.offPeakUnits'>
+					</mat-form-field>
+					<div class="ml-xs mr-xs" style="width: 100%;"></div>
+					<div class="ml-xs mr-xs" style="width: 100%;"></div>
+				</div>
+				<div *ngIf="epa.intervalTypeCode=='02'" fxLayout="row" fxLayoutAlign="start center">
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="C1 - PeakHour 1" [(ngModel)]='epa.c1'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="C2 - PeakHour 2" [(ngModel)]='epa.c2'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="C3 - PeakHour 3" [(ngModel)]='epa.c3'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="C4 - PeakHour 4" [(ngModel)]='epa.c4'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="C5 - PeakHour 5" [(ngModel)]='epa.c5'>
+					</mat-form-field>
+				</div>
+
+			</mat-card-content>
+
+			<!-- <div mat-subheader><strong>Generator Unit</strong></div>
+			<ngx-datatable
+				class="material"
+				tabindex="index"
+				[rows]="epa.epaLine"
+				[columnMode]="'force'"
+				[headerHeight]="50"
+				[footerHeight]="0"
+				[rowHeight]="'auto'">
+		
+
+				<ngx-datatable-column name="Generator Unit Name"> 
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.generatorName}}
+					</ng-template>
+				</ngx-datatable-column> 
+				
+				<ngx-datatable-column name="No Of Units"> 
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.noOfUnits}}
+					</ng-template>
+				</ngx-datatable-column>  
+				<ngx-datatable-column name="Capacity"> 
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.genCapacity}}
+					</ng-template>
+				</ngx-datatable-column> 
+				<ngx-datatable-column name="Proposed Total Unit"> 
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.proposedTotalUnits}}
+					</ng-template>
+				</ngx-datatable-column> 
+		
+					
+				<ngx-datatable-column name="Approved Total Unit">
+					<ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row" > 
+						<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input matInput  
+							
+							[(ngModel)]="row.approvedTotalUnits">
+						</mat-form-field>
+					 
+					</ng-template>
+				  </ngx-datatable-column>
+			</ngx-datatable> -->
+	
+
+
+		</mat-card-content>
+	<hr>
+	<mat-card-actions>
+			<button mat-raised-button color="primary" *ngIf="epa.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveEpa('')">Save</button>
+			<button mat-raised-button color="primary"  *ngIf="epa.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveEpa()">Approve</button>
+			<button mat-raised-button color="primary" *ngIf="epa.statusCode=='APPROVED' && this.accessCompleteFlag" (click)="completeEpa()">Complete</button>
+			<button mat-raised-button class="primary" (click)="listEpas()">Cancel/Back</button>
+	</mat-card-actions>
+</mat-card>

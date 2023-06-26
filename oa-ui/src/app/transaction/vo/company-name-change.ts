@@ -1,0 +1,30 @@
+export class CompanyNameChange{
+             id?: string;
+             code?: string;
+             enabled?: string;
+             createdBy?: string;createdDate?: string;
+             modifiedDate?: string; modifiedBy?: string;
+             companyId?: string;
+             companyCode?: string;
+             companyName?: string;
+             serviceId?: string;
+             serviceNumber?: string;
+             orgId?: string;
+             orgCode?: string;
+             orgName?: string;
+            //  mEdcId?: string;
+            //  mEdcCode?: string;
+            //  mEdcName?: string;
+            //  mCompanyId?: string;
+            //  mcompanyCode?: string;
+            //  mCompanyServiceId?: string;
+            //  mCompanyName?: string;
+            //  mCompanyServiceNumber?: string;
+             companyNameChangeDate?: string;
+             oldCompanyName?: string;
+             newCompanyName?: string;
+             flowTypeCode?:string;
+             flowTypeName?:string;
+             statusCode?:string;
+             statusName?:string;
+}

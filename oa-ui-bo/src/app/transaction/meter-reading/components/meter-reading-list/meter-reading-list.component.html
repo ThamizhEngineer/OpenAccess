@@ -1,0 +1,164 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				Meter Readings
+			</mat-card-title>
+
+			<mat-card-content>
+				<!-- <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newPowerplant()'><mat-icon>add</mat-icon></button>  -->
+
+				<br/>
+				
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%" >
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc" placeholder="Edc Name" [(ngModel)]='searchorgId' >
+
+							<mat-option *ngFor="let org of orgList" [value]="org.code">
+								{{org.code}} - {{org.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field> -->
+
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="isEdc" [(ngModel)]='searchorgId' [required]="isMandatory">
+							<mat-option *ngFor="let edc of orgList" [value]="edc.id">
+								{{edc.code}} - {{ edc.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+							<input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service Number" [(ngModel)]="searchcompanyServiceNumber">
+						</mat-form-field>
+				<!--<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input  matInput placeholder="Modem Number" [(ngModel)]="searchmodemNumber">
+					</mat-form-field>  -->
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input  matInput placeholder="Company Name" [(ngModel)]="searchcompanyName">
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input  matInput placeholder="Meter Number" [(ngModel)]="searchsellermeterNumber">
+					</mat-form-field>
+					
+					<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type" [(ngModel)]='selFuel'>
+						  <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+							{{fuelTypes.valueDesc}}
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field> -->
+
+					  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type" [(ngModel)]='selFuel'>
+						  <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.fuelCode">
+							{{fuelTypes.fuelName}}
+						  </mat-option>
+						</mat-select>
+					  </mat-form-field>
+
+
+					  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type" [(ngModel)]='flowTypeCode'>
+							<mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+								{{ flowType.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" fxFlex.gt-sm="100%" placeholder="Statement Month" [(ngModel)]='searchMonth' readonly>
+						<mat-option *ngFor="let month of months" [value]="month.value">
+							{{ month.name }}
+						</mat-option>
+					</mat-select>
+					</mat-form-field>
+					
+					<mat-form-field  class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<mat-select class="ml-xs mr-xs" style="width: 100%;"
+									placeholder="Statement Year" [(ngModel)]='searchYear'>
+									<mat-option *ngFor="let year of years" [value]="year">
+											{{ year }}
+									</mat-option>
+							</mat-select> 
+					</mat-form-field>
+					<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+								<input matInput placeholder="Organisation Name" [matAutocomplete]="tdAuto"  [(ngModel)]='searchOrgId'  #modelDir="ngModel"
+									 (ngModelChange)="this.filteredEDCs = filterEDCs(searchOrg)" [disabled]="isDisabled">
+								 <mat-autocomplete #tdAuto="matAutocomplete">
+										 <mat-option *ngFor="let org of filteredEDCs" [value]="org.code">
+											 <span>{{ org.name }}</span>
+										 </mat-option>
+										 </mat-autocomplete>
+							 </mat-form-field> -->
+
+					<hr>
+
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="searchResults()">Search</button>
+					</mat-card-actions>
+
+				</div>
+			</mat-card-content>
+
+
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+		<!--	<ngx-datatable-column name="Edc Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.orgName}}
+					</ng-template>   
+				</ngx-datatable-column>  -->
+				 <ngx-datatable-column name="Company Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.companyName}}
+					</ng-template>
+				</ngx-datatable-column>  
+				<ngx-datatable-column name="Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.companyServiceNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+					<ngx-datatable-column name="Meter Number" ng-class="test">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.companyMeterNumber}}
+						</ng-template>
+					</ngx-datatable-column>
+					 <ngx-datatable-column name="Reading Month">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{commonService.displayMonth(row.readingMonthCode)}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Reading Year">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.readingYear}}
+						</ng-template>
+					</ngx-datatable-column> 
+					<ngx-datatable-column name="Total Import Generation">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalImportGeneration}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Total Export Generation" ng-class="test">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.totalExportGeneration}}
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column *ngIf="this.accessViewFlag" name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="openMr(row['id'])">Open</button>
+						</ng-template>
+					</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

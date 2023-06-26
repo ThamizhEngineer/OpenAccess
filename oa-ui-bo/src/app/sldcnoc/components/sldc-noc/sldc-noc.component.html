@@ -1,0 +1,307 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-title>SLDC NOC - EDC Approval</mat-card-title>
+
+      <mat-tab-group  >
+        <!-- <mat-tab label="Trader">
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100%" fxFlex="100">
+              <mat-card>
+                <mat-card-title>NOC Trader</mat-card-title>Buyer
+
+
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="isEdc" [(ngModel)]="searchSldc.edcId" >
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                          {{edc.code}} - {{ edc.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input [(ngModel)]="searchSldc.nocCode" matInput placeholder="NOC Code">
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;" placeholder="Status">
+                        <mat-option *ngFor="let edc of status" [value]="edc.key">
+                          {{edc.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-card-actions>
+                      <button mat-raised-button color="primary" (click)="search('Trader')"
+                        class="primary">Search</button>
+                    </mat-card-actions>
+
+                  </div>
+
+
+
+                  <br />
+                  <br />
+
+                  <ngx-datatable class="material" [rows]="sldcNoc"
+                    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+                    <ngx-datatable-column name="NOC Code">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.nocCode}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Status">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.status}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied No">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied Date">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedDt | date:'dd-MMM-yyyy'}}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Generator Name">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.compName}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Htsc Number">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.compServNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Actions">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button mat-raised-button color="primary" class="mr-1"
+                          [routerLink]="['/sldcnocs/sldc-noc-form/',row.id]">Open</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                  </ngx-datatable>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+        </mat-tab> -->
+
+
+        <mat-tab label="Seller" (click)="Sellertab()" >
+
+          <div fxLayout="row" fxLayoutWrap="wrap" >
+            <div fxFlex.gt-sm="100%" fxFlex="100" >
+              <mat-card>
+                <mat-card-title>NOC Seller</mat-card-title>
+
+
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]="searchSldc.edcId" >
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                          {{edc.code}} - {{ edc.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input [(ngModel)]="searchSldc.nocCode" matInput placeholder="NOC Code">
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;" placeholder="Status">
+                        <mat-option *ngFor="let edc of status" [value]="edc.key">
+                          {{edc.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-card-actions>
+                      <button mat-raised-button  (click)="Sellertab('Seller')"color="primary"
+                        class="primary">Search</button>
+                    </mat-card-actions>
+
+                  </div>
+
+
+
+                  <br />
+                  <br />
+
+                  <ngx-datatable class="material" [rows]="datas" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+                    <ngx-datatable-column name="NOC Code">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.nocCode}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Edc Name">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.edc}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Status">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.status}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied No">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied Date">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedDt | date:'dd-MMM-yyyy'}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Seller Name">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.customerName}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Generator No">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.compServNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Actions">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button mat-raised-button color="primary" class="mr-1"
+                        (click)="Updateapprovalinfo(row.id)">Open</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                  </ngx-datatable>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="Buyer" (click)="Buyertab()" >
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-sm="100%" fxFlex="100">
+              <mat-card >
+                <mat-card-title>NOC Buyer</mat-card-title>
+
+
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]="searchSldc.edcId" >
+                        <mat-option *ngFor="let edc of orgList" [value]="edc.id">
+                          {{edc.code}} - {{ edc.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <input [(ngModel)]="searchSldc.nocCode" matInput placeholder="NOC Code">
+                    </mat-form-field>
+
+                    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                      <mat-select [(ngModel)]="searchSldc.status" class="ml-xs mr-xs" style="width: 100%;" placeholder="Status">
+                        <mat-option *ngFor="let edc of status" [value]="edc.key">
+                          {{edc.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-card-actions>
+                      <button mat-raised-button color="primary"  (click)="Buyertab('Buyer')"
+                        class="primary">Search</button>
+                    </mat-card-actions>
+
+                  </div>
+
+
+
+                  <br />
+                  <br />
+
+                  <ngx-datatable class="material" [rows]="data" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true">
+
+
+                    <ngx-datatable-column name="NOC Code">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.nocCode}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Edc Name">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.edc}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Status">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.status}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied No">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Applied Date">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.appliedDt | date:'dd-MMM-yyyy'}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Buyer Name">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.customerName}}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Htsc Number">row.tSldcNocId,
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row.compServNo}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Actions">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <button mat-raised-button color="primary" class="mr-1"
+                        (click)="Updateapprovalinfo(row.id)">Open</button>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                  </ngx-datatable>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-card>
+  </div>
+</div>

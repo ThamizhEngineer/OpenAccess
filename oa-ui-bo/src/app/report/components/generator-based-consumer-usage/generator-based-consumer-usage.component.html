@@ -1,0 +1,89 @@
+<div  fxLayout="row"  fxLayoutWrap="wrap"  fxLayoutAlign="center start" >
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+	<mat-card-title>
+		Generator Based Units Usage
+	</mat-card-title>
+	<mat-card-content id="printSection">
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Operation Circle" [(ngModel)]='searchParentOrgCode'>
+					<mat-option *ngFor="let region of regions" [value]="region.code">
+						{{region.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Voltage" [(ngModel)]='searchVoltageCode'>
+					<mat-option *ngFor="let voltage of voltages" [value]="voltage.valueCode">
+						{{voltage.valueDesc}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Is Captive" [(ngModel)]='searchIsCaptive'>
+					<mat-option *ngFor="let isCaptive of isCaptives" [value]="isCaptive.key">
+						{{isCaptive.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-card-actions>
+				<button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+			</mat-card-actions>
+		</div>
+		<br/>
+
+
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+				<ngx-datatable-column name="Operation Circle">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.parentOrgName}}
+						</ng-template>
+					</ngx-datatable-column>
+			<ngx-datatable-column name="Company Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.companyName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Gen Service No">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.companyServiceNumber}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="EDC">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.orgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Capacity(kW)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.totalCapacity}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Voltage">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.voltageName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Captive Consumers">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.noOfBuyers}}
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="Total Units Consumed SlotWise-CPP(MW)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.totalUnitsBought}}
+				</ng-template>
+			</ngx-datatable-column>
+
+
+		</ngx-datatable>
+	</mat-card-content>
+	<mat-card-actions>
+
+		<button mat-raised-button color="primary" class="primary" (click)="printPage();" >Print</button>
+      </mat-card-actions>
+</mat-card>
+	</div>
+</div>

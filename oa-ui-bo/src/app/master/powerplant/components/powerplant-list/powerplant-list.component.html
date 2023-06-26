@@ -1,0 +1,126 @@
+<mat-card style="margin-bottom:10px;">
+	<mat-accordion fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					Search
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Organisation Name" [matAutocomplete]="tdAuto" [disabled]="isGen" [(ngModel)]='searchOrgId' #modelDir="ngModel" (ngModelChange)="this.filteredEDCs = filterEDCs(searchOrg)" [disabled]="isDisabled">
+					<mat-autocomplete #tdAuto="matAutocomplete">
+						<mat-option *ngFor="let org of filteredEDCs" [value]="org.code">
+							<span>{{ org.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+				<!-- <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<input matInput placeholder="Organisation Name" [matAutocomplete]="tdAuto" [disabled]="isEdc" [(ngModel)]='searchOrgId' #modelDir="ngModel">
+					<mat-autocomplete #tdAuto="matAutocomplete">
+						<mat-option *ngFor="let org of edcList" [value]="org.id">
+							<span>{{ org.name }}</span>
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field> -->
+				<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Organisation Name" [disabled]="isEdc" [(ngModel)]='searchOrgId' [required]="isMandatory">
+						<mat-option *ngFor="let edc of edcList" [value]="edc.id">
+							 {{edc.id}} - {{ edc.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Meter Number" [(ngModel)]="searchMeterNumber">
+				</mat-form-field>
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service Number" [(ngModel)]="searchSellerServiceNumber">
+				</mat-form-field>
+				<mat-card-actions>
+					<button mat-raised-button color="primary" class="primary" (click)="fetchResults()">Search</button>
+				</mat-card-actions>
+			</div>						
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card>
+
+<mat-card>
+	<mat-card-title>
+		Existing Powerplants
+	</mat-card-title>
+	<!-- <button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newPowerplant()'><mat-icon>add</mat-icon></button> -->
+  
+	<mat-card-content>
+		<ng-container *ngIf="powerplantType != '';else my_nces">
+			<ng-container *ngTemplateOutlet="plist_content"></ng-container>		
+		</ng-container>
+		<ng-template #my_nces>
+			<div fxFlex="14%">
+				<mat-card-title>
+					EDCs
+				</mat-card-title>
+				<mat-list role="list">
+					<mat-list-item role="listitem" class="tab-menu" routerLinkActive="active" *ngFor="let r of regions"><a [routerLink]="['/powerplant/powerplant-list/', r.id]" >{{r.name}}</a></mat-list-item>
+				</mat-list>
+			</div>
+			<div fxFlex="84%">
+				<ng-container *ngTemplateOutlet="plist_content"></ng-container>
+			</div>
+		</ng-template>
+		
+	</mat-card-content>
+</mat-card>
+
+
+<ng-template #plist_content>
+	<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true">
+			<!-- <ngx-datatable-column name="Code" ng-class="test">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.code}}
+				</ng-template>
+			</ngx-datatable-column> 
+			<ngx-datatable-column name="Sl.No"> 
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.serialNumber}}
+				</ng-template> 
+			</ngx-datatable-column> -->
+			<ngx-datatable-column name="Sl.No" [width] ="30">
+				<ng-template let-row="row" ngx-datatable-cell-template>
+					{{row.$$index  + 1}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="EDC Name" ng-class="test">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.orgName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Company Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.companyName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Service Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.sellerServiceNumber}}
+				</ng-template> 
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Substation">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.substationName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Meter Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.meterNumber}}
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button mat-raised-button style="min-width:25px;" class="mr-1" title="Edit" (click)="editPowerplant(row['id'])"><mat-icon>edit</mat-icon></button>
+					<button mat-raised-button style="min-width:25px;" class="mr-1" title="View" (click)="viewPowerplant(row['id'])"><mat-icon>view_agenda</mat-icon></button>
+				</ng-template>
+			</ngx-datatable-column>
+
+		</ngx-datatable>
+</ng-template>

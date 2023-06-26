@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <title>GEN WISE CHARGES ALLOCATION TO HT CONSUMER</title>
+
+
+
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            margin: 0;
+            padding: 0;
+            font: 10px/1.4 Georgia, serif;
+
+        }
+
+        @page {
+
+            /* margin-top: 3.3cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-bottom: 3.3cm; */
+
+            margin-top: 1cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1.1cm;
+            height: 21cm;
+            width: 29.7;
+            size: A4 landscape;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 11px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 11px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 75px;
+            background-color: #ffffff;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid #ddd;
+            text-align: left;
+            border-color: black;
+            border-width: 1px;
+            font-size:xx-small;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 9px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+          <div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+    <div class="header">
+        <header class="solid">
+
+            <p>GEN WISE CHARGES ALLOCATION TO HT CONSUMER</p>
+           <p></p>
+
+
+        </header>
+
+    </div>
+
+
+    <div>
+     <table id="table" style="float: center; border:1;width: 100%">
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="15">GEN WISE CHARGES ALLOCATION TO HT CONSUMER</th>
+                    </tr>  
+        
+                    <tr>
+                    	<th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">GEN NAME</th>
+                        <th style="background: #dcdcdc">GEN SERVICE NUMBER</th>
+                        <th style="background: #dcdcdc">MACHINE CAPACITY</th>
+                        <th style="background: #dcdcdc">FLOW TYPE CODE</th>
+                        <th style="background: #dcdcdc">TYPE OF SS</th>
+                        <th style="background: #dcdcdc">IS REC</th>
+                        <th style="background: #dcdcdc">EDC</th>
+                        <th style="background: #dcdcdc">HT SC NO</th>
+    					<th style="background: #dcdcdc">HT SER NAME</th>
+                        <th style="background: #dcdcdc">CHARGE DESC</th>
+                        <th style="background: #dcdcdc">CHARGE CODE</th>
+                        <th style="background: #dcdcdc">TOTAL CHARGE</th>
+                        <th style="background: #dcdcdc">STMT MONTH</th>
+                        <th style="background: #dcdcdc">STMT YEAR</th>
+                        
+                    </tr>
+                <tr class="item-row" th:each="GenChargesAllocToHtList,item : ${GenChargesAllocToHtList}">
+                <td th:text="${item.index+1}"></td>
+                  <td th:text="${GenChargesAllocToHtList.op1}"></td>
+                <td th:text="${GenChargesAllocToHtList.op2}"></td>
+                <td th:text="${GenChargesAllocToHtList.op3}"></td>
+                <td th:text="${GenChargesAllocToHtList.op4}"></td>
+                <td th:text="${GenChargesAllocToHtList.op5}"></td>
+                <td th:text="${GenChargesAllocToHtList.op6}"></td>
+                <td th:text="${GenChargesAllocToHtList.op7}"></td>
+                <td th:text="${GenChargesAllocToHtList.op8}"></td>
+                 <td th:text="${GenChargesAllocToHtList.op9}"></td>
+                <td th:text="${GenChargesAllocToHtList.op10}"></td>
+                <td th:text="${GenChargesAllocToHtList.op11}"></td>
+                <td th:text="${GenChargesAllocToHtList.op12}"></td>
+                <td th:text="${GenChargesAllocToHtList.op13}"></td>
+                <td th:text="${GenChargesAllocToHtList.op14}"></td>
+
+            </tr>
+            <td style="text-align: center;font-family: myFirstFont;" colspan="3">TOTAL</td>
+            <td th:text="${totalop3}"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td th:text="${totalop12}"></td>
+            <td></td>
+            <td></td>
+                </table>
+
+</div>
+
+<div>
+<br />
+<p style="float: left;"><b>*NOTE: This report is generated based on the data available in OA-software and is subject to audit.</b></p>
+</div>
+</body>
+
+</html>

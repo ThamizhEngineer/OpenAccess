@@ -1,0 +1,66 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      <mat-card>
+        <mat-card-title> <strong>Power Sale List</strong> </mat-card-title>
+        <mat-card-content>
+          <button *ngIf="this.accessAddFlag" mat-fab mat-fab-card-float class="mr-1" color="warn" (click)="newEsIntent()"><mat-icon>add</mat-icon></button>
+  
+          <div fxLayout="row" fxLayoutAlign="start center">  
+          </div>
+          <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [scrollbarV]="true">
+            <ngx-datatable-column name="Energy Sale Intent Number">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.code}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Flow Type">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.flowTypeCode}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Company Name">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.sellerCompanyName}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Service Number">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.sellerCompanyServiceNumber}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="EDC">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.sellerEndOrgName}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Duration From">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{commonService.displayMonth(row.fromMonth) +"-" +row.fromYear}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Duration To">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{commonService.displayMonth(row.toMonth) +"-" +row.toYear}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button mat-raised-button color="primary" matTooltip="Displays the detail view" class="mr-1" (click)="editEsIntent(row['id'])">View</button>
+                <button mat-raised-button color="primary" matTooltip="Displays the overall status" class="mr-1" (click)="listPsStatus(row['id'])">Status</button>
+
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </mat-card-content>
+    <mat-card-content>
+
+        <button  mat-raised-button  color="warn" matTooltip="Goes back to Create screen" (click)="listEsIntent()">Back</button>
+    </mat-card-content>
+
+      </mat-card>
+  
+    </div>
+  
+  </div>

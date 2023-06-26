@@ -1,0 +1,98 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+    <mat-card>
+      <mat-card-title >
+       Unimported Weg Services Report
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="disableEdc"  placeholder="EDC" [(ngModel)]='selOrgName'>
+                  <mat-option *ngFor="let org of orgList" [value]="org.id">
+                    {{org.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='searchMonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+            <input matInput placeholder="Year" [(ngModel)]="searchYear">
+          </mat-form-field>
+          
+          <mat-card-actions class="ml-xs mr-xs"  fxFlex.gt-sm="100%">				
+            <button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+            </mat-card-actions>
+          <div class="ml-xs mr-xs"  fxFlex.gt-sm="100%"></div>
+      
+         
+
+
+     
+
+    </div>
+        <br/>
+        <br/>
+
+   
+        <br/>
+        <br/>
+        <div>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+        [scrollbarV]="true">
+
+
+         <!-- <ngx-datatable-column name="Generator EDC">
+          <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+            {{row.op3}}
+          </ng-template> 
+         </ngx-datatable-column> -->
+          
+         <ngx-datatable-column name="Sl.No"  [width]="20">
+            <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+            <!-- {{rows.indexOf(row)+1}} -->
+             {{row.op1}}    
+            </ng-template>
+         </ngx-datatable-column>
+
+        
+         
+         <ngx-datatable-column name="Generator Name" [width]="300" >
+            <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+              {{row.op2}}
+            </ng-template>
+         </ngx-datatable-column>
+
+         <ngx-datatable-column name="Generator Service No"  [width]="300">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op3}}
+            </ng-template>
+         </ngx-datatable-column>
+
+        
+         <ngx-datatable-column name="Meter Number" [width]="300">
+            <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+              {{row.op5}}
+            </ng-template>
+         </ngx-datatable-column>
+         
+        
+              
+      </ngx-datatable>
+        
+      <mat-card-actions>				
+        <button mat-raised-button color="primary" class="primary" (click)="printReport()">Print</button>
+        </mat-card-actions>
+    </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

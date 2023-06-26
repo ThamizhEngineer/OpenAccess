@@ -1,0 +1,65 @@
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+<mat-card>
+      <mat-card-title >
+        Existing Substations        
+      </mat-card-title> 
+			<mat-card-content> 
+
+			<button mat-fab mat-fab-card-float class="mr-1" color="warn" (click)='newSs()'><mat-icon>add</mat-icon></button>
+						 <br/> 
+
+						<div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Substation Code" [(ngModel)]='sscode'>
+               </mat-form-field> 
+
+             <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                    <input matInput placeholder="Substation Name" [(ngModel)]='ssname'>
+               </mat-form-field>
+
+              <hr>
+
+		   		 	  <mat-card-actions>
+         					<button mat-raised-button color="primary" (click)="fetchResults()">Search</button>
+      		  	 </mat-card-actions>
+             </div>
+
+						 	</mat-card-content>
+
+					<mat-card-content>        						
+						 
+	     				   <!--<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'"  [headerHeight]="60" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)'>-->
+						 <ngx-datatable 
+              class="material"
+              [rows]="rows"
+              [columnMode]="'force'"
+							[headerHeight]="50"
+  						[footerHeight]="50"
+							[rowHeight]="'auto'"> 
+				      <ngx-datatable-column name="Substation Code" ng-class="test">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row.code}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+				      <ngx-datatable-column name="Substation Name">
+				        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+				          {{row.name}}
+				        </ng-template>
+				      </ngx-datatable-column> 
+
+             <ngx-datatable-column name="Actions">
+									<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+											<button mat-raised-button color="primary" class="mr-1" (click)="editSs(row['id'])">Open</button>
+									 </ng-template>
+				      </ngx-datatable-column>
+				    </ngx-datatable>
+						
+      </mat-card-content>
+	</mat-card>
+  </div>
+</div> 

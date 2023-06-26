@@ -1,0 +1,59 @@
+<mat-card class="mat-card-top">
+    <mat-card-title>{{addScreen?'Add':'Update'}} Captive Status Application </mat-card-title>
+
+	<mat-vertical-stepper #stepper>
+		<mat-step label="Identify Powerplant">
+			<identify-powerplant [cs]="cs" [stepDisable]="step1Disable" ></identify-powerplant>
+			<div>
+				<button *ngIf="!step1Disable" mat-raised-button  color="primary" (click)="addCs()">Create</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div> 
+		</mat-step>
+	  
+		<mat-step label="Investment Details"> 
+			<investment-details [cs]="cs" [stepDisable]="step2Disable" *ngIf="step2"></investment-details>
+			<div *ngIf="step2">
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="nextStep()">Save</button>
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="updateCs();nextStep()">Submit</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div> 
+		</mat-step>
+		
+		<mat-step label="Quantum Per Shareholder">
+			<quantum-allocation [cs]="cs" [stepDisable]="step3Disable" *ngIf="step3"></quantum-allocation>
+			<div *ngIf="step3">
+				<button  mat-raised-button  color="primary" (click)="prevStep()">Back</button>
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="nextStep()">Save</button>
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="updateCs();nextStep()">Submit</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div>  
+		</mat-step>
+		
+		<mat-step label="Cancel Existing Agreements">
+			<cancel-existing-agreements [cs]="cs" [stepDisable]="step4Disable" *ngIf="step4"></cancel-existing-agreements>
+			<div *ngIf="step4">
+				<button  mat-raised-button  color="primary" (click)="prevStep()">Back</button>
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="nextStep()">Save</button>
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'"  color="primary" (click)="nextStep()">Submit</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div>  
+		</mat-step>
+		
+		<mat-step label="Create Energy Sale Intent">
+			<create-esi [cs]="cs" [stepDisable]="step5Disable" *ngIf="step5"></create-esi>
+			<div *ngIf="step5">
+				<button  mat-raised-button *ngIf="cs.statusCode!='COMPLETED'" color="primary" (click)="completeCs();nextStep()">Complete</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div>  
+		</mat-step>
+		
+		<mat-step label="Application Summary">
+			<summary [cs]="cs" [stepDisable]="step6Disable" *ngIf="step6"></summary>
+			<div *ngIf="step6">
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Complete</button>
+				<button  mat-raised-button  color="primary" (click)="nextStep()">Close</button>
+			</div>  
+		</mat-step>
+
+</mat-vertical-stepper>
+</mat-card>

@@ -1,0 +1,43 @@
+<mat-card class="mat-card-top">
+
+	<!-- <mat-card-title>{{addScreen?'Add':'Update'}} Meter Reading Import </mat-card-title> -->
+	<mat-card-title>Substation Loss</mat-card-title>
+
+	
+	<mat-card>
+	
+
+	
+			
+				<mat-card-content>
+					<div fxLayout="row" fxLayoutAlign="start center">					
+					 
+					<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+						<input matInput placeholder="Substation Name"  [(ngModel)]='substationLoss.substationName'
+						readonly>
+						
+					 </mat-form-field> 
+
+			
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Bulk Meter Reading" [(ngModel)]='substationLoss.bulkMeterReading'   readonly >
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Total Reading of All Wegs" [(ngModel)]='substationLoss.totalAllWegs'   readonly>
+						</mat-form-field>
+
+						<mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+							<input matInput placeholder="Loss Percentage %" [(ngModel)]='substationLoss.lossPercent'  readonly  >
+						</mat-form-field>
+						
+
+					</div>
+					<mat-card-actions>
+						<button mat-raised-button color="primary" class="primary" (click)="navigateToListPage()">Back</button>
+					</mat-card-actions>
+					</mat-card-content>
+					</mat-card>
+					</mat-card>
+					

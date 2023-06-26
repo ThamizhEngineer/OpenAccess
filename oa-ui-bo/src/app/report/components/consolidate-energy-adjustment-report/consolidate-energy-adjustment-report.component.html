@@ -1,0 +1,196 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            Consolidated Energy Adjusted Order Report
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="25%">
+                    <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service Number" [(ngModel)]="ServiceNo">
+                </mat-form-field>
+
+                <!-- <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="25%">
+                  <input matInput placeholder="Financial Year" [(ngModel)]="year">
+                </mat-form-field> -->
+
+                <mat-form-field class="ml-xs mr-xs"  style="width: 25%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Financial-Year" [(ngModel)]='stmtYear'>
+                      <mat-option *ngFor="let yr of Year" [value]="yr.id">
+                        {{yr.year}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                    <button mat-raised-button color="accent" (click)="printReport()">
+                    <mat-icon>cloud_download</mat-icon>
+                    Download Pdf
+                </button>
+                </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">     
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="12">Alloted</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Adjusted</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="12">Surplus Banking</th>
+                    </tr> 
+                    <tr>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="1"></th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Gross</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Net</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Net</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Gross</th>
+                        <th style="text-align: center;background: #dcdcdc" colspan="6">Net</th>
+
+                    </tr>  
+                    <tr>
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">Month</th>
+                        <th style="background: #dcdcdc">Year</th>
+                        <th style="background: #dcdcdc">Consumer Service No</th>
+                        <th style="background: #dcdcdc">Loss %</th>
+                        <th style="background: #dcdcdc">C1</th>
+                        <th style="background: #dcdcdc">C2</th>
+                        <th style="background: #dcdcdc">C3</th>
+                        <th style="background: #dcdcdc">C4</th>
+                        <th style="background: #dcdcdc">C5</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                        <th style="background: #dcdcdc">C1</th>
+                        <th style="background: #dcdcdc">C2</th>
+                        <th style="background: #dcdcdc">C3</th>
+                        <th style="background: #dcdcdc">C4</th>
+                        <th style="background: #dcdcdc">C5</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                       <th style="background: #dcdcdc">C1</th>
+                        <th style="background: #dcdcdc">C2</th>
+                        <th style="background: #dcdcdc">C3</th>
+                        <th style="background: #dcdcdc">C4</th>
+                        <th style="background: #dcdcdc">C5</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                        <th style="background: #dcdcdc">C1</th>
+                        <th style="background: #dcdcdc">C2</th>
+                        <th style="background: #dcdcdc">C3</th>
+                        <th style="background: #dcdcdc">C4</th>
+                        <th style="background: #dcdcdc">C5</th>
+                        <th style="background: #dcdcdc">TOTAL</th>
+                        <th style="background: #dcdcdc">C1</th>
+                        <th style="background: #dcdcdc">C2</th>
+                        <th style="background: #dcdcdc">C3</th>
+                        <th style="background: #dcdcdc">C4</th>
+                        <th style="background: #dcdcdc">C5</th>  
+                        <th style="background: #dcdcdc">TOTAL</th>                    
+                    </tr>
+        
+                    <tr *ngFor="let report of rows;let i=index;">  
+                        <td>{{i+1}}</td> 
+                        <td>{{report.op1}}</td>  
+                        <td>{{report.op2}}</td>  
+                        <td>{{report.op3}}</td>  
+                        <td>{{report.op4}}</td>  
+                        <td>{{report.op5}}</td> 
+                        <td>{{report.op6}}</td> 
+                        <td>{{report.op7}}</td>   
+                        <td>{{report.op8}}</td>
+                        <td>{{report.op9}}</td> 
+                        <td>{{report.op10}}</td>
+                        <td>{{report.op11}}</td>
+                        <td>{{report.op12}}</td>
+                        <td>{{report.op13}}</td>  
+                        <td>{{report.op14}}</td>  
+                        <td>{{report.op15}}</td>  
+                        <td>{{report.op16}}</td>  
+                        <td>{{report.op17}}</td> 
+                        <td>{{report.op18}}</td> 
+                        <td>{{report.op19}}</td>   
+                        <td>{{report.op20}}</td>
+                        <td>{{report.op21}}</td> 
+                        <td>{{report.op22}}</td>
+                        <td>{{report.op23}}</td>
+                        <td>{{report.op24}}</td>
+                        <td>{{report.op25}}</td>
+                        <td>{{report.op26}}</td>
+                        <td>{{report.op27}}</td>
+                        <td>{{report.op28}}</td>
+                        <td>{{report.op29}}</td>
+                        <td>{{report.op30}}</td>
+                        <td>{{report.op31}}</td>
+                        <td>{{report.op32}}</td>
+                        <td>{{report.op33}}</td>
+                        <td>{{report.op34}}</td>
+                        
+                    </tr>   
+                    <tr >
+                      <td colspan="4"  style="text-align: center;"><b>TOTAL</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop4}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop5}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop6}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop7}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop8}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop9}}</b> &#8192; </td> 
+                      <td  style="text-align: center;"> <b>{{this.totalop10}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop11}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop12}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop13}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop14}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop15}}</b> &#8192; </td>
+                     <td  style="text-align: center;"> <b>{{this.totalop16}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop17}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop18}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop19}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop20}}</b> &#8192; </td> 
+                      <td  style="text-align: center;"> <b>{{this.totalop21}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop22}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop23}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop24}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop25}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop26}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop27}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop28}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop29}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop30}}</b> &#8192; </td> 
+                      <td  style="text-align: center;"> <b>{{this.totalop31}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop32}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop33}}</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop34}}</b> &#8192; </td>
+                      
+                    
+                    </tr> 
+               
+
+
+
+
+        
+                </table>
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

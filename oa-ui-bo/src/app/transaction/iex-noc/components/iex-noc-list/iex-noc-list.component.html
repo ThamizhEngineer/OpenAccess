@@ -1,0 +1,59 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-title>
+				IEX-NOC
+			</mat-card-title>
+			<mat-card-content>
+
+				<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+				 [scrollbarV]="true">
+
+					<ngx-datatable-column name="{{this.commonUtils.getProp('buyer')}} Name">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.buyerCompanyName}}
+						</ng-template>
+					</ngx-datatable-column>
+
+						
+					<ngx-datatable-column name="Proposed Capacity">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.proposedCapacity}}
+						</ng-template>
+					</ngx-datatable-column>
+				
+					<ngx-datatable-column name="Buyer EDC Name" ng-class="test">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.buyerOrgName}}
+						</ng-template>
+					</ngx-datatable-column>
+			
+					<ngx-datatable-column name="Duration From">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Duration To">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						</ng-template>
+					</ngx-datatable-column>
+
+					<ngx-datatable-column name="Status">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							{{row.statusCode}}
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="Actions">
+						<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+							<button mat-raised-button color="primary" class="mr-1" (click)="editNoc(row['id'])">Open</button>
+						</ng-template>
+					</ngx-datatable-column>
+
+				</ngx-datatable>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

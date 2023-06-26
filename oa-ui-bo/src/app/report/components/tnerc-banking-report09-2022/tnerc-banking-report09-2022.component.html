@@ -1,0 +1,177 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    
+    <mat-card>
+      <mat-card-title >
+          BANKING-TOD-REPORT
+         </mat-card-title>
+         <div fxLayout="row" fxLayoutAlign="start center">
+
+              <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="20%">
+                  <input matInput placeholder="Statment Year" [(ngModel)]="stmtYear">
+                </mat-form-field> -->
+                
+              <mat-form-field class="ml-xs mr-xs" style="width: 20%;">
+                  <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                          <mat-option *ngFor="let edc of edcList" [value]="edc.name">
+                                  {{edc.code}} - {{ edc.name }}
+                          </mat-option>
+                  </mat-select>
+                  </mat-form-field>
+              <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="30%">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='readMonth'>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        <mat-form-field class="ml-xs mr-xs"  style="width: 30%;">
+          <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Year" [(ngModel)]='readYear'>
+            <mat-option *ngFor="let yr of Year" [value]="yr.id">
+              {{yr.year}}
+            </mat-option>
+           </mat-select>
+        </mat-form-field>
+
+
+            <mat-card-actions>				
+              <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+            </mat-card-actions>
+            <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="printReport()">
+                <mat-icon>cloud_download</mat-icon>
+                Download Pdf
+            </button>
+           </mat-card-actions>
+           <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+             <mat-icon>cloud_download</mat-icon>
+             Download As XL</button>
+           </mat-card-actions>
+
+      </div>
+
+          <mat-card-content>
+            
+                  
+                  <div>
+                      <ngx-datatable class="material" [rows]="uer" [headerHeight]="50" [footerHeight]="50"
+                        [rowHeight]="50" [scrollbarV]="true">
+            
+            
+                        <!-- <ngx-datatable-column name="Generator EDC">
+                        <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                          {{row.op3}}
+                        </ng-template>
+                       </ngx-datatable-column> -->
+            
+                       <ngx-datatable-column name="Sl.No">
+                          <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            {{uer.indexOf(row)+1}}
+            
+                          </ng-template>
+                        </ngx-datatable-column> 
+            
+            
+                        <ngx-datatable-column name="Service No">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op1}}
+                          </ng-template>
+                        </ngx-datatable-column>
+            
+            
+                        <ngx-datatable-column name="Company Name">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op2}}
+                          </ng-template>
+                        </ngx-datatable-column>
+            
+                        <ngx-datatable-column name="Commissioned Date">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op3}}
+                          </ng-template>
+                        </ngx-datatable-column>
+            
+            
+                        <ngx-datatable-column name="Flow Type">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op4}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_C1">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op5}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                   <ngx-datatable-column name="CB_C2">
+                    <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                        {{row.op6}}
+                    </ng-template>
+                  </ngx-datatable-column>
+            
+                         <ngx-datatable-column name="CB_C3">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op7}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_C4">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op8}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_C5">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op9}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_Total">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op10}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_C1">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op11}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_C2">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op12}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_C3">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op13}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_C4">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op14}}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_C5">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op15}}
+                          </ng-template>
+                        </ngx-datatable-column> 
+                        <ngx-datatable-column name="CB_AfterTransfer of C3toC4_Total">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op16}}
+                          </ng-template>
+                        </ngx-datatable-column> 
+                        <ngx-datatable-column name="BankingRemarks">
+                          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{row.op17}}
+                          </ng-template>
+                        </ngx-datatable-column> 
+            
+            
+                      </ngx-datatable>
+            
+                    </div>
+              </mat-card-content>
+              </mat-card>
+      
+  </div>

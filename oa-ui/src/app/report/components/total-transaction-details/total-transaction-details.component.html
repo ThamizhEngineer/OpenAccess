@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-title>
+    Total Transaction Details
+  </mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="start center">
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput [matDatepicker]="fromDate" placeholder="From Date" [(ngModel)]="selectedTrnFromDate" >
+			<mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+			<mat-datepicker #fromDate></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+			<input matInput [matDatepicker]="toDate" placeholder="To Date" [(ngModel)]="selectedTrnToDate" >
+			<mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+			<mat-datepicker #toDate></mat-datepicker>
+		</mat-form-field>
+
+		<mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+			<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Agreement Period" [(ngModel)]="selectedAgreePeriod">
+			  <mat-option *ngFor="let period of periodCodes" [value]="period.valueCode">
+					{{period.valueDesc}}
+			  </mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<mat-card-actions>
+			<button mat-raised-button color="primary" class="primary" (click)="searchReport()">Search</button>
+		</mat-card-actions>
+	
+	</div>
+    <br/>
+
+    <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+      <ngx-datatable-column name="Application No">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op1}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Application Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op2}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Company Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op3}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Service Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op4}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Generator Name">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op5}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Peak Units">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op6}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Off-Peak Units">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op7}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <!-- <ngx-datatable-column name="Application Processing Fee">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op8}}
+				</ng-template>
+      </ngx-datatable-column> -->
+
+      <!-- <ngx-datatable-column name="Receipt No">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op9}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Receipt Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op10}}
+				</ng-template>
+      </ngx-datatable-column> -->
+
+      <ngx-datatable-column name="Approval Number">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op11}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Approval Date">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op12}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Agreement Period">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op13}}
+				</ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Status">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.op14}}
+				</ng-template>
+      </ngx-datatable-column>
+    
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,76 @@
+<div class="solution">
+<div fxLayout="row" fxLayout.xs="column">
+    <mat-card fxFlex="50%;" fxFlex.xs="80%">
+        <mat-card-content>
+        <div class="timeline">  
+        <div class="timeline-card">
+        	<mat-card-title>Fossil Fuel Captive Application</mat-card-title>
+            <div class="timeline-icon mat-grey"></div>
+            </div>
+            <div class="timeline-card" *ngFor="let t of timeline;let i=index">
+            <div class="timeline-icon" [ngClass]="colorCodes[t.processStatus]" [title]="t.processName"></div>
+            <section class="timeline-content">
+                <mat-card>
+                        <mat-card-content>
+                            <p [title]="t.processName">{{t.processName}}</p>
+                            <span><i>{{t.processStatus}}</i></span>
+                            <div class="chips">
+                            <div class="chip">{{t.esiNumber}}</div>
+                        
+
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                    <div class="timeline-date">{{t.logDt | date: "dd-MM-yyyy"}}</div>
+            </section>
+            </div>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+
+<mat-card fxFlex="50%;" fxFlex.xs="80%">
+        <mat-card-content>
+   
+                <mat-card-title>More Info </mat-card-title>
+                <ngx-datatable class="material" tabindex="index" [rows]="status" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="0" [rowHeight]="'auto'">
+
+                    <ngx-datatable-column name="Consumer">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row.buyerCompName}}
+
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Noc">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <button mat-raised-button matTooltip="Displays the detail view for Noc" [disabled]="isGen" (click)="editNoc(row['nocId'])">{{row.nocStatus}}</button>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Consent">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <button mat-raised-button matTooltip="Displays the detail view for Consent" [disabled]="isGen" (click)="editConsent(row['consentId'])">{{row.consentStatus}}</button>
+
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+   
+   </mat-card-content>
+   </mat-card>
+</div>
+</div>
+
+
+    <mat-card>
+            <mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button  color="warn"  matTooltip="Goes back to list Screen" (click)="listEsIntent()">Back</button>
+            </mat-card-actions>
+            </mat-card-content>
+     </mat-card>
+
+

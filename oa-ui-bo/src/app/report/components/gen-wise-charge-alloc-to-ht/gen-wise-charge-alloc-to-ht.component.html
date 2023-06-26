@@ -1,0 +1,152 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            GEN WISE CHARGES ALLOCATION TO HT CONSUMER
+           </mat-card-title>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- <mat-form-field class="ml-xs mr-xs"  style="width: 100%;">
+                  <input matInput placeholder="Stmt Month" [(ngModel)]="stmtMonth">
+                </mat-form-field> -->
+
+                
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="To Month" [(ngModel)]='stmtMonth'>
+                  <mat-option *ngFor="let month of months" [value]="month.value">
+                    {{month.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear"> -->
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                        placeholder="Stmt Year" [(ngModel)]='stmtYear'
+                        readonly>
+                        <mat-option *ngFor="let year of years" [value]="year">
+                            {{ year }}
+                        </mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type" [(ngModel)]='flowTypeCode'>
+                        <mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+                            {{ flowType.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                  <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Type Code" [(ngModel)]='fuelTypeCode'>
+                      <mat-option *ngFor="let fuelTypes of fuelTypes" [value]="fuelTypes.valueCode">
+                        {{fuelTypes.valueDesc}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                            <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                                    {{edc.code}} - {{ edc.name }}
+                            </mat-option>
+                    </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                <input (keydown)="numberFormat($event)" type="text"  onKeyPress="if(this.value.length==12) return false;" matInput placeholder="Service Number" [(ngModel)]="serviceNo">
+              </mat-form-field>
+                  
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+
+                <mat-card-actions>				
+                  <button mat-raised-button color="accent" (click)="printReport()">
+                  <mat-icon>cloud_download</mat-icon>
+                  Download Pdf
+              </button>
+              </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        <mat-card-content>
+            <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                
+            <div style="float: center;width: 100%">
+                <table id="table" style="float: center; border:1;width: 100%">       
+                    <tr>
+                        <th style="background: #dcdcdc">S.NO</th>
+                        <th style="background: #dcdcdc">GEN NAME</th>
+                        <th style="background: #dcdcdc">GEN SERVICE NUMBER</th>
+                        <th style="background: #dcdcdc">MACHINE CAPACITY</th>
+                        <th style="background: #dcdcdc">FLOW TYPE CODE</th>
+                        <th style="background: #dcdcdc">TYPE OF SS</th>
+                        <th style="background: #dcdcdc">IS REC</th>
+                        <th style="background: #dcdcdc">EDC</th>
+                        <th style="background: #dcdcdc">HT SC NO</th>
+    					<th style="background: #dcdcdc">HT SER NAME</th>
+                        <th style="background: #dcdcdc">CHARGE DESC</th>
+                        <th style="background: #dcdcdc">CHARGE CODE</th>
+                        <th style="background: #dcdcdc">TOTAL CHARGE</th>
+                        <th style="background: #dcdcdc">STMT MONTH</th>
+                        <th style="background: #dcdcdc">STMT YEAR</th>
+                    </tr>
+        
+                    <tr *ngFor="let report of gen;let i=index;">  
+                        <td>{{i+1}}</td>
+                        <td>{{report.op1}}</td>  
+                        <td>{{report.op2}}</td>  
+                        <td>{{report.op3}}</td>  
+                        <td>{{report.op4}}</td>  
+                        <td>{{report.op5}}</td> 
+                        <td>{{report.op6}}</td> 
+                        <td>{{report.op7}}</td>   
+                        <td>{{report.op8}}</td>
+                        <td>{{report.op9}}</td> 
+                        <td>{{report.op10}}</td>
+                        <td>{{report.op11}}</td>
+                        <td>{{report.op12}}</td>
+                        <td>{{report.op13}}</td>  
+                        <td>{{report.op14}}</td>  
+                        
+                        <!-- <td>{{report.op19 | date: 'dd/MM/yyyy'}}</td>    -->
+                        <!-- <td>{{report.op21 || '0'}}</td>  --> 
+                    </tr>   
+
+                    <tr >
+                      <td colspan="3"  style="text-align: center;"><b>TOTAL</b> &#8192; </td>
+                      <td  style="text-align: center;"> <b>{{this.totalop3}}</b> &#8192; </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td  style="text-align: center;"> <b>{{this.totalop12}}</b> &#8192; </td>
+                      <td></td>
+                      <td></td>
+        
+                </table>
+               
+        
+        
+            </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

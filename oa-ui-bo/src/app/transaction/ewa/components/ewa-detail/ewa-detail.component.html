@@ -1,0 +1,208 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Ewa Application</mat-card-title>
+
+	<ng-template mat-tab-label>Ewa Details</ng-template>
+	<mat-card-content>
+		<div mat-subheader>{{this.commonUtils.getProp('seller')}} Information</div>
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="{{this.commonUtils.getProp('seller')}} EDC Name" [(ngModel)]="ewa.sellerOrgName" [disabled]="true">
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="{{this.commonUtils.getProp('seller')}} Service Number" value="{{ewa.sellerCompanyName}} - {{ewa.sellerCompServiceNumber}}" [disabled]="true">
+			</mat-form-field>
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Injecting Voltage" [disabled]="true" [(ngModel)]='ewa.sellerInjectionVoltageDesc'>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Energy Sale Intent Number" [disabled]="true" [(ngModel)]='ewa.esIntentCode'>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Wheeling Application Number" [disabled]="true" [(ngModel)]='ewa.code'>
+			</mat-form-field>
+
+			<!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Fuel" [disabled]="true" [(ngModel)]='ewa.sellerPowerPlantFuelDesc'>
+				</mat-form-field> 
+				
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Plant Capacity" [disabled]="true" [(ngModel)]='ewa.sellerCapacity'>
+				</mat-form-field>  -->
+
+		</div><br/>
+
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Duration From" [disabled]="true" value="{{ewa.fromDate | date: 'dd/MM/yyyy'}}">
+				<!--value="{{commonService.displayMonth(ewa.fromMonth)}} - {{ewa.fromYear}}"-->
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Duration To" [disabled]="true"  value="{{ewa.toDate | date: 'dd/MM/yyyy' }}"> 
+				<!--value="{{commonService.displayMonth(ewa.toMonth)}} - {{ewa.toYear}}" -->
+			</mat-form-field>
+
+		<!--	<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Total Injected Peak Units" [disabled]="true" [(ngModel)]='this.totalInjectionPeakUnits'>
+			</mat-form-field>
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Total Injected Off Peak Units" [disabled]="true" [(ngModel)]='this.totalInjectionOffPeakUnits'>
+			</mat-form-field> -->
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Total Approved Quantum(MW)" [disabled]="true" [(ngModel)]='ewa.totalApprovedUnits'>
+			</mat-form-field>
+
+		</div><br/>
+		<div  *ngIf="ewa.flowTypeCode=='THIRD-PARTY' "fxLayout="row" fxLayoutAlign="start center">
+		
+
+			<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<input matInput placeholder="Total Proposed Quantum (MW)" [disabled]="true" [(ngModel)]='ewa.totalProposedUnits'>
+			</mat-form-field>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+			<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+		</div>
+
+		<mat-card *ngIf="ewa.flowTypeCode=='CAPTIVE' || ewa.flowTypeCode=='WEG'">
+
+			<div mat-subheader>Captive User Details</div>
+			<ngx-datatable class="material" [rows]="ewa.ewaLines" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="'auto'">
+				<ngx-datatable-column name="EDC Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerOrgName}}
+					</ng-template>
+				</ngx-datatable-column>
+  
+
+				<ngx-datatable-column name="Consumer(Buyer)Company Name">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerCompanyName}}
+					</ng-template>
+				</ngx-datatable-column>
+
+		
+				<ngx-datatable-column name="Service Number">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.buyerCompServiceNumber}}
+					</ng-template>
+				</ngx-datatable-column>
+
+	<!--		<ngx-datatable-column name="Drawal Peak">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.drawalPeakUnits}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column name="Drawal Off Peak ">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.drawalOffPeakUnits}}
+					</ng-template>
+				</ngx-datatable-column>  -->
+
+				<ngx-datatable-column name="Approved Quantum(MW) ">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.approvedUnits}}
+					</ng-template>
+				</ngx-datatable-column>
+				<ngx-datatable-column name="Remarks">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						{{row.remarks}}
+					</ng-template>
+				</ngx-datatable-column>
+			<!--	<ngx-datatable-column name="">
+					<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+						<button mat-raised-button color="primary" class="mr-1" (click)="editCaptive(row)">Edit</button>
+					</ng-template>
+				</ngx-datatable-column> -->
+			</ngx-datatable>
+			<!-- <button mat-raised-button color="primary" (click)="addCaptive()">Add Captive User</button> -->
+			<br/><br/>
+
+			<mat-card *ngIf="isCaptive">
+				<div mat-subheader>Add/Edit Captive User</div>
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="EDC Name" [disabled]="true" [(ngModel)]='ewaLines.buyerOrgName'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="{{this.commonUtils.getProp('buyer')}} Name" [disabled]="true" [(ngModel)]='ewaLines.buyerCompanyName'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Capacity" [disabled]="true" [(ngModel)]='ewaLines.buyerCapacity'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Voltage" [disabled]="true" [(ngModel)]='ewaLines.drawalVoltageDesc'>
+					</mat-form-field>
+					<div class="ml-xs mr-xs" fxFlex.gt-sm="100%"></div>
+
+
+
+				</div><br/>
+
+				<div fxLayout="row" fxLayoutAlign="start center">
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Drawal (Peak)" [(ngModel)]='ewaLines.drawalPeakUnits'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Drawal (Off Peak)" [(ngModel)]='ewaLines.drawalOffPeakUnits'>
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="ApprovedUnits" [(ngModel)]='ewaLines.approvedUnits' [disabled]="true">
+					</mat-form-field>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Loss" [(ngModel)]='ewaLines.loss'>
+					</mat-form-field>
+
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Remarks" [(ngModel)]='ewaLines.remarks'>
+					</mat-form-field>
+
+
+				</div><br/>
+
+				<mat-card-actions>
+					<button mat-raised-button color="primary" (click)="updateCaptive()">Update Captive User</button>
+				</mat-card-actions>
+			</mat-card>
+		</mat-card>
+	</mat-card-content>
+	<mat-card-content> 
+		<div  fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start">
+		  <div fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100"  class="pr-1">
+			<h4 class="mt-0">Select Agreement to upload</h4>		
+  
+			<input type="file" ng2FileSelect [uploader]="uploader" />		
+			
+		  </div>
+		</div>
+	</mat-card-content>
+	<mat-card-content> 
+		<div  fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start">
+		
+		</div>
+	</mat-card-content>
+	
+	<hr>
+	<mat-card-actions>
+		<button mat-raised-button color="primary" *ngIf="ewa.statusCode=='CREATED' && this.accessUpdateFlag" (click)="saveEwa('')">Upload</button>
+		<!-- <button mat-raised-button color="primary" *ngIf="ewa.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveEwa()">Approve</button> -->
+		<button mat-raised-button color="primary" *ngIf="ewa.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeEwa()">Execute Agreement</button>
+		<button mat-raised-button class="primary" (click)="listEwas()">Cancel/Back</button>
+	</mat-card-actions>
+</mat-card>

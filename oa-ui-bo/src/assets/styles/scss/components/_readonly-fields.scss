@@ -1,0 +1,58 @@
+table.head {
+	width: 100%;
+    border-style: none;
+  }
+ table.head td{ 
+	width: 25%;
+	border-style: none;
+    vertical-align: top;
+ }
+
+ table.head tr.label {
+	font-weight: bold;     
+  }
+
+//   below properties are not used --------
+.mat-grid-tile .mat-figure .figure.mat-figure{
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+	padding: 2px 2px;
+ }
+ mat-grid-tile figure.mat-figure{
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+	padding: 2px 2px;
+ }
+
+  
+
+.hideUnderLine {
+	::ng-deep .mat-form-field-underline .mat-figure{
+		display: none;
+		align-items: flex-start;
+		justify-content: flex-start;
+	}
+}
+
+mat-label {
+    color: #880af0;
+  }
+
+mat-value {
+    color: #070708;
+  }
+
+.colour {
+    // color: #0af030;
+    background-color: #0ee706;
+	// -webkit-border-radius: 10px;
+	// border-radius: 10px;
+	border: none;
+	color: #080808;
+	display: inline-block;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 16px;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+  }

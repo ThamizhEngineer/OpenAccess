@@ -1,0 +1,58 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>Tariff Details</mat-card-title>
+	
+	<mat-card-actions fxLayoutAlign="end">
+		<button mat-raised-button color="primary" (click)='newTariff()'>Add</button>
+	</mat-card-actions><hr>
+	<ng-template mat-tab-label>Tariff Details</ng-template>
+		<!-- <mat-card-content *ngIf="avail"> -->
+			<!-- <hotTable id="hot-table" [data]="tariffs" [options]="hotOptions" [columns]="columns" [colWidths]="colWidths" [colHeaders]="colHeaders"></hotTable> -->
+		<!-- </mat-card-content> -->
+		<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="60" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)'>
+			<ngx-datatable-column name="Commissioning<br>Period From">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+						<input matInput [(ngModel)]="row.fromDate" type="date">
+					</mat-form-field>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="To">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+						<input matInput [(ngModel)]="row.toDate" type="date">
+					</mat-form-field>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="WEG Class/Group">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+						<input matInput [(ngModel)]="row.wegGroup">
+					</mat-form-field>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Rate Per Unit<br>(in INR)">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+						<input matInput [(ngModel)]="row.rate">
+					</mat-form-field>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="TNERC Order Reference">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="80%">
+						<input matInput [(ngModel)]="row.reference">
+					</mat-form-field>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Actions">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					<button  mat-raised-button color="primary" (click)="updateTariff(row)">Save</button>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+	<hr>
+	<mat-card-actions fxLayoutAlign="end">
+		<button mat-raised-button color="primary" (click)='newTariff()'>Add</button>
+	</mat-card-actions>
+</mat-card>

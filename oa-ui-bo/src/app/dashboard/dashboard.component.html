@@ -1,0 +1,149 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="33" *ngIf="uCode=='A' || uCode=='EDC'">
+		<mat-card class="card-widget mat-purple">
+		  <div mat-card-widget>
+			<div mat-card-float-icon>
+			  <mat-icon>notifications</mat-icon>
+			</div>
+			<div class="pl-0">
+			  <h2 mat-card-widget-title>60</h2>
+			  <p>Pending Allotments</p>
+			</div>
+		  </div>
+		</mat-card>
+	  </div>
+	  <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="33" *ngIf="uCode=='A' || uCode=='CON' || uCode=='EDC'">
+		<mat-card class="card-widget mat-cyan">
+		  <div mat-card-widget>
+			<div mat-card-float-icon>
+			  <mat-icon>local_offer</mat-icon>
+			</div>
+			<div class="pl-0">
+			  <h2 mat-card-widget-title>150</h2>
+			  <p>Units Units Adjusted Last Month</p>
+			</div>
+		  </div>
+		</mat-card>
+		</div>
+		
+	  <div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="33" *ngIf="uCode=='A' || uCode=='CON' || uCode=='EDC'">
+		<mat-card class="card-widget mat-teal">
+		  <div mat-card-widget>
+			<div mat-card-float-icon>
+			  <mat-icon>local_offer</mat-icon>
+			</div>
+			<div class="pl-0">
+			  <h2 mat-card-widget-title>250</h2>
+			  <p>Total Units Adjusted Last Month</p>
+			</div>
+		  </div>
+		</mat-card>
+		</div>
+<!-- FOR SLDC AND PPP -->
+
+		<div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="33" *ngIf="uCode=='SLDC' || uCode=='PPP'">
+				<mat-card class="card-widget mat-purple">
+					<div mat-card-widget>
+					<div mat-card-float-icon>
+						<mat-icon>notifications</mat-icon>
+					</div>
+					<div class="pl-0">
+						<h2 mat-card-widget-title>20</h2>
+						<p>Pending Approvals</p>
+					</div>
+					</div>
+				</mat-card>
+				</div>
+				<div fxFlex.gt-sm="33" fxFlex.gt-xs="33" fxFlex="33" *ngIf="uCode=='SLDC' || uCode=='PPP'">
+				<mat-card class="card-widget mat-cyan">
+					<div mat-card-widget>
+					<div mat-card-float-icon>
+						<mat-icon>local_offer</mat-icon>
+					</div>
+					<div class="pl-0">
+						<h2 mat-card-widget-title>15</h2>
+						<p>Aggrements Approved Last Month</p>
+					</div>
+					</div>
+				</mat-card>
+				</div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxFlex.gt-sm="33%" fxFlex="33">
+		<mat-card *ngIf="uCode=='A' || uCode=='GEN' || uCode=='EDC'">
+			<mat-card-content>
+				<canvas baseChart
+					[datasets]="barChartData1"
+					[labels]="barChartLabels1"
+					[options]="barChartOptions1"
+					legend="true"
+					height="250"
+					[colors]="chartColors"
+					chartType="bar">
+				</canvas>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<div fxFlex.gt-sm="33%" fxFlex="33">
+		<mat-card *ngIf="uCode=='A' || uCode=='EDC'">
+			<mat-card-content>
+				 <canvas baseChart
+					  [data]="pieChartData"
+					  [labels]="pieChartLabels"
+					  height="250"
+					  [colors]="chartColors"
+					  [options]="pieChartOptions"
+					  chartType="pie">
+				  </canvas>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<div fxFlex.gt-sm="33%" fxFlex="33">
+		<mat-card *ngIf="uCode=='A' || uCode=='GEN'  || uCode=='CON'  || uCode=='EDC'">
+			<mat-card-content>
+				<canvas baseChart
+					[datasets]="barChartData2"
+					[labels]="barChartLabels2"
+					[options]="barChartOptions2"
+					legend="true"
+					height="250"
+					[colors]="chartColors"
+					chartType="bar">
+				</canvas>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<!-- FO SLDC AND PPP -->
+	<div fxFlex.gt-sm="33%" fxFlex="33">
+			<mat-card *ngIf="uCode=='SLDC' || uCode=='PPP'">
+				<mat-card-content>
+					<canvas baseChart
+						[datasets]="barChartData1"
+						[labels]="barChartLabels1"
+						[options]="barChartOptions1"
+						legend="true"
+						height="250"
+						[colors]="chartColors"
+						chartType="bar">
+					</canvas>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div fxFlex.gt-sm="33%" fxFlex="33">
+			<mat-card *ngIf="uCode=='SLDC' || uCode=='PPP'">
+				<mat-card-content>
+					<canvas baseChart
+							[data]="pieChartData"
+							[labels]="pieChartLabels"
+							height="250"
+							[colors]="chartColors"
+							[options]="pieChartOptions"
+							chartType="pie">
+						</canvas>
+				</mat-card-content>
+			</mat-card>
+		</div>
+
+</div>
+

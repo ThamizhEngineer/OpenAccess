@@ -1,0 +1,148 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+            <mat-card>
+                <mat-card-title>Energy Audit Report Detail Page For {{month}}  {{year}}</mat-card-title>
+                <mat-card-content>
+                    <mat-card-title>Generator Details</mat-card-title>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Gen Service Number"
+                                [(ngModel)]='serviceNo' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <mat-select class="ml-xs mr-xs" style="width: 100%;" [disabled]="true"
+                                    placeholder="Statement Month" [(ngModel)]='month' readonly>
+                                    <mat-option *ngFor="let month of months" [value]="month.value">
+                                        {{ month.name }}
+                                    </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput type="number" placeholder="Year"
+                                [(ngModel)]='year' readonly>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Seller Company"
+                                [(ngModel)]='sellerCompany' readonly>
+                        </mat-form-field>
+                        <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                            <input matInput placeholder="Seller Edc"
+                                [(ngModel)]='sellerEdc' readonly>
+                        </mat-form-field>
+                    </div>
+                    <ngx-datatable class="material striped" [rows]="energyAdjOrderList" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+                            [scrollbarH]="true">
+                            <ngx-datatable-column  name="S.NO" [frozenLeft]="true"  [flexGrow]="1">
+                                <ng-template   let-row="row"  ngx-datatable-cell-template>
+                                    {{row.$$index  + 1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Consumer Number" [frozenLeft]="true" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>                               
+                                   <b> <i [innerHTML]="row['buyerServiceNumber']"></i></b>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Buyer Company Name" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>                               
+                                   <b> <i [innerHTML]="row['dBuyerCompName']"></i></b>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Buyer EDC Name" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>                               
+                                   <b> <i [innerHTML]="row['dBuyerOrgName']"></i></b>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Fuel Type" [flexGrow]="2">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>                               
+                                   <b> <i [innerHTML]="row['fuelTypeCode']"></i></b>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Alloted C1" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.allotedC1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Alloted C2" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.allotedC2}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Alloted C3" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.allotedC3}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Alloted C4" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.allotedC4}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Alloted C5" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.allotedC5}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Adjusted C1" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.adjustedC1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Adjusted C2" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.adjustedC2}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Adjusted C3" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.adjustedC3}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Adjusted C4" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.adjustedC4}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Adjusted C5" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.adjustedC5}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Surplus C1" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.htBankingWithLossC1}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Surplus C2" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.htBankingWithLossC2}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Surplus C3" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.htBankingWithLossC3}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Surplus C4" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.htBankingWithLossC4}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Surplus C5" [flexGrow]="1">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{row.htBankingWithLossC5}}
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                        <mat-card-actions>
+                            <button mat-raised-button class="primary" (click)="listGss(serviceNo,fromMonth,fromYear,toMonth,toYear)" >Back</button>
+                            <!-- <button mat-raised-button class="primary" (click)="printConsumerWise()" >Print</button> -->
+                            <button  mat-raised-button color="accent" (click)="exportAsXLSX()">
+                                <mat-icon>cloud_download</mat-icon>
+                                Download As XL</button>
+                        </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>

@@ -1,0 +1,65 @@
+<mat-card class="mat-card-top">
+
+	<mat-card-title>{{addScreen?'Add':'Update'}} Feeder</mat-card-title>
+
+	<ng-template mat-tab-label>NOC Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				
+				
+				 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Code" [(ngModel)]="feeder.code" >
+				</mat-form-field> 
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Name" [(ngModel)]="feeder.name"  >
+				</mat-form-field>
+
+				 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Remarks" [(ngModel)]="feeder.remarks"  >
+                </mat-form-field> 			
+
+				 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Voltage" [(ngModel)]="feeder.voltage"  >
+					<mat-option *ngFor="let voltage of voltages" [value]="voltage.name"  >
+						{{voltage.name}}
+					</mat-option> 
+				</mat-select>
+				 </mat-form-field> 	
+
+				
+			</div>
+			<br>
+
+			<div mat-subheader><strong>Feeder Details</strong></div><br>
+		
+
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Substation Name" [(ngModel)]='feeder.substationId' >
+				</mat-form-field>
+
+							
+                
+                 <!-- <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Enabled" [(ngModel)]="feeder.enabled"  >
+				</mat-form-field>  -->
+				 <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Enabled" [(ngModel)]="feeder.enabled"  >
+					<mat-option *ngFor="let enable of isEnabled" [value]="enable.name"  >
+						{{enable.name}}
+					</mat-option> 
+				</mat-select>
+					</mat-form-field>
+				<div class="ml-xs mr-xs" style="width: 100%;"> </div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+	<hr>
+	  <mat-card-actions>
+		<button mat-raised-button color="primary" [disabled]=(disableControls) (click)="saveFeeder('')">Save</button>
+		<button mat-raised-button class="primary" (click)="listFeeder()">Cancel/Back</button>
+	</mat-card-actions>   
+</mat-card>

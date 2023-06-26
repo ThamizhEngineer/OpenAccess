@@ -1,0 +1,27 @@
+<mat-card fxFlex="35%">
+	<mat-card-title>Change Password</mat-card-title>
+	<mat-card-content>
+		
+		<form #myNgForm="ngForm">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex="95%">
+					<input matInput placeholder="New Password" type="password" [(ngModel)]="newPword" autocomplete="off" #d_newPword="ngModel" required minlength="4" name="v_newPword">
+					<mat-hint>Must be AlphaNumeric</mat-hint>
+					<mat-error *ngIf="d_newPword.errors?.required">New password is required.</mat-error>
+					<mat-error *ngIf="d_newPword.errors?.minlength">Password must be atleast 4 characters long.</mat-error>
+				</mat-form-field>
+			</div><br/>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex="95%">
+					<input matInput placeholder="Confirm New Password" type="password" [(ngModel)]="cnewPword" autocomplete="off" #d_cnewPword="ngModel" required [pattern]="newPword" name="v_cnewPword">
+					<mat-hint>Must be AlphaNumeric</mat-hint>
+					<mat-error *ngIf="d_cnewPword.errors?.required">New password is required.</mat-error>
+					<mat-error *ngIf="d_cnewPword.errors?.pattern">New Password is not matching.</mat-error>
+				</mat-form-field>
+			</div><br/>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<button mat-raised-button color="primary" type="submit" fxFlex="70%" [disabled]="d_cnewPword.invalid || d_newPword.invalid" (click)="updatePassword();myNgForm.reset();">Change Password</button>
+			</div>
+		</form>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,75 @@
+<mat-card class="mat-card-top">
+	<mat-card-title>{{titles[paymentType]}}</mat-card-title>
+	<ng-template mat-tab-label>Payment Details</ng-template>
+	<mat-card>
+		<mat-card-content>
+			<div *ngIf="paymentType  == 'sale'; else saleContent">
+				
+				<consumer-detail [services]="consumerServices" [csDisplayUnits]="csDisplayUnits" [conDetails]="payment.consumerDetails"></consumer-detail>
+				
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Invoice Number" [(ngModel)]='payment.invoiceNumber'>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Invoice Date" [(ngModel)]='payment.invoiceDate'>
+					</mat-form-field>
+				</div>
+			</div>
+			<ng-template #saleContent>
+				<consumer-detail [services]="consumerServices" [conDetails]="payment.consumerDetails"></consumer-detail>
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Select Accounting Head" [(ngModel)]='payment.paymentMode'>
+						<mat-option *ngFor="let accHead of accHeads" [value]="accHead.key">
+							{{ accHead.name }}
+						</mat-option>
+					</mat-select>
+					</mat-form-field>
+
+					<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+						<input matInput placeholder="Company name" [(ngModel)]='payment.companyName'>
+					</mat-form-field>
+				</div>
+			</ng-template>
+			<br/>
+			<div mat-subheader>Payment Received</div><br>
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Bank name" [(ngModel)]='payment.bankDetails'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+				<mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Mode of Payment" [(ngModel)]='payment.type'>
+					<mat-option *ngFor="let mode of modes" [value]="mode.key">
+						{{ mode.name }}
+					</mat-option>
+				</mat-select>
+					</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Instrument Number" [(ngModel)]='payment.instrumentNumber'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Date" [(ngModel)]='payment.date'>
+				</mat-form-field>
+
+				<mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+					<input matInput placeholder="Amount (Rs)" [(ngModel)]='payment.amount'>
+				</mat-form-field>
+			</div>
+			<br/>
+
+
+		</mat-card-content>
+	</mat-card>
+
+	<mat-card-actions>
+		<button mat-raised-button color="primary" [disabled]=(disableControls) (click)="savePayment('')">Save Temporarily</button>
+		<button *ngIf="nextAction" mat-raised-button color="primary" [disabled]=(disableControls) (click)="savePayment(nextPaymentStatus)">{{nextAction}}</button>
+		<button *ngIf="payment.header.status === 'Applied'" mat-raised-button color="primary" [disabled]=(disableControls) (click)="savePayment('Disapprove')">Disapprove</button>
+		<button mat-raised-button class="primary" (click)="listPayments()">Cancel/Back</button>
+	</mat-card-actions>
+</mat-card>

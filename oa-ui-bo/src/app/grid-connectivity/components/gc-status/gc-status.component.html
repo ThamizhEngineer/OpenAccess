@@ -1,0 +1,112 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Application Status</mat-card-title><br/>
+    <!-- <div fxLayout="row" fxLayoutAlign="start center">
+			<div fxFlex.gt-sm="100%"><b>Application Number: </b>{{gc.applnNumber}}</div>
+			<div fxFlex.gt-sm="100%"><b>Applicant Name: </b></div>
+			<div fxFlex.gt-sm="100%"><b>Date: </b></div>
+		</div> -->
+    <br/>
+    <!-- <ngx-datatable class="material" tabindex="index" [rows]="gc.applicationStatus" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="0"
+		 [rowHeight]="'auto'">
+			<ngx-datatable-column name="Status">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.gcStatusTypeName}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Updated On">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.gcStatusUpdateDate}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Updated By">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.gcStatusUpdateBy}}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Remarks">
+				<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					{{row.gcStatusRemarks}}
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+		<br/> -->
+
+
+
+
+    <ngx-datatable class="material" tabindex="index" [rows]="gc.applicationStatus" [columnMode]="'force'" [headerHeight]="50"
+      [footerHeight]="0" [rowHeight]="'auto'">
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.gcStatusTypeCode}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Updated On">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.gcStatusUpdateDate | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Updated By">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.gcStatusUpdateBy}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Remarks">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row.gcStatusRemarks}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Actions">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="editApplicationStatus(row.$$index)"><mat-icon>mode_edit</mat-icon></button>
+          <button mat-raised-button mat-icon-button mat-button-sm (click)="deleteApplicationStatus(row.$$index)"><mat-icon>delete</mat-icon></button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <mat-card> 
+      <mat-card-title>
+        <Strong>{{appStatusRowIndex>-1?'Update':'Add'}} Application Status</Strong>
+      </mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+
+            <mat-select class="ml-xs mr-xs" [disabled]="accessCreateFlag" fxFlex.gt-sm="100%" placeholder="Status" [(ngModel)]="applicationStatus.gcStatusTypeCode">
+              <mat-option *ngFor="let status of statuses" [value]="status.key">
+                {{ status.name }}
+              </mat-option>
+            </mat-select>
+
+        </mat-form-field>
+       <!--   <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput placeholder="Updated On" [(ngModel)]='applicationStatus.gcStatusUpdateDate'>
+          </mat-form-field> -->
+          
+          
+
+          <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+            <input matInput [disabled]="accessCreateFlag" [(ngModel)]="applicationStatus.gcStatusUpdateDate"  [matDatepicker]="UpdateDate" placeholder="Updated On">
+            <mat-datepicker-toggle matSuffix [for]="UpdateDate"></mat-datepicker-toggle>
+            <mat-datepicker #UpdateDate></mat-datepicker>
+          </mat-form-field>
+
+
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput [disabled]="accessCreateFlag" placeholder="Updated By" [(ngModel)]='applicationStatus.gcStatusUpdateBy'>
+          </mat-form-field>
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <input matInput [disabled]="accessCreateFlag" placeholder="Remarks" [(ngModel)]='applicationStatus.gcStatusRemarks'>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button [disabled]="accessCreateFlag" (click)="appStatusRowIndex>-1?updateApplicationStatus():addApplicationStatus()">{{appStatusRowIndex>-1?'Update':'Add'}}</button>
+        <button mat-raised-button (click)="initApplicationStatus()">Reset</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-card-content>
+</mat-card>

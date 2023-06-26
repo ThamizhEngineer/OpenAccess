@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/png" href="/opt/oa/data/files/images/logo.png" />
+    <title>Energy Allotment Order</title>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* margin: 0; */
+            font: 12px/1.4 Georgia, serif;
+
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font: bold 14px Helvetica, Sans-Serif;
+        }
+
+        /* #header {
+            height: 15px;
+            width: 100%;
+            margin: 20px 0;
+            background: #222;
+            text-align: center;
+            color: white;
+            font: bold 15px Helvetica, Sans-Serif;
+            text-decoration: uppercase;
+            letter-spacing: 20px;
+            padding: 8px 0px;
+        } */
+
+        textarea {
+            border: 0;
+            font: 14px Georgia, Serif;
+            overflow: hidden;
+            resize: none;
+        }
+
+        .header img {
+            float: left;
+            width: 70px;
+            height: 70px;
+            background-color: #ffffff;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            padding: 10px;
+            /* text-align: center; */
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        h3 {
+            margin: 1em 0 0.4em 0;
+            /* color: #343434; */
+            font-weight: bold;
+            line-height: 30px;
+            font-family: bold 10px Helvetica, Sans-Serif;
+            /* text-align: center; */
+        }
+
+        td.meta-head {
+            text-align: left;
+            background: #eee;
+            width: 40%
+        }
+
+        span.a {
+            display: inline;
+            width: 70px;
+            height: 70px;
+            padding: 15px;
+        }
+
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+
+        #left {
+            float: left;
+            text-align: left;
+            /* padding-right: 10px; */
+        }
+
+        #center {
+            text-align: center;
+        }
+
+        #right {
+            float: right;
+            text-align: right;
+            padding-left: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="float: right;"> <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p></div>
+<br/>
+    <div class="header">
+        <header class="solid">
+            <img src="/opt/oa/data/files/images/logo.png" alt="logo" />
+            <p>TAMIL NADU GENERATION AND DISTRIBUTION CORPORATION LIMITED</p>
+            <p>OFFICE OF THE SUPERINTENDING ENGINEER/
+                <span th:text="${sellerEndOrgName}"></span>
+            </p>
+            <h3 style="text-align: center">Statement Showing the Energy Alloted for <strong>[[${month}]],[[${year}]]</strong></h3>
+        </header>
+
+    </div>
+    <!-- <textarea id="header">Energy Allotment Order</textarea> -->
+
+    <div>
+        <table style="float: left;width: 50%">
+          <tr>
+                <td class="meta-head">EDC Name</td>
+                <td th:text="${sellerEndOrgName}"></td>
+            </tr>  
+            <tr>
+                <td class="meta-head">Service Number/isRec</td>
+                <td th:text="${sellerCompanyServiceNumber}"></td>
+            </tr>
+            <tr>
+                <td class="meta-head">Company Name</td>
+                <td th:text="${sellerCompanyName}"></td>
+            </tr>
+             <tr>
+                <td class="meta-head">Allow LowerAdjustment Slot</td>
+                <td th:text="${allowLowerSlotAdmt}"></td>
+            </tr>
+        </table>
+        <table style="float: right;width: 50%">
+            <tr>
+                <td class="meta-head">Statement Month</td>
+                <td th:text="${month}"></td>
+            </tr>
+            <tr>
+                <td class="meta-head">Statement Year</td>
+                <td th:text="${year}"></td>
+            </tr>
+            <tr>
+                <td class="meta-head">Injection Voltage</td>
+                <td th:text="${injectingVoltage}"></td>
+            </tr>  
+           <tr>
+                <td class="meta-head">Allocation Completed Date</td>
+                <td th:text="${createdDate}"></td>
+            </tr>
+           
+            
+        </table>
+    </div>
+    
+    <div style="margin-left:40%">
+        <h3>Allocated Summaries</h3>
+    </div>
+    <div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>Source</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>Total</th>
+            </tr>
+            
+            <tr  th:if="${fuelGroupe =='RE'}">                
+                <th class="items-head">FROM POWERPLANT</th>
+                <td th:text="${totalGC1}"></td>
+                <td th:text="${totalGC2}"></td>
+                <td th:text="${totalGC3}"></td>
+                <td th:text="${totalGC4}"></td>
+                <td th:text="${totalGC5}"></td>
+                <td th:text="${totalGenUnitsSold}"></td>
+
+
+            </tr>
+            <tr th:if="${fuelGroupe =='RE'}">                
+                <th class="items-head">FROM BANKING</th>
+                <td th:text="${totalBc1}"></td>
+                <td th:text="${totalBc2}"></td>
+                <td th:text="${totalBc3}"></td>
+                <td th:text="${totalBc4}"></td>
+                <td th:text="${totalBc5}"></td>
+                <td th:text="${totalBankingUnitsSold}"></td>
+
+                 
+
+            </tr>
+            <tr>
+                <th class="items-head">TOTAL</th>
+                <td th:text="${totalC1}"></td>
+                <td th:text="${totalC2}"></td>
+                <td th:text="${totalC3}"></td>
+                <td th:text="${totalC4}"></td>
+                <td th:text="${totalC5}"></td>
+                <td th:text="${totalUnitsSold}"></td>
+
+            </tr>
+            </table>
+    </div>
+    <div style="margin-left:40%">
+        <h3>Balance</h3>
+    </div>
+    <div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>Excess Units</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+                <th>Total</th>
+            </tr >
+            
+            <tr th:each="exessbankingUnits : ${ExessbankingUnits}">                
+                <th th:text="${exessbankingUnits.excessUnitType}"></th>
+                <td th:text="${exessbankingUnits.currC1}"></td>
+                <td th:text="${exessbankingUnits.currC2}"></td>
+                <td th:text="${exessbankingUnits.currC3}"></td>
+                <td th:text="${exessbankingUnits.currC4}"></td>
+                <td th:text="${exessbankingUnits.currC5}"></td>
+                <td th:text="${exessbankingUnits.currTotalUnits}"></td>
+
+
+            </tr>
+            <tr>                
+                <th>TOTAL</th>
+                <td th:text="${totalBankC1}"></td>
+                <td th:text="${totalBankC2}"></td>
+                <td th:text="${totalBankC3}"></td>
+                <td th:text="${totalBankC4}"></td>
+                <td th:text="${totalBankC5}"></td>
+                <td th:text="${totalBanktotal}"></td>
+                
+
+            </tr>
+          
+            </table>
+    </div>
+    
+    
+    
+    
+     <div style="margin-left:40%">
+        <h3>Allocated Consumers</h3>
+    </div>
+    <div>
+
+        <table style="float: left;width: 100%">
+            <tr>
+                <th>Consumer Name</th>
+                <th>Consumer Service No</th>
+                <th>Org Name</th>
+                <th>Allocated</th>
+                <th>C1</th>
+                <th>C2</th>
+                <th>C3</th>
+                <th>C4</th>
+                <th>C5</th>
+
+
+
+            </tr>
+            <tr class="item-row" th:each="energySaleOrderLines : ${energySaleOrderLines}">
+                <td th:text="${energySaleOrderLines.buyerCompanyName}"></td>
+                <td th:text="${energySaleOrderLines.buyerCompanyServiceNumber}"></td>
+                <td th:text="${energySaleOrderLines.buyerEndOrgName}"></td>
+                <td th:text="${energySaleOrderLines.totalUnitsSold}"></td>
+                <td th:text="${energySaleOrderLines.c1}"></td>
+                <td th:text="${energySaleOrderLines.c2}"></td>
+                <td th:text="${energySaleOrderLines.c3}"></td>
+                <td th:text="${energySaleOrderLines.c4}"></td>
+                <td th:text="${energySaleOrderLines.c5}"></td>
+
+            </tr>
+                  <tr>
+                <th>Total</th>
+                <td></td>
+                <td></td>
+                <td th:text="${totalAllocated}"></td>
+                <td th:text="${c1Value}"></td>
+                <td th:text="${c2Value}"></td>
+                <td th:text="${c3Value}"></td>
+                <td th:text="${c4Value}"></td>
+                <td th:text="${c5Value}"></td>
+                
+ 			
+				
+
+            </tr>
+        </table>
+    </div>
+    
+    
+    <div style="margin-left:40%"  th:if="${fuelGroupe =='RE'}">
+        <h3>Energy Allotment Order Charges </h3>
+    </div>
+    
+   <!--  <div>
+
+            <table style="float: left;width: 100%">
+                <tr>
+                    <th>Consumer Service NO</th>
+                    <th>Charge Type</th>
+                    <th>Total Charges</th>
+    `
+    
+    
+                </tr>
+                <tr class="item-row" th:each="energyCharge : ${energyCharges}">
+                    <td th:text="${energyCharge.companyServiceNumber}"></td>
+                    <td th:text="${energyCharge.chargeDesc}"></td>
+                    <td th:text="${energyCharge.totalCharges}"></td>
+    
+                </tr>
+            </table>
+        </div>-->
+  <div  th:if="${fuelGroupe =='RE'}">
+
+       
+    
+            <table style="float: left;width: 100%">
+                    <tr>
+                        <th>Consumer Name</th>
+                        <th>Consumer Service No</th>
+                        
+                        <th>M.R.C</th>
+                        <th>O.M.C</th>
+                        <th>T.R.C</th>
+                        <th>S.O.C</th>
+                        <th>R.K.P</th>
+        
+                        <th>N.E.C</th>
+                        <th>S.H.C</th>
+                        <th>O.C</th>
+        
+        
+                    </tr>
+                    <tr class="item-row" th:each="esChargeForPrint : ${esChargeForPrintList}">
+                        <td th:text="${esChargeForPrint.companyName}"></td>
+                        <td th:text="${esChargeForPrint.companyServiceNumber}"></td>
+                        <td th:text="${esChargeForPrint.c001TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c002TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c003TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c004TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c005TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c006TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c007TotalCharge}"></td>
+                        <td th:text="${esChargeForPrint.c008TotalCharge}"></td>
+                    </tr>
+                       <tr>
+                <th class="items-head">Total </th>
+                <td></td>
+                <td th:text="${c1TotalValue}"></td>
+                <td th:text="${c2TotalValue}"></td>
+                <td th:text="${c3TotalValue}"></td>
+                <td th:text="${c4TotalValue}"></td>
+                <td th:text="${c5TotalValue}"></td>
+                <td th:text="${c6TotalValue}"></td>
+                <td th:text="${c7TotalValue}"></td>
+                <td th:text="${c8TotalValue}"></td>
+				
+            </tr>
+                </table>
+          
+    
+    </div> 
+    
+    
+  
+    <div class="footer">
+        <p style="font: 11px/1.4 Georgia, serif;text-align: left">To,</p>
+        <p style="font: 11px/1.4 Georgia, serif;text-align: left">- M/S.
+            <span th:text="${sellerCompanyName}"></span>
+        </p>
+        <!-- <p style="font: 11px/1.4 Georgia, serif;text-align: left">-TVS limited</p> -->
+
+     <!--   <p th:if="${isCaptive=='WHEELING'}" style="font: 11px/1.4 Georgia, serif;text-align: left">-S.E/EDCS(Concerned)</p> -->
+
+        <!-- <p style="font: 11px/1.4 Georgia, serif;text-align: left">Lr.No. SE/UEDC/UDT/AO/REV/HTWIND/A.L/2017 Dt 11/12/2017</p> -->
+        <!-- <p style="font: 12px/1.4 Georgia, serif;text-align: right">Accounts Officer (Revenue)</p>
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right">-</p>
+
+        <p style="font: 12px/1.4 Georgia, serif;text-align: right">for SUPERINTENDING ENGINEER/EDC/
+            <span th:text="${sellerEndOrgName}"></span> 
+        </p> -->
+    </div>
+    <div>
+</div>
+</body>
+
+</html>

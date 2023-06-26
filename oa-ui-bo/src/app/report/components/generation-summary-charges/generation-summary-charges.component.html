@@ -1,0 +1,181 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      
+      <mat-card>
+        <mat-card-title >
+            GENERATION SUMMARY CHARGES REPORT
+           </mat-card-title>
+           <mat-card-content>
+           <div fxLayout="row" fxLayoutAlign="start center">
+
+            <mat-form-field class="ml-xs mr-xs"  fxFlex.gt-sm="100%">
+                <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='stmtMonth'>
+                  <mat-option *ngFor="let month of months" [value]="month.value">
+                    {{month.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+                <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <!-- <input matInput type="number" placeholder="Stmt Year" [(ngModel)]="stmtYear"> -->
+                    <mat-select class="ml-xs mr-xs" style="width: 100%;"
+                    placeholder="Statement Year" [(ngModel)]='stmtYear'
+                    readonly>
+                    <mat-option *ngFor="let year of years" [value]="year">
+                        {{ year }}
+                    </mat-option>
+                </mat-select> 
+                  </mat-form-field>
+
+          <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+            <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Edc Name" [disabled]="disableEdc" [(ngModel)]='dispOrgCode' [required]="isMandatory">
+                    <mat-option *ngFor="let edc of edcList" [value]="edc.id">
+                            {{edc.code}} - {{ edc.name }}
+                    </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Flow Type"
+        [(ngModel)]='searchFlowTypeCode'>
+        <mat-option *ngFor="let flowType of flowTypes" [value]="flowType.key">
+          {{ flowType.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Rec/Non-Rec"
+        [(ngModel)]='searchIsRec' >
+        <mat-option *ngFor="let isRec of isRecs" [value]="isRec.key">
+          {{ isRec.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Code"
+        [(ngModel)]='dispFuelTypeGroup' (ngModelChange)="displayFuel($event)">
+        <mat-option *ngFor="let fuelType of fuelGroup" [value]="fuelType.key">
+          {{ fuelType.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+      <mat-select class="ml-xs mr-xs" style="width: 100%;" placeholder="Fuel Code"
+      [disabled]="isOpen" [(ngModel)]='dispFuelTypeCode' >
+        <mat-option *ngFor="let fuelType of filteredFuel" [value]="fuelType.fuelCode">
+          {{ fuelType.fuelName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      
+                <mat-card-actions>				
+                    <button mat-raised-button color="primary" class="primary" (click)="searchResults()">Genarate Report</button>
+                </mat-card-actions>
+
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="restSearch()">Reset</button>
+                </mat-card-actions>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="exportAsXLSX()">
+                     <mat-icon>cloud_download</mat-icon>
+                     Download As XL</button>
+                   </mat-card-actions>
+              </div>
+        
+              <br/>
+              <br/>
+              <div>
+              <ngx-datatable class="material" [rows]="rows" [columnMode]="'ColumnMode.force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+              [scrollbarV]="true">
+              <ngx-datatable-column  name="NO" [width]="70"  [frozenLeft]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value"  let-rowLenght="rowlength"   ngx-datatable-cell-template>
+                  {{ rows.length == rows.indexOf(row) + 1 ? 'TOTAL' : rows.indexOf(row) + 1 }}
+                </ng-template>
+              </ngx-datatable-column> 
+    
+              <ngx-datatable-column name="EDC NAME"  [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row.op1}} 
+                </ng-template>
+              </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="SERVICE COUNT" [frozenLeft]="false" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    {{row.op2 || '0'}}
+                </ng-template>
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="FLOW TYPE" [frozenLeft]="false" >
+                <ng-template let-row="row" let-value="value"   ngx-datatable-cell-template>
+                    <!-- {{row.op3}} -->
+                    <span *ngIf="row.op3 === 'IS-CAPTIVE'">CAPTIVE</span>
+                    <span *ngIf="row.op3 === 'THIRD-PARTY'">THIRD-PARTY</span>
+                    <span *ngIf="row.op3 === 'STB'">STB</span>
+                    <span *ngIf="row.op3 === '0'">0</span>
+                </ng-template>
+               </ngx-datatable-column> 
+               
+               <ngx-datatable-column name="TOTAL CAPACITY" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op4 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+    
+               <ngx-datatable-column name="AMR METER READING CHARGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op5 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="O&M CHANGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                    {{row.op6 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="TRANSMISSION CHANGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op7 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="SYSTEM OPERATING CHARGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op8 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="RKVAH PENALTY" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op9 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="IMPORT ENERGY CHARGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op10 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+               
+               <ngx-datatable-column name="SCHEDULING" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op11 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+
+               <ngx-datatable-column name="OTHER CHARGES" [frozenLeft]="false">
+                <ng-template let-row="row" let-value="value"  ngx-datatable-cell-template>
+                  {{row.op12 || '0'}}
+                </ng-template> 
+               </ngx-datatable-column> 
+              </ngx-datatable>   
+               
+          </div>
+            </mat-card-content>
+            </mat-card>
+    </div>
+</div>

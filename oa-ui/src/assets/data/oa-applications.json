@@ -1,0 +1,23 @@
+[
+    {
+        "application-number": "OA-121",
+        "consumer": "MRF Tyres Pvt Ltd",
+        "generator": "New Generator1",
+        "date": 1427207139000 ,
+        "status": "Pending Approval"
+    },
+    {
+        "application-number": "OA-122",
+        "consumer": "Lakshmi Mills",
+        "generator": "New Generator1",
+        "date": 1427207139000 ,
+        "status": "Pending Approval"
+    },
+    {
+        "application-number": "OA-220",
+        "consumer": "Binny Mills",
+        "generator": "New Generator2",
+        "date": 1427207139000 ,
+        "status": "Pending Approval"
+    } 
+]

@@ -1,0 +1,61 @@
+<mat-card class="mat-card-top">
+    <mat-card-title>Block Transaction Detail</mat-card-title>
+   
+   
+       <mat-card>
+           <mat-card-content>
+   
+               <div fxLayout="row" fxLayoutAlign="start center">
+
+                
+
+   
+                   <mat-form-field class="ml-xs mr-xs" style="width: 100%;">
+                    <input matInput placeholder="Service Number" [(ngModel)]="blocktransaction.mCompServiceNumber">
+                   </mat-form-field>
+   
+                   
+           </div>
+   
+           <div fxLayout="row" fxLayoutAlign="start center">
+                   <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                       <mat-select *ngIf="!foredit" class="ml-xs mr-xs" style="width: 100%;" placeholder="Month" [(ngModel)]='blocktransaction.month'> <!----[(ngModel)]='geoOtherCharges.month' -->
+                           <mat-option *ngFor="let month of months" [value]="month.value">
+                               {{ month.name }}
+                           </mat-option>
+                       </mat-select>
+                       <input *ngIf="foredit" matInput placeholder="Month" [(ngModel)]="blocktransaction.month">
+                   </mat-form-field>
+   
+                   <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                       <input matInput placeholder="Year" [(ngModel)]="blocktransaction.year">
+                   </mat-form-field>
+           </div>
+           <div fxLayout="row" fxLayoutAlign="start center">
+               <mat-form-field style="width: 100%;"  fxFlex.gt-sm="100%">
+                <input matInput placeholder="Remarks" [(ngModel)]="blocktransaction.remarks">
+                 </mat-form-field>
+         </div>
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field class="ml-xs mr-xs" fxFlex.gt-sm="100%">
+                <mat-select *ngIf="!foredit" class="ml-xs mr-xs" style="width: 100%;" placeholder="Transaction Type" [(ngModel)]='blocktransaction.transactionType'>
+                    <mat-option *ngFor="let transType of transTypesblk" [value]="transType.key">
+                        {{transType.name}}
+                    </mat-option>
+                </mat-select>
+                <input *ngIf="foredit" matInput placeholder="Transaction Type" [(ngModel)]="blocktransaction.transactionType">
+            </mat-form-field>
+          </div>
+           
+       </mat-card-content>
+       </mat-card>
+       <hr>
+       <mat-card-actions>
+               <button mat-raised-button color="primary"  (click)="unblock()">UnBlock</button>
+               <!-- <button mat-raised-button color="primary"  *ngIf="consent.statusCode=='CREATED' && this.accessApproveFlag" (click)="approveConsent()">Approve</button> 
+              <button mat-raised-button color="primary" *ngIf="consent.statusCode=='CREATED' && this.accessCompleteFlag" (click)="completeConsent()">Approve</button> -->	
+               <button mat-raised-button class="primary" (click)="listblcTxn()">Cancel/Back</button>
+   
+           
+       </mat-card-actions>
+   </mat-card>
